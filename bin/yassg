@@ -10,7 +10,8 @@ $baseDir = bootstrap([
     __DIR__.'/../../../autoload.php',
 ]);
 
-$baseUrl = ((new ArgvInput())->getParameterOption('--base-url') ?: 'file://'. $baseDir .'/public');
+$input = new ArgvInput();
+$baseUrl = ($input->getParameterOption('--base-url') ?: 'file://'. $baseDir .'/public');
 
 $renderer = createRenderer($baseDir, $baseUrl);
 $generator = new \Sigwin\YASSG\Generator($renderer);
