@@ -10,13 +10,14 @@ use Twig\TwigFunction;
 class Renderer
 {
     private Environment $template;
+    private string $baseUrl;
 
     public function __construct(Database $database, Router $router, array $options = [])
     {
         $path = $options['templates'];
         unset($options['templates']);
         
-        $baseUrl = $options['base_url'];
+        $this->baseUrl = $baseUrl =$options['base_url'];
         unset($options['base_url']);
         
         $this->database = $database;
@@ -51,15 +52,15 @@ class Renderer
         );
     }
 
-    public function render(array $context): string
+    public function render(?array $context = null): string
     {
-        return $this->template->render(sprintf('pages/%1$s.html.twig', $context['_route']), $context);
+        return $this->template->render(sprintf('pages/%1$s.html.twig', $context['_route']), $context ?? $this->router->dispatch());
     }
     
-    public function permute($baseUrl): iterable
+    public function permute(): iterable
     {
         foreach ($this->router->permute($this->database) as $route => $parameters) {
-            $url = str_replace($baseUrl, '', trim($this->router->generate($route, $parameters), '/'));
+            $url = str_replace($this->baseUrl, '', trim($this->router->generate($route, $parameters), '/'));
             
             $response = $this->render($this->router->dispatch(Request::create($url)));
             

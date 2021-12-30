@@ -4,14 +4,14 @@ namespace Sigwin\YASSG;
 
 class Generator
 {
-    public function __construct(private string $baseUrl)
+    public function __construct(private Renderer $renderer)
     {}
     
-    public function generate(Renderer $renderer, string $buildDir): void
+    public function generate(string $buildDir): void
     {
         $this->mkdir($buildDir);
         
-        foreach ($renderer->permute($this->baseUrl) as $url => $response) {
+        foreach ($this->renderer->permute() as $url => $response) {
             fwrite(STDOUT, sprintf('Rendering "%1$s".'."\n", $url ?: '/'));
 
             $path = $buildDir.$url .'/index.html';
