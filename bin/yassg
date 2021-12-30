@@ -8,7 +8,28 @@ use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Yaml\Yaml;
 
-require __DIR__.'/../vendor/autoload.php';
+$autoLoaders = [
+    // single repo installed auto-loader
+    __DIR__.'/../../../autoload.php',
+
+    // mono-repo installed auto-loader
+    __DIR__.'/../../../../../../autoload.php',
+];
+
+$found = false;
+foreach ($autoLoaders as $autoLoader) {
+    if (true === file_exists($autoLoader)) {
+        /* @noinspection PhpIncludeInspection */
+        include $autoLoader;
+
+        $found = true;
+    }
+}
+if ($found === false) {
+    fwrite(STDERR, 'You must set up the project dependencies using `composer install`'.PHP_EOL);
+
+    exit(1);
+}
 
 $input = new ArgvInput();
 $baseUrl = ($input->getParameterOption('--base-url') ?: 'file://'. dirname(__DIR__) .'/public');
