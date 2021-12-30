@@ -37,7 +37,6 @@ if ($found === false) {
 
 $input = new ArgvInput();
 $baseUrl = ($input->getParameterOption('--base-url') ?: 'file://'. $baseDir .'/public');
-
 $database = new Database(Yaml::parseFile($baseDir.'/database.yaml'));
 $router = new Router(Yaml::parseFile($baseDir.'/routes.yaml'), $baseUrl);
 $renderer = new Renderer(
@@ -51,25 +50,5 @@ $renderer = new Renderer(
     ]
 );
 
-$buildDir = $baseDir.'/'.(trim($input->getFirstArgument() ?? 'build', '/'));
-if (!is_dir($buildDir) && !mkdir($buildDir, 0777, true) && !is_dir($buildDir)) {
-    throw new \RuntimeException(sprintf('Directory "%s" was not created', $buildDir));
-}
-
-foreach ($router->permute($database) as $route => $parameters) {
-    $url = str_replace($baseUrl, '', trim($router->generate($route, $parameters), '/'));
-    fwrite(STDOUT, sprintf('Rendering "%1$s".'."\n", $url ?: '/'));
-    
-    $path = $buildDir.$url .'/index.html';
-    $pathDir = dirname($path);
-    
-    if (!is_dir($pathDir) && !mkdir($pathDir, 0777, true) && !is_dir($pathDir)) {
-        throw new \RuntimeException(sprintf('Directory "%s" was not created', $pathDir));
-    }
-    
-    // do a full dispatch and render the output
-    $request = Request::create($url);
-    file_put_contents($path, $renderer->render($router->dispatch($request)));
-
-    fwrite(STDOUT, sprintf('Wrote %1$s.'."\n", $path));
-}
+$generator = new \Sigwin\YASSG\Generator($baseUrl);
+$generator->generate($renderer, $baseDir.'/'.(trim($input->getFirstArgument() ?? 'build', '/')));

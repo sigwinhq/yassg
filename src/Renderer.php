@@ -19,6 +19,8 @@ class Renderer
         $baseUrl = $options['base_url'];
         unset($options['base_url']);
         
+        $this->database = $database;
+        $this->router = $router;
         $this->template = new Environment(new FilesystemLoader($path), $options);
 
         $this->template->addFunction(
@@ -52,5 +54,16 @@ class Renderer
     public function render(array $context): string
     {
         return $this->template->render(sprintf('pages/%1$s.html.twig', $context['_route']), $context);
+    }
+    
+    public function permute($baseUrl): iterable
+    {
+        foreach ($this->router->permute($this->database) as $route => $parameters) {
+            $url = str_replace($baseUrl, '', trim($this->router->generate($route, $parameters), '/'));
+            
+            $response = $this->render($this->router->dispatch(Request::create($url)));
+            
+            yield $url => $response;
+        }
     }
 }
