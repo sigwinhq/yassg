@@ -1,0 +1,50 @@
+#!/usr/bin/env php
+<?php
+
+use Sigwin\YASSG\Database;
+use Sigwin\YASSG\Renderer;
+use Sigwin\YASSG\Router;
+use Symfony\Component\Console\Input\ArgvInput;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Yaml\Yaml;
+
+require __DIR__.'/../vendor/autoload.php';
+
+$input = new ArgvInput();
+$baseUrl = ($input->getParameterOption('--base-url') ?: 'file://'. dirname(__DIR__) .'/public');
+
+$database = new Database(Yaml::parseFile(__DIR__.'/../database.yaml'));
+$router = new Router(Yaml::parseFile(__DIR__.'/../routes.yaml'), $baseUrl);
+$renderer = new Renderer(
+    $database,
+    $router,
+    [
+        'templates' => __DIR__.'/../templates',
+        'base_url' => $baseUrl,
+        'cache' => __DIR__.'/../cache',
+        'auto_reload' => true,
+    ]
+);
+
+$buildDir = getcwd().'/'.(trim($input->getFirstArgument() ?? 'build', '/'));
+if (!is_dir($buildDir) && !mkdir($buildDir, 0777, true) && !is_dir($buildDir)) {
+    throw new \RuntimeException(sprintf('Directory "%s" was not created', $buildDir));
+}
+
+foreach ($router->permute($database) as $route => $parameters) {
+    $url = str_replace($baseUrl, '', trim($router->generate($route, $parameters), '/'));
+    fwrite(STDOUT, sprintf('Rendering %1$s.'."\n", $url));
+    
+    $path = $buildDir.$url .'/index.html';
+    $pathDir = dirname($path);
+    
+    if (!is_dir($pathDir) && !mkdir($pathDir, 0777, true) && !is_dir($pathDir)) {
+        throw new \RuntimeException(sprintf('Directory "%s" was not created', $pathDir));
+    }
+    
+    // do a full dispatch and render the output
+    $request = Request::create($url);
+    file_put_contents($path, $renderer->render($router->dispatch($request)));
+
+    fwrite(STDOUT, sprintf('Wrote %1$s.'."\n", $path));
+}
