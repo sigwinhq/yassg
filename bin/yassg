@@ -6,15 +6,14 @@ use function Sigwin\YASSG\bootstrap;
 use function Sigwin\YASSG\createRenderer;
 
 require __DIR__ .'/../bootstrap.php';
-
 $baseDir = bootstrap([
     __DIR__.'/../../../autoload.php',
 ]);
 
-$input = new ArgvInput();
-$baseUrl = ($input->getParameterOption('--base-url') ?: 'file://'. $baseDir .'/public');
-$buildDir = $baseDir.'/'.(trim($input->getFirstArgument() ?? 'build', '/'));
+$baseUrl = ((new ArgvInput())->getParameterOption('--base-url') ?: 'file://'. $baseDir .'/public');
 
 $renderer = createRenderer($baseDir, $baseUrl);
 $generator = new \Sigwin\YASSG\Generator($renderer);
+
+$buildDir = $baseDir.'/'.(trim($input->getFirstArgument() ?? 'build', '/'));
 $generator->generate($buildDir);

@@ -5,7 +5,6 @@ namespace Sigwin\YASSG;
 use Sigwin\YASSG\Database;
 use Sigwin\YASSG\Renderer;
 use Sigwin\YASSG\Router;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Yaml\Yaml;
 
 ini_set('display_errors', 1);

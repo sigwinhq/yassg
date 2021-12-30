@@ -54,7 +54,9 @@ class Renderer
 
     public function render(?array $context = null): string
     {
-        return $this->template->render(sprintf('pages/%1$s.html.twig', $context['_route']), $context ?? $this->router->dispatch());
+        $context = $context ?? $this->router->dispatch(); 
+        
+        return $this->template->render(sprintf('pages/%1$s.html.twig', $context['_route']), $context);
     }
     
     public function permute(): iterable
@@ -65,6 +67,15 @@ class Renderer
             $response = $this->render($this->router->dispatch(Request::create($url)));
             
             yield $url => $response;
+        }
+    }
+    
+    public function __toString()
+    {
+        try {
+            return $this->render();
+        } catch (\Throwable $e) {
+            return $e->getMessage() .': '. $e->getTraceAsString();
         }
     }
 }
