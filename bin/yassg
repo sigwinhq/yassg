@@ -17,10 +17,14 @@ $autoLoaders = [
 ];
 
 $found = false;
+$baseDir = null;
 foreach ($autoLoaders as $autoLoader) {
     if (true === file_exists($autoLoader)) {
         /* @noinspection PhpIncludeInspection */
         include $autoLoader;
+        
+        // strips "vendor/"
+        $baseDir = realpath(dirname($autoLoader).'/..');
 
         $found = true;
     }
@@ -32,22 +36,22 @@ if ($found === false) {
 }
 
 $input = new ArgvInput();
-$baseUrl = ($input->getParameterOption('--base-url') ?: 'file://'. dirname(__DIR__) .'/public');
+$baseUrl = ($input->getParameterOption('--base-url') ?: 'file://'. $baseDir .'/public');
 
-$database = new Database(Yaml::parseFile(__DIR__.'/../database.yaml'));
-$router = new Router(Yaml::parseFile(__DIR__.'/../routes.yaml'), $baseUrl);
+$database = new Database(Yaml::parseFile($baseDir.'/database.yaml'));
+$router = new Router(Yaml::parseFile($baseDir.'/routes.yaml'), $baseUrl);
 $renderer = new Renderer(
     $database,
     $router,
     [
-        'templates' => __DIR__.'/../templates',
+        'templates' => $baseDir.'/templates',
         'base_url' => $baseUrl,
-        'cache' => __DIR__.'/../cache',
+        'cache' => $baseDir.'/cache',
         'auto_reload' => true,
     ]
 );
 
-$buildDir = getcwd().'/'.(trim($input->getFirstArgument() ?? 'build', '/'));
+$buildDir = $baseDir.'/'.(trim($input->getFirstArgument() ?? 'build', '/'));
 if (!is_dir($buildDir) && !mkdir($buildDir, 0777, true) && !is_dir($buildDir)) {
     throw new \RuntimeException(sprintf('Directory "%s" was not created', $buildDir));
 }
