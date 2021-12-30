@@ -58,7 +58,7 @@ if (!is_dir($buildDir) && !mkdir($buildDir, 0777, true) && !is_dir($buildDir)) {
 
 foreach ($router->permute($database) as $route => $parameters) {
     $url = str_replace($baseUrl, '', trim($router->generate($route, $parameters), '/'));
-    fwrite(STDOUT, sprintf('Rendering %1$s.'."\n", $url));
+    fwrite(STDOUT, sprintf('Rendering "%1$s".'."\n", $url ?: '/'));
     
     $path = $buildDir.$url .'/index.html';
     $pathDir = dirname($path);
