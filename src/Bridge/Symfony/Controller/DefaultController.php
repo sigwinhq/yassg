@@ -14,6 +14,6 @@ class DefaultController extends AbstractController
         
         $route = $request->attributes->get('_route');
         
-        return $this->render(sprintf('pages/%1$s.html.twig', $route));
+        return $this->render(sprintf('pages/%1$s.html.twig', $route), $request->attributes->all());
     }
 }
