@@ -1,17 +1,9 @@
 <?php
 
-use Symfony\Component\Console\Input\ArgvInput;
-use Symfony\Component\HttpFoundation\Request;
-use function Sigwin\YASSG\bootstrap;
-use function Sigwin\YASSG\createRenderer;
+use Sigwin\YASSG\Bridge\Symfony\Kernel;
 
-require __DIR__.'/../bootstrap.php';
-$baseDir = bootstrap([
-    __DIR__.'/../../../autoload.php',
-]);
+require_once __DIR__ .'/../bootstrap.php';
 
-$baseUrl = Request::createFromGlobals()->getBaseUrl();
-
-$renderer = createRenderer($baseDir, $baseUrl);
-
-echo $renderer;
+return static function (array $context) {
+    return new Kernel($GLOBALS['YASSG_BASEDIR'], $context['APP_ENV'], (bool) $context['APP_DEBUG']);
+};
