@@ -28,6 +28,7 @@ class Kernel extends \Symfony\Component\HttpKernel\Kernel
 
     public function build(ContainerBuilder $container): void
     {
+        $container->setParameter('kernel.secret', uniqid(__DIR__));
         $container->setParameter('yassg.base_dir', $this->baseDir);
     }
 }
