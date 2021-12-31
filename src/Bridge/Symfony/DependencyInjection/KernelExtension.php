@@ -10,7 +10,9 @@ class KernelExtension extends Extension
     public function load(array $configs, ContainerBuilder $container)
     {
         // TODO: validate config here
-        $container->setParameter('sigwin_yassg.routes', $configs[0]['routes']);
+        $container->setParameter('sigwin_yassg.database', $configs[0]['database']);
+        
+        $container->setParameter('sigwin_yassg.routes', $configs[1]['routes']);
     }
     
     public function getNamespace(): string

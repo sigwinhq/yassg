@@ -12,6 +12,7 @@
         "adbario/php-dot-notation": "^2.2",
         "bentools/cartesian-product": "^1.3",
         "symfony/console": "^6.0",
+        "symfony/expression-language": "^6.0",
         "symfony/framework-bundle": "^6.0",
         "symfony/runtime": "^6.0",
         "symfony/twig-bundle": "^6.0",
