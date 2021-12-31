@@ -1,2 +1,2 @@
 webpack_encore:
-    output_path: "%yassg.base_dir%/public"
+    output_path: "%yassg.base_dir%/public/assets"

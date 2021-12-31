@@ -1,0 +1,2 @@
+twig:
+    default_path: "%yassg.base_dir%/templates" 
