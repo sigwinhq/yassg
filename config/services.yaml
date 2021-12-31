@@ -11,3 +11,6 @@ services:
     Sigwin\YASSG\Bridge\Symfony\Controller\:
         resource: '../src/Bridge/Symfony/Controller'
         tags: ['controller.service_arguments']
+
+    Sigwin\YASSG\Bridge\Symfony\Routing\Loader\RouteLoader:
+        $routes: "%sigwin_yassg.routes%"
