@@ -32,12 +32,6 @@ class Renderer
         );
         $this->template->addFunction(
             new TwigFunction(
-                'url', static function (array $parameters = [], ?string $name = null) use ($router) {
-                    return $router->url(Request::createFromGlobals(), $parameters, $name);
-            })
-        );
-        $this->template->addFunction(
-            new TwigFunction(
                 'index', static function () use ($router, $database) {
                     return $router->permute($database);
             })

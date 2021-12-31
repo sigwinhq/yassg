@@ -12,10 +12,16 @@ class RouteLoader implements RouteLoaderInterface
     {
         $collection = new RouteCollection();
         
+        // TODO: loader from YAML
         $route = new Route('/', [
             '_controller' => 'Sigwin\YASSG\Bridge\Symfony\Controller\DefaultController',
         ]);
         $collection->add('index', $route);
+
+        $route = new Route('/home', [
+            '_controller' => 'Sigwin\YASSG\Bridge\Symfony\Controller\DefaultController',
+        ]);
+        $collection->add('home', $route);
         
         return $collection;
     }
