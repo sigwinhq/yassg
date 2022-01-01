@@ -2,6 +2,7 @@
 
 namespace Sigwin\YASSG\Bridge\Symfony;
 
+use Sigwin\YASSG\Bridge\Symfony\DependencyInjection\CompilerPass\RemoveCommandsCompilerPass;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\LoaderInterface;
@@ -41,6 +42,9 @@ class Kernel extends \Symfony\Component\HttpKernel\Kernel
         $container->setParameter('kernel.secret', uniqid(__DIR__));
         $container->setParameter('sigwin_yassg.base_dir', $this->baseDir);
         
+        $tagged = $container->findTaggedServiceIds('console.command');
+        
         $container->registerExtension(new \Sigwin\YASSG\Bridge\Symfony\DependencyInjection\KernelExtension());
+        $container->addCompilerPass(new \Sigwin\YASSG\Bridge\Symfony\DependencyInjection\CompilerPass\RemoveCommandsCompilerPass());
     }
 }
