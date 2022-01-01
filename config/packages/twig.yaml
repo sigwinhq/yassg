@@ -1,2 +1,6 @@
 twig:
     default_path: "%sigwin_yassg.base_dir%/templates" 
+
+when@prod:
+    twig:
+        auto_reload: false

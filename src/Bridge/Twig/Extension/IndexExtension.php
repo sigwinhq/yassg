@@ -2,6 +2,7 @@
 
 namespace Sigwin\YASSG\Bridge\Twig\Extension;
 
+use Sigwin\YASSG\Permutator;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 use Sigwin\YASSG\Database;
@@ -9,37 +10,17 @@ use function BenTools\CartesianProduct\cartesian_product;
 
 class IndexExtension extends AbstractExtension
 {
-    private array $routes;
-    private Database $database;
-
-    public function __construct(array $routes, Database $database)
+    private Permutator $permutator;
+    
+    public function __construct(Permutator $permutator)
     {
-        $this->routes = $routes;
-        $this->database = $database;
+        $this->permutator = $permutator;
     }
-
+    
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('yassg_index', [$this, 'permute']),
+            new TwigFunction('yassg_index', [$this->permutator, 'permute']),
         ];
-    }
-    
-    public function permute()
-    {
-        foreach ($this->routes as $route => $spec) {
-            $variables = [];
-            if (!isset($spec['catalog'])) {
-                yield $route => $spec['defaults'] ?? [];
-            }
-
-            foreach ($spec['catalog'] ?? [] as $variable => $query) {
-                $variables[$variable] = $this->database->query($query);
-            }
-
-            foreach (cartesian_product($variables) as $parameters) {
-                yield $route => $parameters;
-            }
-        }
     }
 }
