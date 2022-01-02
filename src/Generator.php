@@ -7,6 +7,7 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\RequestContext;
 
 class Generator
 {
@@ -14,17 +15,17 @@ class Generator
     {
     }
     
-    public function generate(callable $callable): void
+    public function generate(string $baseUrl, callable $callable): void
     {
         // TODO: extract to config
         $buildDir = 'public';
-        
         $this->mkdir($buildDir);
         
+        // TODO: extract to factory
+        $this->urlGenerator->setContext(RequestContext::fromUri($baseUrl));
+        
         foreach ($this->permutator->permute() as $routeName => $parameters) {
-            $parameters += ['_filename' => 'index.html'];
-            
-            $request = Request::create($this->urlGenerator->generate($routeName, $parameters, UrlGeneratorInterface::ABSOLUTE_PATH));
+            $request = Request::create($this->urlGenerator->generate($routeName, $parameters + ['_filename' => 'index.html'], UrlGeneratorInterface::RELATIVE_PATH));
             try {
                 $response = $this->kernel->handle($request, HttpKernelInterface::MAIN_REQUEST, false);
             } catch (HttpException $exception) {

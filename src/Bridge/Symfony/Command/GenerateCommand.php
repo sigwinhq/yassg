@@ -18,19 +18,12 @@ class GenerateCommand extends Command
     protected static $defaultName = 'yassg:generate';
     
     private Generator $generator;
-    private FilenameUrlGenerator $urlGenerator;
     
-    public function __construct(Generator $generator, UrlGeneratorInterface $urlGenerator)
+    public function __construct(Generator $generator)
     {
         parent::__construct(self::$defaultName);
         
         $this->generator = $generator;
-        
-        if ($urlGenerator instanceof FilenameUrlGenerator === false) {
-            throw new \LogicException('Invalid URL generator!');
-        }
-        
-        $this->urlGenerator = $urlGenerator;
     }
 
     protected function configure(): void
@@ -46,9 +39,7 @@ class GenerateCommand extends Command
         $style = new SymfonyStyle($input, $output);
         $style->title('Sigwin YASSG');
         
-        $this->urlGenerator->setBaseUrl($input->getArgument('url'));
-        
-        $this->generator->generate(function (Request $request, Response $response, string $path) use ($style): void {
+        $this->generator->generate($input->getArgument('url'), function (Request $request, Response $response, string $path) use ($style): void {
             $style->writeln($request->getUri());
         });
         
