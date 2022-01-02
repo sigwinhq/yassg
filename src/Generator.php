@@ -2,6 +2,8 @@
 
 namespace Sigwin\YASSG;
 
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,15 +16,22 @@ class Generator
     
     public function generate(callable $callable): void
     {
+        // TODO: extract to config
         $buildDir = 'public';
         
         $this->mkdir($buildDir);
         
         foreach ($this->permutator->permute() as $routeName => $parameters) {
+            $parameters += ['_filename' => 'index.html'];
+            
             $request = Request::create($this->urlGenerator->generate($routeName, $parameters, UrlGeneratorInterface::ABSOLUTE_URL));
-            $response = $this->kernel->handle($request);
+            try {
+                $response = $this->kernel->handle($request, HttpKernelInterface::MAIN_REQUEST, false);
+            } catch (HttpException $exception) {
+                throw $exception;
+            }
 
-            $path = $buildDir . $request->getPathInfo() .'/index.html';
+            $path = $buildDir . $request->getPathInfo();
             $this->mkdir(dirname($path));
             
             $callable($request, $response, $path);

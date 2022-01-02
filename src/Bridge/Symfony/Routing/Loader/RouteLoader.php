@@ -21,12 +21,16 @@ class RouteLoader implements RouteLoaderInterface
         $collection = new RouteCollection();
         
         foreach ($this->routes as $name => $route) {
-            $route = new Route($route['path'], array_replace(
-                $route['_defaults'] ?? [],
-                [
-                    '_controller' => DefaultController::class,
-                ]
-            ));
+            $route = new Route(
+                $route['path'] .'/{_filename}',
+                array_replace(
+                    $route['_defaults'] ?? [],
+                    [
+                        '_controller' => DefaultController::class,
+                        '_filename' => null,
+                    ]             
+                ),
+            );
             $collection->add($name, $route);
         }
         

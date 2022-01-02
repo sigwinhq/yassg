@@ -1,2 +1,3 @@
 webpack_encore:
+    # TODO: extract to config
     output_path: "%sigwin_yassg.base_dir%/public/assets"

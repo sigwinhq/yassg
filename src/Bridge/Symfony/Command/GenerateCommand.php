@@ -37,7 +37,7 @@ class GenerateCommand extends Command
         $style = new SymfonyStyle($input, $output);
         $style->title('Sigwin YASSG');
         
-        // use this URL to generate all the routes
+        // TODO: use this URL to generate all the routes
         $url = $input->getArgument('url');
         
         $this->generator->generate(function (Request $request, Response $response, string $path) use ($style): void {

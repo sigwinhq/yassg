@@ -14,3 +14,15 @@ services:
     Sigwin\YASSG\Bridge\Symfony\Controller\:
         resource: '../src/Bridge/Symfony/Controller'
         tags: ['controller.service_arguments']
+    
+when@prod:
+    services:
+        Sigwin\YASSG\Bridge\Symfony\Routing\Generator\FilenameUrlGenerator:
+            decorates: Symfony\Component\Routing\Generator\UrlGeneratorInterface
+            arguments:
+                $urlGenerator: '@Sigwin\YASSG\Bridge\Symfony\Routing\Generator\FilenameUrlGenerator.inner'
+            
+        twig.extension.routing:
+            class: Symfony\Bridge\Twig\Extension\RoutingExtension
+            arguments:
+                $generator: '@Symfony\Component\Routing\Generator\UrlGeneratorInterface'
