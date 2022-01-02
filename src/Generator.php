@@ -24,7 +24,7 @@ class Generator
         foreach ($this->permutator->permute() as $routeName => $parameters) {
             $parameters += ['_filename' => 'index.html'];
             
-            $request = Request::create($this->urlGenerator->generate($routeName, $parameters, UrlGeneratorInterface::ABSOLUTE_URL));
+            $request = Request::create($this->urlGenerator->generate($routeName, $parameters, UrlGeneratorInterface::ABSOLUTE_PATH));
             try {
                 $response = $this->kernel->handle($request, HttpKernelInterface::MAIN_REQUEST, false);
             } catch (HttpException $exception) {

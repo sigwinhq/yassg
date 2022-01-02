@@ -1,6 +1,0 @@
-parameters:
-    env(YASSG_BASE_URL): 'http://localhost'
-        
-framework:
-    router:
-        default_uri: "%env(YASSG_BASE_URL)%"
