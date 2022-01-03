@@ -3,7 +3,7 @@ on:
     pull_request:
     push:
         branches:
-            - "master"
+            - "main"
 
 jobs:
     CodeQualityAnalysis:
@@ -17,3 +17,12 @@ jobs:
             -
                 name: Run code quality analysis
                 run: make check
+    DocumentationQualityAnalysis:
+        runs-on: ubuntu-latest
+        steps:
+            -
+                uses: actions/checkout@v1
+            -
+                name: Run documentation quality analysis
+                run: make docs
+
