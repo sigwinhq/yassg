@@ -1,8 +1,10 @@
+BASE_URL ?= "file://${APP_ROOT}/${BUILD_DIR}"
+
 start/dev: dev
 dev: clean
 	@make dev/assets dev/server -j2
 dev/server: vendor index.php
-	php -S localhost:9988
+	php -S localhost:${APP_PORT}
 dev/assets: node_modules
 	node_modules/.bin/encore dev-server
 index.php:
