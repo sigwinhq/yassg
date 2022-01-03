@@ -1,29 +1,40 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the yassg project.
+ *
+ * (c) sigwin.hr
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace Sigwin\YASSG;
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RequestContext;
 
-class Generator
+final class Generator
 {
     public function __construct(private Permutator $permutator, private UrlGeneratorInterface $urlGenerator, private KernelInterface $kernel)
     {
     }
-    
+
     public function generate(string $baseUrl, callable $callable): void
     {
         // TODO: extract to config
         $buildDir = 'public';
         $this->mkdir($buildDir);
-        
+
         // TODO: extract to factory
         $this->urlGenerator->setContext(RequestContext::fromUri($baseUrl));
-        
+
         foreach ($this->permutator->permute() as $routeName => $parameters) {
             $request = Request::create($this->urlGenerator->generate($routeName, $parameters + ['_filename' => 'index.html'], UrlGeneratorInterface::RELATIVE_PATH));
             try {
@@ -32,17 +43,17 @@ class Generator
                 throw $exception;
             }
 
-            $path = $buildDir . $request->getPathInfo();
-            $this->mkdir(dirname($path));
-            
+            $path = $buildDir.$request->getPathInfo();
+            $this->mkdir(\dirname($path));
+
             $callable($request, $response, $path);
             file_put_contents($path, $response->getContent());
         }
     }
-    
+
     private function mkdir(string $dir): void
     {
-        if (!is_dir($dir) && !mkdir($dir, 0755, true) && !is_dir($dir)) {
+        if ( ! is_dir($dir) && ! mkdir($dir, 0755, true) && ! is_dir($dir)) {
             throw new \RuntimeException(sprintf('Directory "%s" was not created', $dir));
         }
     }

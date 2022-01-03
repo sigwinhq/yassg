@@ -1,11 +1,17 @@
 <?php
 
-namespace Sigwin\YASSG;
+declare(strict_types=1);
 
-use Sigwin\YASSG\Database;
-use Sigwin\YASSG\Renderer;
-use Sigwin\YASSG\Router;
-use Symfony\Component\Yaml\Yaml;
+/*
+ * This file is part of the yassg project.
+ *
+ * (c) sigwin.hr
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
+namespace Sigwin\YASSG;
 
 $autoloaders = [
     __DIR__.'/../../autoload_runtime.php',
@@ -14,16 +20,16 @@ $autoloaders = [
 $baseDir = null;
 foreach ($autoloaders as $autoloader) {
     if (true === file_exists($autoloader)) {
-        $GLOBALS['YASSG_BASEDIR'] = $baseDir = realpath(dirname($autoloader).'/..');
-        
+        $GLOBALS['YASSG_BASEDIR'] = $baseDir = realpath(\dirname($autoloader).'/..');
+
         require_once $autoloader;
-        
+
         break;
     }
 }
 
 if ($baseDir === null) {
-    fwrite(STDERR, 'You must set up the project dependencies using `composer install`'.PHP_EOL);
+    fwrite(\STDERR, 'You must set up the project dependencies using `composer install`'.\PHP_EOL);
 
     exit(1);
 }

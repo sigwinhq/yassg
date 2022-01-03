@@ -1,10 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the yassg project.
+ *
+ * (c) sigwin.hr
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace Sigwin\YASSG;
 
 use function BenTools\CartesianProduct\cartesian_product;
 
-class Permutator
+final class Permutator
 {
     private array $routes;
     private Database $database;
@@ -14,12 +25,12 @@ class Permutator
         $this->routes = $routes;
         $this->database = $database;
     }
-    
+
     public function permute(): iterable
     {
         foreach ($this->routes as $route => $spec) {
             $variables = [];
-            if (!isset($spec['catalog'])) {
+            if ( ! isset($spec['catalog'])) {
                 yield $route => $spec['defaults'] ?? [];
             }
 
