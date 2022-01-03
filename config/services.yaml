@@ -1,0 +1,46 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        bind:
+            $baseDir: "%sigwin_yassg.base_dir%"
+            $data: "%sigwin_yassg.database%"
+            $routes: "%sigwin_yassg.routes%"
+
+    Sigwin\YASSG\:
+        resource: '../src/'
+        exclude:
+            - '../src/Kernel.php'
+
+    Sigwin\YASSG\Bridge\Symfony\Controller\:
+        resource: '../src/Bridge/Symfony/Controller'
+        tags: ['controller.service_arguments']
+        
+    Sigwin\YASSG\Bridge\Symfony\Command\InitCommand:
+        $initDir: "%kernel.project_dir%/resources/init"
+        
+    Sigwin\YASSG\Bridge\Twig\Extension\AssetExtension:
+        autoconfigure: false
+    
+when@prod:
+    services:
+        Sigwin\YASSG\Bridge\Symfony\Routing\Generator\FilenameUrlGenerator:
+            decorates: Symfony\Component\Routing\Generator\UrlGeneratorInterface
+            arguments:
+                $urlGenerator: '@Sigwin\YASSG\Bridge\Symfony\Routing\Generator\FilenameUrlGenerator.inner'
+            
+        router.request_context:
+            class: Symfony\Component\Routing\RequestContext
+            factory: ['@Sigwin\YASSG\Bridge\Symfony\Routing\BuildRequestContextFactory', 'create']
+            shared: false
+            
+        Sigwin\YASSG\Bridge\Twig\Extension\AssetExtension:
+            decorates: twig.extension.assets            
+            arguments:
+                $requestContext: '@router.request_context'
+                $packages: '@assets.packages'
+            
+        twig.extension.routing:
+            class: Symfony\Bridge\Twig\Extension\RoutingExtension
+            arguments:
+                $generator: '@Symfony\Component\Routing\Generator\UrlGeneratorInterface'

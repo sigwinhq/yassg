@@ -27,7 +27,7 @@ class Database
         
         $result = $this->data->get($query);
         if ($result === null) {
-            throw new \UnexpectedValueException('No matches');
+            throw new \UnexpectedValueException(sprintf('No database matches for query "%1$s"', $query));
         }
         if ($condition === null) {
             if ($keys) {

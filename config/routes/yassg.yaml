@@ -1,0 +1,3 @@
+yassg:
+    resource: 'Sigwin\YASSG\Bridge\Symfony\Routing\Loader\RouteLoader'
+    type: service

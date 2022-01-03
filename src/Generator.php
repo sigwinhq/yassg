@@ -2,23 +2,41 @@
 
 namespace Sigwin\YASSG;
 
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
+use Symfony\Component\HttpKernel\KernelInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\RequestContext;
+
 class Generator
 {
-    public function __construct(private Renderer $renderer)
-    {}
-    
-    public function generate(string $buildDir): void
+    public function __construct(private Permutator $permutator, private UrlGeneratorInterface $urlGenerator, private KernelInterface $kernel)
     {
+    }
+    
+    public function generate(string $baseUrl, callable $callable): void
+    {
+        // TODO: extract to config
+        $buildDir = 'public';
         $this->mkdir($buildDir);
         
-        foreach ($this->renderer->permute() as $url => $response) {
-            fwrite(STDOUT, sprintf('Rendering "%1$s".'."\n", $url ?: '/'));
+        // TODO: extract to factory
+        $this->urlGenerator->setContext(RequestContext::fromUri($baseUrl));
+        
+        foreach ($this->permutator->permute() as $routeName => $parameters) {
+            $request = Request::create($this->urlGenerator->generate($routeName, $parameters + ['_filename' => 'index.html'], UrlGeneratorInterface::RELATIVE_PATH));
+            try {
+                $response = $this->kernel->handle($request, HttpKernelInterface::MAIN_REQUEST, false);
+            } catch (HttpException $exception) {
+                throw $exception;
+            }
 
-            $path = $buildDir.$url .'/index.html';
+            $path = $buildDir . $request->getPathInfo();
             $this->mkdir(dirname($path));
             
-            file_put_contents($path, $response);
-            fwrite(STDOUT, sprintf('Wrote %1$s.'."\n", $path));
+            $callable($request, $response, $path);
+            file_put_contents($path, $response->getContent());
         }
     }
     
