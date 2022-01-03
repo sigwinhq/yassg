@@ -31,14 +31,23 @@ class InitCommand extends Command
 
         $finder = new \Symfony\Component\Finder\Finder();
         $finder
+            ->depth('== 0')
             ->in($this->initDir);
+        
+        $filesystem = new \Symfony\Component\Filesystem\Filesystem();
         
         /** @var SplFileInfo $file */
         foreach ($finder as $file) {
-            $path = $this->baseDir .'/'. $file->getFilename();
-            copy($file->getRealPath(), $path);
+            $source = $file->getRealPath();
+            $target = $this->baseDir .'/'. $file->getFilename();
             
-            $style->writeln($path);
+            if ($file->isFile()) {
+                $filesystem->copy($source, $target);
+            } else {
+                $filesystem->mirror($source, $target);
+            }
+            
+            $style->writeln($target);
         }
 
         return 0;
