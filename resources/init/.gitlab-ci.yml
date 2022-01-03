@@ -18,13 +18,14 @@ assets:
         paths:
             - node_modules/
 
-generate: &generate
+.generate: &generate
     stage: pages
     image: jakzal/phpqa:php8.0-alpine
     needs:
         - assets
     script:
         - mkdir node_modules
+        - composer install
         - make build
     artifacts:
         paths:
