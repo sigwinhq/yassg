@@ -3,6 +3,7 @@ services:
         autowire: true
         autoconfigure: true
         bind:
+            $baseDir: "%sigwin_yassg.base_dir%"
             $data: "%sigwin_yassg.database%"
             $routes: "%sigwin_yassg.routes%"
 
@@ -14,6 +15,9 @@ services:
     Sigwin\YASSG\Bridge\Symfony\Controller\:
         resource: '../src/Bridge/Symfony/Controller'
         tags: ['controller.service_arguments']
+        
+    Sigwin\YASSG\Bridge\Symfony\Command\InitCommand:
+        $initDir: "%kernel.project_dir%/resources/init"
     
 when@prod:
     services:
