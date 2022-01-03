@@ -31,6 +31,7 @@ class InitCommand extends Command
 
         $finder = new \Symfony\Component\Finder\Finder();
         $finder
+            ->ignoreDotFiles(false)
             ->depth('== 0')
             ->in($this->initDir);
         
