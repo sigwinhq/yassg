@@ -17,7 +17,7 @@ use Symfony\Component\Routing\RequestContext;
 
 final class BuildRequestContextFactory
 {
-    private $buildUrl;
+    private ?string $buildUrl = null;
 
     public function setBuildUrl(string $buildUrl): void
     {

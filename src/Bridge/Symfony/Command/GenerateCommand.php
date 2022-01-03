@@ -32,7 +32,7 @@ final class GenerateCommand extends Command
 
     public function __construct(Generator $generator, BuildRequestContextFactory $contextFactory)
     {
-        parent::__construct(self::$defaultName);
+        parent::__construct('yassg:generate');
 
         $this->generator = $generator;
         $this->contextFactory = $contextFactory;
@@ -41,9 +41,8 @@ final class GenerateCommand extends Command
     protected function configure(): void
     {
         $this
-            ->setName(self::$defaultName)
             ->setDescription('Generate the site')
-            ->addArgument('url', InputArgument::REQUIRED);
+            ->addArgument('url', InputArgument::REQUIRED, 'Base URL to generate for');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -51,11 +50,20 @@ final class GenerateCommand extends Command
         $style = new SymfonyStyle($input, $output);
         $style->title('Sigwin YASSG');
 
+        /**
+         * @phpstan-var string $buildUrl
+         * @psalm-suppress UnnecessaryVarAnnotation Psalm's Symfony plugin solves this, but not PHPStan's
+         */
         $buildUrl = $input->getArgument('url');
         $this->contextFactory->setBuildUrl($buildUrl);
 
         $this->generator->generate($buildUrl, static function (Request $request, Response $response, string $path) use ($style, $buildUrl): void {
             $style->writeln(str_replace('http://localhost', $buildUrl, $request->getUri()));
+
+            if ($style->isDebug()) {
+                $style->info(sprintf('Response code: %1d$', $response->getStatusCode()));
+                $style->info(sprintf('Written to: %1s$', $path));
+            }
         });
 
         return 0;

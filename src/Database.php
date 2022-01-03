@@ -33,9 +33,10 @@ final class Database
     {
         $keys = mb_substr($query, -4) === '$key';
         if ($keys) {
-            $query = mb_substr($query, 0, \mb_strlen($query) - 5);
+            $query = mb_substr($query, 0, -5);
         }
 
+        /** @var null|array $result */
         $result = $this->data->get($query);
         if ($result === null) {
             throw new \UnexpectedValueException(sprintf('No database matches for query "%1$s"', $query));
@@ -51,7 +52,7 @@ final class Database
         $restricted = [];
         foreach ($result as $key => $item) {
             try {
-                if ($this->expressionLanguage->evaluate($condition, $item)) {
+                if ($this->expressionLanguage->evaluate($condition, $item) !== null) {
                     if ($keys) {
                         $restricted[] = $key;
                     } else {

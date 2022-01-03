@@ -22,8 +22,15 @@ use Symfony\Component\Routing\RequestContext;
 
 final class Generator
 {
-    public function __construct(private Permutator $permutator, private UrlGeneratorInterface $urlGenerator, private KernelInterface $kernel)
+    private Permutator $permutator;
+    private UrlGeneratorInterface $urlGenerator;
+    private KernelInterface $kernel;
+
+    public function __construct(Permutator $permutator, UrlGeneratorInterface $urlGenerator, KernelInterface $kernel)
     {
+        $this->kernel = $kernel;
+        $this->urlGenerator = $urlGenerator;
+        $this->permutator = $permutator;
     }
 
     public function generate(string $baseUrl, callable $callable): void
@@ -47,7 +54,13 @@ final class Generator
             $this->mkdir(\dirname($path));
 
             $callable($request, $response, $path);
-            file_put_contents($path, $response->getContent());
+
+            $body = $response->getContent();
+            if ($body === false) {
+                throw new \RuntimeException('No body in response');
+            }
+
+            file_put_contents($path, $body);
         }
     }
 

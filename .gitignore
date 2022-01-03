@@ -1,3 +1,4 @@
 /composer.lock
+/var/
 /vendor/
 /.php-cs-fixer.cache

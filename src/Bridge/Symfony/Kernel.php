@@ -13,8 +13,9 @@ declare(strict_types=1);
 
 namespace Sigwin\YASSG\Bridge\Symfony;
 
+use Sigwin\YASSG\Bridge\Symfony\DependencyInjection\CompilerPass\RemoveCommandsCompilerPass;
+use Sigwin\YASSG\Bridge\Symfony\DependencyInjection\KernelExtension;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
-use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
@@ -38,16 +39,14 @@ final class Kernel extends \Symfony\Component\HttpKernel\Kernel
 
     public function build(ContainerBuilder $container): void
     {
-        $container->setParameter('kernel.secret', uniqid(__DIR__));
+        $container->setParameter('kernel.secret', uniqid(__DIR__, true));
         $container->setParameter('sigwin_yassg.base_dir', $this->baseDir);
 
-        $tagged = $container->findTaggedServiceIds('console.command');
-
-        $container->registerExtension(new \Sigwin\YASSG\Bridge\Symfony\DependencyInjection\KernelExtension());
-        $container->addCompilerPass(new \Sigwin\YASSG\Bridge\Symfony\DependencyInjection\CompilerPass\RemoveCommandsCompilerPass());
+        $container->registerExtension(new KernelExtension());
+        $container->addCompilerPass(new RemoveCommandsCompilerPass());
     }
 
-    private function configureContainer(ContainerConfigurator $container, LoaderInterface $loader, ContainerBuilder $builder): void
+    protected function configureContainer(ContainerConfigurator $container): void
     {
         $configDir = $this->getConfigDir();
         $container->import($configDir.'/{packages}/*.yaml');
