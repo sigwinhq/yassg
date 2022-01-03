@@ -1,0 +1,19 @@
+name: Build
+on:
+    pull_request:
+    push:
+        branches:
+            - "master"
+
+jobs:
+    CodeQualityAnalysis:
+        runs-on: ubuntu-latest
+        steps:
+            -
+                uses: actions/checkout@master
+            -
+                name: Composer install dependencies
+                run: make composer-install
+            -
+                name: Run code quality analysis
+                run: make check

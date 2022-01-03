@@ -2,13 +2,8 @@
     "name": "sigwin/yassg",
     "description": "Yet Another Static Site Generator",
     "license": "MIT",
-    "autoload": {
-        "psr-4": {
-            "Sigwin\\YASSG\\": "src/"
-        }
-    },
     "require": {
-        "php": "^7.4 | ^8.0",
+        "php": "^8.0",
         "adbario/php-dot-notation": "^2.2",
         "bentools/cartesian-product": "^1.3",
         "symfony/console": "^6.0",
@@ -19,13 +14,18 @@
         "symfony/webpack-encore-bundle": "^1.13",
         "symfony/yaml": "^6.0"
     },
-    "config": {
-        "sort-packages": true,
-        "allow-plugins": {
-            "symfony/runtime": true
+    "autoload": {
+        "psr-4": {
+            "Sigwin\\YASSG\\": "src/"
         }
     },
     "bin": [
         "bin/yassg"
-    ]
+    ],
+    "config": {
+        "allow-plugins": {
+            "symfony/runtime": true
+        },
+        "sort-packages": true
+    }
 }

@@ -1,26 +1,43 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the yassg project.
+ *
+ * (c) sigwin.hr
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace Sigwin\YASSG\Bridge\Symfony\Command;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Symfony\Component\Finder\SplFileInfo;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Finder\Finder;
 
-class InitCommand extends Command
+final class InitCommand extends Command
 {
     protected static $defaultName = 'yassg:init';
-    
-    public function __construct(private string $initDir, private string $baseDir)
+
+    private string $initDir;
+    private string $baseDir;
+
+    public function __construct(string $initDir, string $baseDir)
     {
-        parent::__construct(self::$defaultName);
+        $this->baseDir = $baseDir;
+        $this->initDir = $initDir;
+
+        parent::__construct('yassg:init');
     }
 
     protected function configure(): void
     {
         $this
-            ->setName(self::$defaultName)
             ->setDescription('Init a new project');
     }
 
@@ -29,25 +46,24 @@ class InitCommand extends Command
         $style = new SymfonyStyle($input, $output);
         $style->title('Sigwin YASSG init');
 
-        $finder = new \Symfony\Component\Finder\Finder();
+        $finder = new Finder();
         $finder
             ->ignoreDotFiles(false)
             ->depth('== 0')
             ->in($this->initDir);
-        
-        $filesystem = new \Symfony\Component\Filesystem\Filesystem();
-        
-        /** @var SplFileInfo $file */
+
+        $filesystem = new Filesystem();
         foreach ($finder as $file) {
+            /** @var string $source */
             $source = $file->getRealPath();
-            $target = $this->baseDir .'/'. $file->getFilename();
-            
+            $target = $this->baseDir.'/'.$file->getFilename();
+
             if ($file->isFile()) {
                 $filesystem->copy($source, $target);
             } else {
                 $filesystem->mirror($source, $target);
             }
-            
+
             $style->writeln($target);
         }
 

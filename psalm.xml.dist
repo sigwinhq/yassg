@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<psalm xmlns="https://getpsalm.org/schema/config"
+       cacheDirectory="var/psalm"
+       errorLevel="2"
+       findUnusedPsalmSuppress="true"
+       findUnusedVariablesAndParams="true">
+    <projectFiles>
+        <directory name="./"/>
+        <ignoreFiles allowMissingFiles="true">
+            <file name=".php-cs-fixer.dist.php"/>
+            <directory name="vendor/"/>
+            <directory name="var/"/>
+        </ignoreFiles>
+    </projectFiles>
+
+    <issueHandlers>
+        <PropertyNotSetInConstructor>
+            <errorLevel type="info">
+                <file name="src/Bridge/Symfony/Kernel.php"/>
+            </errorLevel>
+        </PropertyNotSetInConstructor>
+
+        <PossiblyNullReference>
+            <errorLevel type="suppress">
+                <file name="src/Bridge/Symfony/DependencyInjection/Configuration.php"/>
+            </errorLevel>
+        </PossiblyNullReference>
+        <PossiblyUndefinedMethod>
+            <errorLevel type="suppress">
+                <file name="src/Bridge/Symfony/DependencyInjection/Configuration.php"/>
+            </errorLevel>
+        </PossiblyUndefinedMethod>
+    </issueHandlers>
+
+    <plugins>
+        <pluginClass class="Psalm\SymfonyPsalmPlugin\Plugin"/>
+    </plugins>
+</psalm>
