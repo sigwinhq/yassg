@@ -8,15 +8,15 @@ dev/assets: node_modules
 index.php:
 	ln -s vendor/sigwin/yassg/web/index.php
 
-build: ${BUILD_DIR}/assets vendor 
+build: ${BUILD_DIR}/assets/entrypoints.json vendor 
 	php vendor/sigwin/yassg/bin/yassg yassg:generate --env prod $(BASE_URL)
-build/clean: clean ${BUILD_DIR}/assets vendor
+build/clean: clean ${BUILD_DIR}/assets/entrypoints.json vendor
 	php vendor/sigwin/yassg/bin/yassg yassg:generate --env prod $(BASE_URL)
 .PHONY: build build/clean
 
 ${BUILD_DIR}:
 	mkdir -p ${BUILD_DIR}
-${BUILD_DIR}/assets: | ${BUILD_DIR} node_modules 
+${BUILD_DIR}/assets/entrypoints.json: | ${BUILD_DIR} node_modules 
 	node_modules/.bin/encore production
 
 clean:
