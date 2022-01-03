@@ -2,5 +2,5 @@ sigwin_yassg:
     database:
         collections:
             demo_page:
-                title: Sigwin index
+                title: Sigwin YASSG demo page
                 image: assets/images/sigwin.svg        

@@ -1,6 +1,4 @@
 {
-    "name": "@sigwin/coreshop-frontend-starter",
-    "license": "SEE LICENSE IN LICENSE",
     "devDependencies": {
         "@symfony/webpack-encore": "^1.7.0",
         "file-loader": "^6.2.0",
