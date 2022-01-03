@@ -14,8 +14,8 @@ class KernelExtension extends Extension
 
         $config = $this->processConfiguration($configuration, $configs);
         
-        $container->setParameter('sigwin_yassg.database', $config['database']);
-        $container->setParameter('sigwin_yassg.routes', $config['routes']);
+        $container->setParameter('sigwin_yassg.database', $config['database'] ?? []);
+        $container->setParameter('sigwin_yassg.routes', $config['routes'] ?? []);
     }
     
     public function getNamespace(): string

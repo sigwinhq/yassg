@@ -24,8 +24,6 @@ class Configuration implements ConfigurationInterface
                             ->end()
                         ->end()
                     ->end()
-                    ->requiresAtLeastOneElement()
-                    ->isRequired()
                 ->end()
                 ->variableNode('database')
                 ->end()

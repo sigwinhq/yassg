@@ -34,7 +34,7 @@ class Kernel extends \Symfony\Component\HttpKernel\Kernel
         $container->import($configDir.'/{packages}/*.yaml');
         $container->import($configDir.'/services.yaml');
         
-        $container->import($this->baseDir .'/config/*.yaml');
+        $container->import($this->baseDir .'/{config}/*.yaml');
     }
 
     public function build(ContainerBuilder $container): void
