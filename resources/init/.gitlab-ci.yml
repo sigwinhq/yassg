@@ -1,0 +1,52 @@
+stages:
+    - assets
+    - pages
+
+assets:
+    stage: assets
+    image: node:16.4.2-alpine
+    script:
+        - npm install
+        - node_modules/.bin/encore production
+    artifacts:
+        paths:
+            - public
+    cache:
+        key:
+            files:
+                - package-lock.json
+        paths:
+            - node_modules/
+
+generate: &generate
+    stage: pages
+    image: jakzal/phpqa:php8.0-alpine
+    needs:
+        - assets
+    script:
+        - mkdir node_modules
+        - make build
+    artifacts:
+        paths:
+            - public
+    cache:
+        key:
+            files:
+                - composer.lock
+        paths:
+            - vendor/
+
+preview:
+    <<: *generate
+    variables:
+        # TODO: simplify with https://gitlab.com/gitlab-org/gitlab/-/issues/36373
+        BASE_URL: https://${CI_PROJECT_ROOT_NAMESPACE}.${CI_PAGES_DOMAIN}/-/engineering/${CI_PROJECT_NAME}/-/jobs/${CI_JOB_ID}/artifacts/public
+    except:
+        - master
+
+pages:
+    <<: *generate
+    variables:
+        BASE_URL: ${CI_PAGES_URL}
+    only:
+        - master
