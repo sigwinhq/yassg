@@ -1,0 +1,4 @@
+framework:
+    translator:
+        # TODO: extract to config
+        default_path: '%sigwin_yassg.base_dir%/translations'
