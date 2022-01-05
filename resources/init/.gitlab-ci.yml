@@ -4,7 +4,7 @@ stages:
 
 assets:
     stage: assets
-    image: node:16.4.2-alpine
+    image: node:17.3-alpine
     script:
         - npm install
         - node_modules/.bin/encore production
@@ -24,7 +24,7 @@ assets:
     needs:
         - assets
     script:
-        - mkdir node_modules
+        - mkdir -p node_modules
         - composer install
         - make build
     artifacts:
@@ -43,6 +43,7 @@ preview:
         # TODO: simplify with https://gitlab.com/gitlab-org/gitlab/-/issues/36373
         BASE_URL: https://${CI_PROJECT_ROOT_NAMESPACE}.${CI_PAGES_DOMAIN}/-/engineering/${CI_PROJECT_NAME}/-/jobs/${CI_JOB_ID}/artifacts/public
     except:
+        - main
         - master
 
 pages:
@@ -50,4 +51,5 @@ pages:
     variables:
         BASE_URL: ${CI_PAGES_URL}
     only:
+        - main
         - master
