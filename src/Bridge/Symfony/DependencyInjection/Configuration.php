@@ -31,6 +31,8 @@ final class Configuration implements ConfigurationInterface
                                 ->isRequired()
                                 ->cannotBeEmpty()
                             ->end()
+                            ->variableNode('defaults')
+                            ->end()
                             ->variableNode('catalog')
                             ->end()
                         ->end()
