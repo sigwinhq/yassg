@@ -24,7 +24,7 @@ class RouteLoader implements RouteLoaderInterface
             $route = new Route(
                 $route['path'] .'/{_filename}',
                 array_replace(
-                    $route['_defaults'] ?? [],
+                    $route['defaults'] ?? [],
                     [
                         '_controller' => DefaultController::class,
                         '_filename' => null,
