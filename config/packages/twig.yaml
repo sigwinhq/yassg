@@ -1,3 +1,2 @@
 twig:
-    # TODO: extract to config
-    default_path: "%sigwin_yassg.base_dir%/templates" 
+    default_path: "%sigwin_yassg.template_dir%" 

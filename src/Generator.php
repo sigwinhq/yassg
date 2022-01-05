@@ -22,12 +22,14 @@ use Symfony\Component\Routing\RequestContext;
 
 final class Generator
 {
+    private string $buildDir;
     private Permutator $permutator;
     private UrlGeneratorInterface $urlGenerator;
     private KernelInterface $kernel;
 
-    public function __construct(Permutator $permutator, UrlGeneratorInterface $urlGenerator, KernelInterface $kernel)
+    public function __construct(string $buildDir, Permutator $permutator, UrlGeneratorInterface $urlGenerator, KernelInterface $kernel)
     {
+        $this->buildDir = $buildDir;
         $this->kernel = $kernel;
         $this->urlGenerator = $urlGenerator;
         $this->permutator = $permutator;
@@ -35,9 +37,7 @@ final class Generator
 
     public function generate(string $baseUrl, callable $callable): void
     {
-        // TODO: extract to config
-        $buildDir = 'public';
-        $this->mkdir($buildDir);
+        $this->mkdir($this->buildDir);
 
         // TODO: extract to factory
         $this->urlGenerator->setContext(RequestContext::fromUri($baseUrl));
@@ -50,7 +50,7 @@ final class Generator
                 throw $exception;
             }
 
-            $path = $buildDir.$request->getPathInfo();
+            $path = $this->buildDir.$request->getPathInfo();
             $this->mkdir(\dirname($path));
 
             $callable($request, $response, $path);

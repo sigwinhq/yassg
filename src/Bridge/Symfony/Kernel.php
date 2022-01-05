@@ -41,6 +41,12 @@ final class Kernel extends \Symfony\Component\HttpKernel\Kernel
     {
         $container->setParameter('kernel.secret', uniqid(__DIR__, true));
         $container->setParameter('sigwin_yassg.base_dir', $this->baseDir);
+        
+        // TODO: make configurable
+        $container->setParameter('sigwin_yassg.asset_dir', $this->baseDir .'/public/assets');
+        $container->setParameter('sigwin_yassg.build_dir', $this->baseDir .'/public');
+        $container->setParameter('sigwin_yassg.template_dir', $this->baseDir .'/templates');
+        $container->setParameter('sigwin_yassg.translation_dir', $this->baseDir .'/translations');
 
         $container->registerExtension(new KernelExtension());
         $container->addCompilerPass(new RemoveCommandsCompilerPass());
