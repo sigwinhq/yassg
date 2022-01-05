@@ -4,6 +4,7 @@ services:
         autoconfigure: true
         bind:
             $baseDir: "%sigwin_yassg.base_dir%"
+            $buildDir: "%sigwin_yassg.build_dir%"
             $data: "%sigwin_yassg.database%"
             $routes: "%sigwin_yassg.routes%"
 
