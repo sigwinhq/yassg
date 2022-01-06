@@ -66,6 +66,7 @@ final class Kernel extends \Symfony\Component\HttpKernel\Kernel
         $container->import($configDir.'/services.yaml');
 
         $container->import($this->baseDir.'/{config}/*.yaml');
+        $container->import($this->baseDir.'/{config}/{packages}/*.yaml');
     }
 
     private function createEnvironmentClasses(string $path): iterable
