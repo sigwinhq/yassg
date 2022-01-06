@@ -34,7 +34,7 @@ final class KernelExtension extends Extension implements PrependExtensionInterfa
     {
         /** @var string $templateDir */
         $templateDir = $container->getParameter('sigwin_yassg.template_dir');
-        $bundlesTemplateDir = $templateDir .'/bundles';
+        $bundlesTemplateDir = $templateDir.'/bundles';
 
         if (file_exists($bundlesTemplateDir)) {
             $finder = new Finder();
@@ -48,7 +48,7 @@ final class KernelExtension extends Extension implements PrependExtensionInterfa
             }
 
             $container->prependExtensionConfig('twig', [
-                'paths' => $paths
+                'paths' => $paths,
             ]);
         }
     }
