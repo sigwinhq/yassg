@@ -6,14 +6,14 @@
         "php": "^8.0",
         "adbario/php-dot-notation": "^2.2",
         "bentools/cartesian-product": "^1.3",
-        "symfony/console": "^6.0",
-        "symfony/expression-language": "^6.0",
-        "symfony/framework-bundle": "^6.0",
-        "symfony/runtime": "^6.0",
-        "symfony/translation": "^6.0",
-        "symfony/twig-bundle": "^6.0",
+        "symfony/console": "^5.4 || ^6.0",
+        "symfony/expression-language": "^5.4 || ^6.0",
+        "symfony/framework-bundle": "^5.4 || ^6.0",
+        "symfony/runtime": "^5.4 || ^6.0",
+        "symfony/translation": "^5.4 || ^6.0",
+        "symfony/twig-bundle": "^5.4 || ^6.0",
         "symfony/webpack-encore-bundle": "^1.13",
-        "symfony/yaml": "^6.0"
+        "symfony/yaml": "^5.4 || ^6.0"
     },
     "autoload": {
         "psr-4": {
