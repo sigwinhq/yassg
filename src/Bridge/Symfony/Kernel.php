@@ -52,6 +52,13 @@ final class Kernel extends \Symfony\Component\HttpKernel\Kernel
         $container->addCompilerPass(new RemoveCommandsCompilerPass());
     }
 
+    public function registerBundles(): iterable
+    {
+        yield from $this->createEnvironmentClasses($this->getBundlesPath());
+
+        yield from $this->createEnvironmentClasses($this->baseDir.'/config/bundles.php');
+    }
+
     protected function configureContainer(ContainerConfigurator $container): void
     {
         $configDir = $this->getConfigDir();
@@ -59,5 +66,17 @@ final class Kernel extends \Symfony\Component\HttpKernel\Kernel
         $container->import($configDir.'/services.yaml');
 
         $container->import($this->baseDir.'/{config}/*.yaml');
+    }
+
+    private function createEnvironmentClasses(string $path): iterable
+    {
+        if (file_exists($path)) {
+            $classes = require $path;
+            foreach ($classes as $class => $envs) {
+                if ($envs[$this->environment] ?? $envs['all'] ?? false) {
+                    yield new $class();
+                }
+            }
+        }
     }
 }
