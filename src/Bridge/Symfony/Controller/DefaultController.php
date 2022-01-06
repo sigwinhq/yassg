@@ -31,6 +31,9 @@ final class DefaultController extends AbstractController
             throw new \LogicException('Invalid request, invalid route attribute');
         }
 
-        return $this->render(sprintf('pages/%1$s.html.twig', $route), $request->attributes->all());
+        /** @var string $template */
+        $template = $request->attributes->get('_template') ?? sprintf('pages/%1$s.html.twig', $route);
+
+        return $this->render($template, $request->attributes->all());
     }
 }
