@@ -40,7 +40,7 @@ endif
 .SILENT:
 
 dist: composer-normalize-all cs check-all test-all docs-all
-check: composer-normalize-check phpstan psalm
+check: composer-normalize-check cs-check phpstan psalm
 test: infection
 docs: markdownlint vale
 
