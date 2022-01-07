@@ -19,7 +19,7 @@ build/clean: clean ${BUILD_DIR}/assets/entrypoints.json vendor
 ${BUILD_DIR}:
 	mkdir -p ${BUILD_DIR}
 ${BUILD_DIR}/assets/entrypoints.json: | ${BUILD_DIR} node_modules 
-	node_modules/.bin/encore production
+	BASE_URL=${BASE_URL} node_modules/.bin/encore production
 
 clean:
 	rm -rf cache ${BUILD_DIR}
