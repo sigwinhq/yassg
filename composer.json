@@ -15,9 +15,17 @@
         "symfony/webpack-encore-bundle": "^1.13",
         "symfony/yaml": "^5.4 || ^6.0"
     },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
     "autoload": {
         "psr-4": {
             "Sigwin\\YASSG\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Sigwin\\YASSG\\Test\\": "tests/"
         }
     },
     "bin": [
