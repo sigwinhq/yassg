@@ -37,7 +37,7 @@ final class RouteLoader implements RouteLoaderInterface
                 array_replace(
                     $route['defaults'] ?? [],
                     [
-                        '_controller' => DefaultController::class,
+                        '_controller' => $route['defaults']['_controller'] ?? DefaultController::class,
                         '_filename' => null,
                     ]
                 ),
