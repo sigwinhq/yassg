@@ -29,7 +29,7 @@ final class Permutator
     public function permute(): iterable
     {
         foreach ($this->routes as $route => $spec) {
-            if ($spec['skip']) {
+            if ($spec['skip'] ?? false) {
                 continue;
             }
 

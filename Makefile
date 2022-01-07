@@ -39,44 +39,14 @@ endif
 
 .SILENT:
 
-dist: composer-normalize-all cs check-all test-all docs-all
+dist: composer-normalize cs check test docs
 check: composer-normalize-check cs-check phpstan psalm
 test: infection
 docs: markdownlint vale
 
-define process
-	(cd src/Bridge/PhpSpreadsheet && MAKEFILE_ROOT=../../.. make -f ../../../Makefile $(1))
-	(cd src/Bridge/Spout && MAKEFILE_ROOT=../../.. make -f ../../../Makefile $(1))
-	(cd src/Bridge/Symfony && MAKEFILE_ROOT=../../.. make -f ../../../Makefile $(1))
-	(cd src/Xezilaires && MAKEFILE_ROOT=../.. make -f ../../Makefile $(1))
-endef
-
 define environment
 	$(shell test -f ${BUILD_ENV}-${1} && echo -n ${BUILD_ENV}-${1} || echo ${1})
 endef
-
-check-all: cs-check check
-	$(call process,check)
-test-all: test
-	$(call process,test)
-composer-install-all: composer-install
-	$(call process,composer-install)
-composer-install-lowest-all: composer-install-lowest
-	$(call process,composer-install-lowest)
-composer-normalize-all: composer-normalize
-	$(call process,composer-normalize)
-composer-normalize-check-all: composer-normalize-check
-	$(call process,composer-normalize-check)
-phpunit-all: phpunit
-	$(call process,phpunit)
-phpunit-coverage-all: phpunit-coverage
-	$(call process,phpunit-coverage)
-docs-all: docs
-	$(call process,docs)
-ensure-all: ensure
-	$(call process,ensure)
-clean-all: clean
-	$(call process,clean)
 
 composer-validate: ensure composer-normalize-check
 	sh -c "${PHPQA_DOCKER_COMMAND} composer validate --no-check-lock"
