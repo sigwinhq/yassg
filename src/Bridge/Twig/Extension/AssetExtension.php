@@ -33,6 +33,10 @@ final class AssetExtension extends AbstractExtension
     {
         return [
             new TwigFunction('asset', function (string $path) {
+                if (mb_strpos($path, '//') !== false) {
+                    return $path;
+                }
+
                 return $this->requestContext->getScheme().'://'.$this->requestContext->getHost().$this->requestContext->getBaseUrl().$this->packages->getUrl(ltrim($path, '/'));
             }),
         ];
