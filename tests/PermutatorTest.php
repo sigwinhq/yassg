@@ -30,10 +30,45 @@ use Sigwin\YASSG\Permutator;
  */
 final class PermutatorTest extends TestCase
 {
-    public function testPermutatorIsEmptyByDefault(): void
+    /**
+     * @dataProvider dataProvider
+     */
+    public function testPermutator(array $routes, array $database, array $fixtures): void
     {
-        $permutator = new Permutator([], new Database([]));
-        
-        self::assertCount(0, $permutator->permute());
+        $permutator = new Permutator($routes, new Database($database));
+        $iterator = $permutator->permute();
+
+        $idx = 0;
+        foreach ($iterator as $key => $value) {
+            static::assertArrayHasKey($idx, $fixtures);
+            static::assertEquals($fixtures[$idx], [$key => $value]);
+
+            ++$idx;
+        }
+        static::assertEquals(\count($fixtures), $idx);
+    }
+
+    public function dataProvider(): array
+    {
+        // routes, database, permutations
+        return [
+            [
+                [], [], [],
+            ],
+            [
+                ['a' => []], [], [['a' => []]],
+            ],
+            [
+                ['a' => ['skip' => true], 'b' => []], [], [['b' => []]],
+            ],
+            [
+                ['a' => ['catalog' => []]], [], [['a' => []]],
+            ],
+            [
+                ['a' => ['catalog' => ['var' => 'path']], 'b' => ['defaults' => ['var' => 1]], 'c' => ['catalog' => []]],
+                ['path' => [1, 2, 3]],
+                [['a' => ['var' => 1]], ['a' => ['var' => 2]], ['a' => ['var' => 3]], ['b' => ['var' => 1]], ['c' => []]],
+            ],
+        ];
     }
 }

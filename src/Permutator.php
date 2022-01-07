@@ -26,7 +26,7 @@ final class Permutator
         $this->database = $database;
     }
 
-    public function permute(): iterable
+    public function permute(): \Traversable
     {
         foreach ($this->routes as $route => $spec) {
             if ($spec['skip'] ?? false) {
@@ -34,11 +34,12 @@ final class Permutator
             }
 
             $variables = [];
-            if ( ! isset($spec['catalog'])) {
+            if ( ! isset($spec['catalog']) || $spec['catalog'] === []) {
                 yield $route => $spec['defaults'] ?? [];
+                continue;
             }
 
-            foreach ($spec['catalog'] ?? [] as $variable => $query) {
+            foreach ($spec['catalog'] as $variable => $query) {
                 $variables[$variable] = $this->database->query($query);
             }
 

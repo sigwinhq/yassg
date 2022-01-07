@@ -17,6 +17,7 @@
         <PropertyNotSetInConstructor>
             <errorLevel type="info">
                 <file name="src/Bridge/Symfony/Kernel.php"/>
+                <directory name="tests/"/>
             </errorLevel>
         </PropertyNotSetInConstructor>
 
