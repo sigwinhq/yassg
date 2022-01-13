@@ -52,7 +52,7 @@ final class Database
         $restricted = [];
         foreach ($result as $key => $item) {
             try {
-                if ($this->expressionLanguage->evaluate($condition, $item) !== null) {
+                if ($this->expressionLanguage->evaluate($condition, $item) === true) {
                     if ($keys) {
                         $restricted[] = $key;
                     } else {
