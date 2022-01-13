@@ -6,14 +6,14 @@ if (!Encore.isRuntimeEnvironmentConfigured()) {
 
 Encore
     .setOutputPath('public/assets')
-    .setPublicPath('/assets')
+    .setPublicPath(Encore.isProduction() ? process.env.BASE_URL + '/assets' : '/assets')
     .setManifestKeyPrefix('assets/')
     .addEntry('app', './assets/app.ts')
     .splitEntryChunks()
     .enableSingleRuntimeChunk()
     .copyFiles({
         from: './assets/images',
-        to: 'images/[path][name].[hash:8].[ext]',        
+        to: 'images/[path][name].[hash:8].[ext]',
     })
     .configureDevServerOptions((options) => {
         options.liveReload = true;

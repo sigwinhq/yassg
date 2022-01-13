@@ -2,12 +2,12 @@ stages:
     - assets
     - pages
 
-assets:
+.assets: &assets
     stage: assets
-    image: node:17.3-alpine
+    image: node:16.4.2-alpine
     script:
         - npm install
-        - node_modules/.bin/encore production
+        - BASE_URL=${BASE_URL} node_modules/.bin/encore production
     artifacts:
         paths:
             - public
@@ -21,8 +21,6 @@ assets:
 .generate: &generate
     stage: pages
     image: jakzal/phpqa:php8.0-alpine
-    needs:
-        - assets
     script:
         - mkdir -p node_modules
         - composer install
@@ -37,8 +35,18 @@ assets:
         paths:
             - vendor/
 
+preview-assets:
+    <<: *assets
+    variables:
+        # TODO: simplify with https://gitlab.com/gitlab-org/gitlab/-/issues/36373
+        BASE_URL: https://${CI_PROJECT_ROOT_NAMESPACE}.${CI_PAGES_DOMAIN}/-/engineering/${CI_PROJECT_NAME}/-/jobs/${CI_JOB_ID}/artifacts/public
+    except:
+        - main
+        - master
 preview:
     <<: *generate
+    needs:
+        - preview-assets
     variables:
         # TODO: simplify with https://gitlab.com/gitlab-org/gitlab/-/issues/36373
         BASE_URL: https://${CI_PROJECT_ROOT_NAMESPACE}.${CI_PAGES_DOMAIN}/-/engineering/${CI_PROJECT_NAME}/-/jobs/${CI_JOB_ID}/artifacts/public
@@ -46,8 +54,17 @@ preview:
         - main
         - master
 
+pages-assets:
+    <<: *assets
+    variables:
+        BASE_URL: ${CI_PAGES_URL}
+    only:
+        - main
+        - master
 pages:
     <<: *generate
+    needs:
+        - pages-assets
     variables:
         BASE_URL: ${CI_PAGES_URL}
     only:
