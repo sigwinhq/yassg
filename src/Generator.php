@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sigwin\YASSG;
 
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
@@ -37,7 +38,8 @@ final class Generator
 
     public function generate(string $baseUrl, callable $callable): void
     {
-        $this->mkdir($this->buildDir);
+        $filesystem = new Filesystem();
+        $filesystem->mkdir($this->buildDir);
 
         // TODO: extract to factory
         $this->urlGenerator->setContext(RequestContext::fromUri($baseUrl));
@@ -50,24 +52,15 @@ final class Generator
                 throw $exception;
             }
 
-            $path = $this->buildDir.$request->getPathInfo();
-            $this->mkdir(\dirname($path));
-
-            $callable($request, $response, $path);
-
             $body = $response->getContent();
             if ($body === false) {
                 throw new \RuntimeException('No body in response');
             }
+            $path = $this->buildDir.$request->getPathInfo();
 
-            file_put_contents($path, $body);
-        }
-    }
+            $filesystem->dumpFile($path, $body);
 
-    private function mkdir(string $dir): void
-    {
-        if ( ! is_dir($dir) && ! mkdir($dir, 0755, true) && ! is_dir($dir)) {
-            throw new \RuntimeException(sprintf('Directory "%s" was not created', $dir));
+            $callable($request, $response, $path);
         }
     }
 }
