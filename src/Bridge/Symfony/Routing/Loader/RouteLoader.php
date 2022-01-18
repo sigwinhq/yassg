@@ -42,7 +42,7 @@ final class RouteLoader implements RouteLoaderInterface
                     ]
                 ),
                 [
-                    '_filename' => 'index\.html'
+                    '_filename' => 'index\.html',
                 ]
             );
             $collection->add($name, $route);
