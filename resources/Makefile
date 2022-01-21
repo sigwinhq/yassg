@@ -22,7 +22,7 @@ ${BUILD_DIR}/assets/entrypoints.json: | ${BUILD_DIR} node_modules
 	BASE_URL=${BASE_URL} node_modules/.bin/encore production
 
 clean:
-	rm -rf cache ${BUILD_DIR}
+	rm -rf var/cache/* var/log/* ${BUILD_DIR}
 .PHONY: clean
 node_modules:
 	npm install
