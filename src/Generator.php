@@ -27,40 +27,45 @@ final class Generator
     private Permutator $permutator;
     private UrlGeneratorInterface $urlGenerator;
     private KernelInterface $kernel;
+    private Filesystem $filesystem;
 
-    public function __construct(string $buildDir, Permutator $permutator, UrlGeneratorInterface $urlGenerator, KernelInterface $kernel)
+    public function __construct(string $buildDir, Permutator $permutator, UrlGeneratorInterface $urlGenerator, KernelInterface $kernel, Filesystem $filesystem)
     {
         $this->buildDir = $buildDir;
         $this->kernel = $kernel;
         $this->urlGenerator = $urlGenerator;
         $this->permutator = $permutator;
+        $this->filesystem = $filesystem;
     }
 
     public function generate(string $baseUrl, callable $callable): void
     {
-        $filesystem = new Filesystem();
-        $filesystem->mkdir($this->buildDir);
-
         // TODO: extract to factory
         $this->urlGenerator->setContext(RequestContext::fromUri($baseUrl));
 
         foreach ($this->permutator->permute() as $routeName => $parameters) {
-            $request = Request::create($this->urlGenerator->generate($routeName, $parameters + ['_filename' => 'index.html'], UrlGeneratorInterface::RELATIVE_PATH));
-            try {
-                $response = $this->kernel->handle($request, HttpKernelInterface::MAIN_REQUEST, false);
-            } catch (HttpException $exception) {
-                throw $exception;
-            }
-
-            $body = $response->getContent();
-            if ($body === false) {
-                throw new \RuntimeException('No body in response');
-            }
-            $path = $this->buildDir.$request->getPathInfo();
-
-            $filesystem->dumpFile($path, $body);
-
-            $callable($request, $response, $path);
+            $this->dump($callable, $this->urlGenerator->generate($routeName, $parameters + ['_filename' => 'index.html'], UrlGeneratorInterface::RELATIVE_PATH));
         }
+        $this->dump($callable, '/404.html');
+    }
+
+    private function dump(callable $callable, string $url): void
+    {
+        $request = Request::create($url);
+        try {
+            $response = $this->kernel->handle($request, HttpKernelInterface::MAIN_REQUEST, false);
+        } catch (HttpException $exception) {
+            throw $exception;
+        }
+
+        $body = $response->getContent();
+        if ($body === false) {
+            throw new \RuntimeException('No body in response');
+        }
+        $path = $this->buildDir.$request->getPathInfo();
+
+        $this->filesystem->dumpFile($path, $body);
+
+        $callable($request, $response, $path);
     }
 }
