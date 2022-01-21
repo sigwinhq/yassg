@@ -34,7 +34,12 @@ final class Kernel extends \Symfony\Component\HttpKernel\Kernel
 
     public function getCacheDir(): string
     {
-        return $this->baseDir.'/cache/'.$this->environment;
+        return $this->baseDir.'/var/cache/'.$this->environment;
+    }
+
+    public function getLogDir(): string
+    {
+        return $this->baseDir.'/var/log';
     }
 
     public function build(ContainerBuilder $container): void
