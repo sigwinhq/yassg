@@ -1,3 +1,15 @@
+error404:
+    path: /404.html
+    defaults:
+        _controller: 'error_controller::preview'
+        _format: html
+        code: 404
+
 yassg:
     resource: 'Sigwin\YASSG\Bridge\Symfony\Routing\Loader\RouteLoader'
     type: service
+
+when@dev:
+    _errors:
+        resource: '@FrameworkBundle/Resources/config/routing/errors.xml'
+        prefix: /_error
