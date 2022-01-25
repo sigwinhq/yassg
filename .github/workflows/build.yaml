@@ -56,6 +56,9 @@ jobs:
             -
                 uses: actions/checkout@master
             -
+                name: Composer install dependencies
+                run: make composer-install
+            -
                 name: Run functional test
                 run: cd tests/resources && make
     DocumentationQualityAnalysis:
