@@ -8,6 +8,7 @@
         <directory name="./"/>
         <ignoreFiles allowMissingFiles="true">
             <file name=".php-cs-fixer.dist.php"/>
+            <directory name="tests/resources/"/>
             <directory name="vendor/"/>
             <directory name="var/"/>
         </ignoreFiles>
@@ -20,7 +21,13 @@
                 <directory name="tests/"/>
             </errorLevel>
         </PropertyNotSetInConstructor>
-
+        
+        <!-- false positives -->
+        <UnresolvableInclude>
+            <errorLevel type="suppress">
+                <file name="src/Bridge/Symfony/Kernel.php"/>
+            </errorLevel>            
+        </UnresolvableInclude>
         <PossiblyNullReference>
             <errorLevel type="suppress">
                 <file name="src/Bridge/Symfony/DependencyInjection/Configuration.php"/>

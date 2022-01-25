@@ -133,9 +133,9 @@ final class InitCommand extends Command
                 $target = $this->baseDir.'/'.$file->getFilename();
 
                 if ($file->isFile()) {
-                    $filesystem->copy($source, $target);
+                    $filesystem->copy($source, $target, true);
                 } else {
-                    $filesystem->mirror($source, $target);
+                    $filesystem->mirror($source, $target, null, ['override' => true]);
                 }
 
                 $style->writeln($target);

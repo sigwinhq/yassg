@@ -50,6 +50,17 @@ jobs:
             -
                 name: Run code quality analysis
                 run: make check
+    FunctionalTest:
+        runs-on: ubuntu-latest
+        steps:
+            -
+                uses: actions/checkout@master
+            -
+                name: Composer install dependencies
+                run: make composer-install
+            -
+                name: Run functional test
+                run: cd tests/resources && make
     DocumentationQualityAnalysis:
         runs-on: ubuntu-latest
         steps:
