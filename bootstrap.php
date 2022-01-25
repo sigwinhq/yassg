@@ -14,13 +14,17 @@ declare(strict_types=1);
 namespace Sigwin\YASSG;
 
 $autoloaders = [
+    // when installed in the project
     __DIR__.'/../../autoload_runtime.php',
+
+    // in own repo
+    __DIR__.'/vendor/autoload_runtime.php',
 ];
 
 $baseDir = null;
 foreach ($autoloaders as $autoloader) {
     if (true === file_exists($autoloader)) {
-        $GLOBALS['YASSG_BASEDIR'] = $baseDir = realpath(\dirname($autoloader).'/..');
+        $GLOBALS['YASSG_BASEDIR'] = $baseDir = getcwd();
 
         require_once $autoloader;
 
