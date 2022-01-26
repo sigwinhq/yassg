@@ -68,10 +68,9 @@ jobs:
                 run: make self/build
             -
                 name: Link Checker
-                uses: lycheeverse/lychee-action@1.2.0
+                uses: lycheeverse/lychee-action@v1.2.0
                 with:
                     fail: true
-                    output: "-"
                     args: --verbose --offline --base ./tests/functional/init/public ./tests/functional/init/public/**.html
     DocumentationQualityAnalysis:
         runs-on: ubuntu-latest
