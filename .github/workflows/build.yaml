@@ -70,7 +70,7 @@ jobs:
                 name: Link Checker
                 uses: lycheeverse/lychee-action@master
                 with:
-                    args: --verbose --offline --base ./public ./public
+                    args: --verbose --offline --base ./tests/functional/init/public ./tests/functional/init/public
     DocumentationQualityAnalysis:
         runs-on: ubuntu-latest
         steps:
