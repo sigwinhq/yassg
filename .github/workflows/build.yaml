@@ -67,7 +67,7 @@ jobs:
                 uses: lycheeverse/lychee-action@v1.2.0
                 with:
                     fail: true
-                    args: --verbose --offline --base ./tests/functional/site/public ./tests/functional/site/public/**.html
+                    args: --verbose --offline --base ./tests/functional/site/public "./tests/functional/site/public/*.html" "./tests/functional/site/public/**/*.html"
     FunctionalInitTest:
         runs-on: ubuntu-latest
         steps:
@@ -89,7 +89,7 @@ jobs:
                 uses: lycheeverse/lychee-action@v1.2.0
                 with:
                     fail: true
-                    args: --verbose --offline --base ./tests/functional/init/public ./tests/functional/init/public/**.html
+                    args: --verbose --offline --base ./tests/functional/init/public "./tests/functional/init/public/*.html" "./tests/functional/init/public/**/*.html"
     DocumentationQualityAnalysis:
         runs-on: ubuntu-latest
         steps:
