@@ -50,6 +50,24 @@ jobs:
             -
                 name: Run code quality analysis
                 run: make check
+    FunctionalSiteTest:
+        runs-on: ubuntu-latest
+        steps:
+            -
+                uses: actions/checkout@master
+            -
+                name: Composer install dependencies
+                run: make composer-install
+            -
+                name: Run build
+                working-directory: tests/functional/site
+                run: make self/build
+            -
+                name: Link Checker
+                uses: lycheeverse/lychee-action@v1.2.0
+                with:
+                    fail: true
+                    args: --verbose --offline --base ./tests/functional/site/public ./tests/functional/site/public/**.html
     FunctionalInitTest:
         runs-on: ubuntu-latest
         steps:

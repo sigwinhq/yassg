@@ -1,0 +1,7 @@
+sigwin_yassg:
+    routes:
+        index:
+            path: /
+        another:
+            path: /yep
+
