@@ -8,15 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>{{ demo_page.title }}</title>
-
-    {# TODO: https://github.com/symfony/webpack-encore-bundle/issues/19 #}
-    {% if app.debug %}
-        {{ encore_entry_link_tags('app') }}
-    {% else %}
-        {% for file in encore_entry_css_files('app') %}
-            <link href="{{ absolute_url(asset(file)) }}" rel="stylesheet" />
-        {% endfor %}
-    {% endif %}
+    
+    {{ encore_entry_link_tags('app') }}
 </head>
 <body>
 
@@ -28,13 +21,6 @@
     <p>Delete this file and tweak <code>config/*.yaml</code> files.</p>
 </main>
 
-{# TODO: https://github.com/symfony/webpack-encore-bundle/issues/19 #}
-{% if app.debug %}
-    {{ encore_entry_script_tags('app') }}
-{% else %}
-    {% for file in encore_entry_js_files('app') %}
-        <script src="{{ absolute_url(asset(file)) }}"></script>
-    {% endfor %}
-{% endif %}
+{{ encore_entry_script_tags('app') }}
 </body>
 </html>

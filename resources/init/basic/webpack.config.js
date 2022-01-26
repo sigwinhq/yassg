@@ -6,7 +6,7 @@ if (!Encore.isRuntimeEnvironmentConfigured()) {
 
 Encore
     .setOutputPath('public/assets')
-    .setPublicPath(Encore.isProduction() ? process.env.BASE_URL + '/assets' : '/assets')
+    .setPublicPath(new URL(process.env.BASE_URL).pathname.replace(/\/$/, '') + '/assets')
     .setManifestKeyPrefix('assets/')
     .addEntry('app', './assets/app.ts')
     .splitEntryChunks()

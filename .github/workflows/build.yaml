@@ -66,6 +66,11 @@ jobs:
                 name: Run build
                 working-directory: tests/functional/init
                 run: make self/build
+            -
+                name: Link Checker
+                uses: lycheeverse/lychee-action@master
+                with:
+                    args: --verbose --offline --base ./public ./public
     DocumentationQualityAnalysis:
         runs-on: ubuntu-latest
         steps:

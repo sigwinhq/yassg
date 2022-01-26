@@ -1,3 +1,5 @@
+BASE_URL=https://example.com
+
 self/build: self/clean self/init ${BUILD_DIR}/assets/entrypoints.json 
 	php ../../../bin/yassg yassg:generate --env prod $(BASE_URL)
 self/clean:
