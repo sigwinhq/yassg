@@ -1,4 +1,0 @@
-sigwin_yassg:
-    routes:
-        demo:
-            path: /

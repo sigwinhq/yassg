@@ -50,7 +50,7 @@ jobs:
             -
                 name: Run code quality analysis
                 run: make check
-    FunctionalTest:
+    FunctionalInitTest:
         runs-on: ubuntu-latest
         steps:
             -
@@ -59,8 +59,13 @@ jobs:
                 name: Composer install dependencies
                 run: make composer-install
             -
-                name: Run functional test
-                run: cd tests/resources && make
+                name: Run init
+                working-directory: tests/functional/init
+                run: make -f vendor/sigwin/yassg/resources/Makefile self/init
+            -
+                name: Run build
+                working-directory: tests/functional/init
+                run: make self/build
     DocumentationQualityAnalysis:
         runs-on: ubuntu-latest
         steps:
