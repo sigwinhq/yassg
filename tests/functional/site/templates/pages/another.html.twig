@@ -1,0 +1,12 @@
+{% extends 'layout.html.twig' %}
+
+{# query the database #}
+{% set demo_page = yassg_query('collections.demo_page') %}
+
+{% block body %}
+    <main>
+        <h1>Another</h1>
+        <p>Go <a href="{{ path('index') }}">back</a>. This <a href="/doesn/t/work">link doesn't work</a>.</p>
+        
+    </main>
+{% endblock %}

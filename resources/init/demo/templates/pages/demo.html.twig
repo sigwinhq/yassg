@@ -1,17 +1,9 @@
+{% extends 'layout.html.twig' %}
+
 {# query the database #}
 {% set demo_page = yassg_query('collections.demo_page') %}
 
-<!DOCTYPE html>
-<html lang="en" class="h-full">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
-    <title>{{ demo_page.title }}</title>
-
-    {{ encore_entry_link_tags('app') }}
-</head>
-<body class="h-full">
+{% block body %}
 
     <main class="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div class="sm:mx-auto sm:w-full sm:max-w-md">
@@ -30,7 +22,7 @@
                     <h3>
                         1. Create a new route
                     </h3>
-                    <p>Open up <code>config/routes.yaml</code> and add the following:</p>
+                    <p>Open up <code>config/yassg_routes.yaml</code> and add the following:</p>
 <pre><code>new_page:
     path: /my-new-page
 </code></pre>
@@ -44,10 +36,7 @@
         </div>
 
         <div class="sm:mx-auto sm:w-full sm:max-w-md">
-            <img class="mx-auto h-12 w-auto mt-6" src="{{ asset(demo_page.image) }}">
+            <a href="https://www.sigwin.hr/"><img class="mx-auto h-12 w-auto mt-6" src="{{ asset(demo_page.image) }}"></a>
         </div>
     </main>
-
-{{ encore_entry_script_tags('app') }}
-</body>
-</html>
+{% endblock %}

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    
+    <title>{{ demo_page.title }}</title>
+
+    {{ encore_entry_link_tags('app') }}
+</head>
+<body>
+
+{% block body %}{% endblock %}
+
+{{ encore_entry_script_tags('app') }}
+</body>
+</html>
