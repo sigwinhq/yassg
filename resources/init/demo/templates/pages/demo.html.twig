@@ -2,24 +2,51 @@
 {% set demo_page = yassg_query('collections.demo_page') %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-full">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
     <title>{{ demo_page.title }}</title>
-    
+
     {{ encore_entry_link_tags('app') }}
 </head>
-<body>
+<body class="h-full">
 
-<main>
-    <h1>{{ demo_page.title }}</h1>
-    <h2>Asset example</h2>
-    <p><img src="{{ asset(demo_page.image) }}"/></p>
-    <h2>Demo notes</h2>
-    <p>Delete this file and tweak <code>config/*.yaml</code> files.</p>
-</main>
+    <main class="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+        <div class="sm:mx-auto sm:w-full sm:max-w-md">
+            <h1 class="text-center text-3xl font-extrabold text-gray-900">
+                {{ demo_page.title }}
+            </h1>
+        </div>
+
+        <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-xl">
+            <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+                <h2 class="text-2xl text-blue-900 text-center">
+                    Next steps
+                </h2>
+
+                <div class="mt-4 prose">
+                    <h3>
+                        1. Create a new route
+                    </h3>
+                    <p>Open up <code>config/routes.yaml</code> and add the following:</p>
+<pre><code>new_page:
+    path: /my-new-page
+</code></pre>
+
+                    <h3>
+                        2. Add a corresponding template
+                    </h3>
+                    <p>In the <code>templates/pages</code> folder, create a new file <code>new_page.html.twig</code>.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="sm:mx-auto sm:w-full sm:max-w-md">
+            <img class="mx-auto h-12 w-auto mt-6" src="{{ asset(demo_page.image) }}">
+        </div>
+    </main>
 
 {{ encore_entry_script_tags('app') }}
 </body>
