@@ -1,0 +1,11 @@
+sigwin_yassg:
+    data_sources:
+        product:
+            type: filesystem
+            options:
+                path: content
+        locale:
+            type: config
+            values:
+                - de
+                - hr

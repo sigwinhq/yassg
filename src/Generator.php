@@ -44,12 +44,12 @@ final class Generator
         $this->urlGenerator->setContext(RequestContext::fromUri($baseUrl));
 
         foreach ($this->permutator->permute() as $routeName => $parameters) {
-            $this->dump($callable, $this->urlGenerator->generate($routeName, $parameters + ['_filename' => 'index.html'], UrlGeneratorInterface::RELATIVE_PATH));
+            $this->dumpFile($callable, $this->urlGenerator->generate($routeName, $parameters + ['_filename' => 'index.html'], UrlGeneratorInterface::RELATIVE_PATH));
         }
-        $this->dump($callable, '/404.html');
+        $this->dumpFile($callable, '/404.html');
     }
 
-    private function dump(callable $callable, string $url): void
+    private function dumpFile(callable $callable, string $url): void
     {
         $request = Request::create($url);
         try {
