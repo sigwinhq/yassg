@@ -1,7 +1,4 @@
 sigwin_yassg:
     routes:
-        index:
+        demo:
             path: /
-        another:
-            path: /yep
-

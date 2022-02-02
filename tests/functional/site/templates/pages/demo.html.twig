@@ -1,0 +1,42 @@
+{% extends 'layout.html.twig' %}
+
+{# query the database #}
+{% set demo_page = yassg_query('collections.demo_page') %}
+
+{% block body %}
+
+    <main class="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+        <div class="sm:mx-auto sm:w-full sm:max-w-md">
+            <h1 class="text-center text-3xl font-extrabold text-gray-900">
+                {{ demo_page.title }}
+            </h1>
+        </div>
+
+        <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-xl">
+            <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+                <h2 class="text-2xl text-blue-900 text-center">
+                    Next steps
+                </h2>
+
+                <div class="mt-4 prose">
+                    <h3>
+                        1. Create a new route
+                    </h3>
+                    <p>Open up <code>config/yassg_routes.yaml</code> and add the following:</p>
+<pre><code>new_page:
+    path: /my-new-page
+</code></pre>
+
+                    <h3>
+                        2. Add a corresponding template
+                    </h3>
+                    <p>In the <code>templates/pages</code> folder, create a new file <code>new_page.html.twig</code>.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="sm:mx-auto sm:w-full sm:max-w-md">
+            <a href="https://www.sigwin.hr/"><img class="mx-auto h-12 w-auto mt-6" src="{{ asset(demo_page.image) }}"></a>
+        </div>
+    </main>
+{% endblock %}
