@@ -58,31 +58,15 @@ final class Configuration implements ConfigurationInterface
                     ->requiresAtLeastOneElement()
                     ->arrayPrototype()
                         ->children()
-                            ->enumNode('type')
-                                ->values(['config', 'filesystem'])
+                            ->scalarNode('type')
                                 ->isRequired()
                             ->end()
-                            ->variableNode('values')
-                                // only with type: config
+                            ->scalarNode('class')
+                                ->isRequired()
                             ->end()
-                            ->arrayNode('options')
+                            ->variableNode('options')
                                 // only with type: filesystem
-                                ->children()
-                                    ->scalarNode('path')->isRequired()->end()
-                                ->end()
                             ->end()
-                        ->end()
-                        ->validate()
-                            ->ifTrue(static function (array $node): bool {
-                                return $node['type'] === 'config' xor isset($node['values']);
-                            })
-                            ->thenInvalid('"values" must be configured only with "type: config"')
-                        ->end()
-                        ->validate()
-                            ->ifTrue(static function (array $node): bool {
-                                return $node['type'] === 'filesystem' xor isset($node['options']);
-                            })
-                            ->thenInvalid('"options" must be configured with "type: filesystem"')
                         ->end()
                     ->end()
                 ->end()

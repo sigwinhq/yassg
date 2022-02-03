@@ -33,6 +33,7 @@ final class RemoveCommandsCompilerPass implements CompilerPassInterface
 
             if (0 !== mb_strpos($className, 'Sigwin')
                 && ( ! $debug || ! \in_array($id, [
+                        'console.command.debug_autowiring',
                         'console.command.config_debug',
                         'console.command.container_debug',
                         'console.command.router_debug',

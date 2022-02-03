@@ -1,11 +1,21 @@
 sigwin_yassg:
     data_sources:
-        product:
+        products:
+            class: Sigwin\YASSG\Test\Functional\Model\Product
             type: filesystem
             options:
-                path: content
+                paths:           
+                    - "%sigwin_yassg.base_dir%/content/products"
+                names:
+                    - "*.yaml"
         locale:
-            type: config
-            values:
-                - de
-                - hr
+            class: Sigwin\YASSG\Test\Functional\Model\Locale
+            type: memory
+            options:
+                values:
+                    de:
+                        isoCode: de
+                        name: German
+                    hra:
+                        isoCode: hr
+                        name: Croatian

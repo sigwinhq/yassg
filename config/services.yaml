@@ -5,7 +5,7 @@ services:
         bind:
             $baseDir: "%sigwin_yassg.base_dir%"
             $buildDir: "%sigwin_yassg.build_dir%"
-            $data: "%sigwin_yassg.database%"
+            # $data: "%sigwin_yassg.database%"
             $routes: "%sigwin_yassg.routes%"
 
     Sigwin\YASSG\:
@@ -19,9 +19,6 @@ services:
 
     Sigwin\YASSG\Bridge\Symfony\Command\InitCommand:
         $initDir: "%kernel.project_dir%/resources/init"
-
-    Sigwin\YASSG\Bridge\Twig\Extension\AssetExtension:
-        autoconfigure: false
 
 when@prod:
     services:

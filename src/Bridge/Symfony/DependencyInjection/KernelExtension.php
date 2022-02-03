@@ -28,6 +28,9 @@ final class KernelExtension extends Extension implements PrependExtensionInterfa
 
         $container->setParameter('sigwin_yassg.database', $config['database'] ?? []);
         $container->setParameter('sigwin_yassg.routes', $config['routes'] ?? []);
+
+        // this gets validated more in \Sigwin\YASSG\Bridge\Symfony\DependencyInjection\CompilerPass\ConfigureDataSourcesCompilerPass
+        $container->setParameter('sigwin_yassg.data_sources_spec', $config['data_sources'] ?? []);
     }
 
     public function prepend(ContainerBuilder $container): void
