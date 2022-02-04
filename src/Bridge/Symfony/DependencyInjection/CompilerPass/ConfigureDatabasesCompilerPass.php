@@ -15,6 +15,7 @@ namespace Sigwin\YASSG\Bridge\Symfony\DependencyInjection\CompilerPass;
 
 use Sigwin\YASSG\Database;
 use Sigwin\YASSG\Database\MemoryDatabase;
+use Sigwin\YASSG\DatabaseProvider;
 use Sigwin\YASSG\Storage;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Compiler\PriorityTaggedServiceTrait;
@@ -50,6 +51,8 @@ final class ConfigureDatabasesCompilerPass implements CompilerPassInterface
             $container->removeDefinition($reference);
         }
         unset($type);
+
+        $databases = [];
 
         /** @var array<string, array{storage: string, options?: array}> $configuredDataSources */
         $configuredDataSources = $container->getParameter('sigwin_yassg.databases_spec');
@@ -92,7 +95,13 @@ final class ConfigureDatabasesCompilerPass implements CompilerPassInterface
             $databaseId = sprintf('sigwin_yassg.database.%1$s', $name);
             $container->setDefinition($databaseId, $databaseDefinition);
             $container->setAlias(sprintf('%1$s $%2$s', Database::class, $name), $databaseId);
+
+            $databases[$name] = new Reference($databaseId);
         }
         $container->setParameter('sigwin_yassg.databases_spec', null);
+
+        $container
+            ->getDefinition(DatabaseProvider::class)
+                ->setArgument(0, $databases);
     }
 }

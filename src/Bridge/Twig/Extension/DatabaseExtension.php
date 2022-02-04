@@ -13,23 +13,25 @@ declare(strict_types=1);
 
 namespace Sigwin\YASSG\Bridge\Twig\Extension;
 
-use Sigwin\YASSG\Database;
+use Sigwin\YASSG\DatabaseProvider;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 final class DatabaseExtension extends AbstractExtension
 {
-    private Database $products;
+    private DatabaseProvider $provider;
 
-    public function __construct(Database $products)
+    public function __construct(DatabaseProvider $provider)
     {
-        $this->products = $products;
+        $this->provider = $provider;
     }
 
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('yassg_query', [$this->products, 'find']),
+            new TwigFunction('yassg_query', function (string $name, ?array $arguments) {
+                return $this->provider->getDatabase($name)->find(...$arguments);
+            }),
         ];
     }
 }

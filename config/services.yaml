@@ -11,8 +11,9 @@ services:
     Sigwin\YASSG\:
         resource: '../src/'
         exclude:
+            - '../src/Database/*'
+            - '../src/DatabaseProvider.php'
             - '../src/Kernel.php'
-            - '../src/Database'
 
     Sigwin\YASSG\Bridge\Symfony\Controller\:
         resource: '../src/Bridge/Symfony/Controller'
@@ -33,6 +34,8 @@ services:
 
     sigwin_yassg.expression_language:
         class: Symfony\Component\ExpressionLanguage\ExpressionLanguage
+        
+    Sigwin\YASSG\DatabaseProvider: ~        
 
 when@prod:
     services:
