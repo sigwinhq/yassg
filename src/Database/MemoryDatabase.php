@@ -53,7 +53,7 @@ final class MemoryDatabase implements Database
         // sort files here
         if ($sort !== null) {
             $sortExpressions = [];
-            foreach ($sort as $key => $direction) {
+            foreach (array_keys($sort) as $key) {
                 $sortExpressions[$key] = $this->expressionLanguage->parse($key, $this->names);
             }
 
