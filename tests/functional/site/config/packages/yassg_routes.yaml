@@ -1,4 +1,8 @@
 sigwin_yassg:
     routes:
-        demo:
+        index:
             path: /
+        homepage:
+            path: /{_locale}
+            catalog:
+                _locale: "yassg_query('locale', {select: 'isoCode'})"

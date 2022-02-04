@@ -12,7 +12,6 @@ services:
         resource: '../src/'
         exclude:
             - '../src/Database/*'
-            - '../src/DatabaseProvider.php'
             - '../src/Kernel.php'
 
     Sigwin\YASSG\Bridge\Symfony\Controller\:
@@ -34,8 +33,11 @@ services:
 
     sigwin_yassg.expression_language:
         class: Symfony\Component\ExpressionLanguage\ExpressionLanguage
+        calls:
+            - registerProvider: ['@Sigwin\YASSG\Bridge\Symfony\ExpressionLanguage\FunctionProvider']
         
-    Sigwin\YASSG\DatabaseProvider: ~        
+    Sigwin\YASSG\Permutator:
+        $expressionLanguage: '@sigwin_yassg.expression_language'         
 
 when@prod:
     services:

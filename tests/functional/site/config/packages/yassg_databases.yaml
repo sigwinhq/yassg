@@ -19,3 +19,9 @@ sigwin_yassg:
                     hr:
                         isoCode: hr
                         name: Croatian
+                    en:
+                        isoCode: en
+                        name: English
+                    it:
+                        isoCode: it
+                        name: Italian

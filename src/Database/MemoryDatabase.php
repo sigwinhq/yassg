@@ -43,7 +43,7 @@ final class MemoryDatabase implements Database
         return $total;
     }
 
-    public function find(?string $condition = null, ?array $sort = null, ?int $limit = null, int $offset = 0): array
+    public function find(?string $condition = null, ?array $sort = null, ?int $limit = null, int $offset = 0, ?string $select = null): array
     {
         $storage = [];
         $this->load($condition, static function (string $id, array $item) use (&$storage): void {
@@ -74,7 +74,12 @@ final class MemoryDatabase implements Database
             });
         }
 
-        return \array_slice($storage, $offset, $limit, true);
+        $storage = \array_slice($storage, $offset, $limit, true);
+        if ($select !== null) {
+            $storage = array_combine(array_keys($storage), array_column($storage, $select));
+        }
+
+        return $storage;
     }
 
     private function load(?string $condition, callable $callable): void

@@ -1,0 +1,30 @@
+{% extends 'layout.html.twig' %}
+
+{# query the database #}
+{% set products = yassg_query('products', {sort: {name: 'desc'}}) %}
+
+{% set locales = yassg_query('locale', {sort: {name: 'asc'}}) %}
+
+{% block body %}
+    <main class="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+        <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-xl">
+            <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+                <ul>
+                    {% for locale in locales %}
+                        <li>
+                            <a>{{ locale.name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+                
+                <ul>
+                    {% for product in products %}
+                        <li>
+                            <a>{{ product.name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </main>
+{% endblock %}
