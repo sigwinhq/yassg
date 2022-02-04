@@ -1,13 +1,29 @@
 sigwin_yassg:
     databases:
-        products:
+        products_de:
+            class: Sigwin\YASSG\Test\Functional\Model\Product
+            storage: filesystem
+            options:
+                paths:
+                    - "%sigwin_yassg.base_dir%/content/products"
+                names:
+                    - "*.de.yaml"
+        products_en:
             class: Sigwin\YASSG\Test\Functional\Model\Product
             storage: filesystem
             options:
                 paths:           
                     - "%sigwin_yassg.base_dir%/content/products"
                 names:
-                    - "*.yaml"
+                    - "*.en.yaml"
+        products_hr:
+            class: Sigwin\YASSG\Test\Functional\Model\Product
+            storage: filesystem
+            options:
+                paths:
+                    - "%sigwin_yassg.base_dir%/content/products"
+                names:
+                    - "*.hr.yaml"
         locale:
             class: Sigwin\YASSG\Test\Functional\Model\Locale
             storage: memory
@@ -22,6 +38,3 @@ sigwin_yassg:
                     en:
                         isoCode: en
                         name: English
-                    it:
-                        isoCode: it
-                        name: Italian

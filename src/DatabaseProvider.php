@@ -30,6 +30,10 @@ final class DatabaseProvider
 
     public function getDatabase(string $name): Database
     {
+        if (isset($this->databases[$name]) === false) {
+            throw new \LogicException(sprintf('No such database "%1$s"', $name));
+        }
+
         return $this->databases[$name];
     }
 }

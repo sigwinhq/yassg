@@ -1,7 +1,7 @@
 {% extends 'layout.html.twig' %}
 
 {# query the database #}
-{% set products = yassg_query('products', {sort: {name: 'desc'}}) %}
+{% set products = yassg_query('products_'~ _locale, {sort: {name: 'desc'}}) %}
 
 {% set locales = yassg_query('locale', {sort: {name: 'asc'}}) %}
 
@@ -12,7 +12,7 @@
                 <ul>
                     {% for locale in locales %}
                         <li>
-                            <a>{{ locale.name }}</a>
+                            <a href="{{ path('homepage', {_locale: locale.isoCode}) }}">{{ locale.name }}</a>
                         </li>
                     {% endfor %}
                 </ul>
