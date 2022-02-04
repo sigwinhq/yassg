@@ -58,7 +58,6 @@ final class ConfigureDatabasesCompilerPass implements CompilerPassInterface
         $configuredDatabases = $container->getParameter('sigwin_yassg.databases_spec');
         foreach ($configuredDatabases as $name => $database) {
             $type = $database['storage'];
-
             if (\array_key_exists($type, $supportedStorageTypes) === false) {
                 throw new \LogicException(sprintf('Unsupported type "%1$s" at "sigwin_yassg.data_sources.%2$s", allowed values: %3$s', $type, $name, implode(', ', array_keys($supportedStorageTypes))));
             }
@@ -67,19 +66,15 @@ final class ConfigureDatabasesCompilerPass implements CompilerPassInterface
             $storageDefinition
                 ->setAutowired(true)
                 ->setAutoconfigured(true);
-
-            // resolve options set for the data source
             $callable = [$supportedStorageTypes[$type], 'resolveOptions'];
             try {
                 $options = $callable($database['options'] ?? []);
             } catch (OptionsResolverException $resolverException) {
                 throw new \LogicException(sprintf('Options issue at "sigwin_yassg.data_sources.%1$s.options": %2$s', $name, $resolverException->getMessage()));
             }
-
             foreach ($options as $key => $value) {
                 $storageDefinition->setArgument('$'.$key, $value);
             }
-
             $storageId = sprintf('sigwin_yassg.database.storage.%1$s', $name);
             $container->setDefinition($storageId, $storageDefinition);
 
@@ -91,7 +86,6 @@ final class ConfigureDatabasesCompilerPass implements CompilerPassInterface
                 ->setArgument(0, new Reference($storageId))
                 ->setArgument(1, new Reference('sigwin_yassg.expression_language'))
                 ->setArgument(2, $this->getProperties($database['class']));
-
             $databaseId = sprintf('sigwin_yassg.database.%1$s', $name);
             $container->setDefinition($databaseId, $databaseDefinition);
             $container->setAlias(sprintf('%1$s $%2$s', Database::class, $name), $databaseId);
@@ -105,15 +99,17 @@ final class ConfigureDatabasesCompilerPass implements CompilerPassInterface
                 ->setArgument(0, $databases);
     }
 
-    private function getProperties(mixed $class): array
+    /**
+     * @param class-string $class
+     */
+    private function getProperties(string $class): array
     {
         $properties = [];
-        
         $reflection = new \ReflectionClass($class);
         foreach ($reflection->getProperties() as $property) {
             $properties[] = $property->getName();
         }
-        
+
         return $properties;
     }
 }

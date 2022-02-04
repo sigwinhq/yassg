@@ -24,7 +24,12 @@ final class YamlFileDecoder implements FileDecoder
 
     public function decode(\SplFileInfo $file): array
     {
-        $data = Yaml::parseFile($file->getRealPath());
+        $path = $file->getRealPath();
+        if ($path === false) {
+            throw new \RuntimeException('Invalid file path');
+        }
+
+        $data = Yaml::parseFile($path);
         if (\is_array($data) === false) {
             throw new \RuntimeException('Invalid data decoded');
         }

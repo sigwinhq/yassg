@@ -29,7 +29,7 @@ final class DatabaseExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('yassg_query', function (string $name, ?array $arguments) {
+            new TwigFunction('yassg_query', function (string $name, array $arguments = []) {
                 return $this->provider->getDatabase($name)->find(...$arguments);
             }),
         ];
