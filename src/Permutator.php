@@ -21,10 +21,10 @@ final class Permutator
     private array $routes;
     private MemoryDatabase $database;
 
-    public function __construct(array $routes, MemoryDatabase $database)
+    public function __construct(array $routes)
     {
         $this->routes = $routes;
-        $this->database = $database;
+        // $this->database = $database;
     }
 
     public function permute(): \Traversable

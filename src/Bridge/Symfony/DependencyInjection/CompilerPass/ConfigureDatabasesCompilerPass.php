@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sigwin\YASSG\Bridge\Symfony\DependencyInjection\CompilerPass;
 
+use Sigwin\YASSG\Database;
 use Sigwin\YASSG\Database\MemoryDatabase;
 use Sigwin\YASSG\Storage;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
@@ -84,9 +85,13 @@ final class ConfigureDatabasesCompilerPass implements CompilerPassInterface
                 ->setAutowired(true)
                 ->setAutoconfigured(true);
             $databaseDefinition
-                ->setArgument(0, new Reference($storageId));
+                ->setArgument(0, new Reference($storageId))
+                ->setArgument(1, new Reference('sigwin_yassg.expression_language'))
+                ->setArgument(2, ['name', 'index', 'slug']);
 
-            $container->setDefinition(sprintf('sigwin_yassg.database.%1$s', $name), $databaseDefinition);
+            $databaseId = sprintf('sigwin_yassg.database.%1$s', $name);
+            $container->setDefinition($databaseId, $databaseDefinition);
+            $container->setAlias(sprintf('%1$s $%2$s', Database::class, $name), $databaseId);
         }
         $container->setParameter('sigwin_yassg.databases_spec', null);
     }
