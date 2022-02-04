@@ -15,4 +15,6 @@ namespace Sigwin\YASSG\Test\Functional\Model;
 
 final class Locale
 {
+    public string $isoCode;
+    public string $name;
 }

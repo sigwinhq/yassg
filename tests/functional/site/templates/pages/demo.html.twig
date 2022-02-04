@@ -1,7 +1,7 @@
 {% extends 'layout.html.twig' %}
 
 {# query the database #}
-{% set products = yassg_query('products', {sort: {slug: 'desc'}}) %}
+{% set products = yassg_query('locale', {sort: {name: 'desc'}}) %}
 
 {% block body %}
     <main class="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
