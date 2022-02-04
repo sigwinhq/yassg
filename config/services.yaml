@@ -12,6 +12,7 @@ services:
         resource: '../src/'
         exclude:
             - '../src/Kernel.php'
+            - '../src/Database.php'
 
     Sigwin\YASSG\Bridge\Symfony\Controller\:
         resource: '../src/Bridge/Symfony/Controller'
@@ -19,6 +20,8 @@ services:
 
     Sigwin\YASSG\Bridge\Symfony\Command\InitCommand:
         $initDir: "%kernel.project_dir%/resources/init"
+
+    Symfony\Component\ExpressionLanguage\ExpressionLanguage: ~
 
 when@prod:
     services:

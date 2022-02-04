@@ -11,14 +11,14 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace Sigwin\YASSG\DataSource;
+namespace Sigwin\YASSG\Storage;
 
-use Sigwin\YASSG\DataSource;
 use Sigwin\YASSG\FileDecoder;
+use Sigwin\YASSG\Storage;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-final class FilesystemDataSource implements DataSource
+final class FilesystemStorage implements Storage
 {
     private FileDecoder $decoder;
     private Finder $finder;
@@ -36,29 +36,16 @@ final class FilesystemDataSource implements DataSource
         }
     }
 
-    public function count(): int
+    public function load(): iterable
     {
-        return $this->finder->count();
-    }
-
-    public function get(string $id): array
-    {
-        return [];
-    }
-
-    public function find(): array
-    {
-        $files = [];
         foreach ($this->finder as $file) {
             $id = $file->getRealPath();
             if ($this->decoder->supports($file) === false) {
                 throw new \RuntimeException(sprintf('Decoder does not know how to decode %1$s file', $id));
             }
 
-            $files[$id] = $this->decoder->decode($file);
+            yield $id => $this->decoder->decode($file);
         }
-
-        return $files;
     }
 
     public static function getType(): string

@@ -1,8 +1,8 @@
 sigwin_yassg:
-    data_sources:
+    databases:
         products:
             class: Sigwin\YASSG\Test\Functional\Model\Product
-            type: filesystem
+            storage: filesystem
             options:
                 paths:           
                     - "%sigwin_yassg.base_dir%/content/products"
@@ -10,7 +10,7 @@ sigwin_yassg:
                     - "*.yaml"
         locale:
             class: Sigwin\YASSG\Test\Functional\Model\Locale
-            type: memory
+            storage: memory
             options:
                 values:
                     de:

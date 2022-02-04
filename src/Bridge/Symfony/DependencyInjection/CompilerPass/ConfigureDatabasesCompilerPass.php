@@ -13,55 +13,57 @@ declare(strict_types=1);
 
 namespace Sigwin\YASSG\Bridge\Symfony\DependencyInjection\CompilerPass;
 
-use Sigwin\YASSG\DataSource;
+use Sigwin\YASSG\Database;
+use Sigwin\YASSG\Storage;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Compiler\PriorityTaggedServiceTrait;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\OptionsResolver\Exception\ExceptionInterface as OptionsResolverException;
 
-final class ConfigureDataSourcesCompilerPass implements CompilerPassInterface
+final class ConfigureDatabasesCompilerPass implements CompilerPassInterface
 {
     use PriorityTaggedServiceTrait;
 
     public function process(ContainerBuilder $container): void
     {
-        $supportedTypes = [];
+        $supportedStorageTypes = [];
         $references = $this->findAndSortTaggedServices('sigwin_yassg.abstract.data_source_type', $container);
         foreach ($references as $reference) {
             $reference = $reference->__toString();
-            $definition = $container->getDefinition($reference);
+            $storageDefinition = $container->getDefinition($reference);
 
-            /** @var class-string<DataSource> $class */
-            $class = $definition->getClass();
+            /** @var class-string<Storage> $class */
+            $class = $storageDefinition->getClass();
             $callable = [$class, 'getType'];
             $type = $callable();
 
-            if (isset($supportedTypes[$type])) {
+            if (isset($supportedStorageTypes[$type])) {
                 throw new \LogicException(sprintf('Data source type %1$s already provided by %2$s', $type, $reference));
             }
 
-            $supportedTypes[$type] = $class;
+            $supportedStorageTypes[$type] = $class;
             $container->removeDefinition($reference);
         }
         unset($type);
 
-        /** @var array<string, array{type: string, options?: array}> $configuredDataSources */
-        $configuredDataSources = $container->getParameter('sigwin_yassg.data_sources_spec');
+        /** @var array<string, array{storage: string, options?: array}> $configuredDataSources */
+        $configuredDataSources = $container->getParameter('sigwin_yassg.databases_spec');
         foreach ($configuredDataSources as $name => $configuredDataSource) {
-            $type = $configuredDataSource['type'];
+            $type = $configuredDataSource['storage'];
 
-            if (\array_key_exists($type, $supportedTypes) === false) {
-                throw new \LogicException(sprintf('Unsupported type "%1$s" at "sigwin_yassg.data_sources.%2$s", allowed values: %3$s', $type, $name, implode(', ', array_keys($supportedTypes))));
+            if (\array_key_exists($type, $supportedStorageTypes) === false) {
+                throw new \LogicException(sprintf('Unsupported type "%1$s" at "sigwin_yassg.data_sources.%2$s", allowed values: %3$s', $type, $name, implode(', ', array_keys($supportedStorageTypes))));
             }
 
-            $definition = new Definition($supportedTypes[$type]);
-            $definition
+            $storageDefinition = new Definition($supportedStorageTypes[$type]);
+            $storageDefinition
                 ->setAutowired(true)
                 ->setAutoconfigured(true);
 
             // resolve options set for the data source
-            $callable = [$supportedTypes[$type], 'resolveOptions'];
+            $callable = [$supportedStorageTypes[$type], 'resolveOptions'];
             try {
                 $options = $callable($configuredDataSource['options'] ?? []);
             } catch (OptionsResolverException $resolverException) {
@@ -69,13 +71,21 @@ final class ConfigureDataSourcesCompilerPass implements CompilerPassInterface
             }
 
             foreach ($options as $key => $value) {
-                $definition->setArgument('$'.$key, $value);
+                $storageDefinition->setArgument('$'.$key, $value);
             }
 
-            $id = sprintf('sigwin_yassg.data_source.%1$s', $name);
-            $container->setDefinition($id, $definition);
-            $container->setAlias(sprintf('%1$s $%2$s', DataSource::class, $name), $id);
+            $storageId = sprintf('sigwin_yassg.database.storage.%1$s', $name);
+            $container->setDefinition($storageId, $storageDefinition);
+
+            $databaseDefinition = new Definition(Database::class);
+            $databaseDefinition
+                ->setAutowired(true)
+                ->setAutoconfigured(true);
+            $databaseDefinition
+                ->setArgument(0, new Reference($storageId));
+
+            $container->setDefinition(sprintf('sigwin_yassg.database.%1$s', $name), $databaseDefinition);
         }
-        $container->setParameter('sigwin_yassg.data_sources_spec', null);
+        $container->setParameter('sigwin_yassg.databases_spec', null);
     }
 }

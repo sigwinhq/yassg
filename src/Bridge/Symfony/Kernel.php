@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Sigwin\YASSG\Bridge\Symfony;
 
-use Sigwin\YASSG\Bridge\Symfony\DependencyInjection\CompilerPass\ConfigureDataSourcesCompilerPass;
+use Sigwin\YASSG\Bridge\Symfony\DependencyInjection\CompilerPass\ConfigureDatabasesCompilerPass;
 use Sigwin\YASSG\Bridge\Symfony\DependencyInjection\CompilerPass\RemoveCommandsCompilerPass;
 use Sigwin\YASSG\Bridge\Symfony\DependencyInjection\KernelExtension;
-use Sigwin\YASSG\DataSource;
+use Sigwin\YASSG\Storage;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
@@ -55,12 +55,12 @@ final class Kernel extends \Symfony\Component\HttpKernel\Kernel
         $container->setParameter('sigwin_yassg.template_dir', $this->baseDir.'/templates');
         $container->setParameter('sigwin_yassg.translation_dir', $this->baseDir.'/translations');
 
-        $container->registerForAutoconfiguration(DataSource::class)
+        $container->registerForAutoconfiguration(Storage::class)
             ->setAbstract(true)
             ->addTag('sigwin_yassg.abstract.data_source_type');
 
         $container->registerExtension(new KernelExtension());
-        $container->addCompilerPass(new ConfigureDataSourcesCompilerPass());
+        $container->addCompilerPass(new ConfigureDatabasesCompilerPass());
         $container->addCompilerPass(new RemoveCommandsCompilerPass());
     }
 

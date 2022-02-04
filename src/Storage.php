@@ -13,11 +13,9 @@ declare(strict_types=1);
 
 namespace Sigwin\YASSG;
 
-interface DataSource
+interface Storage
 {
-    public function count(): int;
-
-    public function get(string $id): array;
+    public function load(): iterable;
 
     public static function resolveOptions(array $options): array;
 
