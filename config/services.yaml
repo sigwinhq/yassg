@@ -12,16 +12,27 @@ services:
         resource: '../src/'
         exclude:
             - '../src/Kernel.php'
-            - '../src/Database.php'
+            - '../src/Database'
 
     Sigwin\YASSG\Bridge\Symfony\Controller\:
         resource: '../src/Bridge/Symfony/Controller'
         tags: ['controller.service_arguments']
-
     Sigwin\YASSG\Bridge\Symfony\Command\InitCommand:
         $initDir: "%kernel.project_dir%/resources/init"
+        
+    sigwin_yassg.abstract.database.storage.filesystem_storage_type:
+        class: Sigwin\YASSG\Storage\FilesystemStorage
+        tags:
+            - name: sigwin_yassg.database.storage.type
+              type: filesystem
+    sigwin_yassg.abstract.database.storage.memory_storage_type:
+        class: Sigwin\YASSG\Storage\MemoryStorage
+        tags:
+            - name: sigwin_yassg.database.storage.type
+              type: memory
 
-    Symfony\Component\ExpressionLanguage\ExpressionLanguage: ~
+    sigwin_yassg.expression_language:
+        class: Symfony\Component\ExpressionLanguage\ExpressionLanguage
 
 when@prod:
     services:

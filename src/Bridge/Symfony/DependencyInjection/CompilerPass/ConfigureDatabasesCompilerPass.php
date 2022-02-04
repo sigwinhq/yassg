@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sigwin\YASSG\Bridge\Symfony\DependencyInjection\CompilerPass;
 
-use Sigwin\YASSG\Database;
+use Sigwin\YASSG\Database\MemoryDatabase;
 use Sigwin\YASSG\Storage;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Compiler\PriorityTaggedServiceTrait;
@@ -29,19 +29,21 @@ final class ConfigureDatabasesCompilerPass implements CompilerPassInterface
     public function process(ContainerBuilder $container): void
     {
         $supportedStorageTypes = [];
-        $references = $this->findAndSortTaggedServices('sigwin_yassg.abstract.data_source_type', $container);
+        $references = $this->findAndSortTaggedServices('sigwin_yassg.database.storage.type', $container);
         foreach ($references as $reference) {
             $reference = $reference->__toString();
             $storageDefinition = $container->getDefinition($reference);
 
-            /** @var class-string<Storage> $class */
-            $class = $storageDefinition->getClass();
-            $callable = [$class, 'getType'];
-            $type = $callable();
+            // TODO: error handling
+            $tag = current($storageDefinition->getTag('sigwin_yassg.database.storage.type'));
+            $type = $tag['type'];
 
             if (isset($supportedStorageTypes[$type])) {
                 throw new \LogicException(sprintf('Data source type %1$s already provided by %2$s', $type, $reference));
             }
+
+            /** @var class-string<Storage> $class */
+            $class = $storageDefinition->getClass();
 
             $supportedStorageTypes[$type] = $class;
             $container->removeDefinition($reference);
@@ -77,7 +79,7 @@ final class ConfigureDatabasesCompilerPass implements CompilerPassInterface
             $storageId = sprintf('sigwin_yassg.database.storage.%1$s', $name);
             $container->setDefinition($storageId, $storageDefinition);
 
-            $databaseDefinition = new Definition(Database::class);
+            $databaseDefinition = new Definition(MemoryDatabase::class);
             $databaseDefinition
                 ->setAutowired(true)
                 ->setAutoconfigured(true);

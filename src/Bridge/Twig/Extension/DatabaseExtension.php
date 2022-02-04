@@ -13,15 +13,15 @@ declare(strict_types=1);
 
 namespace Sigwin\YASSG\Bridge\Twig\Extension;
 
-use Sigwin\YASSG\Database;
+use Sigwin\YASSG\Database\MemoryDatabase;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 final class DatabaseExtension extends AbstractExtension
 {
-    private Database $database;
+    private MemoryDatabase $database;
 
-    public function __construct(Database $database)
+    public function __construct(MemoryDatabase $database)
     {
         $this->database = $database;
     }

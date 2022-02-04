@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sigwin\YASSG\Test;
 
 use PHPUnit\Framework\TestCase;
-use Sigwin\YASSG\Database;
+use Sigwin\YASSG\Database\MemoryDatabase;
 use Sigwin\YASSG\Permutator;
 
 /**
@@ -26,7 +26,7 @@ use Sigwin\YASSG\Permutator;
  *
  * @covers \Sigwin\YASSG\Permutator
  *
- * @uses \Sigwin\YASSG\Database
+ * @uses \Sigwin\YASSG\Database\MemoryDatabase
  */
 final class PermutatorTest extends TestCase
 {
@@ -35,7 +35,7 @@ final class PermutatorTest extends TestCase
      */
     public function testPermutator(array $routes, array $database, array $fixtures): void
     {
-        $permutator = new Permutator($routes, new Database($database));
+        $permutator = new Permutator($routes, new MemoryDatabase($database));
         $iterator = $permutator->permute();
 
         $idx = 0;

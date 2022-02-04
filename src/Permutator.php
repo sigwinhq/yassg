@@ -14,13 +14,14 @@ declare(strict_types=1);
 namespace Sigwin\YASSG;
 
 use function BenTools\CartesianProduct\cartesian_product;
+use Sigwin\YASSG\Database\MemoryDatabase;
 
 final class Permutator
 {
     private array $routes;
-    private Database $database;
+    private MemoryDatabase $database;
 
-    public function __construct(array $routes, Database $database)
+    public function __construct(array $routes, MemoryDatabase $database)
     {
         $this->routes = $routes;
         $this->database = $database;

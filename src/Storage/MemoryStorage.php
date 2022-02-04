@@ -34,11 +34,6 @@ final class MemoryStorage implements Storage
         return $resolver->resolve($options);
     }
 
-    public static function getType(): string
-    {
-        return 'memory';
-    }
-
     public function load(): iterable
     {
         return $this->values;

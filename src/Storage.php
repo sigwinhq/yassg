@@ -15,9 +15,7 @@ namespace Sigwin\YASSG;
 
 interface Storage
 {
-    public function load(): iterable;
-
     public static function resolveOptions(array $options): array;
 
-    public static function getType(): string;
+    public function load(): iterable;
 }

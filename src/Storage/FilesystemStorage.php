@@ -48,11 +48,6 @@ final class FilesystemStorage implements Storage
         }
     }
 
-    public static function getType(): string
-    {
-        return 'filesystem';
-    }
-
     public static function resolveOptions(array $options): array
     {
         $resolver = new OptionsResolver();
