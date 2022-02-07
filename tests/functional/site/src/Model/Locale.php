@@ -17,4 +17,9 @@ final class Locale
 {
     public string $isoCode;
     public string $name;
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
 }

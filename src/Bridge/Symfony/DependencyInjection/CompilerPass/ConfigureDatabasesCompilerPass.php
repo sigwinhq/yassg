@@ -78,6 +78,14 @@ final class ConfigureDatabasesCompilerPass implements CompilerPassInterface
             $storageId = sprintf('sigwin_yassg.database.storage.%1$s', $name);
             $container->setDefinition($storageId, $storageDefinition);
 
+            $denormalizerDefinition = new Definition(Storage\DenormalizingStorage::class);
+            $denormalizerDefinition->setDecoratedService($storageId);
+            $denormalizerDefinition
+                ->setArgument(0, new Reference('serializer'))
+                ->setArgument(1, new Reference(sprintf('sigwin_yassg.database.storage_denormalizer.%1$s.inner', $name)))
+                ->setArgument(2, $database['class']);
+            $container->setDefinition(sprintf('sigwin_yassg.database.storage_denormalizer.%1$s', $name), $denormalizerDefinition);
+
             $databaseDefinition = new Definition(MemoryDatabase::class);
             $databaseDefinition
                 ->setAutowired(true)

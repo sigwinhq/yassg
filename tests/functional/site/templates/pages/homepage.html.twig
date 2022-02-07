@@ -12,7 +12,8 @@
                 <ul>
                     {% for locale in locales %}
                         <li>
-                            <a href="{{ path('homepage', {_locale: locale.isoCode}) }}">{{ locale.name }}</a>
+                            {# ensure an actual method is called so we know it's being denormalized #}
+                            <a href="{{ path('homepage', {_locale: locale.isoCode}) }}">{{ locale.getName() }}</a>
                         </li>
                     {% endfor %}
                 </ul>

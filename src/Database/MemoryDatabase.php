@@ -46,7 +46,7 @@ final class MemoryDatabase implements Database
     public function find(?string $condition = null, ?array $sort = null, ?int $limit = null, int $offset = 0, ?string $select = null): array
     {
         $storage = [];
-        $this->load($condition, static function (string $id, array $item) use (&$storage): void {
+        $this->load($condition, static function (string $id, array|object $item) use (&$storage): void {
             $storage[$id] = $item;
         });
 
@@ -57,10 +57,11 @@ final class MemoryDatabase implements Database
                 $sortExpressions[$key] = $this->expressionLanguage->parse($key, $this->names);
             }
 
-            uasort($storage, function (array $itemA, array $itemB) use ($sort, $sortExpressions): int {
+            uasort($storage, function (array|object $itemA, array|object $itemB) use ($sort, $sortExpressions): int {
                 foreach ($sort as $key => $direction) {
-                    $itemAValue = $this->expressionLanguage->evaluate($sortExpressions[$key], $itemA);
-                    $itemBValue = $this->expressionLanguage->evaluate($sortExpressions[$key], $itemB);
+                    // TODO: hack to cast to array
+                    $itemAValue = $this->expressionLanguage->evaluate($sortExpressions[$key], (array) $itemA);
+                    $itemBValue = $this->expressionLanguage->evaluate($sortExpressions[$key], (array) $itemB);
 
                     // TODO: compare values not just like this
                     // maybe strings, locale, etc?
@@ -90,6 +91,9 @@ final class MemoryDatabase implements Database
         }
 
         foreach ($this->storage->load() as $id => $item) {
+            if ($item === null) {
+                continue;
+            }
             if ($conditionExpression === null || $this->expressionLanguage->evaluate($conditionExpression, $item) !== false) {
                 $callable($id, $item);
             }
