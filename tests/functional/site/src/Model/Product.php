@@ -11,7 +11,7 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace Sigwin\YASSG\Test\Functional\Model;
+namespace Sigwin\YASSG\Test\Functional\Site\Model;
 
 final class Product
 {
