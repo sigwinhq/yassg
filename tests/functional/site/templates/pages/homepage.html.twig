@@ -1,9 +1,11 @@
 {% extends 'layout.html.twig' %}
 
 {# query the database #}
-{% set products = yassg_query('products_'~ _locale, {sort: {name: 'desc'}}) %}
+{% set products = yassg_query('products', {sort: {name: 'desc'}}) %}
 
 {% set locales = yassg_query('locale', {sort: {name: 'asc'}}) %}
+
+{% block title %}Homepage{% endblock %}
 
 {% block body %}
     <main class="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">

@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sigwin\YASSG\Bridge\Symfony\DependencyInjection\CompilerPass;
 
+use Sigwin\YASSG\Bridge\Attribute\Localized;
+use Sigwin\YASSG\Bridge\Symfony\Serializer\Normalizer\LocalizingNormalizer;
 use Sigwin\YASSG\Database;
 use Sigwin\YASSG\Database\MemoryDatabase;
 use Sigwin\YASSG\DatabaseProvider;
@@ -53,6 +55,7 @@ final class ConfigureDatabasesCompilerPass implements CompilerPassInterface
         unset($type);
 
         $databases = [];
+        $localizableClasses = [];
 
         /** @var array<string, array{storage: string, class: class-string, options?: array}> $configuredDatabases */
         $configuredDatabases = $container->getParameter('sigwin_yassg.databases_spec');
@@ -99,12 +102,35 @@ final class ConfigureDatabasesCompilerPass implements CompilerPassInterface
             $container->setAlias(sprintf('%1$s $%2$s', Database::class, $name), $databaseId);
 
             $databases[$name] = new Reference($databaseId);
+
+            $localizableProperties = $this->getLocalizableProperties($database['class']);
+            if ($localizableProperties !== []) {
+                $localizableClasses[$database['class']] = $localizableProperties;
+            }
         }
         $container->setParameter('sigwin_yassg.databases_spec', null);
 
         $container
             ->getDefinition(DatabaseProvider::class)
                 ->setArgument(0, $databases);
+
+        if ($localizableClasses !== []) {
+            $localizingObjectNormalizer = new Definition(LocalizingNormalizer::class);
+            $localizingObjectNormalizer
+                ->setAutowired(true)
+                ->setAutoconfigured(true)
+                ->setDecoratedService('serializer.normalizer.object')
+                ->setArgument(0, $localizableClasses);
+            $container->setDefinition('sigwin_yassg.normalizer.object_normalizer', $localizingObjectNormalizer);
+
+            $localizingPropertyNormalizer = new Definition(LocalizingNormalizer::class);
+            $localizingPropertyNormalizer
+                ->setAutowired(true)
+                ->setAutoconfigured(true)
+                ->setDecoratedService('serializer.normalizer.property')
+                ->setArgument(0, $localizableClasses);
+            $container->setDefinition('sigwin_yassg.normalizer.property_normalizer', $localizingPropertyNormalizer);
+        }
     }
 
     /**
@@ -116,6 +142,22 @@ final class ConfigureDatabasesCompilerPass implements CompilerPassInterface
         $reflection = new \ReflectionClass($class);
         foreach ($reflection->getProperties() as $property) {
             $properties[] = $property->getName();
+        }
+
+        return $properties;
+    }
+
+    /**
+     * @param class-string $class
+     */
+    private function getLocalizableProperties(string $class): array
+    {
+        $properties = [];
+        $reflection = new \ReflectionClass($class);
+        foreach ($reflection->getProperties() as $property) {
+            if ($property->getAttributes(Localized::class) !== []) {
+                $properties[] = $property->getName();
+            }
         }
 
         return $properties;
