@@ -43,6 +43,11 @@ final class MemoryDatabase implements Database
         return $total;
     }
 
+    public function findOne(?string $condition = null, ?array $sort = null, ?string $select = null): object
+    {
+        return current($this->find($condition, $sort, null, 0, $select));
+    }
+
     public function find(?string $condition = null, ?array $sort = null, ?int $limit = null, int $offset = 0, ?string $select = null): array
     {
         $storage = [];

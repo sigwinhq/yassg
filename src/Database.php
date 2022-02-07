@@ -18,4 +18,6 @@ interface Database
     public function count(?string $condition = null): int;
 
     public function find(?string $condition = null, ?array $sort = null, ?int $limit = null, int $offset = 0, ?string $select = null): array;
+
+    public function findOne(?string $condition = null, ?array $sort = null, ?string $select = null): object;
 }
