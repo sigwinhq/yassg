@@ -41,7 +41,8 @@ endif
 
 dist: composer-normalize cs check test docs
 check: composer-normalize-check cs-check phpstan psalm
-test: infection
+# test: infection
+test:
 docs: markdownlint vale
 
 define environment

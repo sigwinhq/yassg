@@ -8,13 +8,19 @@
         <directory name="./"/>
         <ignoreFiles allowMissingFiles="true">
             <file name=".php-cs-fixer.dist.php"/>
-            <directory name="tests/resources/"/>
+            <directory name="tests/functional/init/"/>
+            <directory name="tests/functional/site/var/"/>
             <directory name="vendor/"/>
             <directory name="var/"/>
         </ignoreFiles>
     </projectFiles>
 
     <issueHandlers>
+        <MissingConstructor>
+            <errorLevel type="info">
+                <directory name="tests/functional/site/src/Model"/>
+            </errorLevel>
+        </MissingConstructor>
         <PropertyNotSetInConstructor>
             <errorLevel type="info">
                 <file name="src/Bridge/Symfony/Kernel.php"/>

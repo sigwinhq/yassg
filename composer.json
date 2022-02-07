@@ -4,14 +4,17 @@
     "license": "MIT",
     "require": {
         "php": "^8.0",
-        "adbario/php-dot-notation": "^2.2",
         "bentools/cartesian-product": "^1.3",
         "symfony/console": "^5.4 || ^6.0",
         "symfony/expression-language": "^5.4 || ^6.0",
+        "symfony/filesystem": "^5.4 || ^6.0",
+        "symfony/finder": "^5.4 || ^6.0",
         "symfony/form": "^5.4 || ^6.0",
         "symfony/framework-bundle": "^5.4 || ^6.0",
         "symfony/runtime": "^5.4 || ^6.0",
         "symfony/security-csrf": "^5.4 || ^6.0",
+        "symfony/serializer": "^5.4 || ^6.0",
+        "symfony/stopwatch": "^5.4 || ^6.0",
         "symfony/translation": "^5.4 || ^6.0",
         "symfony/twig-bundle": "^5.4 || ^6.0",
         "symfony/web-profiler-bundle": "^5.4 || ^6.0",
@@ -28,7 +31,9 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Sigwin\\YASSG\\Test\\": "tests/"
+            "Sigwin\\YASSG\\Test\\": "tests/",
+            "Sigwin\\YASSG\\Test\\Functional\\Init\\": "tests/functional/init/src/",
+            "Sigwin\\YASSG\\Test\\Functional\\Site\\": "tests/functional/site/src/"
         }
     },
     "bin": [

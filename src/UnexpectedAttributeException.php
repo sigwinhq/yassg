@@ -13,9 +13,10 @@ declare(strict_types=1);
 
 namespace Sigwin\YASSG;
 
-interface Database
+final class UnexpectedAttributeException extends \RuntimeException
 {
-    public function count(?string $condition = null): int;
-
-    public function find(?string $condition = null, ?array $sort = null, ?int $limit = null, int $offset = 0, ?string $select = null): array;
+    public static function newSelf(string $id, string $message): self
+    {
+        return new self(sprintf('Unexpected attribute for "%1$s", %2$s', $id, $message));
+    }
 }

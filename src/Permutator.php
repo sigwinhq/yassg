@@ -14,16 +14,19 @@ declare(strict_types=1);
 namespace Sigwin\YASSG;
 
 use function BenTools\CartesianProduct\cartesian_product;
+use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 final class Permutator
 {
     private array $routes;
-    private Database $database;
+    private DatabaseProvider $provider;
+    private ExpressionLanguage $expressionLanguage;
 
-    public function __construct(array $routes, Database $database)
+    public function __construct(array $routes, DatabaseProvider $provider, ExpressionLanguage $expressionLanguage)
     {
         $this->routes = $routes;
-        $this->database = $database;
+        $this->provider = $provider;
+        $this->expressionLanguage = $expressionLanguage;
     }
 
     public function permute(): \Traversable
@@ -39,8 +42,11 @@ final class Permutator
                 continue;
             }
 
-            foreach ($spec['catalog'] as $variable => $query) {
-                $variables[$variable] = $this->database->query($query);
+            foreach ($spec['catalog'] as $variable => $expression) {
+                $variables[$variable] = $this->expressionLanguage->evaluate(
+                    $expression,
+                    ['provider' => $this->provider]
+                );
             }
 
             foreach (cartesian_product($variables) as $parameters) {

@@ -1,15 +1,20 @@
 {% extends 'layout.html.twig' %}
 
-{# query the database #}
-{% set demo_page = yassg_query('collections.demo_page') %}
+{% block title %}Homepage{% endblock %}
 
 {% block body %}
-<main>
-    <h1>{{ demo_page.title }}</h1>
-    <h2>Asset example</h2>
-    <p><img src="{{ asset(demo_page.image) }}"/></p>
-    <h2>Demo notes</h2>
-    <p>Delete this file and tweak <code>config/*.yaml</code> files.</p>
-    <h2><a href="{{ path('another') }}">Another</a> page</h2>
-</main>
+    <main class="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+        <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-xl">
+            <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+                <h1>Home</h1>
+                
+                <ul>
+                {% for route, params in yassg_index() %}
+                    {% set path = path(route, params) %}
+                    <li><a href="{{ path }}">{{ path }}</a></li>
+                {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </main>
 {% endblock %}

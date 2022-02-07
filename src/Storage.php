@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sigwin\YASSG;
 
-interface Database
+interface Storage
 {
-    public function count(?string $condition = null): int;
+    public static function resolveOptions(array $options): array;
 
-    public function find(?string $condition = null, ?array $sort = null, ?int $limit = null, int $offset = 0, ?string $select = null): array;
+    public function load(): iterable;
 }

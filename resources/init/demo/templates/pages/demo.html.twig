@@ -1,7 +1,7 @@
 {% extends 'layout.html.twig' %}
 
 {# query the database #}
-{% set demo_page = yassg_query('collections.demo_page') %}
+{% set demo_page = yassg_query('pages', {condition: 'slug == "demo-page"'}).demo_page %}
 
 {% block body %}
 

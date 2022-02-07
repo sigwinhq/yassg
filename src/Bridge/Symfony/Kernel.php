@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sigwin\YASSG\Bridge\Symfony;
 
+use Sigwin\YASSG\Bridge\Symfony\DependencyInjection\CompilerPass\ConfigureDatabasesCompilerPass;
 use Sigwin\YASSG\Bridge\Symfony\DependencyInjection\CompilerPass\RemoveCommandsCompilerPass;
 use Sigwin\YASSG\Bridge\Symfony\DependencyInjection\KernelExtension;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
@@ -54,6 +55,7 @@ final class Kernel extends \Symfony\Component\HttpKernel\Kernel
         $container->setParameter('sigwin_yassg.translation_dir', $this->baseDir.'/translations');
 
         $container->registerExtension(new KernelExtension());
+        $container->addCompilerPass(new ConfigureDatabasesCompilerPass());
         $container->addCompilerPass(new RemoveCommandsCompilerPass());
     }
 

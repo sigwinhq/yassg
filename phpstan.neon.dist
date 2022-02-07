@@ -11,6 +11,7 @@ parameters:
     paths:
         - ./
     excludePaths:
-        - tests/resources/
+        - tests/functional/init/
+        - tests/functional/site/var/
         - var/
         - vendor/

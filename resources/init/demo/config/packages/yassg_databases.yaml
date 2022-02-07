@@ -1,0 +1,11 @@
+sigwin_yassg:
+    databases:
+        pages:
+            storage: memory
+            class: Sigwin\YASSG\Test\Functional\Init\Model\Page
+            options:
+                values:
+                    demo_page:
+                        slug: demo-page
+                        title: YASSG starter page
+                        image: assets/images/sigwin.svg
