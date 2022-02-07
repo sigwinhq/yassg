@@ -32,7 +32,8 @@
     "autoload-dev": {
         "psr-4": {
             "Sigwin\\YASSG\\Test\\": "tests/",
-            "Sigwin\\YASSG\\Test\\Functional\\": "tests/functional/site/src/"
+            "Sigwin\\YASSG\\Test\\Functional\\Init\\": "tests/functional/init/src/",
+            "Sigwin\\YASSG\\Test\\Functional\\Site\\": "tests/functional/site/src/"
         }
     },
     "bin": [

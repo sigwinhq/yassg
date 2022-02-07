@@ -94,7 +94,7 @@ final class MemoryDatabase implements Database
             if ($item === null) {
                 continue;
             }
-            if ($conditionExpression === null || $this->expressionLanguage->evaluate($conditionExpression, $item) !== false) {
+            if ($conditionExpression === null || $this->expressionLanguage->evaluate($conditionExpression, (array) $item) !== false) {
                 $callable($id, $item);
             }
         }
