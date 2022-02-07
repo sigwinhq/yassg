@@ -1,7 +1,7 @@
 sigwin_yassg:
     databases:
         products_de:
-            class: Sigwin\YASSG\Test\Functional\Model\Product
+            class: Sigwin\YASSG\Test\Functional\Site\Model\Product
             storage: filesystem
             options:
                 paths:
@@ -9,7 +9,7 @@ sigwin_yassg:
                 names:
                     - "*.de.yaml"
         products_en:
-            class: Sigwin\YASSG\Test\Functional\Model\Product
+            class: Sigwin\YASSG\Test\Functional\Site\Model\Product
             storage: filesystem
             options:
                 paths:           
@@ -17,7 +17,7 @@ sigwin_yassg:
                 names:
                     - "*.en.yaml"
         products_hr:
-            class: Sigwin\YASSG\Test\Functional\Model\Product
+            class: Sigwin\YASSG\Test\Functional\Site\Model\Product
             storage: filesystem
             options:
                 paths:
@@ -25,7 +25,7 @@ sigwin_yassg:
                 names:
                     - "*.hr.yaml"
         locale:
-            class: Sigwin\YASSG\Test\Functional\Model\Locale
+            class: Sigwin\YASSG\Test\Functional\Site\Model\Locale
             storage: memory
             options:
                 values:
