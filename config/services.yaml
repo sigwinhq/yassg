@@ -10,6 +10,7 @@ services:
     Sigwin\YASSG\:
         resource: '../src/'
         exclude:
+            - '../src/Bridge/Symfony/Serializer/*'
             - '../src/Database/*'
             - '../src/Kernel.php'
 

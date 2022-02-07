@@ -1,3 +1,9 @@
-slug: example1
-name: Example 1
-index: 2
+slug:
+    de: beischpiel1
+    en: example1
+    hr: primjer1
+name:
+    de: Beischpiel 1
+    en: Example 1
+    hr: Primjer 1
+index: 1

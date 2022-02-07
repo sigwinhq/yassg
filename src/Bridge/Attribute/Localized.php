@@ -11,15 +11,9 @@ declare(strict_types=1);
  * with this source code in the file LICENSE.
  */
 
-namespace Sigwin\YASSG\Test\Functional\Site\Model;
+namespace Sigwin\YASSG\Bridge\Attribute;
 
-use Sigwin\YASSG\Bridge\Attribute\Localized;
-
-final class Product
+#[\Attribute(\Attribute::TARGET_PROPERTY)]
+final class Localized
 {
-    #[Localized]
-    public string $name;
-    #[Localized]
-    public string $slug;
-    public int $index;
 }
