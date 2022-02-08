@@ -65,6 +65,9 @@ final class ConfigureDatabasesCompilerPass implements CompilerPassInterface
                 throw new \LogicException(sprintf('Unsupported type "%1$s" at "sigwin_yassg.data_sources.%2$s", allowed values: %3$s', $type, $name, implode(', ', array_keys($supportedStorageTypes))));
             }
 
+            /** @var class-string $databaseClass */
+            $databaseClass = ltrim($database['class'], '\\');
+
             $storageDefinition = new Definition($supportedStorageTypes[$type]);
             $storageDefinition
                 ->setAutowired(true)
@@ -86,7 +89,7 @@ final class ConfigureDatabasesCompilerPass implements CompilerPassInterface
             $denormalizerDefinition
                 ->setArgument(0, new Reference('serializer'))
                 ->setArgument(1, new Reference(sprintf('sigwin_yassg.database.storage_denormalizer.%1$s.inner', $name)))
-                ->setArgument(2, $database['class']);
+                ->setArgument(2, $databaseClass);
             $container->setDefinition(sprintf('sigwin_yassg.database.storage_denormalizer.%1$s', $name), $denormalizerDefinition);
 
             $databaseDefinition = new Definition(MemoryDatabase::class);
@@ -96,16 +99,16 @@ final class ConfigureDatabasesCompilerPass implements CompilerPassInterface
             $databaseDefinition
                 ->setArgument(0, new Reference($storageId))
                 ->setArgument(1, new Reference('sigwin_yassg.expression_language'))
-                ->setArgument(2, $this->getProperties($database['class']));
+                ->setArgument(2, $this->getProperties($databaseClass));
             $databaseId = sprintf('sigwin_yassg.database.%1$s', $name);
             $container->setDefinition($databaseId, $databaseDefinition);
             $container->setAlias(sprintf('%1$s $%2$s', Database::class, $name), $databaseId);
 
             $databases[$name] = new Reference($databaseId);
 
-            $localizableProperties = $this->getLocalizableProperties($database['class']);
+            $localizableProperties = $this->getLocalizableProperties($databaseClass);
             if ($localizableProperties !== []) {
-                $localizableClasses[$database['class']] = $localizableProperties;
+                $localizableClasses[$databaseClass] = $localizableProperties;
             }
         }
         $container->setParameter('sigwin_yassg.databases_spec', null);
@@ -122,14 +125,6 @@ final class ConfigureDatabasesCompilerPass implements CompilerPassInterface
                 ->setDecoratedService('serializer.normalizer.object')
                 ->setArgument(0, $localizableClasses);
             $container->setDefinition('sigwin_yassg.normalizer.object_normalizer', $localizingObjectNormalizer);
-
-            $localizingPropertyNormalizer = new Definition(LocalizingNormalizer::class);
-            $localizingPropertyNormalizer
-                ->setAutowired(true)
-                ->setAutoconfigured(true)
-                ->setDecoratedService('serializer.normalizer.property')
-                ->setArgument(0, $localizableClasses);
-            $container->setDefinition('sigwin_yassg.normalizer.property_normalizer', $localizingPropertyNormalizer);
         }
     }
 
