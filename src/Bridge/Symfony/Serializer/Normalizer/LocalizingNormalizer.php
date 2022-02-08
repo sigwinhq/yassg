@@ -15,18 +15,26 @@ namespace Sigwin\YASSG\Bridge\Symfony\Serializer\Normalizer;
 
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\SerializerAwareInterface;
+use Symfony\Component\Serializer\SerializerInterface;
 
-final class LocalizingNormalizer implements DenormalizerInterface
+final class LocalizingNormalizer implements DenormalizerInterface, SerializerAwareInterface
 {
     private array $classes;
-    private DenormalizerInterface $normalizer;
+    private ObjectNormalizer $normalizer;
     private RequestStack $requestStack;
 
-    public function __construct(array $classes, DenormalizerInterface $normalizer, RequestStack $requestStack)
+    public function __construct(array $classes, ObjectNormalizer $normalizer, RequestStack $requestStack)
     {
         $this->classes = $classes;
         $this->normalizer = $normalizer;
         $this->requestStack = $requestStack;
+    }
+
+    public function setSerializer(SerializerInterface $serializer): void
+    {
+        $this->normalizer->setSerializer($serializer);
     }
 
     public function denormalize(mixed $data, string $type, string $format = null, array $context = []): mixed
