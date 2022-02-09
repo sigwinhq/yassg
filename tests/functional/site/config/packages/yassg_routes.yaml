@@ -5,4 +5,8 @@ sigwin_yassg:
         homepage:
             path: /{_locale}
             catalog:
-                _locale: "yassg_query('locale', {select: 'isoCode'})"
+                _locale: "yassg_find_all('locale', {select: 'isoCode'})"
+        product:
+            path: /{_locale}/{slug}
+            catalog:
+                slug: "yassg_find_all('products', {select: 'slug'})"

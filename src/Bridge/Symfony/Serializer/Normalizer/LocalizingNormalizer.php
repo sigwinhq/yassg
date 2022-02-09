@@ -18,18 +18,21 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\SerializerAwareInterface;
 use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class LocalizingNormalizer implements DenormalizerInterface, SerializerAwareInterface
 {
     private array $classes;
     private ObjectNormalizer $normalizer;
     private RequestStack $requestStack;
+    private TranslatorInterface $translator;
 
-    public function __construct(array $classes, ObjectNormalizer $normalizer, RequestStack $requestStack)
+    public function __construct(array $classes, ObjectNormalizer $normalizer, RequestStack $requestStack, TranslatorInterface $translator)
     {
         $this->classes = $classes;
         $this->normalizer = $normalizer;
         $this->requestStack = $requestStack;
+        $this->translator = $translator;
     }
 
     public function setSerializer(SerializerInterface $serializer): void
@@ -42,10 +45,15 @@ final class LocalizingNormalizer implements DenormalizerInterface, SerializerAwa
         if (isset($this->classes[$type])) {
             $request = $this->requestStack->getMainRequest();
             if ($request === null) {
-                throw new \RuntimeException('Cannot fetch main request');
+                if ($this->translator instanceof \Symfony\Component\Translation\Translator === false) {
+                    // TODO: remove with Symfony 6.x being lowest
+                    throw new \LogicException();
+                }
+                $locale = $defaultLocale = $this->translator->getLocale();
+            } else {
+                $locale = $request->getLocale();
+                $defaultLocale = $request->getDefaultLocale();
             }
-            $locale = $request->getLocale();
-            $defaultLocale = $request->getDefaultLocale();
 
             if ( ! \is_array($data)) {
                 throw new \LogicException('Localizing normalizer can only work on array input data');

@@ -1,9 +1,9 @@
 {% extends 'layout.html.twig' %}
 
 {# query the database #}
-{% set products = yassg_query('products', {sort: {name: 'desc'}}) %}
+{% set products = yassg_find_all('products', {sort: {name: 'desc'}}) %}
 
-{% set locales = yassg_query('locale', {sort: {name: 'asc'}}) %}
+{% set locales = yassg_find_all('locale', {sort: {name: 'asc'}}) %}
 
 {% block title %}Homepage{% endblock %}
 
