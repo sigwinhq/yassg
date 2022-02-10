@@ -18,6 +18,7 @@
     <issueHandlers>
         <MissingConstructor>
             <errorLevel type="info">
+                <directory name="resources/init/demo/src/Model"/>
                 <directory name="tests/functional/site/src/Model"/>
             </errorLevel>
         </MissingConstructor>

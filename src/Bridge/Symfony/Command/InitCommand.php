@@ -46,7 +46,7 @@ final class InitCommand extends Command
     {
         $this
             ->setDescription('Init a new project')
-            ->addOption('namespace', null, InputOption::VALUE_OPTIONAL, 'Namespace to setup the customization support for')
+            ->addOption('namespace', null, InputOption::VALUE_OPTIONAL, 'Namespace to setup the customization support for', 'App')
             ->addOption(self::SOURCE_DEMO, null, InputOption::VALUE_NONE, 'Generate the demo site showcasing most common use cases')
             // ->addOption(self::SOURCE_GITHUB, null, InputOption::VALUE_NONE, 'Generate Github Actions / Github Pages support')
             ->addOption(self::SOURCE_GITLAB, null, InputOption::VALUE_NONE, 'Generate Gitlab CI / Gitlab Pages support');
@@ -61,52 +61,52 @@ final class InitCommand extends Command
         $filesystem = new Filesystem();
 
         /**
-         * @var null|string $namespace
-         * @psalm-suppress UnnecessaryVarAnnotation
+         * @var string $namespace
          */
         $namespace = $input->getOption('namespace');
-        if (null !== $namespace) {
-            $namespace = trim($namespace, '\\');
+        $namespace = trim($namespace, '\\');
 
-            $style->section(sprintf('Namespace: %1$s', $namespace));
+        $style->section(sprintf('Namespace: %1$s', $namespace));
 
-            $style->writeln(sprintf('Ensuring folder <comment>%1$s</comment>', $this->baseDir.'/src/'));
-            $filesystem->mkdir($this->baseDir.'/src/');
-            $composerFile = $this->baseDir.'/composer.json';
-            $style->writeln(sprintf('Registering namespace <comment>%1$s</comment> in <info>%2$s</info>', $namespace, $composerFile));
+        $style->writeln(sprintf('Ensuring folder <comment>%1$s</comment>', $this->baseDir.'/src/'));
+        $filesystem->mkdir($this->baseDir.'/src/');
+        $composerFile = $this->baseDir.'/composer.json';
+        $style->writeln(sprintf('Registering namespace <comment>%1$s</comment> in <info>%2$s</info>', $namespace, $composerFile));
+        $composer = [];
+        if (file_exists($composerFile)) {
             /** @var string $composer */
             $composer = file_get_contents($composerFile);
 
             /** @var array $composer */
             $composer = json_decode($composer, true, 512, \JSON_THROW_ON_ERROR);
-            $composer = array_replace($composer, [
-                'autoload' => [
-                    'psr-4' => [
-                        $namespace.'\\' => 'src',
-                    ],
-                ],
-            ]);
-            file_put_contents($composerFile, json_encode($composer, \JSON_PRETTY_PRINT | \JSON_THROW_ON_ERROR));
-
-            $style->writeln(sprintf('Ensuring folder <comment>%1$s</comment>', $this->baseDir.'/config/'));
-            $filesystem->mkdir($this->baseDir.'/config/');
-            $servicesFile = $this->baseDir.'/config/services.yaml';
-            $style->writeln(sprintf('Registering namespace <comment>%1$s</comment> in <info>%2$s</info>', $namespace, $servicesFile));
-            /** @var array $services */
-            $services = file_exists($servicesFile) ? Yaml::parseFile($servicesFile) : [];
-            $services = array_replace($services, [
-                'services' => [
-                    '_defaults' => [
-                        'autoconfigure' => true,
-                        'autowire' => true,
-                    ],
-                    $namespace.'\\' => [
-                        'resource' => '../src',
-                    ],
-                ],
-            ]);
-            file_put_contents($servicesFile, Yaml::dump($services, 4));
         }
+        $composer = array_replace($composer, [
+            'autoload' => [
+                'psr-4' => [
+                    $namespace.'\\' => 'src',
+                ],
+            ],
+        ]);
+        file_put_contents($composerFile, json_encode($composer, \JSON_PRETTY_PRINT | \JSON_THROW_ON_ERROR));
+
+        $style->writeln(sprintf('Ensuring folder <comment>%1$s</comment>', $this->baseDir.'/config/'));
+        $filesystem->mkdir($this->baseDir.'/config/');
+        $servicesFile = $this->baseDir.'/config/services.yaml';
+        $style->writeln(sprintf('Registering namespace <comment>%1$s</comment> in <info>%2$s</info>', $namespace, $servicesFile));
+        /** @var array $services */
+        $services = file_exists($servicesFile) ? Yaml::parseFile($servicesFile) : [];
+        $services = array_replace($services, [
+            'services' => [
+                '_defaults' => [
+                    'autoconfigure' => true,
+                    'autowire' => true,
+                ],
+                $namespace.'\\' => [
+                    'resource' => '../src',
+                ],
+            ],
+        ]);
+        file_put_contents($servicesFile, Yaml::dump($services, 4));
 
         $sourceDirs = [
             self::SOURCE_BASIC => false,

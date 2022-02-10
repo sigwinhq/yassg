@@ -2,7 +2,7 @@ sigwin_yassg:
     databases:
         pages:
             storage: memory
-            class: Sigwin\YASSG\Test\Functional\Init\Model\Page
+            class: App\Model\Page
             options:
                 values:
                     demo_page:
