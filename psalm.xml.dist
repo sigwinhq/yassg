@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <psalm xmlns="https://getpsalm.org/schema/config"
        cacheDirectory="var/psalm"
-       errorLevel="2"
        findUnusedPsalmSuppress="true"
        findUnusedVariablesAndParams="true">
     <projectFiles>
@@ -16,8 +15,14 @@
     </projectFiles>
 
     <issueHandlers>
+        <InternalMethod>
+            <errorLevel type="info">
+                <file name="src/Bridge/Symfony/Serializer/AttributeMetadataTrait.php"/>
+            </errorLevel>            
+        </InternalMethod>
         <MissingConstructor>
             <errorLevel type="info">
+                <file name="src/Bridge/Symfony/Serializer/AttributeMetadataTrait.php"/>
                 <directory name="resources/init/demo/src/Model"/>
                 <directory name="tests/functional/site/src/Model"/>
             </errorLevel>
@@ -25,6 +30,7 @@
         <PropertyNotSetInConstructor>
             <errorLevel type="info">
                 <file name="src/Bridge/Symfony/Kernel.php"/>
+                <directory name="src/Bridge/Symfony/Serializer/Normalizer"/>
                 <directory name="tests/"/>
             </errorLevel>
         </PropertyNotSetInConstructor>

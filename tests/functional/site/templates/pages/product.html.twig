@@ -1,7 +1,7 @@
 {% extends 'layout.html.twig' %}
 
 {# query the database #}
-{% set product = yassg_find_one_by('products', {condition: {slug: slug}}) %}
+{% set product = yassg_find_one_by('products', {condition: {'item.slug': slug}}) %}
 
 {% block title %}{{ product.name }}{% endblock %}
 

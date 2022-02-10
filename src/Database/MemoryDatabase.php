@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sigwin\YASSG\Database;
 
+use Sigwin\YASSG\Collection;
 use Sigwin\YASSG\Database;
 use Sigwin\YASSG\Exception\MoreThanOneResultException;
 use Sigwin\YASSG\Exception\NoResultException;
@@ -50,7 +51,7 @@ final class MemoryDatabase implements Database
         return $this->count($this->conditionArrayToString($condition));
     }
 
-    public function findAll(?string $condition = null, ?array $sort = null, ?int $limit = null, int $offset = 0, ?string $select = null): array
+    public function findAll(?string $condition = null, ?array $sort = null, ?int $limit = null, int $offset = 0, ?string $select = null): Collection
     {
         $storage = [];
         $this->load($condition, static function (string $id, array|object $item) use (&$storage): void {
@@ -61,14 +62,13 @@ final class MemoryDatabase implements Database
         if ($sort !== null) {
             $sortExpressions = [];
             foreach (array_keys($sort) as $key) {
-                $sortExpressions[$key] = $this->expressionLanguage->parse($key, $this->names);
+                $sortExpressions[$key] = $this->expressionLanguage->parse($key, ['item']);
             }
 
             uasort($storage, function (array|object $itemA, array|object $itemB) use ($sort, $sortExpressions): int {
                 foreach ($sort as $key => $direction) {
-                    // TODO: hack to cast to array
-                    $itemAValue = $this->expressionLanguage->evaluate($sortExpressions[$key], (array) $itemA);
-                    $itemBValue = $this->expressionLanguage->evaluate($sortExpressions[$key], (array) $itemB);
+                    $itemAValue = $this->expressionLanguage->evaluate($sortExpressions[$key], ['item' => $itemA]);
+                    $itemBValue = $this->expressionLanguage->evaluate($sortExpressions[$key], ['item' => $itemB]);
 
                     // TODO: compare values not just like this
                     // maybe strings, locale, etc?
@@ -87,10 +87,10 @@ final class MemoryDatabase implements Database
             $storage = array_combine(array_keys($storage), array_column($storage, $select));
         }
 
-        return $storage;
+        return new Collection\ReadOnlyCollection($this->expressionLanguage, $this->names, $storage);
     }
 
-    public function findAllBy(array $condition, ?array $sort = null, ?int $limit = null, int $offset = 0, ?string $select = null): array
+    public function findAllBy(array $condition, ?array $sort = null, ?int $limit = null, int $offset = 0, ?string $select = null): Collection
     {
         return $this->findAll($this->conditionArrayToString($condition), $sort, $limit, $offset, $select);
     }
@@ -125,30 +125,32 @@ final class MemoryDatabase implements Database
     {
         $conditionExpression = null;
         if ($condition !== null) {
-            $conditionExpression = $this->expressionLanguage->parse($condition, $this->names);
+            $conditionExpression = $this->expressionLanguage->parse($condition, ['item']);
         }
 
         foreach ($this->storage->load() as $id => $item) {
             if ($item === null) {
                 continue;
             }
-            if ($conditionExpression === null || $this->expressionLanguage->evaluate($conditionExpression, (array) $item) !== false) {
+            if ($conditionExpression === null || $this->expressionLanguage->evaluate($conditionExpression, ['item' => $item]) !== false) {
                 $callable($id, $item);
             }
         }
     }
 
-    private function oneOrFail(array $list): ?object
+    private function oneOrFail(Collection $list): ?object
     {
         $count = \count($list);
-        if ($count === 0) {
+        if ($count <= 0) {
             return null;
         }
         if ($count > 1) {
             throw MoreThanOneResultException::newSelf($count);
         }
 
-        return current($list);
+        $item = current(iterator_to_array($list));
+
+        return $item !== false ? $item : null;
     }
 
     private function conditionArrayToString(array $condition): ?string

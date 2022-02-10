@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sigwin\YASSG\Bridge\Symfony\DependencyInjection\CompilerPass;
 
 use Sigwin\YASSG\Bridge\Attribute\Localized;
-use Sigwin\YASSG\Bridge\Symfony\Serializer\Normalizer\LocalizingNormalizer;
+use Sigwin\YASSG\Bridge\Symfony\Serializer\AttributeMetadataTrait;
 use Sigwin\YASSG\Database;
 use Sigwin\YASSG\Database\MemoryDatabase;
 use Sigwin\YASSG\DatabaseProvider;
@@ -25,9 +25,11 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\OptionsResolver\Exception\ExceptionInterface as OptionsResolverException;
+use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactoryInterface;
 
 final class ConfigureDatabasesCompilerPass implements CompilerPassInterface
 {
+    use AttributeMetadataTrait;
     use PriorityTaggedServiceTrait;
 
     public function process(ContainerBuilder $container): void
@@ -56,6 +58,12 @@ final class ConfigureDatabasesCompilerPass implements CompilerPassInterface
 
         $databases = [];
         $localizableClasses = [];
+
+        $classMetadata = $container->get('serializer.mapping.class_metadata_factory');
+        if ($classMetadata instanceof ClassMetadataFactoryInterface === false) {
+            throw new \LogicException('Invalid class metadata factory');
+        }
+        $this->classMetadataFactory = $classMetadata;
 
         /** @var array<string, array{storage: string, class: class-string, options?: array}> $configuredDatabases */
         $configuredDatabases = $container->getParameter('sigwin_yassg.databases_spec');
@@ -112,34 +120,12 @@ final class ConfigureDatabasesCompilerPass implements CompilerPassInterface
             }
         }
         $container->setParameter('sigwin_yassg.databases_spec', null);
-
         $container
             ->getDefinition(DatabaseProvider::class)
                 ->setArgument(0, $databases);
-
-        if ($localizableClasses !== []) {
-            $localizingObjectNormalizer = new Definition(LocalizingNormalizer::class);
-            $localizingObjectNormalizer
-                ->setAutowired(true)
-                ->setAutoconfigured(true)
-                ->setDecoratedService('serializer.normalizer.object')
+        $container
+            ->getDefinition('sigwin_yassg.serializer.denormalizer.localizing')
                 ->setArgument(0, $localizableClasses);
-            $container->setDefinition('sigwin_yassg.normalizer.object_normalizer', $localizingObjectNormalizer);
-        }
-    }
-
-    /**
-     * @param class-string $class
-     */
-    private function getProperties(string $class): array
-    {
-        $properties = [];
-        $reflection = new \ReflectionClass($class);
-        foreach ($reflection->getProperties() as $property) {
-            $properties[] = $property->getName();
-        }
-
-        return $properties;
     }
 
     /**

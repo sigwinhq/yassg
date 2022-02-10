@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sigwin\YASSG\Test\Functional\Site\Model;
 
 use Sigwin\YASSG\Bridge\Attribute\Localized;
+use Sigwin\YASSG\Collection;
 
 final class Product
 {
@@ -22,4 +23,16 @@ final class Product
     #[Localized]
     public string $slug;
     public int $index;
+
+    /**
+     * @var Collection<string, Category>
+     */
+    public Collection $categories;
+
+    public function getCategory(): ?Category
+    {
+        $category = current($this->categories);
+
+        return $category !== false ? $category : null;
+    }
 }
