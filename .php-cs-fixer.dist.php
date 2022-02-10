@@ -12,6 +12,7 @@ with this source code in the file LICENSE.
 EOF;
 
 $finder = PhpCsFixer\Finder::create()
+    ->exclude('resources/init/demo/src')
     ->exclude('var')
     ->exclude('vendor')
     ->in(__DIR__);
