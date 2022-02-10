@@ -29,8 +29,23 @@ final class DatabaseExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('yassg_query', function (string $name, array $arguments = []) {
-                return $this->provider->getDatabase($name)->find(...$arguments);
+            new TwigFunction('yassg_find_all', function (string $name, array $arguments = []) {
+                return $this->provider->getDatabase($name)->findAll(...$arguments);
+            }),
+            new TwigFunction('yassg_find_all_by', function (string $name, array $arguments = []) {
+                return $this->provider->getDatabase($name)->findAllBy(...$arguments);
+            }),
+            new TwigFunction('yassg_find_one', function (string $name, array $arguments = []) {
+                return $this->provider->getDatabase($name)->findOne(...$arguments);
+            }),
+            new TwigFunction('yassg_find_one_by', function (string $name, array $arguments = []) {
+                return $this->provider->getDatabase($name)->findOneBy(...$arguments);
+            }),
+            new TwigFunction('yassg_find_one_or_null', function (string $name, array $arguments = []) {
+                return $this->provider->getDatabase($name)->findOneOrNull(...$arguments);
+            }),
+            new TwigFunction('yassg_find_one_by_or_null', function (string $name, array $arguments = []) {
+                return $this->provider->getDatabase($name)->findOneByOrNull(...$arguments);
             }),
         ];
     }

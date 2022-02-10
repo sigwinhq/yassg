@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sigwin\YASSG\Storage;
 
+use Sigwin\YASSG\Exception\UnexpectedAttributeException;
 use Sigwin\YASSG\Storage;
-use Sigwin\YASSG\UnexpectedAttributeException;
 use Symfony\Component\Serializer\Exception\ExtraAttributesException;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;

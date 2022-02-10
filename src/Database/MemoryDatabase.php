@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Sigwin\YASSG\Database;
 
 use Sigwin\YASSG\Database;
+use Sigwin\YASSG\Exception\MoreThanOneResultException;
+use Sigwin\YASSG\Exception\NoResultException;
 use Sigwin\YASSG\Storage;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
@@ -43,12 +45,12 @@ final class MemoryDatabase implements Database
         return $total;
     }
 
-    public function findOne(?string $condition = null, ?array $sort = null, ?string $select = null): object
+    public function countBy(array $condition): int
     {
-        return current($this->find($condition, $sort, null, 0, $select));
+        return $this->count($this->conditionArrayToString($condition));
     }
 
-    public function find(?string $condition = null, ?array $sort = null, ?int $limit = null, int $offset = 0, ?string $select = null): array
+    public function findAll(?string $condition = null, ?array $sort = null, ?int $limit = null, int $offset = 0, ?string $select = null): array
     {
         $storage = [];
         $this->load($condition, static function (string $id, array|object $item) use (&$storage): void {
@@ -88,6 +90,37 @@ final class MemoryDatabase implements Database
         return $storage;
     }
 
+    public function findAllBy(array $condition, ?array $sort = null, ?int $limit = null, int $offset = 0, ?string $select = null): array
+    {
+        return $this->findAll($this->conditionArrayToString($condition), $sort, $limit, $offset, $select);
+    }
+
+    public function findOne(?string $condition = null, ?array $sort = null, ?string $select = null): object
+    {
+        $result = $this->findOneOrNull($condition, $sort, $select);
+
+        if ($result === null) {
+            throw new NoResultException();
+        }
+
+        return $result;
+    }
+
+    public function findOneOrNull(?string $condition = null, ?array $sort = null, ?string $select = null): ?object
+    {
+        return $this->oneOrFail($this->findAll($condition, $sort, null, 0, $select));
+    }
+
+    public function findOneBy(array $condition, ?array $sort = null, ?string $select = null): object
+    {
+        return $this->findOne($this->conditionArrayToString($condition), $sort, $select);
+    }
+
+    public function findOneByOrNull(array $condition, ?array $sort = null, ?string $select = null): ?object
+    {
+        return $this->findOneOrNull($this->conditionArrayToString($condition), $sort, $select);
+    }
+
     private function load(?string $condition, callable $callable): void
     {
         $conditionExpression = null;
@@ -103,5 +136,31 @@ final class MemoryDatabase implements Database
                 $callable($id, $item);
             }
         }
+    }
+
+    private function oneOrFail(array $list): ?object
+    {
+        $count = \count($list);
+        if ($count === 0) {
+            return null;
+        }
+        if ($count > 1) {
+            throw MoreThanOneResultException::newSelf($count);
+        }
+
+        return current($list);
+    }
+
+    private function conditionArrayToString(array $condition): ?string
+    {
+        if ($condition === []) {
+            return null;
+        }
+
+        array_walk($condition, static function (mixed &$value, string $key): void {
+            $value = sprintf('%1$s == "%2$s"', $key, $value);
+        });
+
+        return implode(' AND ', $condition);
     }
 }

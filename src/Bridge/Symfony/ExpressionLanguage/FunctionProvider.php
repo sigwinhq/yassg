@@ -22,13 +22,13 @@ final class FunctionProvider implements ExpressionFunctionProviderInterface
     public function getFunctions(): array
     {
         return [
-            new ExpressionFunction('yassg_query', static function (string $name): string {
+            new ExpressionFunction('yassg_find_all', static function (string $name): string {
                 return sprintf('$provider->getDatabase(%s)', $name);
             }, static function (array $variables, string $name, array $arguments = []) {
                 /** @var DatabaseProvider $provider */
                 $provider = $variables['provider'];
 
-                return $provider->getDatabase($name)->find(...$arguments);
+                return $provider->getDatabase($name)->findAll(...$arguments);
             }),
         ];
     }
