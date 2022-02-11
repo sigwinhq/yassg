@@ -5,8 +5,10 @@ sigwin_yassg:
         homepage:
             path: /{_locale}
             catalog:
-                _locale: "yassg_find_all('locale', {select: 'isoCode'})"
+                # map results as an array
+                _locale: "yassg_find_all('locale')['isoCode']"
         product:
             path: /{_locale}/{slug}
             catalog:
-                slug: "yassg_find_all('products', {select: 'slug'})"
+                # map results as a property
+                slug: "yassg_find_all('products').slug"

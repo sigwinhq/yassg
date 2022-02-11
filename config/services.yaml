@@ -16,28 +16,47 @@ services:
 
     Sigwin\YASSG\Bridge\Symfony\Controller\:
         resource: '../src/Bridge/Symfony/Controller'
-        tags: ['controller.service_arguments']
+        tags: [ 'controller.service_arguments' ]
     Sigwin\YASSG\Bridge\Symfony\Command\InitCommand:
         $initDir: "%kernel.project_dir%/resources/init"
-        
+    
     sigwin_yassg.abstract.database.storage.filesystem_storage_type:
         class: Sigwin\YASSG\Storage\FilesystemStorage
         tags:
-            - name: sigwin_yassg.database.storage.type
-              type: filesystem
+            -
+                name: sigwin_yassg.database.storage.type
+                type: filesystem
     sigwin_yassg.abstract.database.storage.memory_storage_type:
         class: Sigwin\YASSG\Storage\MemoryStorage
         tags:
-            - name: sigwin_yassg.database.storage.type
-              type: memory
+            -
+                name: sigwin_yassg.database.storage.type
+                type: memory
 
     sigwin_yassg.expression_language:
         class: Symfony\Component\ExpressionLanguage\ExpressionLanguage
         calls:
-            - registerProvider: ['@Sigwin\YASSG\Bridge\Symfony\ExpressionLanguage\FunctionProvider']
-        
+            -
+                registerProvider: [ '@Sigwin\YASSG\Bridge\Symfony\ExpressionLanguage\FunctionProvider' ]
+    
     Sigwin\YASSG\Permutator:
-        $expressionLanguage: '@sigwin_yassg.expression_language'         
+        $expressionLanguage: '@sigwin_yassg.expression_language'
+    
+    sigwin_yassg.serializer.denormalizer.localizing:
+        class: Sigwin\YASSG\Bridge\Symfony\Serializer\Normalizer\LocalizingNormalizer
+        tags:
+            -
+                name: serializer.normalizer
+                priority: 3000
+    
+    sigwin_yassg.serializer.denormalizer.collection:
+        class: Sigwin\YASSG\Bridge\Symfony\Serializer\Normalizer\CollectionNormalizer
+        arguments:
+            $expressionLanguage: '@sigwin_yassg.expression_language'
+        tags:
+            -
+                name: serializer.normalizer
+                priority: 5000
 
 when@prod:
     services:
@@ -48,7 +67,7 @@ when@prod:
 
         router.request_context:
             class: Symfony\Component\Routing\RequestContext
-            factory: ['@Sigwin\YASSG\Bridge\Symfony\Routing\BuildRequestContextFactory', 'create']
+            factory: [ '@Sigwin\YASSG\Bridge\Symfony\Routing\BuildRequestContextFactory', 'create' ]
             shared: false
 
         twig.extension.routing:

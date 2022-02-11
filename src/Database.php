@@ -19,9 +19,9 @@ interface Database
 
     public function countBy(array $condition): int;
 
-    public function findAll(?string $condition = null, ?array $sort = null, ?int $limit = null, int $offset = 0, ?string $select = null): array;
+    public function findAll(?string $condition = null, ?array $sort = null, ?int $limit = null, int $offset = 0, ?string $select = null): Collection;
 
-    public function findAllBy(array $condition, ?array $sort = null, ?int $limit = null, int $offset = 0, ?string $select = null): array;
+    public function findAllBy(array $condition, ?array $sort = null, ?int $limit = null, int $offset = 0, ?string $select = null): Collection;
 
     public function findOne(?string $condition = null, ?array $sort = null, ?string $select = null): object;
 

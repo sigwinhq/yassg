@@ -14,30 +14,26 @@ declare(strict_types=1);
 namespace Sigwin\YASSG\Bridge\Symfony\Serializer\Normalizer;
 
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\SerializerAwareInterface;
-use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface;
+use Symfony\Component\Serializer\Normalizer\ContextAwareDenormalizerInterface;
+use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
+use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-final class LocalizingNormalizer implements DenormalizerInterface, SerializerAwareInterface
+final class LocalizingNormalizer implements CacheableSupportsMethodInterface, ContextAwareDenormalizerInterface, DenormalizerAwareInterface
 {
+    use DenormalizerAwareTrait;
+    private const LOCALIZING_PROCESSING_NEEDED = 'sigwin_yassg_localizing_processing_needed';
+
     private array $classes;
-    private ObjectNormalizer $normalizer;
     private RequestStack $requestStack;
     private TranslatorInterface $translator;
 
-    public function __construct(array $classes, ObjectNormalizer $normalizer, RequestStack $requestStack, TranslatorInterface $translator)
+    public function __construct(array $classes, RequestStack $requestStack, TranslatorInterface $translator)
     {
         $this->classes = $classes;
-        $this->normalizer = $normalizer;
         $this->requestStack = $requestStack;
         $this->translator = $translator;
-    }
-
-    public function setSerializer(SerializerInterface $serializer): void
-    {
-        $this->normalizer->setSerializer($serializer);
     }
 
     public function denormalize(mixed $data, string $type, string $format = null, array $context = []): mixed
@@ -60,15 +56,22 @@ final class LocalizingNormalizer implements DenormalizerInterface, SerializerAwa
             }
 
             foreach ($this->classes[$type] as $property) {
-                $data[$property] = $data[$property][$locale] ?? $data[$property][$defaultLocale] ?? throw new \RuntimeException('Invalid localized property value');
+                $data[$property] = $data[$property][$locale] ?? $data[$property][$defaultLocale] ?? throw new \RuntimeException('Invalid localized property value '.$property);
             }
+
+            $context[self::LOCALIZING_PROCESSING_NEEDED] = false;
         }
 
-        return $this->normalizer->denormalize($data, $type, $format, $context);
+        return $this->denormalizer->denormalize($data, $type, $format, $context);
     }
 
-    public function supportsDenormalization(mixed $data, string $type, string $format = null): bool
+    public function supportsDenormalization(mixed $data, string $type, string $format = null, array $context = null): bool
     {
-        return $this->normalizer->supportsDenormalization($data, $type, $format);
+        return isset($this->classes[$type]) && ($context[self::LOCALIZING_PROCESSING_NEEDED] ?? true) === true;
+    }
+
+    public function hasCacheableSupportsMethod(): bool
+    {
+        return false;
     }
 }

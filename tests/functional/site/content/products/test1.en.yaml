@@ -7,3 +7,8 @@ name:
     en: Example 1
     hr: Primjer 1
 index: 1
+categories:
+    -
+        slug: category1
+    -
+        slug: category2
