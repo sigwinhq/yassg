@@ -13,7 +13,11 @@ declare(strict_types=1);
 
 namespace Sigwin\YASSG\Test\Functional\Site\Model;
 
+use Sigwin\YASSG\Bridge\Attribute\Localized;
+
 final class Category
 {
     public string $slug;
+    #[Localized]
+    public string $name;
 }

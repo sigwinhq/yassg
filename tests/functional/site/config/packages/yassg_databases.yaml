@@ -8,6 +8,14 @@ sigwin_yassg:
                     - "%sigwin_yassg.base_dir%/content/products"
                 names:
                     - "*.yaml"
+        categories:
+            class: Sigwin\YASSG\Test\Functional\Site\Model\Category
+            storage: filesystem
+            options:
+                paths:
+                    - "%sigwin_yassg.base_dir%/content/categories"
+                names:
+                    - "*.yaml"
         locale:
             class: Sigwin\YASSG\Test\Functional\Site\Model\Locale
             storage: memory
