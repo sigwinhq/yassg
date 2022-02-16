@@ -23,7 +23,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 final class LocalizingNormalizer implements CacheableSupportsMethodInterface, ContextAwareDenormalizerInterface, DenormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
-    private const LOCALIZING_PROCESSING_NEEDED = 'sigwin_yassg_localizing_processing_needed';
+    private const LOCALIZING_NORMALIZER_LAST_TYPE = 'sigwin_yassg_localizing_normalizer_last_type';
 
     private array $classes;
     private RequestStack $requestStack;
@@ -58,16 +58,15 @@ final class LocalizingNormalizer implements CacheableSupportsMethodInterface, Co
             foreach ($this->classes[$type] as $property) {
                 $data[$property] = $data[$property][$locale] ?? $data[$property][$defaultLocale] ?? throw new \RuntimeException('Invalid localized property value '.$property);
             }
-
-            $context[self::LOCALIZING_PROCESSING_NEEDED] = false;
         }
+        $context[self::LOCALIZING_NORMALIZER_LAST_TYPE] = $type;
 
         return $this->denormalizer->denormalize($data, $type, $format, $context);
     }
 
     public function supportsDenormalization(mixed $data, string $type, string $format = null, array $context = null): bool
     {
-        return isset($this->classes[$type]) && ($context[self::LOCALIZING_PROCESSING_NEEDED] ?? true) === true;
+        return isset($this->classes[$type]) && ($context[self::LOCALIZING_NORMALIZER_LAST_TYPE] ?? null) !== $type;
     }
 
     public function hasCacheableSupportsMethod(): bool

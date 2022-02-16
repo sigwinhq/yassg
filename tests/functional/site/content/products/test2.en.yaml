@@ -10,3 +10,7 @@ index: 2
 categories:
     -
         slug: category3
+        name:
+            de: Kategorie 3
+            en: Category 3
+            hr: Kategorija 3

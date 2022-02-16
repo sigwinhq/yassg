@@ -10,5 +10,13 @@ index: 1
 categories:
     -
         slug: category1
+        name:
+            de: Kategorie 1
+            en: Category 1
+            hr: Kategorija 1
     -
         slug: category2
+        name:
+            de: Kategorie 2
+            en: Category 2
+            hr: Kategorija 2
