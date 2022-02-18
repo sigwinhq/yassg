@@ -67,6 +67,7 @@ when@prod:
         Sigwin\YASSG\Bridge\Symfony\Routing\Generator\FilenameUrlGenerator:
             decorates: Symfony\Component\Routing\Generator\UrlGeneratorInterface
             arguments:
+                $stripParameters: '%sigwin_yassg.routes.strip_parameters%'
                 $urlGenerator: '@Sigwin\YASSG\Bridge\Symfony\Routing\Generator\FilenameUrlGenerator.inner'
 
         router.request_context:

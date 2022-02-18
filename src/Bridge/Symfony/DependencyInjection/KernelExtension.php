@@ -28,6 +28,13 @@ final class KernelExtension extends Extension implements PrependExtensionInterfa
 
         $container->setParameter('sigwin_yassg.routes', $config['routes'] ?? []);
 
+        // which params to strip from routes
+        $stripParameters = [];
+        foreach ($config['routes'] ?? [] as $name => $route) {
+            $stripParameters[$name] = $route['options']['strip_parameters'] ?? [];
+        }
+        $container->setParameter('sigwin_yassg.routes.strip_parameters', $stripParameters);
+
         // this gets validated further in \Sigwin\YASSG\Bridge\Symfony\DependencyInjection\CompilerPass\ConfigureDataSourcesCompilerPass
         $container->setParameter('sigwin_yassg.databases_spec', $config['databases'] ?? []);
     }

@@ -18,13 +18,20 @@ use Symfony\Component\Routing\RequestContext;
 
 final class FilenameUrlGenerator implements UrlGeneratorInterface
 {
-    public function __construct(private UrlGeneratorInterface $urlGenerator)
+    public function __construct(private UrlGeneratorInterface $urlGenerator, private array $stripParameters)
     {
     }
 
     public function generate(string $name, array $parameters = [], int $referenceType = self::ABSOLUTE_PATH): string
     {
-        return $this->urlGenerator->generate($name, $parameters + ['_filename' => 'index.html'], $referenceType);
+        $this->stripParameters($this->stripParameters[$name] ?? [], $parameters);
+
+        $url = $this->urlGenerator->generate($name, $parameters + ['_filename' => 'index.html'], $referenceType);
+        if (parse_url($url, \PHP_URL_QUERY) !== null) {
+            throw new \LogicException(sprintf('Query string found while generating route "%1$s", query strings are forbidden: %2$s', $name, $url));
+        }
+
+        return $url;
     }
 
     public function setContext(RequestContext $context): void
@@ -35,5 +42,14 @@ final class FilenameUrlGenerator implements UrlGeneratorInterface
     public function getContext(): RequestContext
     {
         return $this->urlGenerator->getContext();
+    }
+
+    private function stripParameters(array $names, array &$parameters): void
+    {
+        foreach ($names as $name) {
+            if (isset($parameters[$name])) {
+                unset($parameters[$name]);
+            }
+        }
     }
 }

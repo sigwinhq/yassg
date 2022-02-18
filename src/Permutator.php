@@ -32,7 +32,7 @@ final class Permutator
     public function permute(): \Traversable
     {
         foreach ($this->routes as $route => $spec) {
-            if ($spec['skip'] ?? false) {
+            if ($spec['options']['skip'] ?? $spec['skip'] ?? false) {
                 continue;
             }
 
