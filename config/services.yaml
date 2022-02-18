@@ -58,6 +58,10 @@ services:
                 name: serializer.normalizer
                 priority: 5000
 
+    sigwin_yassg.fragment.renderer.inline:
+        class: Sigwin\YASSG\Bridge\Symfony\HttpKernel\Fragment\RelativeUrlInlineFragmentRenderer
+        decorates: fragment.renderer.inline
+
 when@prod:
     services:
         Sigwin\YASSG\Bridge\Symfony\Routing\Generator\FilenameUrlGenerator:

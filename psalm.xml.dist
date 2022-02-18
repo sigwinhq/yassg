@@ -51,6 +51,11 @@
                 <file name="src/Bridge/Symfony/DependencyInjection/Configuration.php"/>
             </errorLevel>
         </PossiblyUndefinedMethod>
+        <DuplicateClass>
+            <errorLevel type="suppress">
+                <file name="src/Bridge/Symfony/HttpKernel/Fragment/RelativeUrlInlineFragmentRenderer.php"/>
+            </errorLevel>            
+        </DuplicateClass>
     </issueHandlers>
 
     <plugins>
