@@ -11,6 +11,7 @@ parameters:
     paths:
         - ./
     excludePaths:
+        - src/Bridge/Symfony/HttpKernel/Fragment/RelativeUrlInlineFragmentRenderer.php
         - tests/functional/init/
         - tests/functional/site/var/
         - var/

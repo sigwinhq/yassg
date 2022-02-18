@@ -1,4 +1,4 @@
-BASE_URL ?= file://${APP_ROOT}/${BUILD_DIR}
+BASE_URL ?= file://localhost${APP_ROOT}/${BUILD_DIR}
 
 start/dev: dev
 dev: clean
