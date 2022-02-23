@@ -10,7 +10,14 @@
         <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-xl">
             <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
                 <h1>{{ product.name }}</h1>
-            </div>              
+
+                <dl>
+                    {% for category in product.categories %}
+                        <dt>{{ category.name }}</dt>
+                        <dd>{{ category.random() }}</dd>
+                    {% endfor %}
+                </dl>
+            </div>
         </div>
     </main>
 {% endblock %}

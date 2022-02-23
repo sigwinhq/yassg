@@ -15,16 +15,9 @@ namespace Sigwin\YASSG;
 
 /**
  * @template T of object
+ * @extends Storage<T>
  */
-interface Storage
+interface StorageWithOptions extends Storage
 {
-    /**
-     * @return iterable<string, array|T>
-     */
-    public function load(): iterable;
-
-    /**
-     * @return array|T
-     */
-    public function get(string $id): object|array;
+    public static function resolveOptions(array $options): array;
 }

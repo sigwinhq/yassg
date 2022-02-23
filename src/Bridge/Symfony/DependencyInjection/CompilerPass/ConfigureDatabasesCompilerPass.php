@@ -17,8 +17,8 @@ use Sigwin\YASSG\Bridge\Attribute\Localized;
 use Sigwin\YASSG\Bridge\Symfony\Serializer\AttributeMetadataTrait;
 use Sigwin\YASSG\Database;
 use Sigwin\YASSG\Database\MemoryDatabase;
-use Sigwin\YASSG\DatabaseProvider;
 use Sigwin\YASSG\Storage;
+use Sigwin\YASSG\StorageWithOptions;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Compiler\PriorityTaggedServiceTrait;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -48,7 +48,7 @@ final class ConfigureDatabasesCompilerPass implements CompilerPassInterface
                 throw new \LogicException(sprintf('Data source type %1$s already provided by %2$s', $type, $reference));
             }
 
-            /** @var class-string<Storage> $class */
+            /** @var class-string<StorageWithOptions> $class */
             $class = $storageDefinition->getClass();
 
             $supportedStorageTypes[$type] = $class;
@@ -56,7 +56,6 @@ final class ConfigureDatabasesCompilerPass implements CompilerPassInterface
         }
         unset($type);
 
-        $databases = [];
         $localizableClasses = [];
 
         $classMetadata = $container->get('serializer.mapping.class_metadata_factory');
@@ -80,6 +79,7 @@ final class ConfigureDatabasesCompilerPass implements CompilerPassInterface
             $storageDefinition
                 ->setAutowired(true)
                 ->setAutoconfigured(true);
+
             $callable = [$supportedStorageTypes[$type], 'resolveOptions'];
             try {
                 $options = $callable($database['options'] ?? []);
@@ -107,12 +107,11 @@ final class ConfigureDatabasesCompilerPass implements CompilerPassInterface
             $databaseDefinition
                 ->setArgument(0, new Reference($storageId))
                 ->setArgument(1, new Reference('sigwin_yassg.expression_language'))
-                ->setArgument(2, $this->getProperties($databaseClass));
+                ->setArgument(2, $this->getProperties($databaseClass))
+                ->addTag('sigwin_yassg.database', ['name' => $name]);
             $databaseId = sprintf('sigwin_yassg.database.%1$s', $name);
             $container->setDefinition($databaseId, $databaseDefinition);
             $container->setAlias(sprintf('%1$s $%2$s', Database::class, $name), $databaseId);
-
-            $databases[$name] = new Reference($databaseId);
 
             $localizableProperties = $this->getLocalizableProperties($databaseClass);
             if ($localizableProperties !== []) {
@@ -120,9 +119,6 @@ final class ConfigureDatabasesCompilerPass implements CompilerPassInterface
             }
         }
         $container->setParameter('sigwin_yassg.databases_spec', null);
-        $container
-            ->getDefinition(DatabaseProvider::class)
-                ->setArgument(0, $databases);
         $container
             ->getDefinition('sigwin_yassg.serializer.denormalizer.localizing')
                 ->setArgument(0, $localizableClasses);

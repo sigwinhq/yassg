@@ -121,6 +121,14 @@ final class MemoryDatabase implements Database
         return $this->findOneOrNull($this->conditionArrayToString($condition), $sort, $select);
     }
 
+    public function get(string $id): object
+    {
+        /** @var object $item */
+        $item = $this->storage->get($id);
+
+        return $item;
+    }
+
     private function load(?string $condition, callable $callable): void
     {
         $conditionExpression = null;
@@ -129,9 +137,6 @@ final class MemoryDatabase implements Database
         }
 
         foreach ($this->storage->load() as $id => $item) {
-            if ($item === null) {
-                continue;
-            }
             if ($conditionExpression === null || $this->expressionLanguage->evaluate($conditionExpression, ['item' => $item]) !== false) {
                 $callable($id, $item);
             }

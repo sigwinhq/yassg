@@ -47,6 +47,9 @@ final class DatabaseExtension extends AbstractExtension
             new TwigFunction('yassg_find_one_by_or_null', function (string $name, array $arguments = []) {
                 return $this->provider->getDatabase($name)->findOneByOrNull(...$arguments);
             }),
+            new TwigFunction('yassg_get', function (string $name, string $id) {
+                return $this->provider->getDatabase($name)->get($id);
+            }),
         ];
     }
 }
