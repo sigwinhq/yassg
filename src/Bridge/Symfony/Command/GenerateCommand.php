@@ -13,36 +13,39 @@ declare(strict_types=1);
 
 namespace Sigwin\YASSG\Bridge\Symfony\Command;
 
-use Sigwin\YASSG\Bridge\Symfony\Routing\BuildRequestContextFactory;
 use Sigwin\YASSG\Generator;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Routing\RequestContext;
 
 final class GenerateCommand extends Command
 {
     protected static $defaultName = 'yassg:generate';
 
     private Generator $generator;
-    private BuildRequestContextFactory $contextFactory;
+    private UrlGeneratorInterface $urlGenerator;
 
-    public function __construct(Generator $generator, BuildRequestContextFactory $contextFactory)
+    public function __construct(Generator $generator, UrlGeneratorInterface $urlGenerator)
     {
         parent::__construct('yassg:generate');
 
         $this->generator = $generator;
-        $this->contextFactory = $contextFactory;
+        $this->urlGenerator = $urlGenerator;
     }
 
     protected function configure(): void
     {
         $this
             ->setDescription('Generate the site')
-            ->addArgument('url', InputArgument::REQUIRED, 'Base URL to generate for');
+            ->addArgument('url', InputArgument::REQUIRED, 'Base URL to generate for')
+            ->addOption('index-file', null, InputOption::VALUE_NONE, 'Add the index.html to generated routes');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -55,9 +58,20 @@ final class GenerateCommand extends Command
          * @psalm-suppress UnnecessaryVarAnnotation Psalm's Symfony plugin solves this, but not PHPStan's
          */
         $buildUrl = $input->getArgument('url');
-        $this->contextFactory->setBuildUrl($buildUrl);
+        $buildUrl = rtrim($buildUrl, '/');
 
-        $this->generator->generate($buildUrl, static function (Request $request, Response $response, string $path) use ($style, $buildUrl): void {
+        /**
+         * @phpstan-var bool $indexFile
+         * @psalm-suppress UnnecessaryVarAnnotation Psalm's Symfony plugin solves this, but not PHPStan's
+         */
+        $indexFile = $input->getOption('index-file');
+
+        $context = RequestContext::fromUri($buildUrl);
+        $context->setParameter('index-file', $indexFile);
+        $this->urlGenerator->setContext($context);
+
+        $this->generator->generate(static function (Request $request, Response $response, string $path) use ($style, $buildUrl): void {
+            // TODO: this looks like a bug in Symfony (?)
             $style->writeln(str_replace('http://localhost', $buildUrl, $request->getUri()));
 
             if ($style->isDebug()) {

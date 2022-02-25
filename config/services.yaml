@@ -82,11 +82,6 @@ when@prod:
                 $stripParameters: '%sigwin_yassg.routes.strip_parameters%'
                 $urlGenerator: '@Sigwin\YASSG\Bridge\Symfony\Routing\Generator\FilenameUrlGenerator.inner'
 
-        router.request_context:
-            class: Symfony\Component\Routing\RequestContext
-            factory: [ '@Sigwin\YASSG\Bridge\Symfony\Routing\BuildRequestContextFactory', 'create' ]
-            shared: false
-
         twig.extension.routing:
             class: Symfony\Bridge\Twig\Extension\RoutingExtension
             arguments:

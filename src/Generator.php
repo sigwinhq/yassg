@@ -19,8 +19,10 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Routing\RequestContext;
 
+/**
+ * @internal
+ */
 final class Generator
 {
     private string $buildDir;
@@ -38,18 +40,17 @@ final class Generator
         $this->filesystem = $filesystem;
     }
 
-    public function generate(string $baseUrl, callable $callable): void
+    public function generate(callable $callable): void
     {
-        // TODO: extract to factory
-        $this->urlGenerator->setContext(RequestContext::fromUri($baseUrl));
+        $indexFile = (bool) ($this->urlGenerator->getContext()->getParameter('index-file') ?? false);
 
         foreach ($this->permutator->permute() as $routeName => $parameters) {
-            $this->dumpFile($callable, $this->urlGenerator->generate($routeName, $parameters + ['_filename' => 'index.html'], UrlGeneratorInterface::RELATIVE_PATH));
+            $this->dumpFile($callable, $this->urlGenerator->generate($routeName, $parameters + ($indexFile ? ['_filename' => 'index.html'] : []), UrlGeneratorInterface::RELATIVE_PATH), ! $indexFile);
         }
-        $this->dumpFile($callable, '/404.html');
+        $this->dumpFile($callable, '/404.html', false);
     }
 
-    private function dumpFile(callable $callable, string $url): void
+    private function dumpFile(callable $callable, string $url, bool $doesNotHaveIndexFile): void
     {
         $request = Request::create($url);
         try {
@@ -62,7 +63,7 @@ final class Generator
         if ($body === false) {
             throw new \RuntimeException('No body in response');
         }
-        $path = $this->buildDir.$request->getPathInfo();
+        $path = $this->buildDir.$request->getPathInfo().($doesNotHaveIndexFile ? '/index.html' : '');
 
         $this->filesystem->dumpFile($path, $body);
 
