@@ -1,4 +1,5 @@
 BASE_URL ?= file://localhost${APP_ROOT}/${BUILD_DIR}
+BUILD_OPTS ?=
 
 start/dev: dev
 dev: clean
@@ -11,10 +12,8 @@ index.php:
 	ln -s vendor/sigwin/yassg/web/index.php
 
 build: ${BUILD_DIR}/assets/entrypoints.json vendor 
-	php vendor/sigwin/yassg/bin/yassg yassg:generate --env prod $(BASE_URL)
-build/clean: clean ${BUILD_DIR}/assets/entrypoints.json vendor
-	php vendor/sigwin/yassg/bin/yassg yassg:generate --env prod $(BASE_URL)
-.PHONY: build build/clean
+	php vendor/sigwin/yassg/bin/yassg yassg:generate --env prod $(BASE_URL) ${BUILD_OPTS}
+.PHONY: build
 
 ${BUILD_DIR}:
 	mkdir -p ${BUILD_DIR}
