@@ -16,18 +16,18 @@ namespace Sigwin\YASSG\Bridge\Symfony\HttpKernel\Fragment;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Fragment\FragmentRendererInterface;
 use Symfony\Component\HttpKernel\Fragment\InlineFragmentRenderer;
-use Symfony\Component\Routing\RequestContext;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 if (\Composer\InstalledVersions::getVersion('symfony/http-kernel') < 6.0) {
     final class RelativeUrlInlineFragmentRenderer implements FragmentRendererInterface
     {
         private InlineFragmentRenderer $fragmentRenderer;
-        private RequestContext $requestContext;
+        private UrlGeneratorInterface $urlGenerator;
 
-        public function __construct(InlineFragmentRenderer $fragmentRenderer, RequestContext $requestContext)
+        public function __construct(InlineFragmentRenderer $fragmentRenderer, UrlGeneratorInterface $urlGenerator)
         {
             $this->fragmentRenderer = $fragmentRenderer;
-            $this->requestContext = $requestContext;
+            $this->urlGenerator = $urlGenerator;
         }
 
         /**
@@ -36,7 +36,7 @@ if (\Composer\InstalledVersions::getVersion('symfony/http-kernel') < 6.0) {
         public function render($uri, Request $request, array $options = []): \Symfony\Component\HttpFoundation\Response
         {
             if (\is_string($uri)) {
-                $uri = str_replace($this->requestContext->getBaseUrl(), '', $uri);
+                $uri = str_replace($this->urlGenerator->getContext()->getBaseUrl(), '', $uri);
             }
 
             return $this->fragmentRenderer->render($uri, $request, $options);
@@ -51,18 +51,18 @@ if (\Composer\InstalledVersions::getVersion('symfony/http-kernel') < 6.0) {
     final class RelativeUrlInlineFragmentRenderer implements FragmentRendererInterface
     {
         private InlineFragmentRenderer $fragmentRenderer;
-        private RequestContext $requestContext;
+        private UrlGeneratorInterface $urlGenerator;
 
-        public function __construct(InlineFragmentRenderer $fragmentRenderer, RequestContext $requestContext)
+        public function __construct(InlineFragmentRenderer $fragmentRenderer, UrlGeneratorInterface $urlGenerator)
         {
             $this->fragmentRenderer = $fragmentRenderer;
-            $this->requestContext = $requestContext;
+            $this->urlGenerator = $urlGenerator;
         }
 
         public function render(\Symfony\Component\HttpKernel\Controller\ControllerReference|string $uri, Request $request, array $options = []): \Symfony\Component\HttpFoundation\Response
         {
             if (\is_string($uri)) {
-                $uri = str_replace($this->requestContext->getBaseUrl(), '', $uri);
+                $uri = str_replace($this->urlGenerator->getContext()->getBaseUrl(), '', $uri);
             }
 
             return $this->fragmentRenderer->render($uri, $request, $options);
