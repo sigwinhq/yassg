@@ -19,12 +19,25 @@ use Symfony\Component\Serializer\Exception\ExtraAttributesException;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
+/**
+ * @template T of object
+ */
 final class DenormalizingStorage implements Storage
 {
     private DenormalizerInterface $denormalizer;
+    /**
+     * @var Storage<T>
+     */
     private Storage $storage;
+    /**
+     * @var class-string<T>
+     */
     private string $class;
 
+    /**
+     * @param Storage<T>      $storage
+     * @param class-string<T> $class
+     */
     public function __construct(DenormalizerInterface $denormalizer, Storage $storage, string $class)
     {
         $this->denormalizer = $denormalizer;
@@ -32,22 +45,45 @@ final class DenormalizingStorage implements Storage
         $this->class = $class;
     }
 
-    public static function resolveOptions(array $options): array
-    {
-        throw new \LogicException('Does not take options');
-    }
-
+    /**
+     * @return iterable<string, T>
+     */
     public function load(): iterable
     {
         foreach ($this->storage->load() as $id => $item) {
-            try {
-                yield $id => $this->denormalizer->denormalize($item, $this->class, null, [
-                    AbstractNormalizer::ALLOW_EXTRA_ATTRIBUTES => false,
-                ]);
-            } catch (ExtraAttributesException $extraAttributesException) {
-                throw UnexpectedAttributeException::newSelf($id, $extraAttributesException->getMessage());
+            if (\is_object($item)) {
+                yield $id => $item;
+                continue;
             }
+
+            yield $id => $this->denormalize($id, $item);
         }
-        yield;
+    }
+
+    /**
+     * @return T
+     */
+    public function get(string $id): object
+    {
+        $item = $this->storage->get($id);
+        if (\is_object($item)) {
+            return $item;
+        }
+
+        return $this->denormalize($id, $item);
+    }
+
+    /**
+     * @return T
+     */
+    private function denormalize(string $id, array $data): object
+    {
+        try {
+            return $this->denormalizer->denormalize($data, $this->class, null, [
+                AbstractNormalizer::ALLOW_EXTRA_ATTRIBUTES => false,
+            ]);
+        } catch (ExtraAttributesException $extraAttributesException) {
+            throw UnexpectedAttributeException::newSelf($id, $extraAttributesException->getMessage());
+        }
     }
 }

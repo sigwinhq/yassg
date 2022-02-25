@@ -13,11 +13,18 @@ declare(strict_types=1);
 
 namespace Sigwin\YASSG\Storage;
 
-use Sigwin\YASSG\Storage;
+use Sigwin\YASSG\StorageWithOptions;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-final class MemoryStorage implements Storage
+/**
+ * @template T of object
+ * @implements StorageWithOptions<T>
+ */
+final class MemoryStorage implements StorageWithOptions
 {
+    /**
+     * @var array<string, array>
+     */
     private array $values;
 
     public function __construct(array $values)
@@ -37,5 +44,10 @@ final class MemoryStorage implements Storage
     public function load(): iterable
     {
         return $this->values;
+    }
+
+    public function get(string $id): array
+    {
+        return $this->values[$id];
     }
 }

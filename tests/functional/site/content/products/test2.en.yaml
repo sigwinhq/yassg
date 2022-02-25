@@ -8,9 +8,5 @@ name:
     hr: Primjer 2
 index: 2
 categories:
-    -
-        slug: category3
-        name:
-            de: Kategorie 3
-            en: Category 3
-            hr: Kategorija 3
+    - '@=yassg_get("categories", "/category1.yaml")'
+    - '@=yassg_get("categories", "/category1.yaml")'

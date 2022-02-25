@@ -12,6 +12,7 @@ services:
         exclude:
             - '../src/Bridge/Symfony/Serializer/*'
             - '../src/Database/*'
+            - '../src/DatabaseProvider.php'
             - '../src/Kernel.php'
 
     Sigwin\YASSG\Bridge\Symfony\Controller\:
@@ -32,6 +33,10 @@ services:
             -
                 name: sigwin_yassg.database.storage.type
                 type: memory
+                
+    Sigwin\YASSG\DatabaseProvider:
+        arguments:
+            $locator: !tagged_locator { tag: 'sigwin_yassg.database', index_by: 'name' }
 
     sigwin_yassg.expression_language:
         class: Symfony\Component\ExpressionLanguage\ExpressionLanguage
@@ -47,8 +52,7 @@ services:
         tags:
             -
                 name: serializer.normalizer
-                priority: 3000
-    
+                priority: 3000    
     sigwin_yassg.serializer.denormalizer.collection:
         class: Sigwin\YASSG\Bridge\Symfony\Serializer\Normalizer\CollectionNormalizer
         arguments:
@@ -56,7 +60,15 @@ services:
         tags:
             -
                 name: serializer.normalizer
-                priority: 5000
+                priority: 5000                
+    sigwin_yassg.serializer.denormalizer.expression:
+        class: Sigwin\YASSG\Bridge\Symfony\Serializer\Normalizer\ExpressionNormalizer
+        arguments:
+            $expressionLanguage: '@sigwin_yassg.expression_language'        
+        tags:
+            -
+                name: serializer.normalizer
+                priority: 4000
 
     sigwin_yassg.fragment.renderer.inline:
         class: Sigwin\YASSG\Bridge\Symfony\HttpKernel\Fragment\RelativeUrlInlineFragmentRenderer

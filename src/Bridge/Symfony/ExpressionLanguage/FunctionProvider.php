@@ -30,6 +30,14 @@ final class FunctionProvider implements ExpressionFunctionProviderInterface
 
                 return $provider->getDatabase($name)->findAll(...$arguments);
             }),
+            new ExpressionFunction('yassg_get', static function (string $name): string {
+                return sprintf('$provider->getDatabase(%s)', $name);
+            }, static function (array $variables, string $name, string $id) {
+                /** @var DatabaseProvider $provider */
+                $provider = $variables['provider'];
+
+                return $provider->getDatabase($name)->get($id);
+            }),
         ];
     }
 }

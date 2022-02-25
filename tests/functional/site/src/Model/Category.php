@@ -20,4 +20,9 @@ final class Category
     public string $slug;
     #[Localized]
     public string $name;
+
+    public function random(): int
+    {
+        return mt_rand();
+    }
 }

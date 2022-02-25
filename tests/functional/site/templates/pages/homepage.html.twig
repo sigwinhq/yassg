@@ -5,6 +5,8 @@
 
 {% set products = yassg_find_all('products', {condition: '"category3" in item.categories.slug', sort: {'item.name': 'desc'}}) %}
 
+{% set category1 = yassg_get('categories', '/category1.yaml') %}
+
 {% block title %}Homepage{% endblock %}
 
 {% block body %}
@@ -27,6 +29,9 @@
                         </li>
                     {% endfor %}
                 </ul>
+                
+                <h2>{{ category1.name }}</h2>
+                <p>{{ category1.random() }}</p>
             </div>
         </div>
     </main>

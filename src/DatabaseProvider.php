@@ -13,27 +13,28 @@ declare(strict_types=1);
 
 namespace Sigwin\YASSG;
 
+use Symfony\Component\DependencyInjection\ServiceLocator;
+
 final class DatabaseProvider
 {
-    /**
-     * @var array<Database>
-     */
-    private array $databases;
+    private ServiceLocator $locator;
 
-    /**
-     * @param array<Database> $databases
-     */
-    public function __construct(array $databases)
+    public function __construct(ServiceLocator $locator)
     {
-        $this->databases = $databases;
+        $this->locator = $locator;
     }
 
     public function getDatabase(string $name): Database
     {
-        if (isset($this->databases[$name]) === false) {
+        if ($this->locator->has($name) === false) {
             throw new \LogicException(sprintf('No such database "%1$s"', $name));
         }
 
-        return $this->databases[$name];
+        $database = $this->locator->get($name);
+        if ($database instanceof Database === false) {
+            throw new \LogicException(sprintf('Service "%1$s" is not a database', $name));
+        }
+
+        return $database;
     }
 }
