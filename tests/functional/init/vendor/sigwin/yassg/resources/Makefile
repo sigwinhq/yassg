@@ -2,7 +2,7 @@ BUILD_DIR=public
 BASE_URL=https://example.com
 
 self/build: self/clean ${BUILD_DIR}/assets/entrypoints.json 
-	php ../../../bin/yassg yassg:generate --env prod $(BASE_URL)
+	php ../../../bin/yassg yassg:generate --env prod $(BASE_URL) ${BUILD_OPTS}
 self/init: self/clean 
 	php ../../../bin/yassg yassg:init --demo
 self/clean:
