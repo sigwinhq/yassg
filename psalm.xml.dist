@@ -56,6 +56,12 @@
                 <file name="src/Bridge/Symfony/HttpKernel/Fragment/RelativeUrlInlineFragmentRenderer.php"/>
             </errorLevel>            
         </DuplicateClass>
+        <UndefinedDocblockClass>
+            <errorLevel type="suppress">
+                <!-- Symfony 6.0.5 is referencing this PHP 8.1 class even though it's available on 8.0 -->
+                <referencedClass name="UnitEnum"/>
+            </errorLevel>
+        </UndefinedDocblockClass>
     </issueHandlers>
 
     <plugins>

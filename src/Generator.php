@@ -63,7 +63,7 @@ final class Generator
         if ($body === false) {
             throw new \RuntimeException('No body in response');
         }
-        $path = $this->buildDir.$request->getPathInfo().($doesNotHaveIndexFile ? '/index.html' : '');
+        $path = $this->buildDir.$request->getPathInfo().($doesNotHaveIndexFile ? 'index.html' : '');
 
         $this->filesystem->dumpFile($path, $body);
 

@@ -25,7 +25,10 @@ final class FilenameUrlGenerator implements UrlGeneratorInterface
     public function generate(string $name, array $parameters = [], int $referenceType = self::ABSOLUTE_PATH): string
     {
         $this->stripParameters($this->stripParameters[$name] ?? [], $parameters);
-        if (($this->getContext()->getParameter('index-file') ?? false) === true) {
+
+        /** @var bool $indexFile */
+        $indexFile = $this->getContext()->getParameter('index-file') ?? false;
+        if ($indexFile === true) {
             $parameters += ['_filename' => 'index.html'];
         }
 
@@ -33,6 +36,9 @@ final class FilenameUrlGenerator implements UrlGeneratorInterface
         if (parse_url($url, \PHP_URL_QUERY) !== null) {
             throw new \LogicException(sprintf('Query string found while generating route "%1$s", query strings are forbidden: %2$s', $name, $url));
         }
+
+        // add a trailing slash if no file is in the URL
+        $url .= ($indexFile === false && str_ends_with($url, '/') === false) ? '/' : '';
 
         return $url;
     }
