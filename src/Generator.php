@@ -47,23 +47,28 @@ final class Generator
         foreach ($this->permutator->permute() as $routeName => $parameters) {
             $this->dumpFile($callable, $this->urlGenerator->generate($routeName, $parameters + ($indexFile ? ['_filename' => 'index.html'] : []), UrlGeneratorInterface::RELATIVE_PATH), ! $indexFile);
         }
-        $this->dumpFile($callable, '/404.html', false);
+        $this->dumpFile($callable, '/404.html', false, 404);
     }
 
-    private function dumpFile(callable $callable, string $url, bool $doesNotHaveIndexFile): void
+    private function dumpFile(callable $callable, string $url, bool $doesNotHaveIndexFile, int $expectedStatusCode = 200): void
     {
-        $request = Request::create($url);
+        $request = Request::create(rtrim($url, '/'));
         try {
             $response = $this->kernel->handle($request, HttpKernelInterface::MAIN_REQUEST, false);
         } catch (HttpException $exception) {
             throw $exception;
         }
 
+        $statusCode = $response->getStatusCode();
+        if ($statusCode !== $expectedStatusCode) {
+            throw new \RuntimeException(sprintf('Invalid response for %1$s, expected %2$d, got %3$d', $request->getUri(), $expectedStatusCode, $statusCode));
+        }
+
         $body = $response->getContent();
         if ($body === false) {
             throw new \RuntimeException('No body in response');
         }
-        $path = $this->buildDir.$request->getPathInfo().($doesNotHaveIndexFile ? 'index.html' : '');
+        $path = $this->buildDir.$request->getPathInfo().($doesNotHaveIndexFile ? '/index.html' : '');
 
         $this->filesystem->dumpFile($path, $body);
 
