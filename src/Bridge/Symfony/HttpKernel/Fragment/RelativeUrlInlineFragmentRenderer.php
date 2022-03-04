@@ -36,7 +36,7 @@ if (\Composer\InstalledVersions::getVersion('symfony/http-kernel') < 6.0) {
         public function render($uri, Request $request, array $options = []): \Symfony\Component\HttpFoundation\Response
         {
             if (\is_string($uri)) {
-                $uri = str_replace($this->urlGenerator->getContext()->getBaseUrl(), '', $uri);
+                $uri = rtrim(str_replace($this->urlGenerator->getContext()->getBaseUrl(), '', $uri), '/');
             }
 
             return $this->fragmentRenderer->render($uri, $request, $options);
@@ -62,7 +62,7 @@ if (\Composer\InstalledVersions::getVersion('symfony/http-kernel') < 6.0) {
         public function render(\Symfony\Component\HttpKernel\Controller\ControllerReference|string $uri, Request $request, array $options = []): \Symfony\Component\HttpFoundation\Response
         {
             if (\is_string($uri)) {
-                $uri = str_replace($this->urlGenerator->getContext()->getBaseUrl(), '', $uri);
+                $uri = rtrim(str_replace($this->urlGenerator->getContext()->getBaseUrl(), '', $uri), '/');
             }
 
             return $this->fragmentRenderer->render($uri, $request, $options);
