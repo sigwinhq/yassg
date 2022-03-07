@@ -56,6 +56,11 @@ final class LocalizingNormalizer implements CacheableSupportsMethodInterface, Co
             }
 
             foreach ($this->classes[$type] as $property) {
+                if (isset($data[$property]) === false) {
+                    // property not set or set to null
+                    continue;
+                }
+
                 $data[$property] = $data[$property][$locale] ?? $data[$property][$defaultLocale] ?? throw new \RuntimeException('Invalid localized property value '.$property);
             }
         }
