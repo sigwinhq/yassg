@@ -73,6 +73,21 @@ services:
     sigwin_yassg.fragment.renderer.inline:
         class: Sigwin\YASSG\Bridge\Symfony\HttpKernel\Fragment\RelativeUrlInlineFragmentRenderer
         decorates: fragment.renderer.inline
+        
+    sigwin_yassg.file_decoder.caching_file_decoder:
+        class: Sigwin\YASSG\Decoder\CachingFileDecoder
+        decorates: 'Sigwin\YASSG\FileDecoder' 
+        
+    Sigwin\YASSG\FileDecoder:
+        class: Sigwin\YASSG\Decoder\CompositeFileDecoder
+        arguments:
+            $decoders: !tagged { tag: 'sigwin_yassg.file_decoder' } 
+        
+    sigwin_yassg.file_decoder.yaml_file_decoder:
+        class: Sigwin\YASSG\Decoder\YamlFileDecoder
+        tags:
+            -
+                name: sigwin_yassg.file_decoder
 
 when@prod:
     services:
