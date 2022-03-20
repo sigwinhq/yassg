@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sigwin\YASSG\Storage;
 
+use Sigwin\YASSG\Context\LocaleContext;
 use Sigwin\YASSG\Exception\UnexpectedAttributeException;
 use Sigwin\YASSG\Storage;
 use Symfony\Component\Serializer\Exception\ExtraAttributesException;
@@ -25,6 +26,7 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 final class DenormalizingStorage implements Storage
 {
     private DenormalizerInterface $denormalizer;
+
     /**
      * @var Storage<T>
      */
@@ -33,16 +35,23 @@ final class DenormalizingStorage implements Storage
      * @var class-string<T>
      */
     private string $class;
+    private LocaleContext $context;
+
+    /**
+     * @var array<string, array<string, array<string, T>>>
+     */
+    private array $cache = [];
 
     /**
      * @param Storage<T>      $storage
      * @param class-string<T> $class
      */
-    public function __construct(DenormalizerInterface $denormalizer, Storage $storage, string $class)
+    public function __construct(DenormalizerInterface $denormalizer, Storage $storage, string $class, LocaleContext $context)
     {
         $this->denormalizer = $denormalizer;
         $this->storage = $storage;
         $this->class = $class;
+        $this->context = $context;
     }
 
     /**
@@ -50,13 +59,21 @@ final class DenormalizingStorage implements Storage
      */
     public function load(): iterable
     {
+        $context = $this->context->getLocale();
+        $locale = $context[LocaleContext::LOCALE];
+
         foreach ($this->storage->load() as $id => $item) {
-            if (\is_object($item)) {
-                yield $id => $item;
+            if (isset($this->cache[$this->class][$locale][$id])) {
+                yield $id => $this->cache[$this->class][$locale][$id];
+
                 continue;
             }
 
-            yield $id => $this->denormalize($id, $item);
+            if (\is_object($item) === false) {
+                $this->cache[$this->class][$locale][$id] = $this->denormalize($id, $item, $context);
+            }
+
+            yield $id => $this->cache[$this->class][$locale][$id];
         }
     }
 
@@ -65,21 +82,28 @@ final class DenormalizingStorage implements Storage
      */
     public function get(string $id): object
     {
-        $item = $this->storage->get($id);
-        if (\is_object($item)) {
-            return $item;
+        $context = $this->context->getLocale();
+        $locale = $context[LocaleContext::LOCALE];
+
+        if (isset($this->cache[$this->class][$locale][$id])) {
+            return $this->cache[$this->class][$locale][$id];
         }
 
-        return $this->denormalize($id, $item);
+        $item = $this->storage->get($id);
+        if (\is_object($item) === false) {
+            $this->cache[$this->class][$locale][$id] = $this->denormalize($id, $item, $context);
+        }
+
+        return $this->cache[$this->class][$locale][$id];
     }
 
     /**
      * @return T
      */
-    private function denormalize(string $id, array $data): object
+    private function denormalize(string $id, array $data, array $context): object
     {
         try {
-            return $this->denormalizer->denormalize($data, $this->class, null, [
+            return $this->denormalizer->denormalize($data, $this->class, null, $context + [
                 AbstractNormalizer::ALLOW_EXTRA_ATTRIBUTES => false,
             ]);
         } catch (ExtraAttributesException $extraAttributesException) {
