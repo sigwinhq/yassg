@@ -29,6 +29,15 @@ final class Product
      */
     public Collection $categories;
 
+    public function getName(): string
+    {
+        if ($this->name === 'Please throw an RuntimeException') {
+            throw new \LogicException('Product not properly overridden');
+        }
+
+        return $this->name;
+    }
+
     public function getCategory(): ?Category
     {
         $category = current($this->categories);

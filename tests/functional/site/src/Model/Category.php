@@ -27,4 +27,13 @@ final class Category
     {
         return mt_rand();
     }
+
+    public function getDescription(): ?string
+    {
+        if ($this->description === 'Please throw an RuntimeException') {
+            throw new \LogicException('Category not properly overridden');
+        }
+
+        return $this->description;
+    }
 }
