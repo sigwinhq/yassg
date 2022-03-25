@@ -45,12 +45,12 @@ final class Generator
         $indexFile = (bool) ($this->urlGenerator->getContext()->getParameter('index-file') ?? false);
 
         foreach ($this->permutator->permute() as $routeName => $parameters) {
-            $this->dumpFile($callable, $this->urlGenerator->generate($routeName, $parameters + ($indexFile ? ['_filename' => 'index.html'] : []), UrlGeneratorInterface::RELATIVE_PATH), ! $indexFile);
+            $this->dumpFile($callable, $this->urlGenerator->generate($routeName, $parameters + ($indexFile ? ['_filename' => 'index.html'] : []), UrlGeneratorInterface::RELATIVE_PATH));
         }
-        $this->dumpFile($callable, '/404.html', false, 404);
+        $this->dumpFile($callable, '/404.html', 404);
     }
 
-    private function dumpFile(callable $callable, string $url, bool $doesNotHaveIndexFile, int $expectedStatusCode = 200): void
+    private function dumpFile(callable $callable, string $url, int $expectedStatusCode = 200): void
     {
         $request = Request::create(rtrim($url, '/'));
         try {
@@ -68,7 +68,10 @@ final class Generator
         if ($body === false) {
             throw new \RuntimeException('No body in response');
         }
-        $path = $this->buildDir.$request->getPathInfo().($doesNotHaveIndexFile ? '/index.html' : '');
+        $path = $this->buildDir.$request->getPathInfo();
+        if (mb_strpos(basename($path), '.') === false) {
+            $path .= '/index.html';
+        }
 
         $this->filesystem->dumpFile($path, $body);
 

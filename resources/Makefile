@@ -5,7 +5,7 @@ start/dev: dev
 dev: clean
 	@make dev/assets dev/server -j2
 dev/server: vendor index.php
-	php -S localhost:${APP_PORT}
+	symfony server:start --no-tls --document-root=. --port=${APP_PORT}
 dev/assets: node_modules
 	node_modules/.bin/encore dev-server
 index.php:
