@@ -3,4 +3,7 @@ name:
     de: Kategorie 1
     en: Category 1
     hr: Kategorija 1
-description: ~
+description:
+    de: Please throw an RuntimeException
+    en: Please throw an RuntimeException
+    hr: Please throw an RuntimeException

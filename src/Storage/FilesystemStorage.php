@@ -21,13 +21,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 final class FilesystemStorage implements StorageWithOptions
 {
     private FileDecoder $decoder;
-    private string $root;
+    private array $roots;
     private Finder $finder;
 
-    public function __construct(FileDecoder $decoder, string $root, ?array $names = null)
+    public function __construct(FileDecoder $decoder, array $root, ?array $names = null)
     {
         $this->decoder = $decoder;
-        $this->root = rtrim($root, \DIRECTORY_SEPARATOR);
+        $this->roots = array_map(static fn (string $path): string => rtrim($path, \DIRECTORY_SEPARATOR), $root);
         $this->finder = new Finder();
         $this->finder
             ->files()
@@ -40,17 +40,31 @@ final class FilesystemStorage implements StorageWithOptions
 
     public function load(): iterable
     {
+        $ids = [];
         foreach ($this->finder as $file) {
             /** @var string $path */
             $path = $file->getRealPath();
 
-            yield str_replace($this->root, '', $path) => $this->decode($file);
+            $id = str_replace($this->roots, '', $path);
+            if (isset($ids[$id])) {
+                continue;
+            }
+            $ids[$id] = true;
+
+            yield $id => $this->decode($file);
         }
     }
 
     public function get(string $id): array
     {
-        return $this->decode(new \SplFileObject($this->root.$id));
+        foreach ($this->roots as $root) {
+            $path = $root.$id;
+            if (file_exists($path)) {
+                return $this->decode(new \SplFileObject($path));
+            }
+        }
+
+        throw new \RuntimeException('No such file');
     }
 
     public static function resolveOptions(array $options): array
@@ -58,8 +72,16 @@ final class FilesystemStorage implements StorageWithOptions
         $resolver = new OptionsResolver();
         $resolver->setDefined(['root', 'names']);
         $resolver->setRequired(['root']);
-        $resolver->setAllowedTypes('root', 'string');
+        $resolver->setAllowedTypes('root', ['array', 'string']);
         $resolver->setAllowedTypes('names', ['array', 'string']);
+        /** @psalm-suppress UnusedClosureParam */
+        $resolver->setNormalizer('root', static function (OptionsResolver $resolver, array|string $value): array {
+            if (\is_string($value)) {
+                $value = [$value];
+            }
+
+            return $value;
+        });
 
         return $resolver->resolve($options);
     }

@@ -4,14 +4,18 @@ sigwin_yassg:
             class: Sigwin\YASSG\Test\Functional\Site\Model\Product
             storage: filesystem
             options:
-                root: "%sigwin_yassg.base_dir%/content/products"
+                root:
+                    - "%sigwin_yassg.base_dir%/content/overridden-products"
+                    - "%sigwin_yassg.base_dir%/content/products"
                 names:
                     - "*.yaml"
         categories:
             class: Sigwin\YASSG\Test\Functional\Site\Model\Category
             storage: filesystem
             options:
-                root: "%sigwin_yassg.base_dir%/content/categories"
+                root:
+                    - "%sigwin_yassg.base_dir%/content/overridden-categories"
+                    - "%sigwin_yassg.base_dir%/content/categories"
                 names:
                     - "*.yaml"
         locale:
