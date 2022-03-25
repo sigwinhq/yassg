@@ -18,7 +18,7 @@ use Symfony\Component\Routing\RequestContext;
 
 final class FilenameUrlGenerator implements UrlGeneratorInterface
 {
-    public function __construct(private UrlGeneratorInterface $urlGenerator, private array $stripParameters)
+    public function __construct(private UrlGeneratorInterface $urlGenerator, private array $stripParameters, private array $routes)
     {
     }
 
@@ -28,7 +28,9 @@ final class FilenameUrlGenerator implements UrlGeneratorInterface
 
         /** @var bool $indexFile */
         $indexFile = $this->getContext()->getParameter('index-file') ?? false;
-        if ($indexFile === true) {
+        if (mb_strpos($this->routes[$name]['path'], '.') !== false) {
+            $parameters['_filename'] = null;
+        } elseif ($indexFile === true) {
             $parameters += ['_filename' => 'index.html'];
         }
 

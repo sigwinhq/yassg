@@ -96,6 +96,7 @@ when@prod:
             arguments:
                 $stripParameters: '%sigwin_yassg.routes.strip_parameters%'
                 $urlGenerator: '@Sigwin\YASSG\Bridge\Symfony\Routing\Generator\FilenameUrlGenerator.inner'
+                $routes: "%sigwin_yassg.routes%"
 
         twig.extension.routing:
             class: Symfony\Bridge\Twig\Extension\RoutingExtension
