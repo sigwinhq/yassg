@@ -27,11 +27,18 @@ final class FilesystemStorage implements StorageWithOptions
     public function __construct(FileDecoder $decoder, array $root, ?array $names = null)
     {
         $this->decoder = $decoder;
-        $this->roots = array_map(static fn (string $path): string => rtrim($path, \DIRECTORY_SEPARATOR), $root);
+        $this->roots = array_map(static function (string $path): string {
+            $realpath = realpath($path);
+            if (false === $realpath) {
+                throw new \InvalidArgumentException(sprintf('The path "%s" does not exist.', $path));
+            }
+
+            return $realpath;
+        }, $root);
         $this->finder = new Finder();
         $this->finder
             ->files()
-            ->in($root);
+            ->in($this->roots);
 
         if ($names !== null) {
             $this->finder->name($names);
