@@ -1,0 +1,12 @@
+services:
+    _defaults:
+        autoconfigure: true
+        autowire: true
+
+    Sigwin\YASSG\Test\Functional\Site\:
+        resource: ../src
+
+    Sigwin\YASSG\Test\Functional\Site\Controller\:
+        resource: ../src/Controller
+        tags:
+            - { name: controller.service_controller }

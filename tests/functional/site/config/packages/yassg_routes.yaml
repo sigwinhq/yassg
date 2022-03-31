@@ -12,3 +12,9 @@ sigwin_yassg:
             catalog:
                 # map results as a property
                 slug: "yassg_find_all('products').slug"
+        product_renderer:
+            path: /{_locale}/_product_renderer/{slug}
+            defaults:
+                _controller: Sigwin\YASSG\Test\Functional\Site\Controller\TestController::indexAction
+            options:
+                skip: true

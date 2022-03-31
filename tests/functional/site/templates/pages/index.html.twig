@@ -5,15 +5,21 @@
 {% block body %}
     <main class="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-xl">
-            <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-                <h1>Home</h1>
+            <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 prose">
+                <h1>Index</h1>
                 
-                <ul>
+                <dl>
+                {% set last_route = null %}
                 {% for route, params in yassg_index() %}
+                    {% if last_route is not same as(route) %}
+                        <dt>{{ route }}</dt>
+                    {% endif %}
+                    {% set last_route = route %}
+                    
                     {% set path = path(route, params) %}
-                    <li><a href="{{ path }}">{{ path }}</a></li>
+                    <dd><a href="{{ path }}">{{ path }}</a></dd>
                 {% endfor %}
-                </ul>
+                </dl>
             </div>
         </div>
     </main>
