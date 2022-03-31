@@ -8,16 +8,26 @@
 {% block body %}
     <main class="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-xl">
-            <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+            <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 prose">
                 <h1>{{ product.name }}</h1>
-                <h1>{{ product.getName() }}</h1>
+                
+                <h2>{{ product.getName() }}</h2>
+                
+                <h3>Render via <code>controller()</code></h3>
+                <code>{{ render(controller('Sigwin\\YASSG\\Test\\Functional\\Site\\Controller\\TestController::indexAction')) }}</code>
 
+                <h3>Render via <code>url()</code></h3>
+                <code>{{ render(url('product_renderer', {slug})) }}</code>
+
+                {% if product.categories.count %}
+                <h2>Categories</h2>
                 <dl>
                     {% for category in product.categories %}
-                        <dt>{{ category.name }}</dt>
-                        <dd>{{ category.random() }}</dd>
+                        <dt><strong>Category:</strong> {{ category.name }}</dt>
+                        <dd><strong>Random:</strong> {{ category.random() }}</dd>
                     {% endfor %}
                 </dl>
+                {% endif %}
             </div>
         </div>
     </main>
