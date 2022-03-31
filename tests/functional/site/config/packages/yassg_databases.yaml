@@ -14,7 +14,8 @@ sigwin_yassg:
             storage: filesystem
             options:
                 root:
-                    - "%sigwin_yassg.base_dir%/content/overridden-categories"
+                    # relative on purpose
+                    - content/overridden-categories
                     - "%sigwin_yassg.base_dir%/content/categories"
                 names:
                     - "*.yaml"
