@@ -70,6 +70,8 @@ final class DenormalizingStorage implements Storage
             }
 
             if (\is_object($item) === false) {
+                // this avoids issues with circular references
+                $this->cache[$this->class][$locale][$id] = new $this->class();
                 $this->cache[$this->class][$locale][$id] = $this->denormalize($id, $item, $context);
             }
 
