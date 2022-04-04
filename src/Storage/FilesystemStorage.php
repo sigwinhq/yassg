@@ -71,7 +71,7 @@ final class FilesystemStorage implements StorageWithOptions
             }
         }
 
-        throw new \RuntimeException('No such file');
+        throw new \RuntimeException(sprintf('Failed to open stream: No such file: %1$s', $id));
     }
 
     public static function resolveOptions(array $options): array
