@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sigwin\YASSG\Test\Functional\Site\Model;
 
 use Sigwin\YASSG\Bridge\Attribute\Localized;
+use Sigwin\YASSG\Collection;
 
 final class Category
 {
@@ -22,6 +23,9 @@ final class Category
     public string $name;
     #[Localized]
     public ?string $description;
+
+    /** @var Collection<string, Product> */
+    public Collection $products;
 
     public function random(): int
     {

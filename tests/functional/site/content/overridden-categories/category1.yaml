@@ -7,3 +7,6 @@ description:
     de: Bezeichnung 1
     en: Description 1
     hr: Opis 1
+products:
+    - '@=yassg_get("products", "/test1.en.yaml")'
+    - '@=yassg_get("products", "/test2.en.yaml")'
