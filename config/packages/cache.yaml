@@ -1,3 +1,8 @@
 framework:
     cache:
-        app: cache.adapter.array
+        app: cache.pool.database
+        pools:
+            cache.pool.database:
+                adapters:
+                    - cache.adapter.array
+                    - cache.adapter.filesystem
