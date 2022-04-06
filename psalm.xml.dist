@@ -34,6 +34,11 @@
                 <directory name="tests/"/>
             </errorLevel>
         </PropertyNotSetInConstructor>
+        <UnusedForeachValue>
+            <errorLevel type="suppress">
+                <file name="src/Database/CachingDatabase.php"/>
+            </errorLevel>
+        </UnusedForeachValue>
         
         <!-- false positives -->
         <UnresolvableInclude>

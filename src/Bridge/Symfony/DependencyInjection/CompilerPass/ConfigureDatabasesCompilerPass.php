@@ -114,6 +114,16 @@ final class ConfigureDatabasesCompilerPass implements CompilerPassInterface
             $container->setDefinition($databaseId, $databaseDefinition);
             $container->setAlias(sprintf('%1$s $%2$s', Database::class, $name), $databaseId);
 
+            $cachingDatabaseDefinition = new Definition(\Sigwin\YASSG\Database\CachingDatabase::class);
+            $cachingDatabaseDefinition
+                ->setArgument(0, $name)
+                ->setArgument(4, new Reference('sigwin_yassg.expression_language'))
+                ->setArgument(5, $this->getProperties($databaseClass))
+                ->setAutowired(true)
+                ->setAutoconfigured(true)
+                ->setDecoratedService($databaseId);
+            $container->setDefinition(sprintf('sigwin_yassg.database.cached.%1$s', $name), $cachingDatabaseDefinition);
+
             $localizableProperties = $this->getLocalizableProperties($databaseClass);
             if ($localizableProperties !== []) {
                 $localizableClasses[$databaseClass] = $localizableProperties;
