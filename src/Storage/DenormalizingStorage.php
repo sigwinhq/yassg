@@ -63,19 +63,7 @@ final class DenormalizingStorage implements Storage
         $locale = $context[LocaleContext::LOCALE];
 
         foreach ($this->storage->load() as $id => $item) {
-            if (isset($this->cache[$this->class][$locale][$id])) {
-                yield $id => $this->cache[$this->class][$locale][$id];
-
-                continue;
-            }
-
-            if (\is_object($item) === false) {
-                // this avoids issues with circular references
-                $this->cache[$this->class][$locale][$id] = new $this->class();
-                $this->cache[$this->class][$locale][$id] = $this->denormalize($id, $item, $context);
-            }
-
-            yield $id => $this->cache[$this->class][$locale][$id];
+            yield $id => $this->fetch($locale, $id, $item, $context);
         }
     }
 
@@ -92,8 +80,31 @@ final class DenormalizingStorage implements Storage
         }
 
         $item = $this->storage->get($id);
+
+        return $this->fetch($locale, $id, $item, $context);
+    }
+
+    /**
+     * @param array|T $item
+     *
+     * @return T
+     */
+    private function fetch(string $locale, string $id, array|object $item, array $context): object
+    {
+        if (isset($this->cache[$this->class][$locale][$id])) {
+            return $this->cache[$this->class][$locale][$id];
+        }
+
         if (\is_object($item) === false) {
-            $this->cache[$this->class][$locale][$id] = $this->denormalize($id, $item, $context);
+            try {
+                // this avoids issues with circular references
+                $this->cache[$this->class][$locale][$id] = new $this->class();
+                $this->cache[$this->class][$locale][$id] = $this->denormalize($id, $item, $context);
+            } catch (ExtraAttributesException $extraAttributesException) {
+                throw UnexpectedAttributeException::newSelf($id, $extraAttributesException->getMessage());
+            }
+        } else {
+            $this->cache[$this->class][$locale][$id] = $item;
         }
 
         return $this->cache[$this->class][$locale][$id];
