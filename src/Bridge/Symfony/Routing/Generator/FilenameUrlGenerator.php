@@ -40,7 +40,7 @@ final class FilenameUrlGenerator implements UrlGeneratorInterface
         }
 
         // add a trailing slash if no file is in the URL
-        $url .= ($indexFile === false && str_ends_with($url, '/') === false) ? '/' : '';
+        $url .= (str_contains(basename($url), '.') === false && str_ends_with($url, '/') === false) ? '/' : '';
 
         return $url;
     }

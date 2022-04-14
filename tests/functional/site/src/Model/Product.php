@@ -23,6 +23,7 @@ final class Product
     #[Localized]
     public string $slug;
     public int $index;
+    public ?string $file = null;
 
     /**
      * @var Collection<string, Category>

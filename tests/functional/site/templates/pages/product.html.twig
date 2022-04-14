@@ -28,6 +28,11 @@
                     {% endfor %}
                 </dl>
                 {% endif %}
+                
+                {% if product.file %}
+                <h2>Download</h2>
+                <p><a href="{{ url('file', {file: product.file}) }}">Download</a></p>
+                {% endif %}
             </div>
         </div>
     </main>
