@@ -96,6 +96,17 @@ services:
         tags:
             -
                 name: sigwin_yassg.file_decoder
+                
+    League\CommonMark\CommonMarkConverter: ~
+    League\CommonMark\ConverterInterface: '@League\CommonMark\CommonMarkConverter'
+    sigwin_yassg.file_decoder.markdown_file_decoder:
+        class: Sigwin\YASSG\Decoder\MarkdownFileDecoder
+        arguments:
+            - '@League\CommonMark\ConverterInterface' 
+        tags:
+            -
+                name: sigwin_yassg.file_decoder
+
 
     Symfony\Component\Config\FileLocatorInterface: '@file_locator'
 
