@@ -93,4 +93,9 @@ final class CachingDatabase implements Database
     {
         return $this->database->get($id);
     }
+
+    public function has(string $id): bool
+    {
+        return $this->database->has($id);
+    }
 }

@@ -84,6 +84,11 @@ final class DenormalizingStorage implements Storage
         return $this->fetch($locale, $id, $item, $context);
     }
 
+    public function has(string $id): bool
+    {
+        return $this->storage->has($id);
+    }
+
     /**
      * @param array|T $item
      *
