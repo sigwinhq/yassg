@@ -10,3 +10,4 @@ index: 2
 categories:
     - '@=yassg_get("categories", "/category1.yaml")'
     - '@=yassg_get("categories", "/category1.yaml")'
+file: something_else

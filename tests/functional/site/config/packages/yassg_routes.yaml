@@ -2,6 +2,12 @@ sigwin_yassg:
     routes:
         index:
             path: /
+        file:
+            path: /download/{file}.json
+            defaults:
+                _controller: Sigwin\YASSG\Test\Functional\Site\Controller\TestController::jsonAction
+            catalog:
+                file: "['something', 'something_else']"
         homepage:
             path: /{_locale}
             catalog:

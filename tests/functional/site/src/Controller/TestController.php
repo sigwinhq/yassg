@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sigwin\YASSG\Test\Functional\Site\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 final class TestController extends AbstractController
@@ -21,5 +22,10 @@ final class TestController extends AbstractController
     public function indexAction(): Response
     {
         return new Response(__METHOD__);
+    }
+
+    public function jsonAction(string $file): JsonResponse
+    {
+        return new JsonResponse(['file' => $file, 'rot13' => str_rot13($file)]);
     }
 }
