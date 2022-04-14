@@ -91,6 +91,11 @@ final class MemoryDatabase implements Database
         return $item;
     }
 
+    public function has(string $id): bool
+    {
+        return $this->storage->has($id);
+    }
+
     private function load(?string $condition, callable $callable): void
     {
         $conditionExpression = null;

@@ -48,6 +48,15 @@ final class MemoryStorage implements StorageWithOptions
 
     public function get(string $id): array
     {
+        if ($this->has($id) === false) {
+            throw new \InvalidArgumentException(sprintf('No value with id "%s" found.', $id));
+        }
+
         return $this->values[$id];
+    }
+
+    public function has(string $id): bool
+    {
+        return \array_key_exists($id, $this->values);
     }
 }

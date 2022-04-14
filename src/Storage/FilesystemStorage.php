@@ -74,6 +74,17 @@ final class FilesystemStorage implements StorageWithOptions
         throw new \RuntimeException(sprintf('Failed to open stream: No such file: %1$s', $id));
     }
 
+    public function has(string $id): bool
+    {
+        foreach ($this->roots as $root) {
+            if (file_exists($root.$id)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public static function resolveOptions(array $options): array
     {
         $resolver = new OptionsResolver();
