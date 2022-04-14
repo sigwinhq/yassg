@@ -46,7 +46,7 @@ trait DatabaseTrait
         $result = $this->findOneOrNull($condition, $sort, $select);
 
         if ($result === null) {
-            throw new NoResultException();
+            throw new NoResultException($condition);
         }
 
         return $result;

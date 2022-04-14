@@ -15,8 +15,12 @@ namespace Sigwin\YASSG\Exception;
 
 final class NoResultException extends \RuntimeException
 {
-    public function __construct()
+    public function __construct(?string $condition)
     {
-        parent::__construct('No result found');
+        if (null === $condition) {
+            parent::__construct('No result found');
+        } else {
+            parent::__construct(sprintf('No result found for condition "%s"', $condition));
+        }
     }
 }
