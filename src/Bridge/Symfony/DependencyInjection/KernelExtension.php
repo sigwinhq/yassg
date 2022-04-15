@@ -62,7 +62,7 @@ final class KernelExtension extends Extension implements PrependExtensionInterfa
         }
     }
 
-    public function getNamespace(): string
+    public function getAlias(): string
     {
         return 'sigwin_yassg';
     }

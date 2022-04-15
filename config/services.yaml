@@ -89,6 +89,8 @@ services:
             -
                 name: sigwin_yassg.file_decoder
 
+    Symfony\Component\Config\FileLocatorInterface: '@file_locator'
+
 when@prod:
     services:
         Sigwin\YASSG\Bridge\Symfony\Routing\Generator\FilenameUrlGenerator:

@@ -15,6 +15,7 @@ namespace Sigwin\YASSG\Storage;
 
 use Sigwin\YASSG\FileDecoder;
 use Sigwin\YASSG\StorageWithOptions;
+use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -24,10 +25,15 @@ final class FilesystemStorage implements StorageWithOptions
     private array $roots;
     private Finder $finder;
 
-    public function __construct(FileDecoder $decoder, array $root, ?array $names = null)
+    public function __construct(FileLocatorInterface $locator, FileDecoder $decoder, array $root, ?array $names = null)
     {
         $this->decoder = $decoder;
-        $this->roots = array_map(static function (string $path): string {
+        $this->roots = array_map(static function (string $path) use ($locator): string {
+            if (str_starts_with($path, '@')) {
+                /** @phpstan-ignore-next-line PHPStan thinks this is array|string, but only string is possible */
+                return $locator->locate($path);
+            }
+
             $realpath = realpath($path);
             if (false === $realpath) {
                 throw new \InvalidArgumentException(sprintf('The path "%s" does not exist.', $path));
