@@ -3,5 +3,3 @@
 !/tests/functional/init/vendor/sigwin/yassg/resources/Makefile
 /var/
 /vendor/
-/.php-cs-fixer.cache
-/.phpunit.result.cache

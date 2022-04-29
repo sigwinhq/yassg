@@ -79,6 +79,7 @@ trait DatabaseTrait
 
         $item = current(iterator_to_array($list));
 
+        /** @phpstan-ignore-next-line */
         return $item !== false ? $item : null;
     }
 

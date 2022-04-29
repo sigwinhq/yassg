@@ -5,6 +5,7 @@ on:
         branches:
             - "main"
 
+
 jobs:
     MutationTest:
         runs-on: ubuntu-latest
@@ -12,7 +13,7 @@ jobs:
             BUILD_ENV: ${{ matrix.php }}
         strategy:
             matrix:
-                php: [ "8.0" ]
+                php: [ "8.0", "8.1" ]
                 dependencies: [ lowest, highest ]
         steps:
             -
@@ -20,11 +21,15 @@ jobs:
             -
                 name: Composer install lowest dependencies
                 if: "matrix.dependencies == 'lowest'"
-                run: make composer-install-lowest
+                uses: docker://jakzal/phpqa:php${{ matrix.php }}-alpine
+                with:
+                    args: composer install --prefer-lowest
             -
                 name: Composer install highest dependencies
                 if: "matrix.dependencies == 'highest'"
-                run: make composer-install
+                uses: docker://jakzal/phpqa:php${{ matrix.php }}-alpine
+                with:
+                    args: composer install
             -
                 name: Tests with mutation
                 run: make test
@@ -34,7 +39,7 @@ jobs:
             BUILD_ENV: ${{ matrix.php }}
         strategy:
             matrix:
-                php: [ "8.0" ]
+                php: [ "8.0", "8.1" ]
                 dependencies: [ lowest, highest ]
         steps:
             -
@@ -42,11 +47,15 @@ jobs:
             -
                 name: Composer install lowest dependencies
                 if: "matrix.dependencies == 'lowest'"
-                run: make composer-install-lowest
+                uses: docker://jakzal/phpqa:php${{ matrix.php }}-alpine
+                with:
+                    args: composer install --prefer-lowest
             -
                 name: Composer install highest dependencies
                 if: "matrix.dependencies == 'highest'"
-                run: make composer-install
+                uses: docker://jakzal/phpqa:php${{ matrix.php }}-alpine
+                with:
+                    args: composer install
             -
                 name: Run code quality analysis
                 run: make check
@@ -57,7 +66,9 @@ jobs:
                 uses: actions/checkout@master
             -
                 name: Composer install dependencies
-                run: make composer-install
+                uses: docker://jakzal/phpqa:alpine
+                with:
+                    args: composer install
             -
                 name: Run build
                 working-directory: tests/functional/site
@@ -75,7 +86,9 @@ jobs:
                 uses: actions/checkout@master
             -
                 name: Composer install dependencies
-                run: make composer-install
+                uses: docker://jakzal/phpqa:alpine
+                with:
+                    args: composer install
             -
                 name: Run init
                 working-directory: tests/functional/init
@@ -90,12 +103,3 @@ jobs:
                 with:
                     fail: true
                     args: --verbose --offline --base ./tests/functional/init/public "./tests/functional/init/public/*.html" "./tests/functional/init/public/**/*.html"
-    DocumentationQualityAnalysis:
-        runs-on: ubuntu-latest
-        steps:
-            -
-                uses: actions/checkout@v1
-            -
-                name: Run documentation quality analysis
-                run: make docs
-
