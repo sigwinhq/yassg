@@ -10,7 +10,7 @@ jobs:
     MutationTest:
         runs-on: ubuntu-latest
         env:
-            BUILD_ENV: ${{ matrix.php }}
+            PHP_VERSION: ${{ matrix.php }}
         strategy:
             matrix:
                 php: [ "8.0", "8.1" ]
@@ -21,13 +21,13 @@ jobs:
             -
                 name: Composer install lowest dependencies
                 if: "matrix.dependencies == 'lowest'"
-                uses: docker://jakzal/phpqa:php${{ matrix.php }}-alpine
+                uses: docker://jakzal/phpqa:php${PHP_VERSION}-alpine
                 with:
                     args: composer install --prefer-lowest
             -
                 name: Composer install highest dependencies
                 if: "matrix.dependencies == 'highest'"
-                uses: docker://jakzal/phpqa:php${{ matrix.php }}-alpine
+                uses: docker://jakzal/phpqa:php${PHP_VERSION}-alpine
                 with:
                     args: composer install
             -
@@ -36,7 +36,7 @@ jobs:
     CodeQualityAnalysis:
         runs-on: ubuntu-latest
         env:
-            BUILD_ENV: ${{ matrix.php }}
+            PHP_VERSION: ${{ matrix.php }}
         strategy:
             matrix:
                 php: [ "8.0", "8.1" ]
@@ -47,13 +47,13 @@ jobs:
             -
                 name: Composer install lowest dependencies
                 if: "matrix.dependencies == 'lowest'"
-                uses: docker://jakzal/phpqa:php${{ matrix.php }}-alpine
+                uses: docker://jakzal/phpqa:php${PHP_VERSION}-alpine
                 with:
                     args: composer install --prefer-lowest
             -
                 name: Composer install highest dependencies
                 if: "matrix.dependencies == 'highest'"
-                uses: docker://jakzal/phpqa:php${{ matrix.php }}-alpine
+                uses: docker://jakzal/phpqa:php${PHP_VERSION}-alpine
                 with:
                     args: composer install
             -
