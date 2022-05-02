@@ -26,14 +26,6 @@ jobs:
                 with:
                     dependency-versions: "${{ matrix.dependencies }}"
             -
-                name: Composer install lowest dependencies
-                if: "matrix.dependencies == 'lowest'"
-                run: composer update --prefer-lowest
-            -
-                name: Composer install highest dependencies
-                if: "matrix.dependencies == 'highest'"
-                run: composer update
-            -
                 name: Tests with mutation
                 run: make test/infection
     CodeQualityAnalysis:
@@ -56,14 +48,6 @@ jobs:
                 uses: "ramsey/composer-install@v2"
                 with:
                     dependency-versions: "${{ matrix.dependencies }}"
-            -
-                name: Composer install lowest dependencies
-                if: "matrix.dependencies == 'lowest'"
-                run: composer update --prefer-lowest
-            -
-                name: Composer install highest dependencies
-                if: "matrix.dependencies == 'highest'"
-                run: composer update
             -
                 name: Run code quality analysis
                 run: make analyze
