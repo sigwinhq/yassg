@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <psalm xmlns="https://getpsalm.org/schema/config"
-       cacheDirectory="var/psalm"
+       cacheDirectory="var/phpqa/psalm"
        findUnusedPsalmSuppress="true"
        findUnusedVariablesAndParams="true">
     <projectFiles>
@@ -18,7 +18,7 @@
         <InternalMethod>
             <errorLevel type="info">
                 <file name="src/Bridge/Symfony/Serializer/AttributeMetadataTrait.php"/>
-            </errorLevel>            
+            </errorLevel>
         </InternalMethod>
         <MissingConstructor>
             <errorLevel type="info">
@@ -39,12 +39,12 @@
                 <file name="src/Database/CachingDatabase.php"/>
             </errorLevel>
         </UnusedForeachValue>
-        
+
         <!-- false positives -->
         <UnresolvableInclude>
             <errorLevel type="suppress">
                 <file name="src/Bridge/Symfony/Kernel.php"/>
-            </errorLevel>            
+            </errorLevel>
         </UnresolvableInclude>
         <PossiblyNullReference>
             <errorLevel type="suppress">
@@ -59,7 +59,7 @@
         <DuplicateClass>
             <errorLevel type="suppress">
                 <file name="src/Bridge/Symfony/HttpKernel/Fragment/RelativeUrlInlineFragmentRenderer.php"/>
-            </errorLevel>            
+            </errorLevel>
         </DuplicateClass>
         <UndefinedDocblockClass>
             <errorLevel type="suppress">
@@ -71,5 +71,6 @@
 
     <plugins>
         <pluginClass class="Psalm\SymfonyPsalmPlugin\Plugin"/>
+        <pluginClass class="Psalm\PhpUnitPlugin\Plugin"/>
     </plugins>
 </psalm>

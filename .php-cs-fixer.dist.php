@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 $header = <<<'EOF'
 This file is part of the yassg project.
@@ -18,6 +18,7 @@ $finder = PhpCsFixer\Finder::create()
     ->in(__DIR__);
 
 return (new PhpCsFixer\Config())
+    ->setCacheFile(__DIR__.'/var/phpqa/php-cs-fixer.cache')
     ->setRiskyAllowed(true)
     ->setRules(
         [
@@ -60,7 +61,7 @@ return (new PhpCsFixer\Config())
             'phpdoc_to_comment' => false,
             'phpdoc_to_return_type' => true,
             'phpdoc_types_order' => [
-                'null_adjustment' => 'always_first'
+                'null_adjustment' => 'always_first',
             ],
             'php_unit_internal_class' => true,
             'random_api_migration' => true,
