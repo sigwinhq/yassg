@@ -15,10 +15,17 @@ jobs:
             matrix:
                 php: [ "8.0", "8.1" ]
                 dependencies: [ lowest, highest ]
-        container: docker://jakzal/phpqa:php${{ matrix.php }}-alpine
         steps:
             -
-                uses: actions/checkout@master
+                uses: "actions/checkout@v3"
+            -
+                uses: "shivammathur/setup-php@v2"
+                with:
+                    php-version: "${{ matrix.php }}"
+            -
+                uses: "ramsey/composer-install@v2"
+                with:
+                    dependency-versions: "${{ matrix.dependencies }}"
             -
                 name: Composer install lowest dependencies
                 if: "matrix.dependencies == 'lowest'"
@@ -41,7 +48,15 @@ jobs:
         container: docker://jakzal/phpqa:php${{ matrix.php }}-alpine
         steps:
             -
-                uses: actions/checkout@master
+                uses: "actions/checkout@v3"
+            -
+                uses: "shivammathur/setup-php@v2"
+                with:
+                    php-version: "${{ matrix.php }}"
+            -
+                uses: "ramsey/composer-install@v2"
+                with:
+                    dependency-versions: "${{ matrix.dependencies }}"
             -
                 name: Composer install lowest dependencies
                 if: "matrix.dependencies == 'lowest'"
@@ -57,12 +72,13 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             -
-                uses: actions/checkout@master
+                uses: "actions/checkout@v3"
             -
-                name: Composer install dependencies
-                uses: docker://jakzal/phpqa:alpine
+                uses: "shivammathur/setup-php@v2"
                 with:
-                    args: composer update
+                    php-version: "${{ matrix.php }}"
+            -
+                uses: "ramsey/composer-install@v2"
             -
                 name: Run build
                 working-directory: tests/functional/site
@@ -77,12 +93,15 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             -
-                uses: actions/checkout@master
+                uses: "actions/checkout@v3"
             -
-                name: Composer install dependencies
-                uses: docker://jakzal/phpqa:alpine
+                uses: "shivammathur/setup-php@v2"
                 with:
-                    args: composer install
+                    php-version: "${{ matrix.php }}"
+            -
+                uses: "ramsey/composer-install@v2"
+                with:
+                    dependency-versions: "${{ matrix.dependencies }}"
             -
                 name: Run init
                 working-directory: tests/functional/init
