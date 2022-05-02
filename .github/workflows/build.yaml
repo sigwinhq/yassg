@@ -27,7 +27,7 @@ jobs:
                     dependency-versions: "${{ matrix.dependencies }}"
             -
                 name: Tests with mutation
-                run: make test/infection
+                run: make test
     CodeQualityAnalysis:
         runs-on: ubuntu-latest
         env:
