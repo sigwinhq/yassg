@@ -15,21 +15,18 @@ jobs:
             matrix:
                 php: [ "8.0", "8.1" ]
                 dependencies: [ lowest, highest ]
+        container: docker://jakzal/phpqa:php${PHP_VERSION}-alpine
         steps:
             -
                 uses: actions/checkout@master
             -
                 name: Composer install lowest dependencies
                 if: "matrix.dependencies == 'lowest'"
-                uses: docker://jakzal/phpqa:php${PHP_VERSION}-alpine
-                with:
-                    args: composer install --prefer-lowest
+                run: composer install --prefer-lowest
             -
                 name: Composer install highest dependencies
                 if: "matrix.dependencies == 'highest'"
-                uses: docker://jakzal/phpqa:php${PHP_VERSION}-alpine
-                with:
-                    args: composer install
+                run: composer install
             -
                 name: Tests with mutation
                 run: make test
@@ -41,21 +38,18 @@ jobs:
             matrix:
                 php: [ "8.0", "8.1" ]
                 dependencies: [ lowest, highest ]
+        container: docker://jakzal/phpqa:php${PHP_VERSION}-alpine
         steps:
             -
                 uses: actions/checkout@master
             -
                 name: Composer install lowest dependencies
                 if: "matrix.dependencies == 'lowest'"
-                uses: docker://jakzal/phpqa:php${PHP_VERSION}-alpine
-                with:
-                    args: composer install --prefer-lowest
+                run: composer install --prefer-lowest
             -
                 name: Composer install highest dependencies
                 if: "matrix.dependencies == 'highest'"
-                uses: docker://jakzal/phpqa:php${PHP_VERSION}-alpine
-                with:
-                    args: composer install
+                run: composer install
             -
                 name: Run code quality analysis
                 run: make check
