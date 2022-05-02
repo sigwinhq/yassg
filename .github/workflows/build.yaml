@@ -36,7 +36,6 @@ jobs:
             matrix:
                 php: [ "8.0" ]
                 dependencies: [ lowest, highest ]
-        container: docker://jakzal/phpqa:php${{ matrix.php }}-alpine
         steps:
             -
                 uses: "actions/checkout@v3"
