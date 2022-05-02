@@ -81,7 +81,7 @@ jobs:
             -
                 name: Run init
                 working-directory: tests/functional/init
-                run: make -f vendor/sigwin/yassg/resources/Makefile self/init
+                run: make -f ../default.mk self/init
             -
                 name: Run build
                 working-directory: tests/functional/init

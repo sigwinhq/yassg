@@ -1,3 +1,4 @@
+APP_ROOT=$(abspath $(patsubst %/,%,$(dir $(abspath $(lastword $(MAKEFILE_LIST))))))
 BUILD_DIR=public
 BASE_URL=https://example.com
 
