@@ -70,9 +70,8 @@ final class GenerateCommand extends Command
         $context->setParameter('index-file', $indexFile);
         $this->urlGenerator->setContext($context);
 
-        $this->generator->generate(static function (Request $request, Response $response, string $path) use ($style, $buildUrl): void {
-            // TODO: this looks like a bug in Symfony (?)
-            $style->writeln(str_replace('http://localhost', $buildUrl, $request->getUri()));
+        $this->generator->generate(static function (Request $request, Response $response, string $path) use ($style): void {
+            $style->writeln($request->getUri());
 
             if ($style->isDebug()) {
                 $style->info(sprintf('Response code: %1d$', $response->getStatusCode()));
