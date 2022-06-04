@@ -64,6 +64,10 @@ jobs:
                 working-directory: tests/functional/site
                 run: make self/build
             -
+                name: Test build
+                working-directory: tests/functional/site
+                run: make self/test
+            -
                 name: Link Checker
                 uses: lycheeverse/lychee-action@v1.2.0
                 with:
@@ -86,6 +90,10 @@ jobs:
                 name: Run build
                 working-directory: tests/functional/init
                 run: make self/build
+            -
+                name: Test build
+                working-directory: tests/functional/init
+                run: make self/test
             -
                 name: Link Checker
                 uses: lycheeverse/lychee-action@v1.2.0

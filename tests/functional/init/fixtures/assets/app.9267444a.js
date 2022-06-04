@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk=self.webpackChunk||[]).push([[143],{582:()=>{document.addEventListener("DOMContentLoaded",(()=>{console.log("DOM ready!")}))}},e=>{var n;n=582,e(e.s=n)}]);
