@@ -44,6 +44,7 @@ final class FilesystemStorage implements StorageWithOptions
         $this->finder = new Finder();
         $this->finder
             ->files()
+            ->sortByName()
             ->in($this->roots);
 
         if ($names !== null) {

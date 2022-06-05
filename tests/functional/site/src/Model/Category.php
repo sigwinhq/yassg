@@ -27,9 +27,9 @@ final class Category
     /** @var Collection<string, Product> */
     public Collection $products;
 
-    public function random(): int
+    public function method(): string
     {
-        return mt_rand();
+        return __METHOD__;
     }
 
     public function getDescription(): ?string

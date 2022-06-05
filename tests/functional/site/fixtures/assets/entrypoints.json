@@ -1,0 +1,18 @@
+{
+  "entrypoints": {
+    "app": {
+      "js": [
+        "/sub/dir/another/assets/runtime.4d1205b9.js",
+        "/sub/dir/another/assets/app.9267444a.js"
+      ],
+      "css": [
+        "/sub/dir/another/assets/app.2e773b84.css"
+      ]
+    }
+  },
+  "integrity": {
+    "/sub/dir/another/assets/runtime.4d1205b9.js": "sha384-J2jFm3DPgrcqyvls0fZlS51nUYgiBB+JLwWiU5v7vxEbLwKolmaHrRuz4BjP6qaE",
+    "/sub/dir/another/assets/app.9267444a.js": "sha384-WbAUi92ziCGFD1kGZRzpOP8Nxymnw5vXM3szOB1JmBrCU+MVGXBRReCttizXHDdI",
+    "/sub/dir/another/assets/app.2e773b84.css": "sha384-t56F6yDakn/jYRHL6uxVbMaf/JtnF0k7yEall1cerAGjo0kfE3W7foG5+n1Ynxd5"
+  }
+}
