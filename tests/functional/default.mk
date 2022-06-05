@@ -11,7 +11,7 @@ self/init: self/clean ## Self: init the app via yassg:init
 self/clean:
 	rm -rf ${BUILD_DIR}
 self/test:
-	diff --recursive --color fixtures/ public/
+	sh -c "${PHPQA_DOCKER_COMMAND} diff -r fixtures/ public/"
 self/check: self/build ## Self: check the build
 	lychee --verbose --offline --base ./${BUILD_DIR} ./${BUILD_DIR}
 self/serve: self/build ## Self: serve the build
