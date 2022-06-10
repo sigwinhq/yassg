@@ -18,6 +18,11 @@ sigwin_yassg:
             catalog:
                 # map results as a property
                 slug: "yassg_find_all('products').slug"
+        product_with_route_default:
+            path: /{_locale}/product_with_alias/{slug}
+            defaults:
+                slug: abcd
+                _controller: Sigwin\YASSG\Test\Functional\Site\Controller\TestController::indexAction
         product_renderer:
             path: /{_locale}/_product_renderer/{slug}
             defaults:
