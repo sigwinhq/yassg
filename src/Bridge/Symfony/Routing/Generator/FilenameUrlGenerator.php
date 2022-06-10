@@ -28,9 +28,9 @@ final class FilenameUrlGenerator implements UrlGeneratorInterface
 
         /** @var bool $indexFile */
         $indexFile = $this->getContext()->getParameter('index-file') ?? false;
-        if (mb_strpos($this->routes[$name]['path'], '.') !== false) {
+        if (str_contains($this->routes[$name]['path'], '.')) {
             $parameters['_filename'] = null;
-        } elseif ($indexFile === true) {
+        } else {
             $parameters += ['_filename' => 'index.html'];
         }
 
@@ -39,8 +39,9 @@ final class FilenameUrlGenerator implements UrlGeneratorInterface
             throw new \LogicException(sprintf('Query string found while generating route "%1$s", query strings are forbidden: %2$s', $name, $url));
         }
 
-        // add a trailing slash if no file is in the URL
-        $url .= (str_contains(basename($url), '.') === false && str_ends_with($url, '/') === false) ? '/' : '';
+        if ($indexFile === false && str_contains($this->routes[$name]['path'], '.') === false) {
+            $url = \dirname($url).'/';
+        }
 
         return $url;
     }
