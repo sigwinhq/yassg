@@ -33,20 +33,31 @@ final class ReadOnlyCollection implements Collection
         $this->data = $data;
     }
 
-    public function __get(string $name): array
+    public function __get(string $name): object
     {
-        return $this->map($name);
+        return $this->data[$name];
+    }
+
+    public function column(string $name): array
+    {
+        $expression = $this->expressionLanguage->parse($name, $this->names);
+
+        $values = [];
+        foreach ($this->data as $id => $item) {
+            $values[$id] = $this->expressionLanguage->evaluate($expression, (array) $item);
+        }
+
+        return $values;
     }
 
     public function offsetExists(mixed $offset): bool
     {
-        return isset($this->names[$offset]);
+        return isset($this->data[$offset]);
     }
 
-    /** @phpstan-ignore-next-line */
-    public function offsetGet(mixed $offset): array
+    public function offsetGet(mixed $offset): object
     {
-        return $this->map($offset);
+        return $this->data[$offset];
     }
 
     public function offsetSet(mixed $offset, mixed $value): void
@@ -67,17 +78,5 @@ final class ReadOnlyCollection implements Collection
     public function getIterator(): Traversable
     {
         return new \ArrayIterator($this->data);
-    }
-
-    private function map(string $name): array
-    {
-        $expression = $this->expressionLanguage->parse($name, $this->names);
-
-        $values = [];
-        foreach ($this->data as $id => $item) {
-            $values[$id] = $this->expressionLanguage->evaluate($expression, (array) $item);
-        }
-
-        return $values;
     }
 }

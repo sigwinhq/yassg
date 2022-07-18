@@ -3,7 +3,7 @@
 {# query the database #}
 {% set locales = yassg_find_all('locale', {sort: {'item.name': 'asc'}}) %}
 
-{% set products = yassg_find_all('products', {condition: '"category1" in item.categories.slug', sort: {'item.name': 'desc'}}) %}
+{% set products = yassg_find_all('products', {condition: '"category1" in item.categories.column("slug")', sort: {'item.name': 'desc'}}) %}
 
 {% set category1 = yassg_get('categories', '/category1.yaml') %}
 
@@ -16,7 +16,7 @@
         <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-xl">
             <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 prose">
                 <h1>Homepage</h1>
-                
+
                 <h2>Locales</h2>
                 <ul>
                     {% for locale in locales %}
@@ -26,7 +26,7 @@
                         </li>
                     {% endfor %}
                 </ul>
-                
+
                 <h2>Products linked to categories <code>slug: category1</code></h2>
                 <ul>
                     {% for product in products %}
@@ -35,15 +35,13 @@
                         </li>
                     {% endfor %}
                 </ul>
-                
+
                 <h2>Category via ID</h2>
                 <h3>{{ category1.name }}</h3>
-                <p>{{ category1.random() }}</p>
                 <p>{{ category1.getDescription() }}</p>
 
                 <h2>Category via slug</h2>
                 <h3>{{ category1_via_slug.name }}</h3>
-                <p>{{ category1_via_slug.random() }}</p>
                 <p>{{ category1_via_slug.getDescription() }}</p>
             </div>
         </div>

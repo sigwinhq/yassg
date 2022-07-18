@@ -12,16 +12,16 @@ sigwin_yassg:
             path: /{_locale}
             catalog:
                 # map results as an array
-                _locale: "yassg_find_all('locale')['isoCode']"
+                _locale: "yassg_find_all('locale').column('isoCode')"
         article:
-            path: /{_locale}/a/{slug}
+            path: /{_locale}/article/{slug}
             catalog:
-                slug: "yassg_find_all('articles').slug"
+                slug: "yassg_find_all('articles').column('slug')"
         product:
             path: /{_locale}/{slug}
             catalog:
                 # map results as a property
-                slug: "yassg_find_all('products').slug"
+                slug: "yassg_find_all('products').column('slug')"
         product_with_route_default:
             path: /{_locale}/product_with_alias/{slug}
             defaults:
