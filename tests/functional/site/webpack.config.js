@@ -19,6 +19,7 @@ Encore
         options.liveReload = true;
         options.hot = true;
         options.watchFiles = [
+            './content/**/*',
             './templates/**/*',
         ]
     })

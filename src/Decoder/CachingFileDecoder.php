@@ -37,7 +37,10 @@ final class CachingFileDecoder implements FileDecoder
         /** @var string $path */
         $path = $file->getRealPath();
 
-        $key = md5($path);
+        /** @var string $content */
+        $content = file_get_contents($path);
+
+        $key = md5($content);
 
         $item = $this->cachePoolItem->getItem($key);
         if ($item->isHit()) {

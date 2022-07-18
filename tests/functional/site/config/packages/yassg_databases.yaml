@@ -1,5 +1,13 @@
 sigwin_yassg:
     databases:
+        articles:
+            class: Sigwin\YASSG\Test\Functional\Site\Model\Article
+            storage: filesystem
+            options:
+                root:
+                    - "%sigwin_yassg.base_dir%/content/articles"
+                names:
+                    - "*.md"
         products:
             class: Sigwin\YASSG\Test\Functional\Site\Model\Product
             storage: filesystem

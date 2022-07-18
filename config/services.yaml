@@ -97,6 +97,35 @@ services:
             -
                 name: sigwin_yassg.file_decoder
 
+    League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension: ~
+    League\CommonMark\Extension\FrontMatter\FrontMatterExtension: ~
+
+    Spatie\CommonMarkHighlighter\FencedCodeRenderer: ~
+    Spatie\CommonMarkHighlighter\IndentedCodeRenderer: ~
+
+    League\CommonMark\Environment\Environment:
+        calls:
+            -
+                addExtension: [ '@League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension' ]
+            -
+                addExtension: [ '@League\CommonMark\Extension\FrontMatter\FrontMatterExtension' ]
+            -
+                addRenderer: [ League\CommonMark\Extension\CommonMark\Node\Block\FencedCode, '@Spatie\CommonMarkHighlighter\FencedCodeRenderer', 10 ]
+            -
+                addRenderer: [ League\CommonMark\Extension\CommonMark\Node\Block\IndentedCode, '@Spatie\CommonMarkHighlighter\IndentedCodeRenderer', 10 ]
+    League\CommonMark\Environment\EnvironmentInterface: '@League\CommonMark\Environment\Environment'
+
+    League\CommonMark\MarkdownConverter: ~
+    League\CommonMark\ConverterInterface: '@League\CommonMark\MarkdownConverter'
+    sigwin_yassg.file_decoder.markdown_file_decoder:
+        class: Sigwin\YASSG\Decoder\MarkdownFileDecoder
+        arguments:
+            - '@League\CommonMark\ConverterInterface'
+        tags:
+            -
+                name: sigwin_yassg.file_decoder
+
+
     Symfony\Component\Config\FileLocatorInterface: '@file_locator'
 
 when@prod:

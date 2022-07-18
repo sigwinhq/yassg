@@ -13,6 +13,10 @@ sigwin_yassg:
             catalog:
                 # map results as an array
                 _locale: "yassg_find_all('locale')['isoCode']"
+        article:
+            path: /{_locale}/a/{slug}
+            catalog:
+                slug: "yassg_find_all('articles').slug"
         product:
             path: /{_locale}/{slug}
             catalog:
