@@ -16,7 +16,6 @@ namespace Sigwin\YASSG;
 use Sigwin\YASSG\Bridge\Symfony\Routing\Request;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
@@ -47,15 +46,17 @@ final class Generator
         $indexFile = (bool) ($requestContext->getParameter('index-file') ?? false);
 
         foreach ($this->permutator->permute() as $routeName => $parameters) {
-            $this->dumpFile($callable, $this->urlGenerator->generate($routeName, $parameters + ($indexFile ? ['_filename' => 'index.html'] : []), UrlGeneratorInterface::ABSOLUTE_URL));
+            $url = $this->urlGenerator->generate($routeName, $parameters + ($indexFile ? ['_filename' => 'index.html'] : []), UrlGeneratorInterface::ABSOLUTE_URL);
+            $request = Request::create(rtrim($url, '/'))->withBaseUrl($requestContext->getBaseUrl());
+
+            $this->dumpFile($callable, $request);
         }
     }
 
-    private function dumpFile(callable $callable, string $url, int $expectedStatusCode = 200): void
+    private function dumpFile(callable $callable, Request $request, int $expectedStatusCode = 200): void
     {
-        $request = Request::create(rtrim($url, '/'))->withBaseUrl($this->urlGenerator->getContext()->getBaseUrl());
         try {
-            $response = $this->kernel->handle($request, HttpKernelInterface::MAIN_REQUEST, false);
+            $response = $this->kernel->handle($request);
         } catch (HttpException $exception) {
             throw $exception;
         }
