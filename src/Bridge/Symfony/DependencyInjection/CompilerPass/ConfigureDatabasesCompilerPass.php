@@ -64,7 +64,7 @@ final class ConfigureDatabasesCompilerPass implements CompilerPassInterface
         }
         $this->classMetadataFactory = $classMetadata;
 
-        /** @var array<string, array{storage: string, class: class-string, options?: array}> $configuredDatabases */
+        /** @var array<string, array{storage: string, class: class-string, page_limit: int<1, max>, options?: array}> $configuredDatabases */
         $configuredDatabases = $container->getParameter('sigwin_yassg.databases_spec');
         foreach ($configuredDatabases as $name => $database) {
             $type = $database['storage'];
@@ -109,6 +109,7 @@ final class ConfigureDatabasesCompilerPass implements CompilerPassInterface
                 ->setArgument(0, new Reference($storageId))
                 ->setArgument(1, new Reference('sigwin_yassg.expression_language'))
                 ->setArgument(2, $this->getProperties($databaseClass))
+                ->setArgument(3, $database['page_limit'])
                 ->addTag('sigwin_yassg.database', ['name' => $name]);
             $databaseId = sprintf('sigwin_yassg.database.%1$s', $name);
             $container->setDefinition($databaseId, $databaseDefinition);

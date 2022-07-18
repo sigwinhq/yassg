@@ -3,6 +3,7 @@ sigwin_yassg:
         articles:
             class: Sigwin\YASSG\Test\Functional\Site\Model\Article
             storage: filesystem
+            page_limit: 2
             options:
                 root:
                     - "%sigwin_yassg.base_dir%/content/articles"

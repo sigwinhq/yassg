@@ -36,6 +36,7 @@ final class CachingDatabase implements Database
         $this->localeContext = $localeContext;
         $this->expressionLanguage = $expressionLanguage;
         $this->names = $names;
+        $this->limit = $this->database->getPageLimit();
     }
 
     /**
@@ -76,7 +77,7 @@ final class CachingDatabase implements Database
                 $storage[$id] = $this->get($id);
             }
 
-            return $this->createCollection($storage);
+            return $this->createCollection($storage, $this->database->count($condition));
         }
 
         $collection = $this->database->findAll($condition, $sort, $limit, $offset, $select);

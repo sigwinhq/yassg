@@ -30,6 +30,16 @@ final class FunctionProvider implements ExpressionFunctionProviderInterface
 
                 return $provider->getDatabase($name)->findAll(...$arguments);
             }),
+            new ExpressionFunction('yassg_pages', static function (string $name): string {
+                return sprintf('$provider->getDatabase(%s)', $name);
+            }, static function (array $variables, string $name, ?string $condition = null, ?int $limit = null) {
+                /** @var DatabaseProvider $provider */
+                $provider = $variables['provider'];
+                $database = $provider->getDatabase($name);
+                $count = $database->count($condition);
+
+                return range(1, ceil($count / ($limit ?? $database->getPageLimit())));
+            }),
             new ExpressionFunction('yassg_get', static function (string $name): string {
                 return sprintf('$provider->getDatabase(%s)', $name);
             }, static function (array $variables, string $name, string $id) {

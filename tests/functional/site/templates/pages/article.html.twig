@@ -3,12 +3,14 @@
 {# query the database #}
 {% set article = yassg_find_one_by('articles', {condition: {'item.slug': slug}}) %}
 
-{% block title %}{{ article.slug }}{% endblock %}
+{% block title %}{{ article.title }}{% endblock %}
 
 {% block body %}
 <main class="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
     <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-xl">
         <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 prose">
+            <h1>{{ article.title }}</h1>
+            <p>{{ article.publishedAt|date('d.m.Y. H:i') }}</p>
             {{ article.body|raw }}
         </div>
     </div>

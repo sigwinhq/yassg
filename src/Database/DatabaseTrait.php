@@ -29,6 +29,19 @@ trait DatabaseTrait
     private array $names;
 
     /**
+     * @var int<1, max>
+     */
+    private int $limit;
+
+    /**
+     * @return int<1, max>
+     */
+    public function getPageLimit(): int
+    {
+        return $this->limit;
+    }
+
+    /**
      * @return int<0, max>
      */
     public function countBy(array $condition): int
@@ -99,8 +112,8 @@ trait DatabaseTrait
         return implode(' AND ', $condition);
     }
 
-    private function createCollection(array $storage): Collection
+    private function createCollection(array $storage, int $total): Collection
     {
-        return new Collection\ReadOnlyCollection($this->expressionLanguage, $this->names, $storage);
+        return new Collection\ReadOnlyCollection($this->expressionLanguage, $this->names, $storage, $total);
     }
 }

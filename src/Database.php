@@ -19,6 +19,11 @@ namespace Sigwin\YASSG;
 interface Database
 {
     /**
+     * @return int<1, max>
+     */
+    public function getPageLimit(): int;
+
+    /**
      * @return int<0, max>
      */
     public function count(?string $condition = null): int;
