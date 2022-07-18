@@ -38,6 +38,9 @@ final class CachingDatabase implements Database
         $this->names = $names;
     }
 
+    /**
+     * @return int<0, max>
+     */
     public function count(?string $condition = null): int
     {
         $locale = $this->localeContext->getLocale()[LocaleContext::LOCALE];
@@ -45,7 +48,7 @@ final class CachingDatabase implements Database
 
         $item = $this->cacheItemPool->getItem($cacheKey);
         if ($item->isHit()) {
-            /** @var int $count */
+            /** @var int<0, max> $count */
             $count = $item->get();
 
             return $count;

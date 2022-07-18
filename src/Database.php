@@ -18,8 +18,14 @@ namespace Sigwin\YASSG;
  */
 interface Database
 {
+    /**
+     * @return int<0, max>
+     */
     public function count(?string $condition = null): int;
 
+    /**
+     * @return int<0, max>
+     */
     public function countBy(array $condition): int;
 
     /**

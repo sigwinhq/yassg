@@ -28,6 +28,9 @@ trait DatabaseTrait
     private ExpressionLanguage $expressionLanguage;
     private array $names;
 
+    /**
+     * @return int<0, max>
+     */
     public function countBy(array $condition): int
     {
         return $this->count($this->conditionArrayToString($condition));
