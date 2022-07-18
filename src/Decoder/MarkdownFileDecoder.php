@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sigwin\YASSG\Decoder;
 
 use League\CommonMark\ConverterInterface;
+use League\CommonMark\Extension\FrontMatter\FrontMatterProviderInterface;
 use Sigwin\YASSG\FileDecoder;
 
 final class MarkdownFileDecoder implements FileDecoder
@@ -41,9 +42,14 @@ final class MarkdownFileDecoder implements FileDecoder
             throw new \RuntimeException('Failed to read file');
         }
 
-        return [
-            'slug' => 'abc',
-            'body' => $this->converter->convert($content)->getContent(),
-        ];
+        $result = $this->converter->convert($content);
+        $metadata = [];
+        if ($result instanceof FrontMatterProviderInterface) {
+            /** @var array<string, string> $metadata */
+            $metadata = $result->getFrontMatter();
+        }
+        $metadata['body'] = $result->getContent();
+
+        return $metadata;
     }
 }
