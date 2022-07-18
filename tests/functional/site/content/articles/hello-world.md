@@ -7,7 +7,7 @@ here I am, writing some Markdown.
 
 Fine.
 
-```php
+```php{4}
 class HelloWorld
 {
     public function __construct()
