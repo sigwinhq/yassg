@@ -17,6 +17,12 @@ sigwin_yassg:
             path: /{_locale}/article/{slug}
             catalog:
                 slug: "yassg_find_all('articles').column('slug')"
+        articles:
+            path: /{_locale}/articles/{page}
+            defaults:
+                page: 1
+            catalog:
+                page: "yassg_pages('articles', 'item.publishedAt.getTimestamp() <= 1658238497')"
         product:
             path: /{_locale}/{slug}
             catalog:

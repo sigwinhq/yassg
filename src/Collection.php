@@ -23,4 +23,6 @@ namespace Sigwin\YASSG;
 interface Collection extends \ArrayAccess, \Countable, \IteratorAggregate
 {
     public function column(string $name): array;
+
+    public function total(): int;
 }

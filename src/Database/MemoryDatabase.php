@@ -26,12 +26,14 @@ final class MemoryDatabase implements Database
 
     /**
      * @param array<string> $names
+     * @param int<1, max>   $limit
      */
-    public function __construct(Storage $storage, ExpressionLanguage $expressionLanguage, array $names)
+    public function __construct(Storage $storage, ExpressionLanguage $expressionLanguage, array $names, int $limit)
     {
         $this->storage = $storage;
         $this->expressionLanguage = $expressionLanguage;
         $this->names = $names;
+        $this->limit = $limit;
     }
 
     public function count(?string $condition = null): int
@@ -75,12 +77,13 @@ final class MemoryDatabase implements Database
             });
         }
 
+        $total = \count($storage);
         $storage = \array_slice($storage, $offset, $limit, true);
         if ($select !== null) {
             $storage = array_combine(array_keys($storage), array_column($storage, $select));
         }
 
-        return $this->createCollection($storage);
+        return $this->createCollection($storage, $total);
     }
 
     public function get(string $id): object

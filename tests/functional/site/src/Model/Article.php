@@ -13,8 +13,14 @@ declare(strict_types=1);
 
 namespace Sigwin\YASSG\Test\Functional\Site\Model;
 
+use Symfony\Component\Serializer\Annotation\Context;
+
 final class Article
 {
+    public string $title;
     public string $slug;
     public string $body;
+
+    #[Context(['datetime_format' => 'Y-m-d H:i:s'])]
+    public \DateTimeInterface $publishedAt;
 }

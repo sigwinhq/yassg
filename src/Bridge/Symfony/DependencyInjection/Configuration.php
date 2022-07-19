@@ -68,6 +68,11 @@ final class Configuration implements ConfigurationInterface
                             ->scalarNode('class')
                                 ->isRequired()
                             ->end()
+                            ->scalarNode('page_limit')
+                                ->defaultValue(20)
+                                ->cannotBeEmpty()
+                                ->info('How many items per page are by default used when paginating this database')
+                            ->end()
                             ->variableNode('options')
                                 // only with type: filesystem
                             ->end()
