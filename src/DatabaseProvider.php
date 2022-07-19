@@ -13,13 +13,13 @@ declare(strict_types=1);
 
 namespace Sigwin\YASSG;
 
-use Symfony\Component\DependencyInjection\ServiceLocator;
+use Psr\Container\ContainerInterface;
 
 final class DatabaseProvider
 {
-    private ServiceLocator $locator;
+    private ContainerInterface $locator;
 
-    public function __construct(ServiceLocator $locator)
+    public function __construct(ContainerInterface $locator)
     {
         $this->locator = $locator;
     }

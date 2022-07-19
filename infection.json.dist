@@ -12,6 +12,9 @@
     "mutators": {
         "@default": true,
         "IdenticalEqual": false,
-        "NotIdenticalNotEqual": false
+        "NotIdenticalNotEqual": false,
+        "UnwrapRtrim": false,
+        "CastBool": false,
+        "MBString": false
     }
 }
