@@ -49,7 +49,8 @@ final class InitCommand extends Command
             ->addOption('namespace', null, InputOption::VALUE_OPTIONAL, 'Namespace to setup the customization support for', 'App')
             ->addOption(self::SOURCE_DEMO, null, InputOption::VALUE_NONE, 'Generate the demo site showcasing most common use cases')
             // ->addOption(self::SOURCE_GITHUB, null, InputOption::VALUE_NONE, 'Generate Github Actions / Github Pages support')
-            ->addOption(self::SOURCE_GITLAB, null, InputOption::VALUE_NONE, 'Generate Gitlab CI / Gitlab Pages support');
+            ->addOption(self::SOURCE_GITLAB, null, InputOption::VALUE_NONE, 'Generate Gitlab CI / Gitlab Pages support')
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -125,7 +126,8 @@ final class InitCommand extends Command
             $finder
                 ->ignoreDotFiles(false)
                 ->depth('== 0')
-                ->in($this->initDir.'/'.$sourceDir);
+                ->in($this->initDir.'/'.$sourceDir)
+            ;
 
             foreach ($finder as $file) {
                 /** @var string $source */

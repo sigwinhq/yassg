@@ -27,19 +27,19 @@ final class RemoveCommandsCompilerPass implements CompilerPassInterface
             $definition = $container->getDefinition($id);
 
             $className = $definition->getClass();
-            if (null === $className) {
+            if ($className === null) {
                 continue;
             }
 
             if (0 !== mb_strpos($className, 'Sigwin')
-                && ( ! $debug || ! \in_array($id, [
-                        'console.command.debug_autowiring',
-                        'console.command.config_debug',
-                        'console.command.container_debug',
-                        'console.command.router_debug',
-                        'console.command.translation_debug',
-                        'twig.command.debug',
-                    ], true))) {
+                && (! $debug || ! \in_array($id, [
+                    'console.command.debug_autowiring',
+                    'console.command.config_debug',
+                    'console.command.container_debug',
+                    'console.command.router_debug',
+                    'console.command.translation_debug',
+                    'twig.command.debug',
+                ], true))) {
                 $container->removeDefinition($id);
             }
         }

@@ -15,6 +15,7 @@ namespace Sigwin\YASSG;
 
 /**
  * @template T of object
+ *
  * @extends Storage<T>
  */
 interface StorageWithOptions extends Storage

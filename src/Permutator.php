@@ -38,7 +38,7 @@ final class Permutator
             }
 
             $variables = [];
-            if ( ! isset($spec['catalog']) || $spec['catalog'] === []) {
+            if (! isset($spec['catalog']) || $spec['catalog'] === []) {
                 yield $route => $spec['defaults'] ?? [];
                 continue;
             }

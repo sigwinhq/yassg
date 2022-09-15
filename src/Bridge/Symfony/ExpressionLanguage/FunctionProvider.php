@@ -24,30 +24,30 @@ final class FunctionProvider implements ExpressionFunctionProviderInterface
         return [
             new ExpressionFunction('yassg_find_all', static function (string $name): string {
                 return sprintf('$provider->getDatabase(%s)', $name);
-                }, static function (array $variables, string $name, array $arguments = []) {
-                    /** @var DatabaseProvider $provider */
-                    $provider = $variables['provider'];
+            }, static function (array $variables, string $name, array $arguments = []) {
+                /** @var DatabaseProvider $provider */
+                $provider = $variables['provider'];
 
-                    return $provider->getDatabase($name)->findAll(...$arguments);
-                }),
+                return $provider->getDatabase($name)->findAll(...$arguments);
+            }),
             new ExpressionFunction('yassg_pages', static function (string $name): string {
                 return sprintf('$provider->getDatabase(%s)', $name);
-                }, static function (array $variables, string $name, ?string $condition = null, ?int $limit = null) {
-                    /** @var DatabaseProvider $provider */
-                    $provider = $variables['provider'];
-                    $database = $provider->getDatabase($name);
-                    $count = $database->count($condition);
+            }, static function (array $variables, string $name, ?string $condition = null, ?int $limit = null) {
+                /** @var DatabaseProvider $provider */
+                $provider = $variables['provider'];
+                $database = $provider->getDatabase($name);
+                $count = $database->count($condition);
 
-                    return range(1, ceil($count / ($limit ?? $database->getPageLimit())));
-                }),
+                return range(1, ceil($count / ($limit ?? $database->getPageLimit())));
+            }),
             new ExpressionFunction('yassg_get', static function (string $name): string {
                 return sprintf('$provider->getDatabase(%s)', $name);
-                }, static function (array $variables, string $name, string $id) {
-                    /** @var DatabaseProvider $provider */
-                    $provider = $variables['provider'];
+            }, static function (array $variables, string $name, string $id) {
+                /** @var DatabaseProvider $provider */
+                $provider = $variables['provider'];
 
-                    return $provider->getDatabase($name)->get($id);
-                }),
+                return $provider->getDatabase($name)->get($id);
+            }),
         ];
     }
 }

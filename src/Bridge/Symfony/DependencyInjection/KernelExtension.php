@@ -49,7 +49,8 @@ final class KernelExtension extends Extension implements PrependExtensionInterfa
             $finder = new Finder();
             $finder
                 ->depth('== 0')
-                ->in($bundlesTemplateDir);
+                ->in($bundlesTemplateDir)
+            ;
 
             $paths = [];
             foreach ($finder->directories() as $directory) {

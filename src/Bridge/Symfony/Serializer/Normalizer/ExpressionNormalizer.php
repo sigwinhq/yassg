@@ -37,6 +37,7 @@ final class ExpressionNormalizer implements DenormalizerInterface
 
         /**
          * @var class-string $type
+         *
          * @phpstan-ignore-next-line
          */
         if (is_a($value, $type, false) === false) {
