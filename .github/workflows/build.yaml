@@ -12,7 +12,7 @@ jobs:
             PHP_VERSION: ${{ matrix.php }}
         strategy:
             matrix:
-                php: [ "8.0" ]
+                php: [ "8.0", "8.1" ]
                 dependencies: [ lowest, highest ]
         steps:
             -
@@ -34,7 +34,7 @@ jobs:
             PHP_VERSION: ${{ matrix.php }}
         strategy:
             matrix:
-                php: [ "8.0" ]
+                php: [ "8.0", "8.1" ]
                 dependencies: [ lowest, highest ]
         steps:
             -
