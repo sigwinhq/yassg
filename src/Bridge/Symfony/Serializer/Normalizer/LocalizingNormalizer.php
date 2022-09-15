@@ -37,7 +37,7 @@ final class LocalizingNormalizer implements CacheableSupportsMethodInterface, Co
             $locale = $context[LocaleContext::LOCALE];
             $fallbackLocale = $context[LocaleContext::LOCALE_FALLBACK];
 
-            if ( ! \is_array($data)) {
+            if (! \is_array($data)) {
                 throw new \LogicException('Localizing normalizer can only work on array input data');
             }
 

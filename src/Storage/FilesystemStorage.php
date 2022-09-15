@@ -35,7 +35,7 @@ final class FilesystemStorage implements StorageWithOptions
             }
 
             $realpath = realpath($path);
-            if (false === $realpath) {
+            if ($realpath === false) {
                 throw new \InvalidArgumentException(sprintf('The path "%s" does not exist.', $path));
             }
 
@@ -45,7 +45,8 @@ final class FilesystemStorage implements StorageWithOptions
         $this->finder
             ->files()
             ->sortByName()
-            ->in($this->roots);
+            ->in($this->roots)
+        ;
 
         if ($names !== null) {
             $this->finder->name($names);

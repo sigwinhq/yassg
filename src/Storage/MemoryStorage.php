@@ -18,6 +18,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @template T of object
+ *
  * @implements StorageWithOptions<T>
  */
 final class MemoryStorage implements StorageWithOptions

@@ -32,9 +32,9 @@ use Symfony\Component\Routing\RequestContext;
  *
  * @covers \Sigwin\YASSG\Generator
  *
+ * @uses \Sigwin\YASSG\Bridge\Symfony\Routing\Request
  * @uses \Sigwin\YASSG\DatabaseProvider
  * @uses \Sigwin\YASSG\Permutator
- * @uses \Sigwin\YASSG\Bridge\Symfony\Routing\Request
  */
 final class GeneratorTest extends TestCase
 {
@@ -100,7 +100,7 @@ final class GeneratorTest extends TestCase
         $generator->generate(static function () use (&$called): void {
             $called = true;
         });
-        if ( ! $called) {
+        if (! $called) {
             static::fail('Callback not called');
         }
     }
@@ -120,18 +120,21 @@ final class GeneratorTest extends TestCase
         $requestContext
             ->expects(static::once())
             ->method('getBaseUrl')
-            ->willReturn($baseUrl);
+            ->willReturn($baseUrl)
+        ;
         $requestContext
             ->expects(static::once())
             ->method('getParameter')
             ->with('index-file')
-            ->willReturn($indexFile);
+            ->willReturn($indexFile)
+        ;
 
         $urlGenerator = $this->getMockBuilder(UrlGeneratorInterface::class)->getMock();
         $urlGenerator
             ->expects(static::once())
             ->method('getContext')
-            ->willReturn($requestContext);
+            ->willReturn($requestContext)
+        ;
 
         $remapped = [];
         foreach ($routes as $name => $params) {
@@ -142,7 +145,8 @@ final class GeneratorTest extends TestCase
             ->expects(static::exactly(\count($routes)))
             ->method('generate')
             ->withConsecutive(...$remapped)
-            ->willReturn('/////');
+            ->willReturn('/////')
+        ;
 
         return $urlGenerator;
     }
@@ -153,11 +157,13 @@ final class GeneratorTest extends TestCase
         $response
             ->expects(static::once())
             ->method('getStatusCode')
-            ->willReturn($status);
+            ->willReturn($status)
+        ;
         $response
             ->expects(static::once())
             ->method('getContent')
-            ->willReturn($body);
+            ->willReturn($body)
+        ;
 
         $kernel = $this->getMockBuilder(KernelInterface::class)->getMock();
         $kernel
@@ -166,7 +172,8 @@ final class GeneratorTest extends TestCase
             ->with(static::callback(static function (\Symfony\Component\HttpFoundation\Request $request) use ($baseUrl): bool {
                 return $request->getUri() === 'http://localhost/'.$baseUrl;
             }))
-            ->willReturn($response);
+            ->willReturn($response)
+        ;
 
         return $kernel;
     }
@@ -177,7 +184,8 @@ final class GeneratorTest extends TestCase
         $filesystem
             ->expects(static::once())
             ->method('dumpFile')
-            ->with($path, $content);
+            ->with($path, $content)
+        ;
 
         return $filesystem;
     }

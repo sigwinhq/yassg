@@ -45,7 +45,8 @@ final class GenerateCommand extends Command
         $this
             ->setDescription('Generate the site')
             ->addArgument('url', InputArgument::REQUIRED, 'Base URL to generate for')
-            ->addOption('index-file', null, InputOption::VALUE_NONE, 'Add the index.html to generated routes');
+            ->addOption('index-file', null, InputOption::VALUE_NONE, 'Add the index.html to generated routes')
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -55,6 +56,7 @@ final class GenerateCommand extends Command
 
         /**
          * @phpstan-var string $buildUrl
+         *
          * @psalm-suppress UnnecessaryVarAnnotation Psalm's Symfony plugin solves this, but not PHPStan's
          */
         $buildUrl = $input->getArgument('url');
@@ -62,6 +64,7 @@ final class GenerateCommand extends Command
 
         /**
          * @phpstan-var bool $indexFile
+         *
          * @psalm-suppress UnnecessaryVarAnnotation Psalm's Symfony plugin solves this, but not PHPStan's
          */
         $indexFile = $input->getOption('index-file');
