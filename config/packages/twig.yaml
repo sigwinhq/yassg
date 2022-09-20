@@ -1,2 +1,3 @@
 twig:
-    default_path: "%sigwin_yassg.template_dir%" 
+    default_path: "%sigwin_yassg.template_dir%"
+    strict_variables: true
