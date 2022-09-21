@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sigwin\YASSG\Bridge\Symfony\Routing\Generator;
 
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RequestContext;
 
@@ -24,10 +25,11 @@ final class FilenameUrlGenerator implements UrlGeneratorInterface
 
     public function generate(string $name, array $parameters = [], int $referenceType = self::ABSOLUTE_PATH): string
     {
-        $this->stripParameters($this->stripParameters[$name] ?? [], $parameters);
+        if (! isset($this->routes[$name])) {
+            throw new RouteNotFoundException();
+        }
 
-        /** @var bool $indexFile */
-        $indexFile = $this->getContext()->getParameter('index-file') ?? false;
+        $this->stripParameters($this->stripParameters[$name] ?? [], $parameters);
         if (str_contains($this->routes[$name]['path'], '.')) {
             $parameters['_filename'] = null;
         } else {
@@ -39,6 +41,8 @@ final class FilenameUrlGenerator implements UrlGeneratorInterface
             throw new \LogicException(sprintf('Query string found while generating route "%1$s", query strings are forbidden: %2$s', $name, $url));
         }
 
+        /** @var bool $indexFile */
+        $indexFile = $this->getContext()->getParameter('index-file') ?? false;
         if ($indexFile === false && str_contains($this->routes[$name]['path'], '.') === false) {
             $url = \dirname($url).'/';
         }
