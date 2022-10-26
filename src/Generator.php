@@ -74,6 +74,8 @@ final class Generator
         if (mb_strpos(basename($path), '.') === false) {
             $path .= '/index.html';
         }
+        
+        $path = urldecode($path);
 
         $this->filesystem->dumpFile($path, $body);
 
