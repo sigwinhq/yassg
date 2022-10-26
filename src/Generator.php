@@ -75,6 +75,8 @@ final class Generator
             $path .= '/index.html';
         }
 
+        $path = urldecode($path);
+
         $this->filesystem->dumpFile($path, $body);
 
         $callable($request, $response, $path);
