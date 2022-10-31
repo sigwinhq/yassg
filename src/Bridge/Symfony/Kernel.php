@@ -19,6 +19,7 @@ use Sigwin\YASSG\Bridge\Symfony\DependencyInjection\KernelExtension;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
 final class Kernel extends \Symfony\Component\HttpKernel\Kernel
 {
@@ -72,8 +73,16 @@ final class Kernel extends \Symfony\Component\HttpKernel\Kernel
         $container->import($configDir.'/{packages}/*.yaml');
         $container->import($configDir.'/services.yaml');
 
-        $container->import($this->baseDir.'/{config}/*.yaml');
+        $container->import($this->baseDir.'/{config}/services.yaml');
         $container->import($this->baseDir.'/{config}/{packages}/*.yaml');
+    }
+
+    private function configureRoutes(RoutingConfigurator $routes): void
+    {
+        $configDir = $this->getConfigDir();
+        $routes->import($configDir.'/{routes}/*.yaml');
+
+        $routes->import($this->baseDir.'/{config}/{routes}/*.yaml');
     }
 
     private function createEnvironmentClasses(string $path): iterable
