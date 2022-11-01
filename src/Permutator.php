@@ -39,7 +39,7 @@ final class Permutator
 
             $variables = [];
             if (! isset($spec['catalog']) || $spec['catalog'] === []) {
-                yield $route => $spec['defaults'] ?? [];
+                yield $route => ['parameters' => $spec['defaults'] ?? [], 'headers' => $spec['options']['headers'] ?? null];
                 continue;
             }
 
@@ -51,7 +51,7 @@ final class Permutator
             }
 
             foreach (cartesian_product($variables) as $parameters) {
-                yield $route => $parameters;
+                yield $route => ['parameters' => $parameters, 'headers' => $spec['options']['headers'] ?? null];
             }
         }
     }
