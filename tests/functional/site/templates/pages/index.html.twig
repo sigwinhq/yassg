@@ -10,13 +10,13 @@
                 
                 <dl>
                 {% set last_route = null %}
-                {% for route, params in yassg_index() %}
+                {% for route, options in yassg_index() %}
                     {% if last_route is not same as(route) %}
                         <dt>{{ route }}</dt>
                     {% endif %}
                     {% set last_route = route %}
                     
-                    {% set path = path(route, params) %}
+                    {% set path = path(route, options.parameters) %}
                     <dd><a href="{{ path }}">{{ path }}</a></dd>
                 {% endfor %}
                 </dl>
