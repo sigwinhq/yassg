@@ -41,6 +41,9 @@ final class Product
 
     public function getCategory(): ?Category
     {
+        /**
+         * @psalm-suppress InvalidArgument
+         */
         $category = current($this->categories);
 
         return $category !== false ? $category : null;
