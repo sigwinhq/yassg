@@ -15,7 +15,6 @@ namespace Sigwin\YASSG\Collection;
 
 use Sigwin\YASSG\Collection;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
-use Traversable;
 
 /**
  * @template-implements Collection<string, object>
@@ -82,7 +81,7 @@ final class ReadOnlyCollection implements Collection
         return \count($this->data);
     }
 
-    public function getIterator(): Traversable
+    public function getIterator(): \Traversable
     {
         return new \ArrayIterator($this->data);
     }
