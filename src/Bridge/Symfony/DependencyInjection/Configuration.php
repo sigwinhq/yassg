@@ -24,6 +24,8 @@ final class Configuration implements ConfigurationInterface
 
         $treeBuilder->getRootNode()
             ->children()
+                ->variableNode('variables')
+                ->end()
                 ->arrayNode('routes')
                     ->arrayPrototype()
                         ->children()

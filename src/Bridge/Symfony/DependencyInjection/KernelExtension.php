@@ -27,6 +27,7 @@ final class KernelExtension extends Extension implements PrependExtensionInterfa
         $config = $this->processConfiguration($configuration, $configs);
 
         $container->setParameter('sigwin_yassg.routes', $config['routes'] ?? []);
+        $container->setParameter('sigwin_yassg.routes.variables', $config['variables'] ?? []);
 
         // which params to strip from routes
         $stripParameters = [];
