@@ -125,8 +125,15 @@ services:
             -
                 name: sigwin_yassg.file_decoder
 
+    Sigwin\YASSG\Bridge\Symfony\Routing\Generator\GlobalVariableUrlGenerator:
+        decorates: Symfony\Component\Routing\Generator\UrlGeneratorInterface
+        decoration_priority: 10
 
     Symfony\Component\Config\FileLocatorInterface: '@file_locator'
+    twig.extension.routing:
+        class: Symfony\Bridge\Twig\Extension\RoutingExtension
+        arguments:
+            $generator: '@Symfony\Component\Routing\Generator\UrlGeneratorInterface'
 
 when@prod:
     services:
@@ -136,8 +143,3 @@ when@prod:
                 $stripParameters: '%sigwin_yassg.routes.strip_parameters%'
                 $urlGenerator: '@Sigwin\YASSG\Bridge\Symfony\Routing\Generator\FilenameUrlGenerator.inner'
                 $routes: "%sigwin_yassg.routes%"
-
-        twig.extension.routing:
-            class: Symfony\Bridge\Twig\Extension\RoutingExtension
-            arguments:
-                $generator: '@Symfony\Component\Routing\Generator\UrlGeneratorInterface'
