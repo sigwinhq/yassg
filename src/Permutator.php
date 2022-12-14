@@ -30,6 +30,9 @@ final class Permutator
         $this->expressionLanguage = $expressionLanguage;
     }
 
+    /**
+     * @return \Traversable<Route>
+     */
     public function permute(): \Traversable
     {
         foreach ($this->routes as $route => $spec) {
@@ -39,7 +42,11 @@ final class Permutator
 
             $variables = [];
             if (! isset($spec['catalog']) || $spec['catalog'] === []) {
-                yield $route => ['parameters' => $spec['defaults'] ?? [], 'headers' => $spec['options']['headers'] ?? null];
+                yield new Route(
+                    $route,
+                    $spec['defaults'] ?? [],
+                    new BuildOptions($spec['options']['headers'] ?? null)
+                );
                 continue;
             }
 
@@ -51,7 +58,11 @@ final class Permutator
             }
 
             foreach (cartesian_product($variables) as $parameters) {
-                yield $route => ['parameters' => $parameters, 'headers' => $spec['options']['headers'] ?? null];
+                yield new Route(
+                    $route,
+                    $parameters,
+                    new BuildOptions($spec['options']['headers'] ?? null)
+                );
             }
         }
     }
