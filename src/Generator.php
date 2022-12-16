@@ -45,11 +45,12 @@ final class Generator
 
         $indexFile = (bool) ($requestContext->getParameter('index-file') ?? false);
 
-        foreach ($this->permutator->permute() as $routeName => $options) {
-            $url = $this->urlGenerator->generate($routeName, $options['parameters'] + ($indexFile ? ['_filename' => 'index.html'] : []), UrlGeneratorInterface::ABSOLUTE_URL);
+        foreach ($this->permutator->permute() as $location) {
+            $route = $location->getRoute();
+            $url = $this->urlGenerator->generate($route->getName(), $route->getParameters() + ($indexFile ? ['_filename' => 'index.html'] : []), UrlGeneratorInterface::ABSOLUTE_URL);
             $request = Request::create(rtrim($url, '/'))->withBaseUrl($requestContext->getBaseUrl());
-            if (isset($options['headers'])) {
-                $request->headers->add($options['headers']);
+            if (($buildHeaders = $location->getBuildOptions()->getRequestHeaders()) !== null) {
+                $request->headers->add($buildHeaders);
             }
 
             $this->dumpFile($callable, $request);

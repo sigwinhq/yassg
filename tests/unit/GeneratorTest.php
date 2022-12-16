@@ -33,8 +33,11 @@ use Symfony\Component\Routing\RequestContext;
  * @covers \Sigwin\YASSG\Generator
  *
  * @uses \Sigwin\YASSG\Bridge\Symfony\Routing\Request
+ * @uses \Sigwin\YASSG\BuildOptions
  * @uses \Sigwin\YASSG\DatabaseProvider
+ * @uses \Sigwin\YASSG\Location
  * @uses \Sigwin\YASSG\Permutator
+ * @uses \Sigwin\YASSG\Route
  */
 final class GeneratorTest extends TestCase
 {

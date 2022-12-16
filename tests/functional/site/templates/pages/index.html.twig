@@ -7,16 +7,16 @@
         <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-xl">
             <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 prose">
                 <h1>Index</h1>
-                
+
                 <dl>
-                {% set last_route = null %}
-                {% for route, options in yassg_index() %}
-                    {% if last_route is not same as(route) %}
-                        <dt>{{ route }}</dt>
+                {% set last_route_name = null %}
+                {% for location in yassg_index() %}
+                    {% if last_route_name is not same as(location.route.name) %}
+                        <dt>{{ location.route.name }}</dt>
                     {% endif %}
-                    {% set last_route = route %}
-                    
-                    {% set path = path(route, options.parameters) %}
+                    {% set last_route_name = location.route.name %}
+
+                    {% set path = path(location.route.name, location.route.parameters) %}
                     <dd><a href="{{ path }}">{{ path }}</a></dd>
                 {% endfor %}
                 </dl>
