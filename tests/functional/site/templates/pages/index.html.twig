@@ -10,14 +10,13 @@
 
                 <dl>
                 {% set last_route_name = null %}
-                {% for route in yassg_index() %}
-                    {% set route_name = route.name %}
-                    {% if last_route_name is not same as(route_name) %}
-                        <dt>{{ route_name }}</dt>
+                {% for location in yassg_index() %}
+                    {% if last_route_name is not same as(location.route.name) %}
+                        <dt>{{ location.route.name }}</dt>
                     {% endif %}
-                    {% set last_route_name = route_name %}
+                    {% set last_route_name = location.route.name %}
 
-                    {% set path = path(route_name, route.parameters) %}
+                    {% set path = path(location.route.name, location.route.parameters) %}
                     <dd><a href="{{ path }}">{{ path }}</a></dd>
                 {% endfor %}
                 </dl>
