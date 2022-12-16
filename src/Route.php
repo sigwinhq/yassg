@@ -18,7 +18,6 @@ final class Route
     public function __construct(
         private string $name,
         private array $parameters,
-        private BuildOptions $buildOptions
     ) {
     }
 
@@ -30,10 +29,5 @@ final class Route
     public function getParameters(): array
     {
         return $this->parameters;
-    }
-
-    public function getBuildOptions(): BuildOptions
-    {
-        return $this->buildOptions;
     }
 }

@@ -31,7 +31,7 @@ final class Permutator
     }
 
     /**
-     * @return \Traversable<Route>
+     * @return \Traversable<Location>
      */
     public function permute(): \Traversable
     {
@@ -42,9 +42,8 @@ final class Permutator
 
             $variables = [];
             if (! isset($spec['catalog']) || $spec['catalog'] === []) {
-                yield new Route(
-                    $route,
-                    $spec['defaults'] ?? [],
+                yield new Location(
+                    new Route($route, $spec['defaults'] ?? []),
                     new BuildOptions($spec['options']['headers'] ?? null)
                 );
                 continue;
@@ -58,9 +57,8 @@ final class Permutator
             }
 
             foreach (cartesian_product($variables) as $parameters) {
-                yield new Route(
-                    $route,
-                    $parameters,
+                yield new Location(
+                    new Route($route, $parameters),
                     new BuildOptions($spec['options']['headers'] ?? null)
                 );
             }
