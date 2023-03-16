@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sigwin\YASSG;
 
-use function BenTools\CartesianProduct\cartesian_product;
-
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
+
+use function BenTools\CartesianProduct\cartesian_product;
 
 final class Permutator
 {
