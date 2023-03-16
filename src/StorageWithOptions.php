@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the yassg project.
+ * This file is part of the Sigwin Yassg project.
  *
  * (c) sigwin.hr
  *
