@@ -49,9 +49,6 @@ jobs:
                 name: Composer install
                 run: make composer/install
             -
-                name: Run code quality analysis
-                run: make analyze
-            -
                 name: Run build
                 working-directory: tests/functional/site
                 run: make self/build

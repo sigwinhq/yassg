@@ -5,7 +5,7 @@ declare(strict_types=1);
 $configurator = require __DIR__ .'/vendor/sigwin/infra/resources/PHP/php-cs-fixer.php';
 
 $header = <<<'EOF'
-This file is part of the yassg project.
+This file is part of the Sigwin Yassg project.
 
 (c) sigwin.hr
 

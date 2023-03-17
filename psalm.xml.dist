@@ -1,76 +1,31 @@
 <?xml version="1.0"?>
 <psalm xmlns="https://getpsalm.org/schema/config"
        cacheDirectory="var/phpqa/psalm"
+       checkForThrowsInGlobalScope="true"
+       ensureArrayIntOffsetsExist="true"
+       ensureArrayStringOffsetsExist="true"
+       errorBaseline="psalm.baseline.xml"
+       errorLevel="1"
+       findUnusedBaselineEntry="false"
+       findUnusedCode="true"
        findUnusedPsalmSuppress="true"
-       findUnusedVariablesAndParams="true">
+       findUnusedVariablesAndParams="true"
+       limitMethodComplexity="true"
+       restrictReturnTypes="true"
+       strictBinaryOperands="true">
     <projectFiles>
         <directory name="./"/>
         <ignoreFiles allowMissingFiles="true">
             <file name=".php-cs-fixer.dist.php"/>
             <directory name="tests/functional/init/"/>
             <directory name="tests/functional/site/var/"/>
-            <directory name="vendor/"/>
             <directory name="var/"/>
+            <directory name="vendor/"/>
         </ignoreFiles>
     </projectFiles>
 
-    <issueHandlers>
-        <InternalMethod>
-            <errorLevel type="info">
-                <file name="src/Bridge/Symfony/Serializer/AttributeMetadataTrait.php"/>
-            </errorLevel>
-        </InternalMethod>
-        <MissingConstructor>
-            <errorLevel type="info">
-                <file name="src/Bridge/Symfony/Serializer/AttributeMetadataTrait.php"/>
-                <directory name="resources/init/demo/src/Model"/>
-                <directory name="tests/functional/site/src/Model"/>
-            </errorLevel>
-        </MissingConstructor>
-        <PropertyNotSetInConstructor>
-            <errorLevel type="info">
-                <file name="src/Bridge/Symfony/Kernel.php"/>
-                <directory name="src/Bridge/Symfony/Serializer/Normalizer"/>
-                <directory name="tests/"/>
-            </errorLevel>
-        </PropertyNotSetInConstructor>
-        <UnusedForeachValue>
-            <errorLevel type="suppress">
-                <file name="src/Database/CachingDatabase.php"/>
-            </errorLevel>
-        </UnusedForeachValue>
-
-        <!-- false positives -->
-        <UnresolvableInclude>
-            <errorLevel type="suppress">
-                <file name="src/Bridge/Symfony/Kernel.php"/>
-            </errorLevel>
-        </UnresolvableInclude>
-        <PossiblyNullReference>
-            <errorLevel type="suppress">
-                <file name="src/Bridge/Symfony/DependencyInjection/Configuration.php"/>
-            </errorLevel>
-        </PossiblyNullReference>
-        <PossiblyUndefinedMethod>
-            <errorLevel type="suppress">
-                <file name="src/Bridge/Symfony/DependencyInjection/Configuration.php"/>
-            </errorLevel>
-        </PossiblyUndefinedMethod>
-        <DuplicateClass>
-            <errorLevel type="suppress">
-                <file name="src/Bridge/Symfony/HttpKernel/Fragment/RelativeUrlInlineFragmentRenderer.php"/>
-            </errorLevel>
-        </DuplicateClass>
-        <UndefinedDocblockClass>
-            <errorLevel type="suppress">
-                <!-- Symfony 6.0.5 is referencing this PHP 8.1 class even though it's available on 8.0 -->
-                <referencedClass name="UnitEnum"/>
-            </errorLevel>
-        </UndefinedDocblockClass>
-    </issueHandlers>
-
     <plugins>
-        <pluginClass class="Psalm\SymfonyPsalmPlugin\Plugin"/>
         <pluginClass class="Psalm\PhpUnitPlugin\Plugin"/>
+        <pluginClass class="Psalm\SymfonyPsalmPlugin\Plugin"/>
     </plugins>
 </psalm>

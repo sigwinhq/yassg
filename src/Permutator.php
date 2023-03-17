@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the yassg project.
+ * This file is part of the Sigwin Yassg project.
  *
  * (c) sigwin.hr
  *
@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Sigwin\YASSG;
 
-use function BenTools\CartesianProduct\cartesian_product;
-
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
+
+use function BenTools\CartesianProduct\cartesian_product;
 
 final class Permutator
 {

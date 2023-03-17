@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the yassg project.
+ * This file is part of the Sigwin Yassg project.
  *
  * (c) sigwin.hr
  *
@@ -41,7 +41,7 @@ use Symfony\Component\Routing\RequestContext;
  */
 final class GeneratorTest extends TestCase
 {
-    public function testGenerator(): void
+    public function testGeneratorWithoutIndexFile(): void
     {
         $routes = [
             'foo' => [],
