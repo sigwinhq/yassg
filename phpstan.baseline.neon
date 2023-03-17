@@ -581,6 +581,11 @@ parameters:
 			path: src/StorageWithOptions.php
 
 		-
+			message: "#^Call to deprecated method withConsecutive\\(\\) of class PHPUnit\\\\Framework\\\\MockObject\\\\Builder\\\\InvocationMocker\\.$#"
+			count: 1
+			path: tests/unit/GeneratorTest.php
+
+		-
 			message: "#^Method Sigwin\\\\YASSG\\\\Test\\\\GeneratorTest\\:\\:createPermutator\\(\\) has parameter \\$routes with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: tests/unit/GeneratorTest.php

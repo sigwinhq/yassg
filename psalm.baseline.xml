@@ -719,29 +719,10 @@
       <code>$slug</code>
     </PossiblyUnusedProperty>
   </file>
-  <file src="tests/unit/ConsecutiveCallsTrait.php">
-    <MixedArgument>
-      <code>$expectedArgs</code>
-    </MixedArgument>
-    <MixedArrayAccess>
-      <code>$expectedArgs[$key]</code>
-    </MixedArrayAccess>
-    <MixedArrayOffset>
-      <code>$expectedArgsList[$invocationCount++]</code>
-    </MixedArrayOffset>
-    <MixedAssignment>
-      <code>$arg</code>
-      <code>$expectedArgs</code>
-      <code>$invocationCount</code>
-    </MixedAssignment>
-    <MixedOperand>
-      <code>$invocationCount</code>
-    </MixedOperand>
-    <PossiblyUndefinedMethod>
-      <code>$expectedArgs</code>
-    </PossiblyUndefinedMethod>
-  </file>
   <file src="tests/unit/GeneratorTest.php">
+    <DeprecatedMethod>
+      <code>withConsecutive</code>
+    </DeprecatedMethod>
     <LessSpecificReturnType>
       <code>Filesystem</code>
       <code>KernelInterface</code>
