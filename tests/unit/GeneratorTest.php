@@ -41,6 +41,8 @@ use Symfony\Component\Routing\RequestContext;
  */
 final class GeneratorTest extends TestCase
 {
+    use ConsecutiveCallsTrait;
+
     public function testGenerator(): void
     {
         $routes = [
@@ -147,7 +149,7 @@ final class GeneratorTest extends TestCase
         $urlGenerator
             ->expects(static::exactly(\count($routes)))
             ->method('generate')
-            ->withConsecutive(...$remapped)
+            ->with(self::consecutiveCalls(...$remapped))
             ->willReturn('/////')
         ;
 
