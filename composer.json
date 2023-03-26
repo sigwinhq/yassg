@@ -31,7 +31,7 @@
         "phpunit/phpunit": "^9.6"
     },
     "conflict": {
-        "nikic/php-parser": "< 4.12",
+        "nikic/php-parser": "< 4.14",
         "symfony/dependency-injection": "< 5.4"
     },
     "autoload": {
