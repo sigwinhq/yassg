@@ -314,6 +314,9 @@
     </UnusedClass>
   </file>
   <file src="src/Bridge/Symfony/Serializer/Normalizer/ExpressionNormalizer.php">
+    <MethodSignatureMustProvideReturnType>
+      <code>denormalize</code>
+    </MethodSignatureMustProvideReturnType>
     <MixedAssignment>
       <code>$value</code>
     </MixedAssignment>
@@ -359,6 +362,9 @@
     </UnusedClass>
   </file>
   <file src="src/Bridge/Symfony/Serializer/Normalizer/ResourceLocatorNormalizer.php">
+    <MethodSignatureMustProvideReturnType>
+      <code>denormalize</code>
+    </MethodSignatureMustProvideReturnType>
     <UnusedClass>
       <code>ResourceLocatorNormalizer</code>
     </UnusedClass>
