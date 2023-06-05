@@ -81,6 +81,14 @@ parameters:
 			path: src/Bridge/Symfony/Routing/Loader/RouteLoader.php
 
 		-
+			message: """
+				#^Class Sigwin\\\\YASSG\\\\Bridge\\\\Symfony\\\\Serializer\\\\Normalizer\\\\CollectionNormalizer implements deprecated interface Symfony\\\\Component\\\\Serializer\\\\Normalizer\\\\CacheableSupportsMethodInterface\\:
+				since Symfony 6\\.3, implement "getSupportedTypes\\(\\?string \\$format\\)" instead$#
+			"""
+			count: 1
+			path: src/Bridge/Symfony/Serializer/Normalizer/CollectionNormalizer.php
+
+		-
 			message: "#^Method Sigwin\\\\YASSG\\\\Bridge\\\\Symfony\\\\Serializer\\\\Normalizer\\\\CollectionNormalizer\\:\\:denormalize\\(\\) return type with generic interface Sigwin\\\\YASSG\\\\Collection does not specify its types\\: TKey, TValue$#"
 			count: 1
 			path: src/Bridge/Symfony/Serializer/Normalizer/CollectionNormalizer.php
@@ -94,6 +102,14 @@ parameters:
 			message: "#^Method Sigwin\\\\YASSG\\\\Bridge\\\\Symfony\\\\Serializer\\\\Normalizer\\\\CollectionNormalizer\\:\\:supportsDenormalization\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Bridge/Symfony/Serializer/Normalizer/CollectionNormalizer.php
+
+		-
+			message: """
+				#^Class Sigwin\\\\YASSG\\\\Bridge\\\\Symfony\\\\Serializer\\\\Normalizer\\\\LocalizingNormalizer implements deprecated interface Symfony\\\\Component\\\\Serializer\\\\Normalizer\\\\CacheableSupportsMethodInterface\\:
+				since Symfony 6\\.3, implement "getSupportedTypes\\(\\?string \\$format\\)" instead$#
+			"""
+			count: 1
+			path: src/Bridge/Symfony/Serializer/Normalizer/LocalizingNormalizer.php
 
 		-
 			message: "#^Method Sigwin\\\\YASSG\\\\Bridge\\\\Symfony\\\\Serializer\\\\Normalizer\\\\LocalizingNormalizer\\:\\:__construct\\(\\) has parameter \\$classes with no value type specified in iterable type array\\.$#"
