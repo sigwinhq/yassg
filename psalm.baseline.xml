@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <files psalm-version="5.9.0@8b9ad1eb9e8b7d3101f949291da2b9f7767cd163">
   <file src="bootstrap.php">
+    <PossiblyFalseArgument>
+      <code><![CDATA[getenv('YASSG_SKIP_BUNDLES')]]></code>
+    </PossiblyFalseArgument>
     <RedundantIdentityWithTrue>
       <code>true === file_exists($autoloader)</code>
     </RedundantIdentityWithTrue>
@@ -302,9 +305,6 @@
     </MissingConstructor>
   </file>
   <file src="src/Bridge/Symfony/Serializer/Normalizer/CollectionNormalizer.php">
-    <DeprecatedInterface>
-      <code>CollectionNormalizer</code>
-    </DeprecatedInterface>
     <MixedAssignment>
       <code>$denormalized[$id]</code>
       <code>$item</code>
@@ -331,9 +331,6 @@
     </UnusedClass>
   </file>
   <file src="src/Bridge/Symfony/Serializer/Normalizer/LocalizingNormalizer.php">
-    <DeprecatedInterface>
-      <code>LocalizingNormalizer</code>
-    </DeprecatedInterface>
     <MixedArrayAccess>
       <code>$data[$property][$fallbackLocale]</code>
       <code>$data[$property][$locale]</code>
@@ -480,8 +477,6 @@
       <code>$locale</code>
     </MixedOperand>
     <PossiblyNullOperand>
-      <code>$condition</code>
-      <code>$condition</code>
       <code>$limit</code>
       <code>$select</code>
     </PossiblyNullOperand>
@@ -747,6 +742,7 @@
   <file src="web/index.php">
     <MixedArgument>
       <code><![CDATA[$GLOBALS['YASSG_BASEDIR']]]></code>
+      <code><![CDATA[$GLOBALS['YASSG_SKIP_BUNDLES'] ?? []]]></code>
       <code><![CDATA[$context['APP_ENV']]]></code>
     </MixedArgument>
     <PossiblyUndefinedStringArrayOffset>

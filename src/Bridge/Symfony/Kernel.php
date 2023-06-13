@@ -27,11 +27,20 @@ final class Kernel extends \Symfony\Component\HttpKernel\Kernel
 
     private string $baseDir;
 
-    public function __construct(string $baseDir, string $environment, bool $debug)
+    /**
+     * @var list<string>
+     */
+    private array $skipBundles;
+
+    /**
+     * @param list<string> $skipBundles
+     */
+    public function __construct(string $baseDir, string $environment, bool $debug, array $skipBundles = [])
     {
         parent::__construct($environment, $debug);
 
         $this->baseDir = $baseDir;
+        $this->skipBundles = $skipBundles;
     }
 
     public function getCacheDir(): string
@@ -63,7 +72,7 @@ final class Kernel extends \Symfony\Component\HttpKernel\Kernel
 
     public function registerBundles(): iterable
     {
-        yield from $this->createEnvironmentClasses($this->getBundlesPath());
+        yield from $this->createEnvironmentClasses($this->getBundlesPath(), $this->skipBundles);
 
         yield from $this->createEnvironmentClasses($this->baseDir.'/config/bundles.php');
     }
@@ -78,12 +87,15 @@ final class Kernel extends \Symfony\Component\HttpKernel\Kernel
         $container->import($this->baseDir.'/{config}/{packages}/*.yaml');
     }
 
-    private function createEnvironmentClasses(string $path): iterable
+    /**
+     * @param list<string> $skipBundles
+     */
+    private function createEnvironmentClasses(string $path, array $skipBundles = []): iterable
     {
         if (is_file($path) && \in_array(realpath($path), get_included_files(), true) === false) {
             $classes = require $path;
             foreach ($classes as $class => $envs) {
-                if ($envs[$this->environment] ?? $envs['all'] ?? false) {
+                if (($envs[$this->environment] ?? $envs['all'] ?? false) && ! \in_array($class, $skipBundles, true)) {
                     yield new $class();
                 }
             }
