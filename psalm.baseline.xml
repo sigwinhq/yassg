@@ -305,6 +305,9 @@
     </MissingConstructor>
   </file>
   <file src="src/Bridge/Symfony/Serializer/Normalizer/CollectionNormalizer.php">
+    <DeprecatedInterface>
+      <code>CollectionNormalizer</code>
+    </DeprecatedInterface>
     <MixedAssignment>
       <code>$denormalized[$id]</code>
       <code>$item</code>
@@ -331,6 +334,9 @@
     </UnusedClass>
   </file>
   <file src="src/Bridge/Symfony/Serializer/Normalizer/LocalizingNormalizer.php">
+    <DeprecatedInterface>
+      <code>LocalizingNormalizer</code>
+    </DeprecatedInterface>
     <MixedArrayAccess>
       <code>$data[$property][$fallbackLocale]</code>
       <code>$data[$property][$locale]</code>
