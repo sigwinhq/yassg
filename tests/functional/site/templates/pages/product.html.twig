@@ -17,7 +17,7 @@
                 <code>{{ render(controller('Sigwin\\YASSG\\Test\\Functional\\Site\\Controller\\TestController::indexAction')) }}</code>
 
                 <h3>Render via <code>url()</code></h3>
-                <code>{{ render(url('product_renderer', {slug})) }}</code>
+                <code>{{ render(url('product_renderer', {slug: slug})) }}</code>
 
                 {% if product.categories.count %}
                 <h2>Categories</h2>

@@ -18,7 +18,7 @@ use Symfony\Bundle\FrameworkBundle\Console\Application;
 require_once __DIR__ .'/../bootstrap.php';
 
 return static function (array $context) {
-    $kernel = new Kernel($GLOBALS['YASSG_BASEDIR'], $context['APP_ENV'], (bool) $context['APP_DEBUG']);
+    $kernel = new Kernel($GLOBALS['YASSG_BASEDIR'], $context['APP_ENV'], (bool) $context['APP_DEBUG'], $GLOBALS['YASSG_SKIP_BUNDLES'] ?? []);
 
     return new Application($kernel);
 };

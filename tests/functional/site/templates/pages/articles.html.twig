@@ -2,7 +2,7 @@
 
 {% set condition = 'item.publishedAt.getTimestamp() <= 1658238497' %}
 
-{% set articles = yassg_paginate('articles', page, {condition, sort: {'item.publishedAt': 'asc'}}) %}
+{% set articles = yassg_paginate('articles', page, {condition: condition, sort: {'item.publishedAt': 'asc'}}) %}
 
 {% block title %}Articles, page #{{ page }}{% endblock %}
 

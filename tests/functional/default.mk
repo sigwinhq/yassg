@@ -5,8 +5,10 @@ BASE_URL=https://example.com/sub/dir/another
 include ../../../vendor/sigwin/infra/resources/YASSG/default.mk
 
 self/build: self/clean ${BUILD_DIR}/assets/entrypoints.json ## Self: build the app
+	export YASSG_SKIP_BUNDLES=${YASSG_SKIP_BUNDLES}; \
 	php ../../../bin/yassg yassg:generate --env prod $(BASE_URL) ${BUILD_OPTS}
 self/init: self/clean ## Self: init the app via yassg:init
+	export YASSG_SKIP_BUNDLES=${YASSG_SKIP_BUNDLES}; \
 	php ../../../bin/yassg yassg:init --demo
 self/clean:
 	rm -rf ${BUILD_DIR}

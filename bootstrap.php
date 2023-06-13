@@ -13,6 +13,12 @@ declare(strict_types=1);
 
 namespace Sigwin\YASSG;
 
+$skipBundles = [];
+if (getenv('YASSG_SKIP_BUNDLES') !== false) {
+    $skipBundles = array_map(static fn (string $name): string => trim($name), explode(',', getenv('YASSG_SKIP_BUNDLES')));
+}
+$GLOBALS['YASSG_SKIP_BUNDLES'] = $skipBundles;
+
 $autoloaders = [
     // when installed in the project
     __DIR__.'/../../autoload_runtime.php',
