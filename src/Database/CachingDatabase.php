@@ -45,7 +45,7 @@ final class CachingDatabase implements Database
     public function count(?string $condition = null): int
     {
         $locale = $this->localeContext->getLocale()[LocaleContext::LOCALE];
-        $cacheKey = $this->name.'_count_'.$locale.'_'.$condition;
+        $cacheKey = $this->name.'_count_'.$locale.'_'.md5($condition ?? '');
 
         $item = $this->cacheItemPool->getItem($cacheKey);
         if ($item->isHit()) {
@@ -65,7 +65,7 @@ final class CachingDatabase implements Database
     public function findAll(?string $condition = null, ?array $sort = null, ?int $limit = null, int $offset = 0, ?string $select = null): Collection
     {
         $locale = $this->localeContext->getLocale()[LocaleContext::LOCALE];
-        $cacheKey = $this->name.'_find_'.$locale.'_'.$condition.'_'.json_encode($sort).'_'.$limit.'_'.$offset.'_'.$select;
+        $cacheKey = $this->name.'_find_'.$locale.'_'.md5($condition ?? '').'_'.md5(json_encode($sort, \JSON_THROW_ON_ERROR)).'_'.$limit.'_'.$offset.'_'.$select;
 
         $item = $this->cacheItemPool->getItem($cacheKey);
         if ($item->isHit()) {
