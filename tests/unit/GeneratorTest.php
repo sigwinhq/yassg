@@ -104,7 +104,7 @@ final class GeneratorTest extends TestCase
             $called = true;
         });
         if (! $called) {
-            static::fail('Callback not called');
+            self::fail('Callback not called');
         }
     }
 
@@ -121,12 +121,12 @@ final class GeneratorTest extends TestCase
     {
         $requestContext = $this->getMockBuilder(RequestContext::class)->getMock();
         $requestContext
-            ->expects(static::once())
+            ->expects(self::once())
             ->method('getBaseUrl')
             ->willReturn($baseUrl)
         ;
         $requestContext
-            ->expects(static::once())
+            ->expects(self::once())
             ->method('getParameter')
             ->with('index-file')
             ->willReturn($indexFile)
@@ -134,7 +134,7 @@ final class GeneratorTest extends TestCase
 
         $urlGenerator = $this->getMockBuilder(UrlGeneratorInterface::class)->getMock();
         $urlGenerator
-            ->expects(static::once())
+            ->expects(self::once())
             ->method('getContext')
             ->willReturn($requestContext)
         ;
@@ -145,7 +145,7 @@ final class GeneratorTest extends TestCase
         }
 
         $urlGenerator
-            ->expects(static::exactly(\count($routes)))
+            ->expects(self::exactly(\count($routes)))
             ->method('generate')
             ->withConsecutive(...$remapped)
             ->willReturn('/////')
@@ -158,21 +158,21 @@ final class GeneratorTest extends TestCase
     {
         $response = $this->getMockBuilder(Response::class)->getMock();
         $response
-            ->expects(static::once())
+            ->expects(self::once())
             ->method('getStatusCode')
             ->willReturn($status)
         ;
         $response
-            ->expects(static::once())
+            ->expects(self::once())
             ->method('getContent')
             ->willReturn($body)
         ;
 
         $kernel = $this->getMockBuilder(KernelInterface::class)->getMock();
         $kernel
-            ->expects(static::once())
+            ->expects(self::once())
             ->method('handle')
-            ->with(static::callback(static function (\Symfony\Component\HttpFoundation\Request $request) use ($baseUrl): bool {
+            ->with(self::callback(static function (\Symfony\Component\HttpFoundation\Request $request) use ($baseUrl): bool {
                 return $request->getUri() === 'http://localhost/'.$baseUrl;
             }))
             ->willReturn($response)
@@ -185,7 +185,7 @@ final class GeneratorTest extends TestCase
     {
         $filesystem = $this->getMockBuilder(Filesystem::class)->getMock();
         $filesystem
-            ->expects(static::once())
+            ->expects(self::once())
             ->method('dumpFile')
             ->with($path, $content)
         ;

@@ -31,7 +31,7 @@ final class LocalizingNormalizer implements CacheableSupportsMethodInterface, De
         $this->classes = $classes;
     }
 
-    public function denormalize(mixed $data, string $type, string $format = null, array $context = []): mixed
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         if (isset($this->classes[$type])) {
             $locale = $context[LocaleContext::LOCALE];
@@ -55,7 +55,7 @@ final class LocalizingNormalizer implements CacheableSupportsMethodInterface, De
         return $this->denormalizer->denormalize($data, $type, $format, $context);
     }
 
-    public function supportsDenormalization(mixed $data, string $type, string $format = null, array $context = null): bool
+    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, ?array $context = null): bool
     {
         return isset($this->classes[$type]) && ($context[self::LOCALIZING_NORMALIZER_LAST_TYPE] ?? null) !== $type;
     }

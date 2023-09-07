@@ -100,7 +100,6 @@ final class FilesystemStorage implements StorageWithOptions
         $resolver->setRequired(['root']);
         $resolver->setAllowedTypes('root', ['array', 'string']);
         $resolver->setAllowedTypes('names', ['array', 'string']);
-        /** @psalm-suppress UnusedClosureParam */
         $resolver->setNormalizer('root', static function (OptionsResolver $resolver, array|string $value): array {
             if (\is_string($value)) {
                 $value = [$value];
