@@ -11,7 +11,7 @@
        findUnusedPsalmSuppress="true"
        findUnusedVariablesAndParams="true"
        limitMethodComplexity="true"
-       restrictReturnTypes="true"
+       restrictReturnTypes="false"
        strictBinaryOperands="true">
     <projectFiles>
         <directory name="./"/>

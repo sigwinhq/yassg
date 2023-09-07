@@ -36,7 +36,7 @@ final class CollectionNormalizer implements CacheableSupportsMethodInterface, De
         $this->classMetadataFactory = $classMetadataFactory;
     }
 
-    public function denormalize(mixed $data, string $type, string $format = null, array $context = []): Collection
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): Collection
     {
         $type = mb_substr($type, 0, -2);
         if ($data === null) {
@@ -55,7 +55,7 @@ final class CollectionNormalizer implements CacheableSupportsMethodInterface, De
         return new ReadOnlyCollection($this->expressionLanguage, $this->getProperties($type), $denormalized);
     }
 
-    public function supportsDenormalization(mixed $data, string $type, string $format = null, array $context = null): bool
+    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, ?array $context = null): bool
     {
         return str_ends_with($type, '[]');
     }

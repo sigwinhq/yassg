@@ -32,8 +32,6 @@ if (\Composer\InstalledVersions::getVersion('symfony/http-kernel') < 6.0) {
 
         /**
          * @psalm-param string|\Symfony\Component\HttpKernel\Controller\ControllerReference $uri
-         *
-         * @param mixed $uri
          */
         public function render($uri, Request $request, array $options = []): \Symfony\Component\HttpFoundation\Response
         {

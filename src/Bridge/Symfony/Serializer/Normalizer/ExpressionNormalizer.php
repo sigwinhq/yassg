@@ -28,7 +28,7 @@ final class ExpressionNormalizer implements DenormalizerInterface
         $this->databaseProvider = $databaseProvider;
     }
 
-    public function denormalize(mixed $data, string $type, string $format = null, array $context = [])
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = [])
     {
         /** @var string $data */
         $value = $this->expressionLanguage->evaluate(mb_substr($data, 2), [
@@ -47,7 +47,7 @@ final class ExpressionNormalizer implements DenormalizerInterface
         return $value;
     }
 
-    public function supportsDenormalization(mixed $data, string $type, string $format = null): bool
+    public function supportsDenormalization(mixed $data, string $type, ?string $format = null): bool
     {
         return \is_string($data) && str_starts_with($data, '@=');
     }
