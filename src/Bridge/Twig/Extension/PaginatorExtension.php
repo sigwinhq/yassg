@@ -35,7 +35,8 @@ final class PaginatorExtension extends AbstractExtension
 
                 return range(1, ceil($count / ($limit ?? $database->getPageLimit())));
             }),
-            new TwigFunction('yassg_paginate', function (string $name, int $page, array $conditions = []) {
+            new TwigFunction('yassg_paginate', function (string $name, int|string $page, array $conditions = []) {
+                $page = (int) $page;
                 $database = $this->provider->getDatabase($name);
 
                 $conditions['limit'] ??= $database->getPageLimit();
