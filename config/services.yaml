@@ -101,6 +101,7 @@ services:
     League\CommonMark\Extension\FrontMatter\FrontMatterExtension: ~
     League\CommonMark\Extension\Table\TableExtension: ~
     League\CommonMark\Extension\Footnote\FootnoteExtension: ~
+    League\CommonMark\Extension\Attributes\AttributesExtension: ~
 
     Spatie\CommonMarkHighlighter\FencedCodeRenderer: ~
     Spatie\CommonMarkHighlighter\IndentedCodeRenderer: ~
@@ -115,6 +116,8 @@ services:
                 addExtension: [ '@League\CommonMark\Extension\Table\TableExtension' ]
             -
                 addExtension: [ '@League\CommonMark\Extension\Footnote\FootnoteExtension' ]
+            -
+                addExtension: [ '@League\CommonMark\Extension\Attributes\AttributesExtension' ]
             -
                 addRenderer: [ League\CommonMark\Extension\CommonMark\Node\Block\FencedCode, '@Spatie\CommonMarkHighlighter\FencedCodeRenderer', 10 ]
             -
