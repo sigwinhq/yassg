@@ -138,6 +138,9 @@
       <code>variableNode</code>
       <code>variableNode</code>
     </MixedMethodCall>
+    <PossiblyNullReference>
+      <code>end</code>
+    </PossiblyNullReference>
     <UndefinedInterfaceMethod>
       <code>end</code>
     </UndefinedInterfaceMethod>
@@ -179,16 +182,9 @@
     </UnusedClass>
   </file>
   <file src="src/Bridge/Symfony/HttpKernel/Fragment/RelativeUrlInlineFragmentRenderer.php">
-    <DuplicateClass>
-      <code>RelativeUrlInlineFragmentRenderer</code>
-    </DuplicateClass>
     <UnusedClass>
       <code>RelativeUrlInlineFragmentRenderer</code>
     </UnusedClass>
-    <UnusedParam>
-      <code>$fragmentRenderer</code>
-      <code>$urlGenerator</code>
-    </UnusedParam>
   </file>
   <file src="src/Bridge/Symfony/Kernel.php">
     <MixedArrayAccess>
@@ -210,7 +206,6 @@
       <code>configureContainer</code>
     </PossiblyUnusedMethod>
     <PropertyNotSetInConstructor>
-      <code>Kernel</code>
       <code>Kernel</code>
     </PropertyNotSetInConstructor>
     <UnresolvableInclude>
@@ -304,20 +299,23 @@
     <UnusedClass>
       <code>CollectionNormalizer</code>
     </UnusedClass>
+    <UnusedParam>
+      <code>$format</code>
+    </UnusedParam>
   </file>
   <file src="src/Bridge/Symfony/Serializer/Normalizer/ExpressionNormalizer.php">
     <MixedAssignment>
       <code>$value</code>
     </MixedAssignment>
-    <MixedInferredReturnType>
-      <code>object</code>
-    </MixedInferredReturnType>
     <MixedReturnStatement>
       <code>$value</code>
     </MixedReturnStatement>
     <UnusedClass>
       <code>ExpressionNormalizer</code>
     </UnusedClass>
+    <UnusedParam>
+      <code>$format</code>
+    </UnusedParam>
   </file>
   <file src="src/Bridge/Symfony/Serializer/Normalizer/LocalizingNormalizer.php">
     <MixedArrayAccess>
@@ -339,6 +337,9 @@
     <MixedOperand>
       <code>$property</code>
     </MixedOperand>
+    <MixedReturnStatement>
+      <code><![CDATA[$this->denormalizer->denormalize($data, $type, $format, $context)]]></code>
+    </MixedReturnStatement>
     <PossiblyUndefinedStringArrayOffset>
       <code>$context[LocaleContext::LOCALE]</code>
       <code>$context[LocaleContext::LOCALE_FALLBACK]</code>
@@ -349,11 +350,17 @@
     <UnusedClass>
       <code>LocalizingNormalizer</code>
     </UnusedClass>
+    <UnusedParam>
+      <code>$format</code>
+    </UnusedParam>
   </file>
   <file src="src/Bridge/Symfony/Serializer/Normalizer/ResourceLocatorNormalizer.php">
     <UnusedClass>
       <code>ResourceLocatorNormalizer</code>
     </UnusedClass>
+    <UnusedParam>
+      <code>$format</code>
+    </UnusedParam>
   </file>
   <file src="src/Bridge/Twig/Extension/DatabaseExtension.php">
     <MixedArgument>
@@ -590,17 +597,9 @@
       <code>$locale</code>
       <code>$locale</code>
     </MixedAssignment>
-    <MixedInferredReturnType>
-      <code>T</code>
-    </MixedInferredReturnType>
     <MixedMethodCall>
       <code><![CDATA[new $this->class()]]></code>
     </MixedMethodCall>
-    <MixedReturnStatement>
-      <code><![CDATA[$this->denormalizer->denormalize($data, $this->class, null, $context + [
-                AbstractNormalizer::ALLOW_EXTRA_ATTRIBUTES => false,
-            ])]]></code>
-    </MixedReturnStatement>
     <PossiblyUndefinedStringArrayOffset>
       <code>$context[LocaleContext::LOCALE]</code>
       <code>$context[LocaleContext::LOCALE]</code>
