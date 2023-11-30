@@ -37,7 +37,7 @@ final class LocalizingNormalizer implements DenormalizerAwareInterface, Denormal
             $fallbackLocale = $context[LocaleContext::LOCALE_FALLBACK];
 
             if (! \is_array($data)) {
-                throw new \LogicException('Localizing normalizer can only work on array input data');
+                throw new \LogicException(sprintf('Localizing normalizer can only work on array input data, %1$s given for %2$s', \gettype($data), $type));
             }
 
             foreach ($this->classes[$type] as $property) {
@@ -46,7 +46,7 @@ final class LocalizingNormalizer implements DenormalizerAwareInterface, Denormal
                     continue;
                 }
 
-                $data[$property] = $data[$property][$locale] ?? $data[$property][$fallbackLocale] ?? throw new \RuntimeException('Invalid localized property value '.$property);
+                $data[$property] = $data[$property][$locale] ?? $data[$property][$fallbackLocale] ?? throw new \RuntimeException(sprintf('Invalid localized property value %1$s::%2$s', $type, $property));
             }
         }
         $context[self::LOCALIZING_NORMALIZER_LAST_TYPE] = $type;
