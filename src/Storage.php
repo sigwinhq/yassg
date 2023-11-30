@@ -26,7 +26,7 @@ interface Storage
     /**
      * @return array|T
      */
-    public function get(string $id): object|array;
+    public function get(string $id): array|object;
 
     public function has(string $id): bool;
 }

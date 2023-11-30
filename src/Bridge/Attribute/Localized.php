@@ -14,6 +14,4 @@ declare(strict_types=1);
 namespace Sigwin\YASSG\Bridge\Attribute;
 
 #[\Attribute(\Attribute::TARGET_PROPERTY)]
-final class Localized
-{
-}
+final class Localized {}

@@ -26,7 +26,10 @@ final class ResourceLocatorNormalizer implements DenormalizerInterface
         $this->locator = $locator;
     }
 
-    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = [])
+    /**
+     * @return array<string>|string
+     */
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): array|string
     {
         if (\is_string($data) === false) {
             throw new \LogicException('String expected');
@@ -35,8 +38,19 @@ final class ResourceLocatorNormalizer implements DenormalizerInterface
         return $this->locator->locate($data);
     }
 
-    public function supportsDenormalization(mixed $data, string $type, ?string $format = null): bool
+    /**
+     * @param array<array-key, mixed> $context
+     */
+    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
         return $type === Resource::class && \is_string($data) && str_starts_with($data, '@');
+    }
+
+    /**
+     * @return array<string, bool>
+     */
+    public function getSupportedTypes(?string $format): array
+    {
+        return ['*' => true];
     }
 }

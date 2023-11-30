@@ -18,59 +18,31 @@ use Symfony\Component\HttpKernel\Fragment\FragmentRendererInterface;
 use Symfony\Component\HttpKernel\Fragment\InlineFragmentRenderer;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-if (\Composer\InstalledVersions::getVersion('symfony/http-kernel') < 6.0) {
-    final class RelativeUrlInlineFragmentRenderer implements FragmentRendererInterface
+final class RelativeUrlInlineFragmentRenderer implements FragmentRendererInterface
+{
+    private InlineFragmentRenderer $fragmentRenderer;
+    private UrlGeneratorInterface $urlGenerator;
+
+    public function __construct(InlineFragmentRenderer $fragmentRenderer, UrlGeneratorInterface $urlGenerator)
     {
-        private InlineFragmentRenderer $fragmentRenderer;
-        private UrlGeneratorInterface $urlGenerator;
-
-        public function __construct(InlineFragmentRenderer $fragmentRenderer, UrlGeneratorInterface $urlGenerator)
-        {
-            $this->fragmentRenderer = $fragmentRenderer;
-            $this->urlGenerator = $urlGenerator;
-        }
-
-        /**
-         * @psalm-param string|\Symfony\Component\HttpKernel\Controller\ControllerReference $uri
-         */
-        public function render($uri, Request $request, array $options = []): \Symfony\Component\HttpFoundation\Response
-        {
-            if (\is_string($uri)) {
-                $uri = rtrim(str_replace($this->urlGenerator->getContext()->getBaseUrl(), '', $uri), '/');
-            }
-
-            return $this->fragmentRenderer->render($uri, $request, $options);
-        }
-
-        public function getName(): string
-        {
-            return $this->fragmentRenderer->getName();
-        }
+        $this->fragmentRenderer = $fragmentRenderer;
+        $this->urlGenerator = $urlGenerator;
     }
-} else {
-    final class RelativeUrlInlineFragmentRenderer implements FragmentRendererInterface
+
+    /**
+     * @param array<array-key, mixed> $options
+     */
+    public function render(string|\Symfony\Component\HttpKernel\Controller\ControllerReference $uri, Request $request, array $options = []): \Symfony\Component\HttpFoundation\Response
     {
-        private InlineFragmentRenderer $fragmentRenderer;
-        private UrlGeneratorInterface $urlGenerator;
-
-        public function __construct(InlineFragmentRenderer $fragmentRenderer, UrlGeneratorInterface $urlGenerator)
-        {
-            $this->fragmentRenderer = $fragmentRenderer;
-            $this->urlGenerator = $urlGenerator;
+        if (\is_string($uri)) {
+            $uri = rtrim(str_replace($this->urlGenerator->getContext()->getBaseUrl(), '', $uri), '/');
         }
 
-        public function render(\Symfony\Component\HttpKernel\Controller\ControllerReference|string $uri, Request $request, array $options = []): \Symfony\Component\HttpFoundation\Response
-        {
-            if (\is_string($uri)) {
-                $uri = rtrim(str_replace($this->urlGenerator->getContext()->getBaseUrl(), '', $uri), '/');
-            }
+        return $this->fragmentRenderer->render($uri, $request, $options);
+    }
 
-            return $this->fragmentRenderer->render($uri, $request, $options);
-        }
-
-        public function getName(): string
-        {
-            return $this->fragmentRenderer->getName();
-        }
+    public function getName(): string
+    {
+        return $this->fragmentRenderer->getName();
     }
 }

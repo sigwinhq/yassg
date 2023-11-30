@@ -14,22 +14,18 @@ declare(strict_types=1);
 namespace Sigwin\YASSG\Bridge\Symfony\Serializer\Normalizer;
 
 use Sigwin\YASSG\Context\LocaleContext;
-use Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
-final class LocalizingNormalizer implements CacheableSupportsMethodInterface, DenormalizerAwareInterface, DenormalizerInterface
+final class LocalizingNormalizer implements DenormalizerAwareInterface, DenormalizerInterface
 {
     use DenormalizerAwareTrait;
-    private const LOCALIZING_NORMALIZER_LAST_TYPE = 'sigwin_yassg_localizing_normalizer_last_type';
 
-    private array $classes;
-
-    public function __construct(array $classes)
-    {
-        $this->classes = $classes;
-    }
+    /**
+     * @param array<class-string, list<string>> $classes
+     */
+    public function __construct(private readonly array $classes) {}
 
     public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
@@ -38,7 +34,7 @@ final class LocalizingNormalizer implements CacheableSupportsMethodInterface, De
             $fallbackLocale = $context[LocaleContext::LOCALE_FALLBACK];
 
             if (! \is_array($data)) {
-                throw new \LogicException('Localizing normalizer can only work on array input data');
+                throw new \LogicException(sprintf('Localizing normalizer can only work on array input data, %1$s given for %2$s', \gettype($data), $type));
             }
 
             foreach ($this->classes[$type] as $property) {
@@ -47,21 +43,40 @@ final class LocalizingNormalizer implements CacheableSupportsMethodInterface, De
                     continue;
                 }
 
-                $data[$property] = $data[$property][$locale] ?? $data[$property][$fallbackLocale] ?? throw new \RuntimeException('Invalid localized property value '.$property);
+                $data[$property] = $data[$property][$locale] ?? $data[$property][$fallbackLocale] ?? throw new \RuntimeException(sprintf('Invalid localized property value %1$s::%2$s', $type, $property));
             }
         }
-        $context[self::LOCALIZING_NORMALIZER_LAST_TYPE] = $type;
 
         return $this->denormalizer->denormalize($data, $type, $format, $context);
     }
 
+    /**
+     * @param array<array-key, mixed> $context
+     */
     public function supportsDenormalization(mixed $data, string $type, ?string $format = null, ?array $context = null): bool
     {
-        return isset($this->classes[$type]) && ($context[self::LOCALIZING_NORMALIZER_LAST_TYPE] ?? null) !== $type;
+        if (! isset($this->classes[$type]) || ! \is_array($data)) {
+            return false;
+        }
+
+        foreach ($this->classes[$type] as $property) {
+            if (isset($data[$property]) === false) {
+                continue;
+            }
+
+            if (! \is_array($data[$property])) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
-    public function hasCacheableSupportsMethod(): bool
+    /**
+     * @return array<string, bool>
+     */
+    public function getSupportedTypes(?string $format): array
     {
-        return false;
+        return ['*' => true];
     }
 }

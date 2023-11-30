@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Sigwin\YASSG\Bridge\Symfony\Command;
 
 use Sigwin\YASSG\Generator;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -25,16 +26,17 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RequestContext;
 
+#[AsCommand(
+    name: 'yassg:generate'
+)]
 final class GenerateCommand extends Command
 {
-    protected static $defaultName = 'yassg:generate';
-
     private Generator $generator;
     private UrlGeneratorInterface $urlGenerator;
 
     public function __construct(Generator $generator, UrlGeneratorInterface $urlGenerator)
     {
-        parent::__construct('yassg:generate');
+        parent::__construct();
 
         $this->generator = $generator;
         $this->urlGenerator = $urlGenerator;

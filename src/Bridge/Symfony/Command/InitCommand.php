@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Sigwin\YASSG\Bridge\Symfony\Command;
 
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -22,14 +23,13 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Yaml\Yaml;
 
+#[AsCommand(name: 'yassg:init')]
 final class InitCommand extends Command
 {
     private const SOURCE_BASIC = 'basic';
     private const SOURCE_DEMO = 'demo';
     // private const SOURCE_GITHUB = 'github';
     private const SOURCE_GITLAB = 'gitlab';
-
-    protected static $defaultName = 'yassg:init';
 
     private string $initDir;
     private string $baseDir;
@@ -39,7 +39,7 @@ final class InitCommand extends Command
         $this->baseDir = $baseDir;
         $this->initDir = $initDir;
 
-        parent::__construct('yassg:init');
+        parent::__construct();
     }
 
     protected function configure(): void

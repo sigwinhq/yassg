@@ -15,9 +15,7 @@ namespace Sigwin\YASSG;
 
 final class BuildOptions
 {
-    public function __construct(private ?array $requestHeaders)
-    {
-    }
+    public function __construct(private ?array $requestHeaders) {}
 
     public function getRequestHeaders(): ?array
     {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.9.0@8b9ad1eb9e8b7d3101f949291da2b9f7767cd163">
+<files psalm-version="5.16.0@2897ba636551a8cb61601cc26f6ccfbba6c36591">
   <file src="bootstrap.php">
     <PossiblyFalseArgument>
       <code><![CDATA[getenv('YASSG_SKIP_BUNDLES')]]></code>
@@ -32,9 +32,6 @@
     </UnusedClass>
   </file>
   <file src="src/Bridge/Symfony/DependencyInjection/CompilerPass/ConfigureDatabasesCompilerPass.php">
-    <LessSpecificReturnType>
-      <code>array</code>
-    </LessSpecificReturnType>
     <MixedArgument>
       <code>$type</code>
     </MixedArgument>
@@ -185,21 +182,11 @@
     </UnusedClass>
   </file>
   <file src="src/Bridge/Symfony/HttpKernel/Fragment/RelativeUrlInlineFragmentRenderer.php">
-    <DuplicateClass>
-      <code>RelativeUrlInlineFragmentRenderer</code>
-    </DuplicateClass>
     <UnusedClass>
       <code>RelativeUrlInlineFragmentRenderer</code>
     </UnusedClass>
-    <UnusedParam>
-      <code>$fragmentRenderer</code>
-      <code>$urlGenerator</code>
-    </UnusedParam>
   </file>
   <file src="src/Bridge/Symfony/Kernel.php">
-    <LessSpecificReturnType>
-      <code>iterable</code>
-    </LessSpecificReturnType>
     <MixedArrayAccess>
       <code><![CDATA[$envs[$this->environment]]]></code>
       <code><![CDATA[$envs['all']]]></code>
@@ -219,6 +206,7 @@
       <code>configureContainer</code>
     </PossiblyUnusedMethod>
     <PropertyNotSetInConstructor>
+      <code>Kernel</code>
       <code>Kernel</code>
     </PropertyNotSetInConstructor>
     <UnresolvableInclude>
@@ -297,17 +285,11 @@
       <code>getAttributesMetadata</code>
       <code>getName</code>
     </InternalMethod>
-    <LessSpecificReturnType>
-      <code>array</code>
-    </LessSpecificReturnType>
     <MissingConstructor>
       <code>$classMetadataFactory</code>
     </MissingConstructor>
   </file>
   <file src="src/Bridge/Symfony/Serializer/Normalizer/CollectionNormalizer.php">
-    <DeprecatedInterface>
-      <code>CollectionNormalizer</code>
-    </DeprecatedInterface>
     <MixedAssignment>
       <code>$denormalized[$id]</code>
       <code>$item</code>
@@ -318,25 +300,28 @@
     <UnusedClass>
       <code>CollectionNormalizer</code>
     </UnusedClass>
+    <UnusedParam>
+      <code>$format</code>
+    </UnusedParam>
   </file>
   <file src="src/Bridge/Symfony/Serializer/Normalizer/ExpressionNormalizer.php">
-    <MethodSignatureMustProvideReturnType>
-      <code>denormalize</code>
-    </MethodSignatureMustProvideReturnType>
     <MixedAssignment>
       <code>$value</code>
     </MixedAssignment>
+    <MixedInferredReturnType>
+      <code>object</code>
+    </MixedInferredReturnType>
     <MixedReturnStatement>
       <code>$value</code>
     </MixedReturnStatement>
     <UnusedClass>
       <code>ExpressionNormalizer</code>
     </UnusedClass>
+    <UnusedParam>
+      <code>$format</code>
+    </UnusedParam>
   </file>
   <file src="src/Bridge/Symfony/Serializer/Normalizer/LocalizingNormalizer.php">
-    <DeprecatedInterface>
-      <code>LocalizingNormalizer</code>
-    </DeprecatedInterface>
     <MixedArrayAccess>
       <code>$data[$property][$fallbackLocale]</code>
       <code>$data[$property][$locale]</code>
@@ -369,14 +354,17 @@
     <UnusedClass>
       <code>LocalizingNormalizer</code>
     </UnusedClass>
+    <UnusedParam>
+      <code>$format</code>
+    </UnusedParam>
   </file>
   <file src="src/Bridge/Symfony/Serializer/Normalizer/ResourceLocatorNormalizer.php">
-    <MethodSignatureMustProvideReturnType>
-      <code>denormalize</code>
-    </MethodSignatureMustProvideReturnType>
     <UnusedClass>
       <code>ResourceLocatorNormalizer</code>
     </UnusedClass>
+    <UnusedParam>
+      <code>$format</code>
+    </UnusedParam>
   </file>
   <file src="src/Bridge/Twig/Extension/DatabaseExtension.php">
     <MixedArgument>
@@ -498,9 +486,6 @@
     </UnusedForeachValue>
   </file>
   <file src="src/Database/DatabaseTrait.php">
-    <LessSpecificReturnType>
-      <code>Collection</code>
-    </LessSpecificReturnType>
     <MixedArgument>
       <code>$value</code>
     </MixedArgument>
@@ -509,9 +494,6 @@
     </MixedArgumentTypeCoercion>
   </file>
   <file src="src/Database/MemoryDatabase.php">
-    <LessSpecificReturnType>
-      <code>int</code>
-    </LessSpecificReturnType>
     <MissingTemplateParam>
       <code>Database</code>
       <code>DatabaseTrait</code>
@@ -619,9 +601,17 @@
       <code>$locale</code>
       <code>$locale</code>
     </MixedAssignment>
+    <MixedInferredReturnType>
+      <code>T</code>
+    </MixedInferredReturnType>
     <MixedMethodCall>
       <code><![CDATA[new $this->class()]]></code>
     </MixedMethodCall>
+    <MixedReturnStatement>
+      <code><![CDATA[$this->denormalizer->denormalize($data, $this->class, null, $context + [
+                AbstractNormalizer::ALLOW_EXTRA_ATTRIBUTES => false,
+            ])]]></code>
+    </MixedReturnStatement>
     <PossiblyUndefinedStringArrayOffset>
       <code>$context[LocaleContext::LOCALE]</code>
       <code>$context[LocaleContext::LOCALE]</code>
@@ -733,14 +723,9 @@
     </PossiblyUnusedProperty>
   </file>
   <file src="tests/unit/GeneratorTest.php">
-    <DeprecatedMethod>
-      <code>withConsecutive</code>
-    </DeprecatedMethod>
-    <LessSpecificReturnType>
-      <code>Filesystem</code>
-      <code>KernelInterface</code>
-      <code>UrlGeneratorInterface</code>
-    </LessSpecificReturnType>
+    <InternalMethod>
+      <code>numberOfInvocations</code>
+    </InternalMethod>
     <MixedAssignment>
       <code>$params</code>
     </MixedAssignment>
