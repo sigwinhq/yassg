@@ -22,12 +22,10 @@ final class LocalizingNormalizer implements DenormalizerAwareInterface, Denormal
 {
     use DenormalizerAwareTrait;
 
-    private array $classes;
-
-    public function __construct(array $classes)
-    {
-        $this->classes = $classes;
-    }
+    /**
+     * @param array<class-string, list<string>> $classes
+     */
+    public function __construct(private readonly array $classes) {}
 
     public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
@@ -57,7 +55,7 @@ final class LocalizingNormalizer implements DenormalizerAwareInterface, Denormal
      */
     public function supportsDenormalization(mixed $data, string $type, ?string $format = null, ?array $context = null): bool
     {
-        if (!isset($this->classes[$type]) || !\is_array($data)) {
+        if (! isset($this->classes[$type]) || ! \is_array($data)) {
             return false;
         }
 
@@ -66,7 +64,7 @@ final class LocalizingNormalizer implements DenormalizerAwareInterface, Denormal
                 continue;
             }
 
-            if ( !\is_array($data[$property])) {
+            if (! \is_array($data[$property])) {
                 return false;
             }
         }
