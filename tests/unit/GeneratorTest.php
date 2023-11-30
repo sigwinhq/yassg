@@ -144,17 +144,26 @@ final class GeneratorTest extends TestCase
             $remapped[] = array_merge([$name], [$params], [UrlGeneratorInterface::ABSOLUTE_URL]);
         }
 
+        $matcher = self::exactly(\count($routes));
         $urlGenerator
-            ->expects(self::exactly(\count($routes)))
+            ->expects($matcher)
             ->method('generate')
-            ->withConsecutive(...$remapped)
-            ->willReturn('/////')
+            ->willReturnCallback(static function (string $name, array $params, int $type) use ($matcher, $remapped): string {
+                /** @var array{string, array<array-key, mixed>, int} $call */
+                $call = $remapped[$matcher->numberOfInvocations() - 1];
+
+                self::assertSame($call[0], $name);
+                self::assertSame($call[1], $params);
+                self::assertSame($call[2], $type);
+
+                return '/';
+            })
         ;
 
         return $urlGenerator;
     }
 
-    private function mockKernel(string $baseUrl, string|false $body, int $status = 200): KernelInterface
+    private function mockKernel(string $baseUrl, false|string $body, int $status = 200): KernelInterface
     {
         $response = $this->getMockBuilder(Response::class)->getMock();
         $response

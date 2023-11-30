@@ -59,7 +59,7 @@ if (\Composer\InstalledVersions::getVersion('symfony/http-kernel') < 6.0) {
             $this->urlGenerator = $urlGenerator;
         }
 
-        public function render(\Symfony\Component\HttpKernel\Controller\ControllerReference|string $uri, Request $request, array $options = []): \Symfony\Component\HttpFoundation\Response
+        public function render(string|\Symfony\Component\HttpKernel\Controller\ControllerReference $uri, Request $request, array $options = []): \Symfony\Component\HttpFoundation\Response
         {
             if (\is_string($uri)) {
                 $uri = rtrim(str_replace($this->urlGenerator->getContext()->getBaseUrl(), '', $uri), '/');

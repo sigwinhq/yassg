@@ -13,6 +13,4 @@ declare(strict_types=1);
 
 namespace Sigwin\YASSG;
 
-interface Resource extends \Stringable
-{
-}
+interface Resource extends \Stringable {}

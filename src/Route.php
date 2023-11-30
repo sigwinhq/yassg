@@ -18,8 +18,7 @@ final class Route
     public function __construct(
         private string $name,
         private array $parameters,
-    ) {
-    }
+    ) {}
 
     public function getName(): string
     {

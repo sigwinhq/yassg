@@ -18,12 +18,11 @@ use Sigwin\YASSG\Collection;
 use Sigwin\YASSG\Collection\ReadOnlyCollection;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactoryInterface;
-use Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
-final class CollectionNormalizer implements CacheableSupportsMethodInterface, DenormalizerAwareInterface, DenormalizerInterface
+final class CollectionNormalizer implements DenormalizerAwareInterface, DenormalizerInterface
 {
     use AttributeMetadataTrait;
     use DenormalizerAwareTrait;
@@ -60,8 +59,8 @@ final class CollectionNormalizer implements CacheableSupportsMethodInterface, De
         return str_ends_with($type, '[]');
     }
 
-    public function hasCacheableSupportsMethod(): bool
+    public function getSupportedTypes(?string $format): array
     {
-        return true;
+        return [Collection::class => true];
     }
 }

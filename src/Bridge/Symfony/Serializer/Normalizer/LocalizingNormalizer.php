@@ -14,12 +14,11 @@ declare(strict_types=1);
 namespace Sigwin\YASSG\Bridge\Symfony\Serializer\Normalizer;
 
 use Sigwin\YASSG\Context\LocaleContext;
-use Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
-final class LocalizingNormalizer implements CacheableSupportsMethodInterface, DenormalizerAwareInterface, DenormalizerInterface
+final class LocalizingNormalizer implements DenormalizerAwareInterface, DenormalizerInterface
 {
     use DenormalizerAwareTrait;
     private const LOCALIZING_NORMALIZER_LAST_TYPE = 'sigwin_yassg_localizing_normalizer_last_type';
@@ -60,8 +59,8 @@ final class LocalizingNormalizer implements CacheableSupportsMethodInterface, De
         return isset($this->classes[$type]) && ($context[self::LOCALIZING_NORMALIZER_LAST_TYPE] ?? null) !== $type;
     }
 
-    public function hasCacheableSupportsMethod(): bool
+    public function getSupportedTypes(?string $format): array
     {
-        return false;
+        return ['*' => true];
     }
 }
