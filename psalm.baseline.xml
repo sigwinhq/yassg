@@ -307,6 +307,9 @@
     <MixedAssignment>
       <code>$value</code>
     </MixedAssignment>
+    <MixedInferredReturnType>
+      <code>object</code>
+    </MixedInferredReturnType>
     <MixedReturnStatement>
       <code>$value</code>
     </MixedReturnStatement>
@@ -597,9 +600,17 @@
       <code>$locale</code>
       <code>$locale</code>
     </MixedAssignment>
+    <MixedInferredReturnType>
+      <code>T</code>
+    </MixedInferredReturnType>
     <MixedMethodCall>
       <code><![CDATA[new $this->class()]]></code>
     </MixedMethodCall>
+    <MixedReturnStatement>
+      <code><![CDATA[$this->denormalizer->denormalize($data, $this->class, null, $context + [
+                AbstractNormalizer::ALLOW_EXTRA_ATTRIBUTES => false,
+            ])]]></code>
+    </MixedReturnStatement>
     <PossiblyUndefinedStringArrayOffset>
       <code>$context[LocaleContext::LOCALE]</code>
       <code>$context[LocaleContext::LOCALE]</code>
