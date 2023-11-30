@@ -54,11 +54,17 @@ final class CollectionNormalizer implements DenormalizerAwareInterface, Denormal
         return new ReadOnlyCollection($this->expressionLanguage, $this->getProperties($type), $denormalized);
     }
 
+    /**
+     * @param array<array-key, mixed> $context
+     */
     public function supportsDenormalization(mixed $data, string $type, ?string $format = null, ?array $context = null): bool
     {
         return str_ends_with($type, '[]');
     }
 
+    /**
+     * @return array<string, bool>
+     */
     public function getSupportedTypes(?string $format): array
     {
         return [Collection::class => true];

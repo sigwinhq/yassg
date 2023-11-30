@@ -38,11 +38,17 @@ final class ResourceLocatorNormalizer implements DenormalizerInterface
         return $this->locator->locate($data);
     }
 
+    /**
+     * @param array<array-key, mixed> $context
+     */
     public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
         return $type === Resource::class && \is_string($data) && str_starts_with($data, '@');
     }
 
+    /**
+     * @return array<string, bool>
+     */
     public function getSupportedTypes(?string $format): array
     {
         return ['*' => true];

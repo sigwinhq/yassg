@@ -47,11 +47,17 @@ final class ExpressionNormalizer implements DenormalizerInterface
         return $value;
     }
 
+    /**
+     * @param array<array-key, mixed> $context
+     */
     public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
         return \is_string($data) && str_starts_with($data, '@=');
     }
 
+    /**
+     * @return array<string, bool>
+     */
     public function getSupportedTypes(?string $format): array
     {
         return ['object' => true];

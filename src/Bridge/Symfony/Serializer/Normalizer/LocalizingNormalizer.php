@@ -54,11 +54,17 @@ final class LocalizingNormalizer implements DenormalizerAwareInterface, Denormal
         return $this->denormalizer->denormalize($data, $type, $format, $context);
     }
 
+    /**
+     * @param array<array-key, mixed> $context
+     */
     public function supportsDenormalization(mixed $data, string $type, ?string $format = null, ?array $context = null): bool
     {
         return isset($this->classes[$type]) && ($context[self::LOCALIZING_NORMALIZER_LAST_TYPE] ?? null) !== $type;
     }
 
+    /**
+     * @return array<string, bool>
+     */
     public function getSupportedTypes(?string $format): array
     {
         return ['*' => true];
