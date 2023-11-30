@@ -21,7 +21,6 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 final class LocalizingNormalizer implements DenormalizerAwareInterface, DenormalizerInterface
 {
     use DenormalizerAwareTrait;
-    private const LOCALIZING_NORMALIZER_LAST_TYPE = 'sigwin_yassg_localizing_normalizer_last_type';
 
     private array $classes;
 
@@ -49,7 +48,6 @@ final class LocalizingNormalizer implements DenormalizerAwareInterface, Denormal
                 $data[$property] = $data[$property][$locale] ?? $data[$property][$fallbackLocale] ?? throw new \RuntimeException(sprintf('Invalid localized property value %1$s::%2$s', $type, $property));
             }
         }
-        $context[self::LOCALIZING_NORMALIZER_LAST_TYPE] = $type;
 
         return $this->denormalizer->denormalize($data, $type, $format, $context);
     }
@@ -59,7 +57,21 @@ final class LocalizingNormalizer implements DenormalizerAwareInterface, Denormal
      */
     public function supportsDenormalization(mixed $data, string $type, ?string $format = null, ?array $context = null): bool
     {
-        return isset($this->classes[$type]) && ($context[self::LOCALIZING_NORMALIZER_LAST_TYPE] ?? null) !== $type;
+        if (!isset($this->classes[$type]) || !\is_array($data)) {
+            return false;
+        }
+
+        foreach ($this->classes[$type] as $property) {
+            if (isset($data[$property]) === false) {
+                continue;
+            }
+
+            if ( !\is_array($data[$property])) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**

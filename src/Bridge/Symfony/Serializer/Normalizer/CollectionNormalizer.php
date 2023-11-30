@@ -67,6 +67,6 @@ final class CollectionNormalizer implements DenormalizerAwareInterface, Denormal
      */
     public function getSupportedTypes(?string $format): array
     {
-        return [Collection::class => true];
+        return ['*' => true];
     }
 }
