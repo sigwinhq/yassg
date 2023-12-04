@@ -48,8 +48,12 @@ jobs:
             -
                 name: Composer install
                 env:
-                    PHP_VERSION: 8.1
+                    PHP_VERSION: 8.2
                 run: make composer/install
+            -
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: 8.2
             -
                 name: Run build
                 working-directory: tests/functional/site
@@ -72,8 +76,12 @@ jobs:
             -
                 name: Composer install
                 env:
-                    PHP_VERSION: 8.1
+                    PHP_VERSION: 8.2
                 run: make composer/install
+            -
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: 8.2
             -
                 name: Run init
                 working-directory: tests/functional/init
