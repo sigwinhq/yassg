@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sigwin\YASSG;
 
-final class BuildOptions
+final readonly class BuildOptions
 {
     public function __construct(private ?array $requestHeaders) {}
 

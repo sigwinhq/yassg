@@ -3,7 +3,7 @@
     "description": "Yet Another Static Site Generator",
     "license": "MIT",
     "require": {
-        "php": "^8.1",
+        "php": "^8.2",
         "bentools/cartesian-product": "^1.4",
         "league/commonmark": "^2.3",
         "phpdocumentor/type-resolver": "^1.0",

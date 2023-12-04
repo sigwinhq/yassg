@@ -19,17 +19,12 @@ use Twig\TwigFunction;
 
 final class IndexExtension extends AbstractExtension
 {
-    private Permutator $permutator;
-
-    public function __construct(Permutator $permutator)
-    {
-        $this->permutator = $permutator;
-    }
+    public function __construct(private readonly Permutator $permutator) {}
 
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('yassg_index', [$this->permutator, 'permute']),
+            new TwigFunction('yassg_index', $this->permutator->permute(...)),
         ];
     }
 }

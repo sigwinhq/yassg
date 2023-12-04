@@ -5,7 +5,7 @@ sigwin_yassg:
         file:
             path: /download/{file}.json
             defaults:
-                _controller: Sigwin\YASSG\Test\Functional\Site\Controller\TestController::jsonAction
+                _controller: Sigwin\YASSG\Test\Functional\Site\Controller\TestController::dumpJson
             catalog:
                 file: "['something', 'something_else']"
         homepage:
@@ -32,10 +32,10 @@ sigwin_yassg:
             path: /{_locale}/product_with_alias/{slug}
             defaults:
                 slug: abcd
-                _controller: Sigwin\YASSG\Test\Functional\Site\Controller\TestController::indexAction
+                _controller: Sigwin\YASSG\Test\Functional\Site\Controller\TestController::index
         product_renderer:
             path: /{_locale}/_product_renderer/{slug}
             defaults:
-                _controller: Sigwin\YASSG\Test\Functional\Site\Controller\TestController::indexAction
+                _controller: Sigwin\YASSG\Test\Functional\Site\Controller\TestController::index
             options:
                 skip: true

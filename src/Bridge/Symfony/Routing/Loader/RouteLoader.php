@@ -18,21 +18,16 @@ use Symfony\Bundle\FrameworkBundle\Routing\RouteLoaderInterface;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
 
-final class RouteLoader implements RouteLoaderInterface
+final readonly class RouteLoader implements RouteLoaderInterface
 {
-    private array $routes;
-
-    public function __construct(array $routes)
-    {
-        $this->routes = $routes;
-    }
+    public function __construct(private array $routes) {}
 
     public function __invoke(): RouteCollection
     {
         $collection = new RouteCollection();
 
         foreach ($this->routes as $name => $route) {
-            $hasFilename = mb_strpos($route['path'], '.') !== false;
+            $hasFilename = mb_strpos((string) $route['path'], '.') !== false;
 
             if ($hasFilename) {
                 $path = $route['path'];

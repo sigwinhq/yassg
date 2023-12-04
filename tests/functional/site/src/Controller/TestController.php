@@ -19,12 +19,12 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class TestController extends AbstractController
 {
-    public function indexAction(): Response
+    public function index(): Response
     {
         return new Response(__METHOD__);
     }
 
-    public function jsonAction(string $file): JsonResponse
+    public function dumpJson(string $file): JsonResponse
     {
         return new JsonResponse(['file' => $file, 'rot13' => str_rot13($file)]);
     }

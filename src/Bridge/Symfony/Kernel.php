@@ -25,22 +25,12 @@ final class Kernel extends \Symfony\Component\HttpKernel\Kernel
 {
     use MicroKernelTrait;
 
-    private string $baseDir;
-
-    /**
-     * @var list<string>
-     */
-    private array $skipBundles;
-
     /**
      * @param list<string> $skipBundles
      */
-    public function __construct(string $baseDir, string $environment, bool $debug, array $skipBundles = [])
+    public function __construct(private readonly string $baseDir, string $environment, bool $debug, private readonly array $skipBundles = [])
     {
         parent::__construct($environment, $debug);
-
-        $this->baseDir = $baseDir;
-        $this->skipBundles = $skipBundles;
     }
 
     public function getCacheDir(): string

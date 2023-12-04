@@ -15,14 +15,9 @@ namespace Sigwin\YASSG;
 
 use Psr\Container\ContainerInterface;
 
-final class DatabaseProvider
+final readonly class DatabaseProvider
 {
-    private ContainerInterface $locator;
-
-    public function __construct(ContainerInterface $locator)
-    {
-        $this->locator = $locator;
-    }
+    public function __construct(private ContainerInterface $locator) {}
 
     public function getDatabase(string $name): Database
     {

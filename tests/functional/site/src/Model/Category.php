@@ -22,9 +22,9 @@ final class Category
     #[Localized]
     public string $name;
     #[Localized]
-    public ?string $description;
+    public ?string $description = null;
 
-    public ?self $parent;
+    public ?self $parent = null;
 
     /** @var Collection<string, Product> */
     public Collection $products;

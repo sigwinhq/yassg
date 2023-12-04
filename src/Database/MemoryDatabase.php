@@ -22,15 +22,12 @@ final class MemoryDatabase implements Database
 {
     use DatabaseTrait;
 
-    private Storage $storage;
-
     /**
      * @param array<string> $names
      * @param int<1, max>   $limit
      */
-    public function __construct(Storage $storage, ExpressionLanguage $expressionLanguage, array $names, int $limit)
+    public function __construct(private readonly Storage $storage, ExpressionLanguage $expressionLanguage, array $names, int $limit)
     {
-        $this->storage = $storage;
         $this->expressionLanguage = $expressionLanguage;
         $this->names = $names;
         $this->limit = $limit;

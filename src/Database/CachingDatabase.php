@@ -23,17 +23,8 @@ final class CachingDatabase implements Database
 {
     use DatabaseTrait;
 
-    private string $name;
-    private Database $database;
-    private CacheItemPoolInterface $cacheItemPool;
-    private LocaleContext $localeContext;
-
-    public function __construct(string $name, Database $database, CacheItemPoolInterface $cacheItemPool, LocaleContext $localeContext, ExpressionLanguage $expressionLanguage, array $names)
+    public function __construct(private readonly string $name, private readonly Database $database, private readonly CacheItemPoolInterface $cacheItemPool, private readonly LocaleContext $localeContext, ExpressionLanguage $expressionLanguage, array $names)
     {
-        $this->name = $name;
-        $this->database = $database;
-        $this->cacheItemPool = $cacheItemPool;
-        $this->localeContext = $localeContext;
         $this->expressionLanguage = $expressionLanguage;
         $this->names = $names;
         $this->limit = $this->database->getPageLimit();

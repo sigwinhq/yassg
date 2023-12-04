@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Sigwin\YASSG;
 
-final class Location
+final readonly class Location
 {
     public function __construct(
         private Route $route,

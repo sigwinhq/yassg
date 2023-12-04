@@ -17,18 +17,13 @@ use League\CommonMark\ConverterInterface;
 use League\CommonMark\Extension\FrontMatter\FrontMatterProviderInterface;
 use Sigwin\YASSG\FileDecoder;
 
-final class MarkdownFileDecoder implements FileDecoder
+final readonly class MarkdownFileDecoder implements FileDecoder
 {
     use FileDecoderTrait;
 
     private const EXTENSIONS = ['md', 'markdown'];
 
-    private ConverterInterface $converter;
-
-    public function __construct(ConverterInterface $converter)
-    {
-        $this->converter = $converter;
-    }
+    public function __construct(private ConverterInterface $converter) {}
 
     public function decode(\SplFileInfo $file): array
     {

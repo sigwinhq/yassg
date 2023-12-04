@@ -27,11 +27,8 @@ final class CollectionNormalizer implements DenormalizerAwareInterface, Denormal
     use AttributeMetadataTrait;
     use DenormalizerAwareTrait;
 
-    private ExpressionLanguage $expressionLanguage;
-
-    public function __construct(ExpressionLanguage $expressionLanguage, ClassMetadataFactoryInterface $classMetadataFactory)
+    public function __construct(private readonly ExpressionLanguage $expressionLanguage, ClassMetadataFactoryInterface $classMetadataFactory)
     {
-        $this->expressionLanguage = $expressionLanguage;
         $this->classMetadataFactory = $classMetadataFactory;
     }
 

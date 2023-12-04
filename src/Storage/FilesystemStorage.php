@@ -21,13 +21,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class FilesystemStorage implements StorageWithOptions
 {
-    private FileDecoder $decoder;
-    private array $roots;
-    private Finder $finder;
+    private readonly array $roots;
+    private readonly Finder $finder;
 
-    public function __construct(FileLocatorInterface $locator, FileDecoder $decoder, array $root, ?array $names = null)
+    public function __construct(FileLocatorInterface $locator, private readonly FileDecoder $decoder, array $root, ?array $names = null)
     {
-        $this->decoder = $decoder;
         $this->roots = array_map(static function (string $path) use ($locator): string {
             if (str_starts_with($path, '@')) {
                 /** @phpstan-ignore-next-line PHPStan thinks this is array|string, but only string is possible */
