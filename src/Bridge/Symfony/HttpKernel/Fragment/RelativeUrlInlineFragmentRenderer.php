@@ -18,16 +18,9 @@ use Symfony\Component\HttpKernel\Fragment\FragmentRendererInterface;
 use Symfony\Component\HttpKernel\Fragment\InlineFragmentRenderer;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-final class RelativeUrlInlineFragmentRenderer implements FragmentRendererInterface
+final readonly class RelativeUrlInlineFragmentRenderer implements FragmentRendererInterface
 {
-    private InlineFragmentRenderer $fragmentRenderer;
-    private UrlGeneratorInterface $urlGenerator;
-
-    public function __construct(InlineFragmentRenderer $fragmentRenderer, UrlGeneratorInterface $urlGenerator)
-    {
-        $this->fragmentRenderer = $fragmentRenderer;
-        $this->urlGenerator = $urlGenerator;
-    }
+    public function __construct(private InlineFragmentRenderer $fragmentRenderer, private UrlGeneratorInterface $urlGenerator) {}
 
     /**
      * @param array<array-key, mixed> $options

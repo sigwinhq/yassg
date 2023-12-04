@@ -25,18 +25,6 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
  */
 final class DenormalizingStorage implements Storage
 {
-    private DenormalizerInterface $denormalizer;
-
-    /**
-     * @var Storage<T>
-     */
-    private Storage $storage;
-    /**
-     * @var class-string<T>
-     */
-    private string $class;
-    private LocaleContext $context;
-
     /**
      * @var array<string, array<string, array<string, T>>>
      */
@@ -46,13 +34,7 @@ final class DenormalizingStorage implements Storage
      * @param Storage<T>      $storage
      * @param class-string<T> $class
      */
-    public function __construct(DenormalizerInterface $denormalizer, Storage $storage, string $class, LocaleContext $context)
-    {
-        $this->denormalizer = $denormalizer;
-        $this->storage = $storage;
-        $this->class = $class;
-        $this->context = $context;
-    }
+    public function __construct(private readonly DenormalizerInterface $denormalizer, private readonly Storage $storage, private readonly string $class, private readonly LocaleContext $context) {}
 
     /**
      * @return iterable<string, T>

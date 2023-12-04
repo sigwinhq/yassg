@@ -22,22 +22,9 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 /**
  * @internal
  */
-final class Generator
+final readonly class Generator
 {
-    private string $buildDir;
-    private Permutator $permutator;
-    private UrlGeneratorInterface $urlGenerator;
-    private KernelInterface $kernel;
-    private Filesystem $filesystem;
-
-    public function __construct(string $buildDir, Permutator $permutator, UrlGeneratorInterface $urlGenerator, KernelInterface $kernel, Filesystem $filesystem)
-    {
-        $this->buildDir = $buildDir;
-        $this->kernel = $kernel;
-        $this->urlGenerator = $urlGenerator;
-        $this->permutator = $permutator;
-        $this->filesystem = $filesystem;
-    }
+    public function __construct(private string $buildDir, private Permutator $permutator, private UrlGeneratorInterface $urlGenerator, private KernelInterface $kernel, private Filesystem $filesystem) {}
 
     public function generate(callable $callable): void
     {

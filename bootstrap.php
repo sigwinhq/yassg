@@ -30,7 +30,11 @@ $autoloaders = [
 $baseDir = null;
 foreach ($autoloaders as $autoloader) {
     if (true === file_exists($autoloader)) {
-        $GLOBALS['YASSG_BASEDIR'] = $baseDir = getcwd();
+        $baseDir = getcwd();
+        if ($baseDir === false) {
+            throw new \RuntimeException('Could not get current working directory');
+        }
+        $GLOBALS['YASSG_BASEDIR'] = $baseDir;
 
         require_once $autoloader;
 

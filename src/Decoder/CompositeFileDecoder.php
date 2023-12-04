@@ -15,15 +15,12 @@ namespace Sigwin\YASSG\Decoder;
 
 use Sigwin\YASSG\FileDecoder;
 
-final class CompositeFileDecoder implements FileDecoder
+final readonly class CompositeFileDecoder implements FileDecoder
 {
-    /** @var iterable<FileDecoder> */
-    private iterable $decoders;
-
-    public function __construct(iterable $decoders)
-    {
-        $this->decoders = $decoders;
-    }
+    public function __construct(
+        /** @var iterable<FileDecoder> */
+        private iterable $decoders
+    ) {}
 
     public function supports(\SplFileInfo $file): bool
     {

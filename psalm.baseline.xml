@@ -138,9 +138,6 @@
       <code>variableNode</code>
       <code>variableNode</code>
     </MixedMethodCall>
-    <PossiblyNullReference>
-      <code>end</code>
-    </PossiblyNullReference>
     <UndefinedInterfaceMethod>
       <code>end</code>
     </UndefinedInterfaceMethod>
@@ -215,8 +212,6 @@
   </file>
   <file src="src/Bridge/Symfony/Routing/Generator/FilenameUrlGenerator.php">
     <MixedArgument>
-      <code><![CDATA[$this->routes[$name]['path']]]></code>
-      <code><![CDATA[$this->routes[$name]['path']]]></code>
       <code><![CDATA[$this->stripParameters[$name] ?? []]]></code>
     </MixedArgument>
     <MixedArrayAccess>
@@ -256,7 +251,6 @@
     <MixedArgument>
       <code>$path</code>
       <code><![CDATA[$route['defaults'] ?? []]]></code>
-      <code><![CDATA[$route['path']]]></code>
     </MixedArgument>
     <MixedArgumentTypeCoercion>
       <code>$name</code>
@@ -300,9 +294,6 @@
     <UnusedClass>
       <code>CollectionNormalizer</code>
     </UnusedClass>
-    <UnusedParam>
-      <code>$format</code>
-    </UnusedParam>
   </file>
   <file src="src/Bridge/Symfony/Serializer/Normalizer/ExpressionNormalizer.php">
     <MixedAssignment>
@@ -317,9 +308,6 @@
     <UnusedClass>
       <code>ExpressionNormalizer</code>
     </UnusedClass>
-    <UnusedParam>
-      <code>$format</code>
-    </UnusedParam>
   </file>
   <file src="src/Bridge/Symfony/Serializer/Normalizer/LocalizingNormalizer.php">
     <MixedArrayAccess>
@@ -327,8 +315,6 @@
       <code>$data[$property][$locale]</code>
     </MixedArrayAccess>
     <MixedArrayOffset>
-      <code>$data[$property]</code>
-      <code>$data[$property]</code>
       <code>$data[$property][$fallbackLocale]</code>
       <code>$data[$property][$locale]</code>
     </MixedArrayOffset>
@@ -336,14 +322,7 @@
       <code>$data[$property]</code>
       <code>$fallbackLocale</code>
       <code>$locale</code>
-      <code>$property</code>
     </MixedAssignment>
-    <MixedOperand>
-      <code>$property</code>
-    </MixedOperand>
-    <MixedReturnStatement>
-      <code><![CDATA[$this->denormalizer->denormalize($data, $type, $format, $context)]]></code>
-    </MixedReturnStatement>
     <PossiblyUndefinedStringArrayOffset>
       <code>$context[LocaleContext::LOCALE]</code>
       <code>$context[LocaleContext::LOCALE_FALLBACK]</code>
@@ -354,17 +333,11 @@
     <UnusedClass>
       <code>LocalizingNormalizer</code>
     </UnusedClass>
-    <UnusedParam>
-      <code>$format</code>
-    </UnusedParam>
   </file>
   <file src="src/Bridge/Symfony/Serializer/Normalizer/ResourceLocatorNormalizer.php">
     <UnusedClass>
       <code>ResourceLocatorNormalizer</code>
     </UnusedClass>
-    <UnusedParam>
-      <code>$format</code>
-    </UnusedParam>
   </file>
   <file src="src/Bridge/Twig/Extension/DatabaseExtension.php">
     <MixedArgument>
@@ -534,9 +507,6 @@
     </UnusedClass>
   </file>
   <file src="src/Decoder/CompositeFileDecoder.php">
-    <MixedPropertyTypeCoercion>
-      <code>$decoders</code>
-    </MixedPropertyTypeCoercion>
     <UnusedClass>
       <code>CompositeFileDecoder</code>
     </UnusedClass>
@@ -641,9 +611,6 @@
     </UnusedClass>
   </file>
   <file src="src/Storage/MemoryStorage.php">
-    <MixedPropertyTypeCoercion>
-      <code>$values</code>
-    </MixedPropertyTypeCoercion>
     <UnusedClass>
       <code>MemoryStorage</code>
     </UnusedClass>
@@ -671,9 +638,7 @@
   </file>
   <file src="tests/functional/site/src/Model/Category.php">
     <MissingConstructor>
-      <code>$description</code>
       <code>$name</code>
-      <code>$parent</code>
       <code>$products</code>
       <code>$slug</code>
     </MissingConstructor>
@@ -734,12 +699,10 @@
   </file>
   <file src="web/index.php">
     <MixedArgument>
-      <code><![CDATA[$GLOBALS['YASSG_BASEDIR']]]></code>
-      <code><![CDATA[$GLOBALS['YASSG_SKIP_BUNDLES'] ?? []]]></code>
+      <code><![CDATA[$GLOBALS['YASSG_BASEDIR'] ?? throw new LogicException('YASSG base dir not found')]]></code>
       <code><![CDATA[$context['APP_ENV']]]></code>
     </MixedArgument>
     <PossiblyUndefinedStringArrayOffset>
-      <code><![CDATA[$GLOBALS['YASSG_BASEDIR']]]></code>
       <code><![CDATA[$context['APP_DEBUG']]]></code>
       <code><![CDATA[$context['APP_ENV']]]></code>
     </PossiblyUndefinedStringArrayOffset>

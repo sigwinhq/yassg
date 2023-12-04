@@ -16,16 +16,9 @@ namespace Sigwin\YASSG\Decoder;
 use Psr\Cache\CacheItemPoolInterface;
 use Sigwin\YASSG\FileDecoder;
 
-final class CachingFileDecoder implements FileDecoder
+final readonly class CachingFileDecoder implements FileDecoder
 {
-    private FileDecoder $decoder;
-    private CacheItemPoolInterface $cachePoolItem;
-
-    public function __construct(FileDecoder $decoder, CacheItemPoolInterface $cacheItemPool)
-    {
-        $this->decoder = $decoder;
-        $this->cachePoolItem = $cacheItemPool;
-    }
+    public function __construct(private FileDecoder $decoder, private CacheItemPoolInterface $cachePoolItem) {}
 
     public function supports(\SplFileInfo $file): bool
     {

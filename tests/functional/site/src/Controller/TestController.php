@@ -24,7 +24,7 @@ final class TestController extends AbstractController
         return new Response(__METHOD__);
     }
 
-    public function json(string $file, int $status = 200, array $headers = [], array $context = []): JsonResponse
+    public function dumpJson(string $file): JsonResponse
     {
         return new JsonResponse(['file' => $file, 'rot13' => str_rot13($file)]);
     }

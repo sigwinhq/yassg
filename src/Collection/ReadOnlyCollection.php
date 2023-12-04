@@ -21,16 +21,10 @@ use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
  */
 final class ReadOnlyCollection implements Collection
 {
-    private ExpressionLanguage $expressionLanguage;
-    private array $names;
-    private array $data;
-    private int $total;
+    private readonly int $total;
 
-    public function __construct(ExpressionLanguage $expressionLanguage, array $names, array $data, ?int $total = null)
+    public function __construct(private readonly ExpressionLanguage $expressionLanguage, private readonly array $names, private array $data, ?int $total = null)
     {
-        $this->expressionLanguage = $expressionLanguage;
-        $this->names = $names;
-        $this->data = $data;
         $this->total = $total ?? \count($data);
     }
 

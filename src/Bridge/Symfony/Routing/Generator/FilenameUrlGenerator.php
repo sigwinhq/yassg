@@ -19,7 +19,7 @@ use Symfony\Component\Routing\RequestContext;
 
 final class FilenameUrlGenerator implements UrlGeneratorInterface
 {
-    public function __construct(private UrlGeneratorInterface $urlGenerator, private array $stripParameters, private array $routes) {}
+    public function __construct(private readonly UrlGeneratorInterface $urlGenerator, private array $stripParameters, private array $routes) {}
 
     public function generate(string $name, array $parameters = [], int $referenceType = self::ABSOLUTE_PATH): string
     {
@@ -28,7 +28,7 @@ final class FilenameUrlGenerator implements UrlGeneratorInterface
         }
 
         $this->stripParameters($this->stripParameters[$name] ?? [], $parameters);
-        if (str_contains($this->routes[$name]['path'], '.')) {
+        if (str_contains((string) $this->routes[$name]['path'], '.')) {
             $parameters['_filename'] = null;
         } else {
             $parameters += ['_filename' => 'index.html'];
@@ -41,7 +41,7 @@ final class FilenameUrlGenerator implements UrlGeneratorInterface
 
         /** @var bool $indexFile */
         $indexFile = $this->getContext()->getParameter('index-file') ?? false;
-        if ($indexFile === false && str_contains($this->routes[$name]['path'], '.') === false) {
+        if ($indexFile === false && str_contains((string) $this->routes[$name]['path'], '.') === false) {
             $url = \dirname($url).'/';
         }
 

@@ -17,16 +17,9 @@ use Sigwin\YASSG\DatabaseProvider;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
-final class ExpressionNormalizer implements DenormalizerInterface
+final readonly class ExpressionNormalizer implements DenormalizerInterface
 {
-    private ExpressionLanguage $expressionLanguage;
-    private DatabaseProvider $databaseProvider;
-
-    public function __construct(ExpressionLanguage $expressionLanguage, DatabaseProvider $databaseProvider)
-    {
-        $this->expressionLanguage = $expressionLanguage;
-        $this->databaseProvider = $databaseProvider;
-    }
+    public function __construct(private ExpressionLanguage $expressionLanguage, private DatabaseProvider $databaseProvider) {}
 
     public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): object
     {

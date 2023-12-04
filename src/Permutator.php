@@ -17,18 +17,9 @@ use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
 use function BenTools\CartesianProduct\cartesian_product;
 
-final class Permutator
+final readonly class Permutator
 {
-    private array $routes;
-    private DatabaseProvider $provider;
-    private ExpressionLanguage $expressionLanguage;
-
-    public function __construct(array $routes, DatabaseProvider $provider, ExpressionLanguage $expressionLanguage)
-    {
-        $this->routes = $routes;
-        $this->provider = $provider;
-        $this->expressionLanguage = $expressionLanguage;
-    }
+    public function __construct(private array $routes, private DatabaseProvider $provider, private ExpressionLanguage $expressionLanguage) {}
 
     /**
      * @return \Traversable<Location>

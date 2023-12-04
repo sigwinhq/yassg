@@ -17,14 +17,9 @@ use Sigwin\YASSG\Resource;
 use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
-final class ResourceLocatorNormalizer implements DenormalizerInterface
+final readonly class ResourceLocatorNormalizer implements DenormalizerInterface
 {
-    private FileLocatorInterface $locator;
-
-    public function __construct(FileLocatorInterface $locator)
-    {
-        $this->locator = $locator;
-    }
+    public function __construct(private FileLocatorInterface $locator) {}
 
     /**
      * @return array<string>|string

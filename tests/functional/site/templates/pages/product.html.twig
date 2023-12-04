@@ -14,7 +14,7 @@
                 <h2>{{ product.getName() }}</h2>
 
                 <h3>Render via <code>controller()</code></h3>
-                <code>{{ render(controller('Sigwin\\YASSG\\Test\\Functional\\Site\\Controller\\TestController::indexAction')) }}</code>
+                <code>{{ render(controller('Sigwin\\YASSG\\Test\\Functional\\Site\\Controller\\TestController::index')) }}</code>
 
                 <h3>Render via <code>url()</code></h3>
                 <code>{{ render(url('product_renderer', {slug: slug})) }}</code>

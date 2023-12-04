@@ -31,15 +31,9 @@ use Symfony\Component\Routing\RequestContext;
 )]
 final class GenerateCommand extends Command
 {
-    private Generator $generator;
-    private UrlGeneratorInterface $urlGenerator;
-
-    public function __construct(Generator $generator, UrlGeneratorInterface $urlGenerator)
+    public function __construct(private readonly Generator $generator, private readonly UrlGeneratorInterface $urlGenerator)
     {
         parent::__construct();
-
-        $this->generator = $generator;
-        $this->urlGenerator = $urlGenerator;
     }
 
     protected function configure(): void

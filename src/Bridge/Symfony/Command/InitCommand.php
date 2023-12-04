@@ -31,14 +31,8 @@ final class InitCommand extends Command
     // private const SOURCE_GITHUB = 'github';
     private const SOURCE_GITLAB = 'gitlab';
 
-    private string $initDir;
-    private string $baseDir;
-
-    public function __construct(string $initDir, string $baseDir)
+    public function __construct(private readonly string $initDir, private readonly string $baseDir)
     {
-        $this->baseDir = $baseDir;
-        $this->initDir = $initDir;
-
         parent::__construct();
     }
 
