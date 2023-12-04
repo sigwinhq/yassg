@@ -39,6 +39,14 @@ use Symfony\Component\Routing\RequestContext;
  * @uses \Sigwin\YASSG\Permutator
  * @uses \Sigwin\YASSG\Route
  */
+#[\PHPUnit\Framework\Attributes\Small]
+#[\PHPUnit\Framework\Attributes\CoversClass(\Sigwin\YASSG\Generator::class)]
+#[\PHPUnit\Framework\Attributes\UsesClass(\Sigwin\YASSG\Bridge\Symfony\Routing\Request::class)]
+#[\PHPUnit\Framework\Attributes\UsesClass(\Sigwin\YASSG\BuildOptions::class)]
+#[\PHPUnit\Framework\Attributes\UsesClass(\Sigwin\YASSG\DatabaseProvider::class)]
+#[\PHPUnit\Framework\Attributes\UsesClass(\Sigwin\YASSG\Location::class)]
+#[\PHPUnit\Framework\Attributes\UsesClass(\Sigwin\YASSG\Permutator::class)]
+#[\PHPUnit\Framework\Attributes\UsesClass(\Sigwin\YASSG\Route::class)]
 final class GeneratorTest extends TestCase
 {
     public function testGeneratorWithoutIndexFile(): void
@@ -181,9 +189,7 @@ final class GeneratorTest extends TestCase
         $kernel
             ->expects(self::once())
             ->method('handle')
-            ->with(self::callback(static function (\Symfony\Component\HttpFoundation\Request $request) use ($baseUrl): bool {
-                return $request->getUri() === 'http://localhost/'.$baseUrl;
-            }))
+            ->with(self::callback(static fn (\Symfony\Component\HttpFoundation\Request $request): bool => $request->getUri() === 'http://localhost/'.$baseUrl))
             ->willReturn($response)
         ;
 
