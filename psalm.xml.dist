@@ -17,6 +17,7 @@
         <directory name="./"/>
         <ignoreFiles allowMissingFiles="true">
             <file name=".php-cs-fixer.dist.php"/>
+            <file name="rector.php"/>
             <directory name="tests/functional/init/"/>
             <directory name="tests/functional/site/var/"/>
             <directory name="var/"/>
