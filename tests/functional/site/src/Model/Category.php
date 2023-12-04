@@ -24,6 +24,8 @@ final class Category
     #[Localized]
     public ?string $description;
 
+    public ?self $parent;
+
     /** @var Collection<string, Product> */
     public Collection $products;
 

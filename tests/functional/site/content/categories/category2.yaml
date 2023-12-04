@@ -1,0 +1,6 @@
+slug: child-category
+name:
+    de: Kinder Kategorie
+    en: Child Category
+    hr: Kategorija dijete
+parent: '@=yassg_get("categories", "/category1.yaml")'

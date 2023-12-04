@@ -673,6 +673,7 @@
     <MissingConstructor>
       <code>$description</code>
       <code>$name</code>
+      <code>$parent</code>
       <code>$products</code>
       <code>$slug</code>
     </MissingConstructor>
@@ -682,6 +683,7 @@
     </PossiblyUnusedMethod>
     <PossiblyUnusedProperty>
       <code>$name</code>
+      <code>$parent</code>
       <code>$products</code>
       <code>$slug</code>
     </PossiblyUnusedProperty>
