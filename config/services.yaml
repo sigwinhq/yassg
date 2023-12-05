@@ -38,6 +38,7 @@ services:
         arguments:
             $locator: !tagged_locator { tag: 'sigwin_yassg.database', index_by: 'name' }
 
+    Symfony\Component\ExpressionLanguage\ExpressionLanguage: '@sigwin_yassg.expression_language'
     sigwin_yassg.expression_language:
         class: Symfony\Component\ExpressionLanguage\ExpressionLanguage
         calls:
@@ -122,6 +123,10 @@ services:
                 addRenderer: [ League\CommonMark\Extension\CommonMark\Node\Block\FencedCode, '@Spatie\CommonMarkHighlighter\FencedCodeRenderer', 10 ]
             -
                 addRenderer: [ League\CommonMark\Extension\CommonMark\Node\Block\IndentedCode, '@Spatie\CommonMarkHighlighter\IndentedCodeRenderer', 10 ]
+            -
+                addDelimiterProcessor: [ '@Sigwin\YASSG\Bridge\CommonMark\Delimiter\ExpressionDelimiter']
+            -
+                addRenderer: [Sigwin\YASSG\Bridge\CommonMark\Node\Expression, '@Sigwin\YASSG\Bridge\CommonMark\NodeRenderer\ExpressionRenderer']
     League\CommonMark\Environment\EnvironmentInterface: '@League\CommonMark\Environment\Environment'
 
     League\CommonMark\MarkdownConverter: ~
