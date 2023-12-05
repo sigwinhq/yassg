@@ -22,7 +22,7 @@ sigwin_yassg:
             defaults:
                 page: 1
             catalog:
-                page: "yassg_pages('articles', 'item.publishedAt.getTimestamp() <= 1658238497')"
+                page: "yassg_pages('articles', 'item.publishedAt.getTimestamp() <= 1701776753')"
         product:
             path: /{_locale}/{slug}
             catalog:
