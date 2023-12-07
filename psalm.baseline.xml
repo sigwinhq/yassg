@@ -656,6 +656,7 @@
       <code>$publishedAt</code>
       <code>$slug</code>
       <code>$title</code>
+      <code>$image</code>
     </MissingConstructor>
     <UnusedClass>
       <code>Article</code>

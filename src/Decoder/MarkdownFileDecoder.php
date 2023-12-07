@@ -46,6 +46,7 @@ final readonly class MarkdownFileDecoder implements FileDecoder
                 if (\count($parts) !== 2) {
                     throw new \RuntimeException('Failed to extract frontmatter');
                 }
+                /** @var array<string, string> $metadata */
                 $metadata = Yaml::parse($parts[0]);
             }
 
