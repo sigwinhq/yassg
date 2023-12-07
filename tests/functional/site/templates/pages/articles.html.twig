@@ -1,8 +1,8 @@
 {% extends 'layout.html.twig' %}
 
-{% set condition = 'item.publishedAt.getTimestamp() <= 1658238497' %}
+{% set condition = 'item.publishedAt.getTimestamp() <= 1701776753' %}
 
-{% set articles = yassg_paginate('articles', page, {condition: condition, sort: {'item.publishedAt': 'asc'}}) %}
+{% set articles = yassg_paginate('articles', page, {condition: condition, sort: {'item.publishedAt': 'desc'}}) %}
 
 {% block title %}Articles, page #{{ page }}{% endblock %}
 
