@@ -20,6 +20,7 @@ final class Article
     public string $title;
     public string $slug;
     public string $body;
+    public string $image;
 
     #[Context(['datetime_format' => 'Y-m-d H:i:s'])]
     public \DateTimeInterface $publishedAt;
