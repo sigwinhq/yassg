@@ -14,20 +14,14 @@ declare(strict_types=1);
 namespace Sigwin\YASSG\Bridge\Symfony\ExpressionLanguage;
 
 use Sigwin\YASSG\DatabaseProvider;
-use Symfony\Component\Asset\Packages;
 use Symfony\Component\ExpressionLanguage\ExpressionFunction;
 use Symfony\Component\ExpressionLanguage\ExpressionFunctionProviderInterface;
 
 final class FunctionProvider implements ExpressionFunctionProviderInterface
 {
-    public function __construct(private Packages $packages) {}
-
     public function getFunctions(): array
     {
         return [
-            new ExpressionFunction('asset', static fn (string $url): string => sprintf('$packages->getUrl(%s)', $url), function (array $variables, string $url) {
-                return $this->packages->getUrl($url);
-            }),
             new ExpressionFunction('yassg_find_all', static fn (string $name): string => sprintf('$provider->getDatabase(%s)', $name), static function (array $variables, string $name, array $arguments = []) {
                 /** @var DatabaseProvider $provider */
                 $provider = $variables['provider'];

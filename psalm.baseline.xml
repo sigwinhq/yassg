@@ -18,16 +18,6 @@
       <code>Page</code>
     </UnusedClass>
   </file>
-  <file src="src/Bridge/CommonMark/Delimiter/ExpressionDelimiter.php">
-    <UnusedClass>
-      <code>ExpressionDelimiter</code>
-    </UnusedClass>
-  </file>
-  <file src="src/Bridge/CommonMark/NodeRenderer/ExpressionRenderer.php">
-    <UnusedClass>
-      <code>ExpressionRenderer</code>
-    </UnusedClass>
-  </file>
   <file src="src/Bridge/Symfony/Command/GenerateCommand.php">
     <UnusedClass>
       <code>GenerateCommand</code>

@@ -38,7 +38,6 @@ services:
         arguments:
             $locator: !tagged_locator { tag: 'sigwin_yassg.database', index_by: 'name' }
 
-    Symfony\Component\ExpressionLanguage\ExpressionLanguage: '@sigwin_yassg.expression_language'
     sigwin_yassg.expression_language:
         class: Symfony\Component\ExpressionLanguage\ExpressionLanguage
         calls:
