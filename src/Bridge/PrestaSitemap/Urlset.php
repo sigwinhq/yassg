@@ -29,8 +29,8 @@ final class Urlset extends \Presta\SitemapBundle\Sitemap\Urlset
     {
         parent::addUrl($url);
 
-        if ($url instanceof UrlConcrete) {
-            $this->lastmod = max($url->getLastmod() ?? new \DateTimeImmutable(), $this->lastmod);
+        if ($url instanceof UrlConcrete && $url->getLastmod() !== null && $url->getLastmod()->getTimestamp() > $this->lastmod->getTimestamp()) {
+            $this->lastmod = $url->getLastmod();
         }
     }
 }

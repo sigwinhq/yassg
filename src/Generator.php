@@ -44,16 +44,17 @@ final readonly class Generator
             if ($urlSet !== null) {
                 if ($this->generateSitemapPath($deflate, $location->getRoute()->getName(), $offset) !== $urlSet->getLoc()) {
                     $this->dumpSitemap($urlSet, $deflate);
+                    $index->addSitemap($urlSet);
                     $urlSet = null;
                 } elseif ($urlSet->isFull()) {
                     $this->dumpSitemap($urlSet, $deflate);
+                    $index->addSitemap($urlSet);
                     $urlSet = null;
                     ++$offset;
                 }
             }
             if ($urlSet === null) {
                 $urlSet = new Urlset($this->generateSitemapPath($deflate, $location->getRoute()->getName(), $offset));
-                $index->addSitemap($urlSet);
                 $offset = 0;
             }
 
