@@ -13,24 +13,34 @@ declare(strict_types=1);
 
 namespace Sigwin\YASSG\Bridge\Twig\Extension;
 
+use Sigwin\YASSG\ThumbnailQueue;
+use Symfony\Component\Asset\Packages;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 final class ThumbnailExtension extends AbstractExtension
 {
+    public function __construct(private readonly Packages $packages, private readonly ThumbnailQueue $thumbnailQueue) {}
+
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('yassg_thumbnail', static function (array $context, string $path): string {
+            new TwigFunction('yassg_thumbnail', function (array $context, string $path): string {
                 if (str_starts_with($path, './')) {
                     $newPath = realpath(\dirname($context['_path']).'/'.$path);
                     if ($newPath === false) {
-                        throw new \RuntimeException(sprintf('Invalid thumbnail path '.$path));
+                        throw new \RuntimeException('Invalid thumbnail path '.$path);
                     }
                     $path = $newPath;
                 }
 
-                return str_replace($GLOBALS['YASSG_BASEDIR'], '', $path);
+                $relative = str_replace($GLOBALS['YASSG_BASEDIR'], '', $path);
+                $this->thumbnailQueue->add([
+                    'source' => $path,
+                    'destination' => $relative,
+                ]);
+
+                return $this->packages->getUrl(ltrim($relative, '/'));
             }, ['needs_context' => true]),
         ];
     }

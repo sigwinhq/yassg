@@ -407,6 +407,19 @@
       <code>PaginatorExtension</code>
     </UnusedClass>
   </file>
+  <file src="src/Bridge/Twig/Extension/ThumbnailExtension.php">
+    <MixedArgument>
+      <code><![CDATA[$GLOBALS['YASSG_BASEDIR']]]></code>
+      <code><![CDATA[$context['_path']]]></code>
+    </MixedArgument>
+    <PossiblyUndefinedStringArrayOffset>
+      <code><![CDATA[$GLOBALS['YASSG_BASEDIR']]]></code>
+      <code><![CDATA[$context['_path']]]></code>
+    </PossiblyUndefinedStringArrayOffset>
+    <UnusedClass>
+      <code>ThumbnailExtension</code>
+    </UnusedClass>
+  </file>
   <file src="src/Collection.php">
     <PossiblyUnusedMethod>
       <code>column</code>
@@ -647,6 +660,11 @@
     <PossiblyUnusedReturnValue>
       <code>array</code>
     </PossiblyUnusedReturnValue>
+  </file>
+  <file src="src/ThumbnailQueue.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="tests/functional/site/src/Bridge/Symfony/EventSubscriber.php">
     <UnusedClass>
