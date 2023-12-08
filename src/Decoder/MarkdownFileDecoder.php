@@ -59,6 +59,7 @@ final readonly class MarkdownFileDecoder implements FileDecoder
 
             $content = $this->twig->createTemplate($content)->render([
                 'item' => $metadata,
+                '_path' => $file->getPathname(),
             ]);
         }
 
