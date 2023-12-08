@@ -15,7 +15,7 @@ namespace Sigwin\YASSG;
 
 use Presta\SitemapBundle\Sitemap\Sitemapindex;
 use Presta\SitemapBundle\Sitemap\Url\UrlConcrete;
-use Presta\SitemapBundle\Sitemap\Urlset;
+use Sigwin\YASSG\Bridge\PrestaSitemap\Urlset;
 use Sigwin\YASSG\Bridge\Symfony\Routing\Request;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\Exception\HttpException;

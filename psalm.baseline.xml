@@ -207,7 +207,6 @@
     </PossiblyUnusedMethod>
     <PropertyNotSetInConstructor>
       <code>Kernel</code>
-      <code>Kernel</code>
     </PropertyNotSetInConstructor>
     <UnresolvableInclude>
       <code>require $path</code>
@@ -516,6 +515,11 @@
       <code>__construct</code>
     </PossiblyUnusedMethod>
   </file>
+  <file src="src/DatabaseProvider.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
   <file src="src/Decoder/CachingFileDecoder.php">
     <UnusedClass>
       <code>CachingFileDecoder</code>
@@ -535,6 +539,11 @@
     <UnusedClass>
       <code>YamlFileDecoder</code>
     </UnusedClass>
+  </file>
+  <file src="src/Generator.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="src/Permutator.php">
     <MixedArgument>
@@ -570,6 +579,9 @@
       <code><![CDATA[$spec['defaults']]]></code>
       <code><![CDATA[$spec['options']]]></code>
     </PossiblyUndefinedStringArrayOffset>
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="src/Storage/DenormalizingStorage.php">
     <MissingTemplateParam>
@@ -643,6 +655,7 @@
   <file src="tests/functional/site/src/Model/Article.php">
     <MissingConstructor>
       <code>$body</code>
+      <code>$image</code>
       <code>$publishedAt</code>
       <code>$slug</code>
       <code>$title</code>
@@ -704,14 +717,6 @@
       <code>$index</code>
       <code>$slug</code>
     </PossiblyUnusedProperty>
-  </file>
-  <file src="tests/unit/GeneratorTest.php">
-    <InternalMethod>
-      <code>numberOfInvocations</code>
-    </InternalMethod>
-    <MixedAssignment>
-      <code>$params</code>
-    </MixedAssignment>
   </file>
   <file src="web/index.php">
     <MixedArgument>
