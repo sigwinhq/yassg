@@ -16,6 +16,7 @@ namespace Sigwin\YASSG\Decoder;
 use League\CommonMark\ConverterInterface;
 use League\CommonMark\Extension\FrontMatter\FrontMatterProviderInterface;
 use Sigwin\YASSG\FileDecoder;
+use Sigwin\YASSG\ThumbnailQueue;
 use Symfony\Component\Yaml\Exception\ParseException;
 use Symfony\Component\Yaml\Yaml;
 use Twig\Environment;
@@ -26,7 +27,7 @@ final readonly class MarkdownFileDecoder implements FileDecoder
 
     private const EXTENSIONS = ['md', 'markdown'];
 
-    public function __construct(private ConverterInterface $converter, private Environment $twig) {}
+    public function __construct(private ConverterInterface $converter, private Environment $twig, private ThumbnailQueue $thumbnailQueue) {}
 
     public function decode(\SplFileInfo $file): array
     {
@@ -41,6 +42,7 @@ final readonly class MarkdownFileDecoder implements FileDecoder
         }
 
         $metadata = [];
+        $thumbnails = [];
         if (str_contains($content, '{{') || str_contains($content, '{%')) {
             if (str_starts_with($content, '---')) {
                 $end = mb_strpos($content, '---', 3);
@@ -61,6 +63,7 @@ final readonly class MarkdownFileDecoder implements FileDecoder
                 'item' => $metadata,
                 '_path' => $file->getPathname(),
             ]);
+            $thumbnails = $this->thumbnailQueue->flush();
         }
 
         $result = $this->converter->convert($content);
@@ -69,6 +72,7 @@ final readonly class MarkdownFileDecoder implements FileDecoder
             $metadata = $result->getFrontMatter();
         }
         $metadata['body'] = $result->getContent();
+        $metadata['@thumbnails'] = $thumbnails;
 
         return $metadata;
     }

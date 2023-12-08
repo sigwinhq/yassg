@@ -37,7 +37,7 @@ final readonly class CachingFileDecoder implements FileDecoder
 
         $item = $this->cachePoolItem->getItem($key);
         if ($item->isHit()) {
-            /** @var array $value */
+            /** @var array<string, string> $value */
             $value = $item->get();
 
             return $value;

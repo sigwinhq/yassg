@@ -37,8 +37,10 @@ final class ThumbnailQueue
 
     /**
      * @param callable(TThumbnailOptions): void $callable
+     *
+     * @return list<TThumbnailOptions>
      */
-    public function flush(callable $callable): void
+    public function flush(?callable $callable = null): array
     {
         foreach ($this->queue as $specification) {
             $destination = $this->buildDir.'/'.ltrim($specification['destination'], '/');
@@ -48,7 +50,13 @@ final class ThumbnailQueue
 
             // TODO: ImgProxy
             $this->filesystem->copy($specification['source'], $destination);
-            $callable($specification);
+            if ($callable !== null) {
+                $callable($specification);
+            }
         }
+        $queue = array_values($this->queue);
+        $this->queue = [];
+
+        return $queue;
     }
 }

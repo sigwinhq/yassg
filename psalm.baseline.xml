@@ -549,7 +549,16 @@
       <code>MarkdownFileDecoder</code>
     </UnusedClass>
   </file>
+  <file src="src/Decoder/ThumbnailQueueFileDecoder.php">
+    <UnusedClass>
+      <code>ThumbnailQueueFileDecoder</code>
+    </UnusedClass>
+  </file>
   <file src="src/Decoder/YamlFileDecoder.php">
+    <MixedReturnTypeCoercion>
+      <code>$data</code>
+      <code>array</code>
+    </MixedReturnTypeCoercion>
     <UnusedClass>
       <code>YamlFileDecoder</code>
     </UnusedClass>
