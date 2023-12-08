@@ -44,8 +44,8 @@ final readonly class Generator
         }
 
         // dump static files
-        $this->dumpFile($callable, $this->createRequest('/404.html'));
-        $this->dumpFile($callable, $this->createRequest('/sitemap.xml'));
+        $this->dumpFile($callable, $this->createRequest($this->urlGenerator->generate('error404', [], UrlGeneratorInterface::ABSOLUTE_URL)), 404);
+        $this->dumpFile($callable, $this->createRequest($this->urlGenerator->generate('PrestaSitemapBundle_index', ['_format' => 'xml'], UrlGeneratorInterface::ABSOLUTE_URL)));
     }
 
     private function createRequest(string $path): Request
