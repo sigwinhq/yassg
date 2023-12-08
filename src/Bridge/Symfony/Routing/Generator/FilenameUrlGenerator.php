@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sigwin\YASSG\Bridge\Symfony\Routing\Generator;
 
-use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RequestContext;
 

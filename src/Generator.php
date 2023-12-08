@@ -27,17 +27,15 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
  */
 final readonly class Generator
 {
-    public function __construct(private string $buildDir, private Permutator $permutator, private UrlGeneratorInterface $urlGenerator, private KernelInterface $kernel, private Filesystem $filesystem)
-    {
-    }
+    public function __construct(private string $buildDir, private Permutator $permutator, private UrlGeneratorInterface $urlGenerator, private KernelInterface $kernel, private Filesystem $filesystem) {}
 
     public function generate(callable $callable): void
     {
         $requestContext = $this->urlGenerator->getContext();
 
-        $indexFile = (bool)($requestContext->getParameter('index-file') ?? false);
+        $indexFile = (bool) ($requestContext->getParameter('index-file') ?? false);
 
-        $deflate = false;
+        $deflate = true;
         $index = new Sitemapindex();
         $offset = 0;
         $urlSet = null;
@@ -49,7 +47,7 @@ final readonly class Generator
                 } elseif ($urlSet->isFull()) {
                     $this->dumpSitemap($urlSet, $deflate);
                     $urlSet = null;
-                    $offset++;
+                    ++$offset;
                 }
             }
             if ($urlSet === null) {
@@ -68,7 +66,9 @@ final readonly class Generator
             $this->dumpRequest($callable, $request);
             $urlSet->addUrl(new UrlConcrete($url));
         }
-        $this->dumpSitemap($urlSet, $deflate);
+        if ($urlSet !== null) {
+            $this->dumpSitemap($urlSet, $deflate);
+        }
         $this->dumpSitemap($index, $deflate);
 
         // dump static files
@@ -83,15 +83,17 @@ final readonly class Generator
     private function generateSitemapPath(bool $deflate, ?string $name = null, ?int $offset = null): string
     {
         if ($name === null) {
-            return $this->generateUrl('/sitemap.xml' . ($deflate ? '.gz' : ''));
+            return $this->generateUrl('/sitemap.xml'.($deflate ? '.gz' : ''));
         }
 
-        return $this->generateUrl(sprintf('/sitemap-%1$s-%2$d.xml' . ($deflate ? '.gz' : ''), $name, $offset));
+        return $this->generateUrl(sprintf('/sitemap-%1$s-%2$d.xml'.($deflate ? '.gz' : ''), $name, $offset ?? throw new \LogicException('Offset must be set when name is set')));
     }
 
     private function generateUrl(string $path): string
     {
-        return $this->urlGenerator->getContext()->getBaseUrl() . $path;
+        $context = $this->urlGenerator->getContext();
+
+        return sprintf('%1$s://%2$s%3$s%4$s', $context->getScheme(), $context->getHost(), $context->getBaseUrl(), $path);
     }
 
     private function dumpRequest(callable $callable, Request $request, int $expectedStatusCode = 200): void
@@ -111,7 +113,7 @@ final readonly class Generator
         if ($body === false) {
             throw new \RuntimeException('No body in response');
         }
-        $path = $this->buildDir . $request->getPathInfo();
+        $path = $this->buildDir.$request->getPathInfo();
         if (mb_strpos(basename($path), '.') === false) {
             $path .= '/index.html';
         }
@@ -123,7 +125,7 @@ final readonly class Generator
         $callable($request, $response, $path);
     }
 
-    private function dumpSitemap(Urlset|Sitemapindex $sitemap, bool $deflate): void
+    private function dumpSitemap(Sitemapindex|Urlset $sitemap, bool $deflate): void
     {
         if ($sitemap->count() === 0) {
             return;
@@ -134,6 +136,8 @@ final readonly class Generator
             $path = $sitemap->getLoc();
         }
 
-        $this->filesystem->dumpFile($this->buildDir . str_replace($this->urlGenerator->getContext()->getBaseUrl(), '', $path), $deflate ? gzdeflate($sitemap->toXml()) : $sitemap->toXml());
+        /** @var string $content */
+        $content = $deflate ? gzdeflate($sitemap->toXml()) : $sitemap->toXml();
+        $this->filesystem->dumpFile($this->buildDir.str_replace($this->generateUrl(''), '', $path), $content);
     }
 }
