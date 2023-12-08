@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Sigwin\YASSG\Bridge\Symfony\Routing\Generator;
 
-use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RequestContext;
 
@@ -24,7 +23,7 @@ final class FilenameUrlGenerator implements UrlGeneratorInterface
     public function generate(string $name, array $parameters = [], int $referenceType = self::ABSOLUTE_PATH): string
     {
         if (! isset($this->routes[$name])) {
-            throw new RouteNotFoundException();
+            return $this->urlGenerator->generate($name, $parameters, $referenceType);
         }
 
         $this->stripParameters($this->stripParameters[$name] ?? [], $parameters);

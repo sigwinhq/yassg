@@ -15,7 +15,6 @@ namespace Sigwin\YASSG\Test\Functional\Site\Bridge\Symfony\Routing\Generator;
 
 use PHPUnit\Framework\TestCase;
 use Sigwin\YASSG\Bridge\Symfony\Routing\Generator\FilenameUrlGenerator;
-use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
@@ -31,9 +30,7 @@ final class FilenameUrlGeneratorTest extends TestCase
 {
     public function testCannotGenerateUnknownRoute(): void
     {
-        $this->expectException(RouteNotFoundException::class);
-
         $generator = new FilenameUrlGenerator($this->getMockBuilder(UrlGeneratorInterface::class)->getMock(), [], []);
-        $generator->generate('unknown');
+        self::assertEmpty($generator->generate('unknown'));
     }
 }
