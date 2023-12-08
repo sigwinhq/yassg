@@ -647,6 +647,11 @@
       <code>array</code>
     </PossiblyUnusedReturnValue>
   </file>
+  <file src="tests/functional/site/src/Bridge/Symfony/EventSubscriber.php">
+    <UnusedClass>
+      <code>EventSubscriber</code>
+    </UnusedClass>
+  </file>
   <file src="tests/functional/site/src/Controller/TestController.php">
     <UnusedClass>
       <code>TestController</code>

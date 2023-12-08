@@ -1,12 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the Sigwin Yassg project.
+ *
+ * (c) sigwin.hr
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace Sigwin\YASSG\Test\Functional\Site\Bridge\Symfony;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 
-class EventSubscriber implements EventSubscriberInterface
+final class EventSubscriber implements EventSubscriberInterface
 {
     public static function getSubscribedEvents(): array
     {
