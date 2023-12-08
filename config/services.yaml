@@ -102,6 +102,8 @@ services:
     League\CommonMark\Extension\Table\TableExtension: ~
     League\CommonMark\Extension\Footnote\FootnoteExtension: ~
     League\CommonMark\Extension\Attributes\AttributesExtension: ~
+    League\CommonMark\Extension\HeadingPermalink\HeadingPermalinkExtension: ~
+    League\CommonMark\Extension\TableOfContents\TableOfContentsExtension: ~
 
     Spatie\CommonMarkHighlighter\FencedCodeRenderer: ~
     Spatie\CommonMarkHighlighter\IndentedCodeRenderer: ~
@@ -114,6 +116,10 @@ services:
                 addExtension: [ '@League\CommonMark\Extension\FrontMatter\FrontMatterExtension' ]
             -
                 addExtension: [ '@League\CommonMark\Extension\Table\TableExtension' ]
+            -
+                addExtension: [ '@League\CommonMark\Extension\HeadingPermalink\HeadingPermalinkExtension' ]
+            -
+                addExtension: [ '@League\CommonMark\Extension\TableOfContents\TableOfContentsExtension' ]
             -
                 addExtension: [ '@League\CommonMark\Extension\Footnote\FootnoteExtension' ]
             -
