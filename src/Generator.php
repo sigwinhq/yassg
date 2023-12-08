@@ -35,13 +35,22 @@ final readonly class Generator
         foreach ($this->permutator->permute() as $location) {
             $route = $location->getRoute();
             $url = $this->urlGenerator->generate($route->getName(), $route->getParameters() + ($indexFile ? ['_filename' => 'index.html'] : []), UrlGeneratorInterface::ABSOLUTE_URL);
-            $request = Request::create(rtrim($url, '/'))->withBaseUrl($requestContext->getBaseUrl());
+            $request = $this->createRequest($url);
             if (($buildHeaders = $location->getBuildOptions()->getRequestHeaders()) !== null) {
                 $request->headers->add($buildHeaders);
             }
 
             $this->dumpFile($callable, $request);
         }
+
+        // dump static files
+        $this->dumpFile($callable, $this->createRequest('/404.html'));
+        $this->dumpFile($callable, $this->createRequest('/sitemap.xml'));
+    }
+
+    private function createRequest(string $path): Request
+    {
+        return Request::create(rtrim($path, '/'))->withBaseUrl($this->urlGenerator->getContext()->getBaseUrl());
     }
 
     private function dumpFile(callable $callable, Request $request, int $expectedStatusCode = 200): void
