@@ -16,6 +16,7 @@ namespace Sigwin\YASSG\Decoder;
 use League\CommonMark\ConverterInterface;
 use League\CommonMark\Extension\FrontMatter\FrontMatterProviderInterface;
 use Sigwin\YASSG\FileDecoder;
+use Symfony\Component\Yaml\Exception\ParseException;
 use Symfony\Component\Yaml\Yaml;
 use Twig\Environment;
 
@@ -42,12 +43,18 @@ final readonly class MarkdownFileDecoder implements FileDecoder
         $metadata = [];
         if (str_contains($content, '{{') || str_contains($content, '{%')) {
             if (str_starts_with($content, '---')) {
-                $parts = explode('---', ltrim($content, '-'), 3);
-                if (\count($parts) !== 2) {
-                    throw new \RuntimeException('Failed to extract frontmatter');
+                $end = mb_strpos($content, '---', 3);
+                if ($end === false) {
+                    throw new \RuntimeException('Invalid frontmatter, missing closing ---');
                 }
-                /** @var array<string, string> $metadata */
-                $metadata = Yaml::parse($parts[0]);
+                $frontMatter = mb_substr($content, 3, $end - 3);
+
+                try {
+                    /** @var array<string, string> $metadata */
+                    $metadata = Yaml::parse($frontMatter);
+                } catch (ParseException $e) {
+                    throw new \RuntimeException('Invalid frontmatter, failed to parse YAML: '.$e->getMessage(), 0, $e);
+                }
             }
 
             $content = $this->twig->createTemplate($content)->render([
