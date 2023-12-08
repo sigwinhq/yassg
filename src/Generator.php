@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Sigwin\YASSG;
 
+use Presta\SitemapBundle\Sitemap\Url\UrlConcrete;
+    use Presta\SitemapBundle\Sitemap\Urlset;
 use Sigwin\YASSG\Bridge\Symfony\Routing\Request;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -32,7 +34,18 @@ final readonly class Generator
 
         $indexFile = (bool) ($requestContext->getParameter('index-file') ?? false);
 
+        $index = 0;
+        $urlSet = null;
         foreach ($this->permutator->permute() as $location) {
+            if ($urlSet !== null && $location->getRoute()->getName() !== $urlSet->getLoc()) {
+                $this->dumpSitemapUrlSet($urlSet, $index);
+                $urlSet = null;
+            }
+
+            if ($urlSet === null) {
+                $urlSet = new Urlset($location->getRoute()->getName());
+                $index = 0;
+            }
             $route = $location->getRoute();
             $url = $this->urlGenerator->generate($route->getName(), $route->getParameters() + ($indexFile ? ['_filename' => 'index.html'] : []), UrlGeneratorInterface::ABSOLUTE_URL);
             $request = $this->createRequest($url);
@@ -41,7 +54,14 @@ final readonly class Generator
             }
 
             $this->dumpFile($callable, $request);
+            $urlSet->addUrl(new UrlConcrete($url));
+            if ($urlSet->isFull()) {
+                $this->dumpSitemapUrlSet($urlSet, $index);
+                $urlSet = new Urlset($location->getRoute()->getName());
+                ++$index;
+            }
         }
+        $this->dumpSitemapUrlSet($urlSet, $index);
 
         // dump static files
         $this->dumpFile($callable, $this->createRequest($this->urlGenerator->generate('error404', [], UrlGeneratorInterface::ABSOLUTE_URL)), 404);
@@ -80,5 +100,14 @@ final readonly class Generator
         $this->filesystem->dumpFile($path, $body);
 
         $callable($request, $response, $path);
+    }
+
+    private function dumpSitemapUrlSet(Urlset $urlSet, int $index): void
+    {
+        if ($urlSet->count() === 0) {
+            return;
+        }
+
+        $this->filesystem->dumpFile(sprintf('%1$s/sitemap-%2$s-%3$d.xml.gz', $this->buildDir, $urlSet->getLoc(), $index), gzdeflate($urlSet->toXml()));
     }
 }

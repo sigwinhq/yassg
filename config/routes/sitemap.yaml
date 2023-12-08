@@ -1,2 +1,0 @@
-sitemap:
-    resource: "@PrestaSitemapBundle/config/routing.yml"
