@@ -17,5 +17,8 @@ interface FileDecoder
 {
     public function supports(\SplFileInfo $file): bool;
 
+    /**
+     * @return array<string, mixed>
+     */
     public function decode(\SplFileInfo $file): array;
 }

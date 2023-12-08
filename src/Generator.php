@@ -28,8 +28,13 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
  */
 final readonly class Generator
 {
-    public function __construct(private string $buildDir, private Permutator $permutator, private UrlGeneratorInterface $urlGenerator, private KernelInterface $kernel, private Filesystem $filesystem) {}
+    public function __construct(private string $buildDir, private Permutator $permutator, private UrlGeneratorInterface $urlGenerator, private KernelInterface $kernel, private Filesystem $filesystem, private ThumbnailQueue $thumbnailQueue) {}
 
+    /**
+     * @param callable(Request, Response, string): void $callable
+     *
+     * @throws \Exception
+     */
     public function generate(callable $callable): void
     {
         $requestContext = $this->urlGenerator->getContext();
@@ -71,6 +76,10 @@ final readonly class Generator
 
             $response = $this->dumpRequest($callable, $request);
             $urlSet->addUrl(new UrlConcrete($url, new \DateTimeImmutable($response->headers->get('Last-Modified', 'now'))));
+
+            $this->thumbnailQueue->flush(function (array $item) use ($callable): void {
+                $callable($this->createRequest($item['destination']), new Response('OK'), $item['destination']);
+            });
         }
         if ($urlSet !== null) {
             $this->dumpSitemap($urlSet, $deflate);
@@ -105,6 +114,11 @@ final readonly class Generator
         return sprintf('%1$s://%2$s%3$s%4$s', $context->getScheme(), $context->getHost(), $context->getBaseUrl(), $path);
     }
 
+    /**
+     * @param callable(Request, Response, string): void $callable
+     *
+     * @throws \Exception
+     */
     private function dumpRequest(callable $callable, Request $request, int $expectedStatusCode = 200): Response
     {
         try {

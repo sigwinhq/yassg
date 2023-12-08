@@ -2,7 +2,7 @@
 title: Images!
 slug: images
 publishedAt: "2022-07-20 12:35:00"
-image: assets/images/sigwin.svg
+image: ./image.webp
 ---
 
 | Column 1 | Column 2 | Column 3 |
@@ -13,7 +13,7 @@ image: assets/images/sigwin.svg
 
 This is a database lookup example: {{yassg_get('articles', '/hello-world.md').title}}
 
-This is an asset lookup: {{asset(item.image)}}
+This is an asset lookup: {{ yassg_thumbnail(item.image) }}
 
-![Logo]({{ asset(item.image) }})
+![Logo]({{ yassg_thumbnail(item.image) }})
 
