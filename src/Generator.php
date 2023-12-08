@@ -40,21 +40,25 @@ final readonly class Generator
         $index = new Sitemapindex();
         $offset = 0;
         $urlSet = null;
+        $urlSetAdded = true;
         foreach ($this->permutator->permute() as $location) {
             if ($urlSet !== null) {
                 if ($this->generateSitemapPath($deflate, $location->getRoute()->getName(), $offset) !== $urlSet->getLoc()) {
                     $this->dumpSitemap($urlSet, $deflate);
                     $index->addSitemap($urlSet);
                     $urlSet = null;
+                    $urlSetAdded = false;
                 } elseif ($urlSet->isFull()) {
                     $this->dumpSitemap($urlSet, $deflate);
                     $index->addSitemap($urlSet);
                     $urlSet = null;
+                    $urlSetAdded = false;
                     ++$offset;
                 }
             }
             if ($urlSet === null) {
                 $urlSet = new Urlset($this->generateSitemapPath($deflate, $location->getRoute()->getName(), $offset));
+                $urlSetAdded = false;
                 $offset = 0;
             }
 
@@ -70,6 +74,9 @@ final readonly class Generator
         }
         if ($urlSet !== null) {
             $this->dumpSitemap($urlSet, $deflate);
+            if ($urlSetAdded === false) {
+                $index->addSitemap($urlSet);
+            }
         }
         $this->dumpSitemap($index, $deflate);
 
