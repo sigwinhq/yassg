@@ -18,6 +18,13 @@ use Presta\SitemapBundle\Sitemap\Url\UrlConcrete;
 
 final class Urlset extends \Presta\SitemapBundle\Sitemap\Urlset
 {
+    public function __construct(string $loc)
+    {
+        parent::__construct($loc);
+
+        $this->lastmod = new \DateTimeImmutable('1970-01-01 00:00:00');
+    }
+
     public function addUrl(Url $url): void
     {
         parent::addUrl($url);
