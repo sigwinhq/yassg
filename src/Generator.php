@@ -13,8 +13,9 @@ declare(strict_types=1);
 
 namespace Sigwin\YASSG;
 
+use Presta\SitemapBundle\Sitemap\Sitemapindex;
 use Presta\SitemapBundle\Sitemap\Url\UrlConcrete;
-    use Presta\SitemapBundle\Sitemap\Urlset;
+use Presta\SitemapBundle\Sitemap\Urlset;
 use Sigwin\YASSG\Bridge\Symfony\Routing\Request;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -26,26 +27,37 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
  */
 final readonly class Generator
 {
-    public function __construct(private string $buildDir, private Permutator $permutator, private UrlGeneratorInterface $urlGenerator, private KernelInterface $kernel, private Filesystem $filesystem) {}
+    public function __construct(private string $buildDir, private Permutator $permutator, private UrlGeneratorInterface $urlGenerator, private KernelInterface $kernel, private Filesystem $filesystem)
+    {
+    }
 
     public function generate(callable $callable): void
     {
         $requestContext = $this->urlGenerator->getContext();
 
-        $indexFile = (bool) ($requestContext->getParameter('index-file') ?? false);
+        $indexFile = (bool)($requestContext->getParameter('index-file') ?? false);
 
-        $index = 0;
+        $deflate = false;
+        $index = new Sitemapindex();
+        $offset = 0;
         $urlSet = null;
         foreach ($this->permutator->permute() as $location) {
-            if ($urlSet !== null && $location->getRoute()->getName() !== $urlSet->getLoc()) {
-                $this->dumpSitemapUrlSet($urlSet, $index);
-                $urlSet = null;
+            if ($urlSet !== null) {
+                if ($this->generateSitemapPath($deflate, $location->getRoute()->getName(), $offset) !== $urlSet->getLoc()) {
+                    $this->dumpSitemap($urlSet, $deflate);
+                    $urlSet = null;
+                } elseif ($urlSet->isFull()) {
+                    $this->dumpSitemap($urlSet, $deflate);
+                    $urlSet = null;
+                    $offset++;
+                }
+            }
+            if ($urlSet === null) {
+                $urlSet = new Urlset($this->generateSitemapPath($deflate, $location->getRoute()->getName(), $offset));
+                $index->addSitemap($urlSet);
+                $offset = 0;
             }
 
-            if ($urlSet === null) {
-                $urlSet = new Urlset($location->getRoute()->getName());
-                $index = 0;
-            }
             $route = $location->getRoute();
             $url = $this->urlGenerator->generate($route->getName(), $route->getParameters() + ($indexFile ? ['_filename' => 'index.html'] : []), UrlGeneratorInterface::ABSOLUTE_URL);
             $request = $this->createRequest($url);
@@ -53,19 +65,14 @@ final readonly class Generator
                 $request->headers->add($buildHeaders);
             }
 
-            $this->dumpFile($callable, $request);
+            $this->dumpRequest($callable, $request);
             $urlSet->addUrl(new UrlConcrete($url));
-            if ($urlSet->isFull()) {
-                $this->dumpSitemapUrlSet($urlSet, $index);
-                $urlSet = new Urlset($location->getRoute()->getName());
-                ++$index;
-            }
         }
-        $this->dumpSitemapUrlSet($urlSet, $index);
+        $this->dumpSitemap($urlSet, $deflate);
+        $this->dumpSitemap($index, $deflate);
 
         // dump static files
-        $this->dumpFile($callable, $this->createRequest($this->urlGenerator->generate('error404', [], UrlGeneratorInterface::ABSOLUTE_URL)), 404);
-        $this->dumpFile($callable, $this->createRequest($this->urlGenerator->generate('PrestaSitemapBundle_index', ['_format' => 'xml'], UrlGeneratorInterface::ABSOLUTE_URL)));
+        $this->dumpRequest($callable, $this->createRequest($this->urlGenerator->generate('error404', [], UrlGeneratorInterface::ABSOLUTE_URL)), 404);
     }
 
     private function createRequest(string $path): Request
@@ -73,7 +80,21 @@ final readonly class Generator
         return Request::create(rtrim($path, '/'))->withBaseUrl($this->urlGenerator->getContext()->getBaseUrl());
     }
 
-    private function dumpFile(callable $callable, Request $request, int $expectedStatusCode = 200): void
+    private function generateSitemapPath(bool $deflate, ?string $name = null, ?int $offset = null): string
+    {
+        if ($name === null) {
+            return $this->generateUrl('/sitemap.xml' . ($deflate ? '.gz' : ''));
+        }
+
+        return $this->generateUrl(sprintf('/sitemap-%1$s-%2$d.xml' . ($deflate ? '.gz' : ''), $name, $offset));
+    }
+
+    private function generateUrl(string $path): string
+    {
+        return $this->urlGenerator->getContext()->getBaseUrl() . $path;
+    }
+
+    private function dumpRequest(callable $callable, Request $request, int $expectedStatusCode = 200): void
     {
         try {
             $response = $this->kernel->handle($request);
@@ -90,7 +111,7 @@ final readonly class Generator
         if ($body === false) {
             throw new \RuntimeException('No body in response');
         }
-        $path = $this->buildDir.$request->getPathInfo();
+        $path = $this->buildDir . $request->getPathInfo();
         if (mb_strpos(basename($path), '.') === false) {
             $path .= '/index.html';
         }
@@ -102,12 +123,17 @@ final readonly class Generator
         $callable($request, $response, $path);
     }
 
-    private function dumpSitemapUrlSet(Urlset $urlSet, int $index): void
+    private function dumpSitemap(Urlset|Sitemapindex $sitemap, bool $deflate): void
     {
-        if ($urlSet->count() === 0) {
+        if ($sitemap->count() === 0) {
             return;
         }
 
-        $this->filesystem->dumpFile(sprintf('%1$s/sitemap-%2$s-%3$d.xml.gz', $this->buildDir, $urlSet->getLoc(), $index), gzdeflate($urlSet->toXml()));
+        $path = $this->generateSitemapPath($deflate);
+        if ($sitemap instanceof Urlset) {
+            $path = $sitemap->getLoc();
+        }
+
+        $this->filesystem->dumpFile($this->buildDir . str_replace($this->urlGenerator->getContext()->getBaseUrl(), '', $path), $deflate ? gzdeflate($sitemap->toXml()) : $sitemap->toXml());
     }
 }
