@@ -18,6 +18,7 @@ use Presta\SitemapBundle\Sitemap\Url\UrlConcrete;
 use Sigwin\YASSG\Bridge\PrestaSitemap\Urlset;
 use Sigwin\YASSG\Bridge\Symfony\Routing\Request;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -63,8 +64,8 @@ final readonly class Generator
                 $request->headers->add($buildHeaders);
             }
 
-            $this->dumpRequest($callable, $request);
-            $urlSet->addUrl(new UrlConcrete($url));
+            $response = $this->dumpRequest($callable, $request);
+            $urlSet->addUrl(new UrlConcrete($url, new \DateTimeImmutable($response->headers->get('Last-Modified', 'now'))));
         }
         if ($urlSet !== null) {
             $this->dumpSitemap($urlSet, $deflate);
@@ -96,7 +97,7 @@ final readonly class Generator
         return sprintf('%1$s://%2$s%3$s%4$s', $context->getScheme(), $context->getHost(), $context->getBaseUrl(), $path);
     }
 
-    private function dumpRequest(callable $callable, Request $request, int $expectedStatusCode = 200): void
+    private function dumpRequest(callable $callable, Request $request, int $expectedStatusCode = 200): Response
     {
         try {
             $response = $this->kernel->handle($request);
@@ -123,6 +124,8 @@ final readonly class Generator
         $this->filesystem->dumpFile($path, $body);
 
         $callable($request, $response, $path);
+
+        return $response;
     }
 
     private function dumpSitemap(Sitemapindex|Urlset $sitemap, bool $deflate): void
