@@ -207,6 +207,7 @@
     </PossiblyUnusedMethod>
     <PropertyNotSetInConstructor>
       <code>Kernel</code>
+      <code>Kernel</code>
     </PropertyNotSetInConstructor>
     <UnresolvableInclude>
       <code>require $path</code>
