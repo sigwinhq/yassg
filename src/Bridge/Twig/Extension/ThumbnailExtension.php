@@ -74,9 +74,10 @@ final class ThumbnailExtension extends AbstractExtension
 
                 $request = $this->requestStack->getCurrentRequest();
                 if ($request === null) {
-                    throw new \RuntimeException('Cannot use yassg_thumbnail without a request');
+                    $build = true;
+                } else {
+                    $build = (bool) $request->attributes->get('yassg_build', false);
                 }
-                $build = (bool) $request->attributes->get('yassg_build', false);
                 $url = sprintf('%1$s/insecure/%2$s%3$s', $this->imgproxyUrl, $filter, $this->encode('local:///'.ltrim($relative, '/')));
                 if (! $build) {
                     return $url;
