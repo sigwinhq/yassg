@@ -152,6 +152,7 @@
       <code>variableNode</code>
     </MixedMethodCall>
     <PossiblyNullReference>
+      <code>arrayNode</code>
       <code>end</code>
     </PossiblyNullReference>
     <UndefinedInterfaceMethod>
