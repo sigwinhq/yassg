@@ -15,6 +15,8 @@ namespace Sigwin\YASSG;
 
 use Presta\SitemapBundle\Sitemap\Sitemapindex;
 use Presta\SitemapBundle\Sitemap\Url\UrlConcrete;
+use Sigwin\YASSG\Asset\AssetCopy;
+use Sigwin\YASSG\Asset\AssetFetch;
 use Sigwin\YASSG\Bridge\PrestaSitemap\Urlset;
 use Sigwin\YASSG\Bridge\Symfony\Routing\Request;
 use Symfony\Component\Filesystem\Filesystem;
@@ -28,7 +30,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
  */
 final readonly class Generator
 {
-    public function __construct(private string $buildDir, private Permutator $permutator, private UrlGeneratorInterface $urlGenerator, private KernelInterface $kernel, private Filesystem $filesystem, private ThumbnailQueue $thumbnailQueue) {}
+    public function __construct(private string $buildDir, private Permutator $permutator, private UrlGeneratorInterface $urlGenerator, private KernelInterface $kernel, private Filesystem $filesystem, private AssetQueue $thumbnailQueue) {}
 
     /**
      * @param callable(Request, Response, string): void $callable
@@ -77,8 +79,8 @@ final readonly class Generator
             $response = $this->dumpRequest($callable, $request);
             $urlSet->addUrl(new UrlConcrete($url, new \DateTimeImmutable($response->headers->get('Last-Modified', 'now'))));
 
-            $this->thumbnailQueue->flush(function (array $item) use ($callable): void {
-                $callable($this->createRequest($item['destination']), new Response('OK'), $item['destination']);
+            $this->thumbnailQueue->flush(function (AssetCopy|AssetFetch $item) use ($callable): void {
+                $callable($this->createRequest($item->destination), new Response('OK'), $item->destination);
             });
         }
         if ($urlSet !== null) {
@@ -95,7 +97,10 @@ final readonly class Generator
 
     private function createRequest(string $path): Request
     {
-        return Request::create(rtrim($path, '/'))->withBaseUrl($this->urlGenerator->getContext()->getBaseUrl());
+        $request = Request::create(rtrim($path, '/'))->withBaseUrl($this->urlGenerator->getContext()->getBaseUrl());
+        $request->attributes->add(['yassg_build' => true]);
+
+        return $request;
     }
 
     private function generateSitemapPath(bool $deflate, ?string $name = null, ?int $offset = null): string

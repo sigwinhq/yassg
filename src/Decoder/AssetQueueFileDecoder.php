@@ -13,15 +13,14 @@ declare(strict_types=1);
 
 namespace Sigwin\YASSG\Decoder;
 
+use Sigwin\YASSG\Asset\AssetCopy;
+use Sigwin\YASSG\Asset\AssetFetch;
+use Sigwin\YASSG\AssetQueue;
 use Sigwin\YASSG\FileDecoder;
-use Sigwin\YASSG\ThumbnailQueue;
 
-/**
- * @psalm-import-type TThumbnailOptions from \Sigwin\YASSG\ThumbnailQueue
- */
-final readonly class ThumbnailQueueFileDecoder implements FileDecoder
+final readonly class AssetQueueFileDecoder implements FileDecoder
 {
-    public function __construct(private FileDecoder $decoder, private ThumbnailQueue $thumbnailQueue) {}
+    public function __construct(private FileDecoder $decoder, private AssetQueue $queue) {}
 
     public function supports(\SplFileInfo $file): bool
     {
@@ -30,15 +29,15 @@ final readonly class ThumbnailQueueFileDecoder implements FileDecoder
 
     public function decode(\SplFileInfo $file): array
     {
-        /** @var array{"@thumbnails"?: list<TThumbnailOptions>} $decoded */
+        /** @var array{"@assets"?: list<AssetCopy|AssetFetch>} $decoded */
         $decoded = $this->decoder->decode($file);
 
-        if (isset($decoded['@thumbnails'])) {
-            foreach ($decoded['@thumbnails'] as $thumbnail) {
-                $this->thumbnailQueue->add($thumbnail);
+        if (isset($decoded['@assets'])) {
+            foreach ($decoded['@assets'] as $thumbnail) {
+                $this->queue->add($thumbnail);
             }
         }
-        unset($decoded['@thumbnails']);
+        unset($decoded['@assets']);
 
         return $decoded;
     }

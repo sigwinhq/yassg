@@ -18,6 +18,16 @@
       <code>Page</code>
     </UnusedClass>
   </file>
+  <file src="src/Asset/AssetCopy.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/AssetQueue.php">
+    <PossiblyUnusedMethod>
+      <code>__construct</code>
+    </PossiblyUnusedMethod>
+  </file>
   <file src="src/Bridge/Symfony/Command/GenerateCommand.php">
     <UnusedClass>
       <code>GenerateCommand</code>
@@ -118,6 +128,8 @@
       <code>end</code>
       <code>end</code>
       <code>end</code>
+      <code>end</code>
+      <code>end</code>
       <code>info</code>
       <code>isRequired</code>
       <code>isRequired</code>
@@ -127,6 +139,7 @@
       <code>scalarNode</code>
       <code>scalarNode</code>
       <code>scalarNode</code>
+      <code>scalarPrototype</code>
       <code>scalarPrototype</code>
       <code>scalarPrototype</code>
       <code>setDeprecated</code>
@@ -139,15 +152,17 @@
       <code>variableNode</code>
     </MixedMethodCall>
     <PossiblyNullReference>
+      <code>arrayNode</code>
       <code>end</code>
     </PossiblyNullReference>
     <UndefinedInterfaceMethod>
-      <code>end</code>
+      <code>arrayNode</code>
     </UndefinedInterfaceMethod>
   </file>
   <file src="src/Bridge/Symfony/DependencyInjection/KernelExtension.php">
     <MixedArgument>
       <code><![CDATA[$config['databases'] ?? []]]></code>
+      <code><![CDATA[$config['imgproxy_url'] ?? null]]></code>
       <code><![CDATA[$config['routes'] ?? []]]></code>
       <code><![CDATA[$config['variables'] ?? []]]></code>
     </MixedArgument>
@@ -412,6 +427,9 @@
       <code><![CDATA[$GLOBALS['YASSG_BASEDIR']]]></code>
       <code><![CDATA[$context['_path']]]></code>
     </MixedArgument>
+    <PossiblyNullArgument>
+      <code><![CDATA[$this->imgproxyUrl]]></code>
+    </PossiblyNullArgument>
     <PossiblyUndefinedStringArrayOffset>
       <code><![CDATA[$GLOBALS['YASSG_BASEDIR']]]></code>
       <code><![CDATA[$context['_path']]]></code>
@@ -534,6 +552,11 @@
       <code>__construct</code>
     </PossiblyUnusedMethod>
   </file>
+  <file src="src/Decoder/AssetQueueFileDecoder.php">
+    <UnusedClass>
+      <code>AssetQueueFileDecoder</code>
+    </UnusedClass>
+  </file>
   <file src="src/Decoder/CachingFileDecoder.php">
     <UnusedClass>
       <code>CachingFileDecoder</code>
@@ -547,11 +570,6 @@
   <file src="src/Decoder/MarkdownFileDecoder.php">
     <UnusedClass>
       <code>MarkdownFileDecoder</code>
-    </UnusedClass>
-  </file>
-  <file src="src/Decoder/ThumbnailQueueFileDecoder.php">
-    <UnusedClass>
-      <code>ThumbnailQueueFileDecoder</code>
     </UnusedClass>
   </file>
   <file src="src/Decoder/YamlFileDecoder.php">
@@ -669,11 +687,6 @@
     <PossiblyUnusedReturnValue>
       <code>array</code>
     </PossiblyUnusedReturnValue>
-  </file>
-  <file src="src/ThumbnailQueue.php">
-    <PossiblyUnusedMethod>
-      <code>__construct</code>
-    </PossiblyUnusedMethod>
   </file>
   <file src="tests/functional/site/src/Bridge/Symfony/EventSubscriber.php">
     <UnusedClass>
