@@ -29,15 +29,14 @@ final readonly class AssetQueueFileDecoder implements FileDecoder
 
     public function decode(\SplFileInfo $file): array
     {
-        /** @var array{"@assets"?: list<AssetCopy|AssetFetch>} $decoded */
+        /** @var array{"__assets"?: list<AssetCopy|AssetFetch>} $decoded */
         $decoded = $this->decoder->decode($file);
 
-        if (isset($decoded['@assets'])) {
-            foreach ($decoded['@assets'] as $thumbnail) {
-                $this->queue->add($thumbnail);
+        if (isset($decoded['__assets'])) {
+            foreach ($decoded['__assets'] as $asset) {
+                $this->queue->add($asset);
             }
         }
-        unset($decoded['@assets']);
 
         return $decoded;
     }
