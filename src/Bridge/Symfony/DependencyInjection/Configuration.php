@@ -24,6 +24,8 @@ final class Configuration implements ConfigurationInterface
 
         $treeBuilder->getRootNode()
             ->children()
+                ->scalarNode('imgproxy_url')
+                ->end()
                 ->arrayNode('variables')
                     ->scalarPrototype()
                     ->end()

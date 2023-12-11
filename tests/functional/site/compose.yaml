@@ -1,0 +1,14 @@
+services:
+    imgproxy:
+        image: darthsim/imgproxy:v3
+        environment:
+            - DOMAIN_NAME=default:img.yassg.local
+            - IMGPROXY_BIND=:80
+            - IMGPROXY_LOCAL_FILESYSTEM_ROOT=/app
+        labels:
+            - dev.orbstack.domains=img.yassg.local
+        working_dir: /app
+        volumes:
+            - .:/app:ro
+        tmpfs:
+            - /tmp

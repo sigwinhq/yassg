@@ -3,6 +3,7 @@ services:
         autowire: true
         autoconfigure: true
         bind:
+            $imgproxyUrl: "%sigwin_yassg.imgproxy_url%"
             $baseDir: "%sigwin_yassg.base_dir%"
             $buildDir: "%sigwin_yassg.build_dir%"
             $routes: "%sigwin_yassg.routes%"
