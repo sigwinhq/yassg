@@ -15,7 +15,6 @@ namespace Sigwin\YASSG\Bridge\Twig\Extension;
 
 use Sigwin\YASSG\Asset\AssetFetch;
 use Sigwin\YASSG\AssetQueue;
-use Sigwin\YASSG\Locatable;
 use Symfony\Component\Asset\Packages;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Twig\Extension\AbstractExtension;
@@ -30,17 +29,17 @@ final class ThumbnailExtension extends AbstractExtension
         return [
             new TwigFunction('yassg_thumbnail', function (array $context, string $path, array $options = []): string {
                 if (str_starts_with($path, './')) {
-                    if (!isset($context['_path'])) {
+                    if (! isset($context['_path'])) {
                         if (isset($options['self'])) {
                             $context['_path'] = $options['self']->__path;
                         } else {
                             $candidates = [];
                             foreach ($context as $item) {
-                                if (is_object($item) && property_exists($item, '__path')) {
+                                if (\is_object($item) && property_exists($item, '__path')) {
                                     $candidates[] = $item;
                                 }
                             }
-                            if (count($candidates) !== 1) {
+                            if (\count($candidates) !== 1) {
                                 throw new \RuntimeException('Cannot use yassg_thumbnail() without a single Locatable object in context, pass {self: object} as the second argument');
                             }
                             $context['_path'] = $candidates[0]->__path;

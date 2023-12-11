@@ -116,6 +116,9 @@ final class DenormalizingStorage implements Storage
 
             // attach metadata to the object as dynamic properties
             foreach ($metadata as $key => $value) {
+                /**
+                 * @phpstan-ignore-next-line
+                 */
                 $object->{$key} = $value;
             }
 
