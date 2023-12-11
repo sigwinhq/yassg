@@ -115,6 +115,9 @@ final class FilesystemStorage implements StorageWithOptions
             throw new \RuntimeException(sprintf('Decoder does not know how to decode %1$s file', $file->getRealPath()));
         }
 
-        return $this->decoder->decode($file);
+        $decoded = $this->decoder->decode($file);
+        $decoded['__path'] = $file->getRealPath();
+
+        return $decoded;
     }
 }

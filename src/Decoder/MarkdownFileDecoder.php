@@ -72,7 +72,7 @@ final readonly class MarkdownFileDecoder implements FileDecoder
             $metadata = $result->getFrontMatter();
         }
         $metadata['body'] = $result->getContent();
-        $metadata['@assets'] = $assets;
+        $metadata['__assets'] = $assets;
 
         return $metadata;
     }

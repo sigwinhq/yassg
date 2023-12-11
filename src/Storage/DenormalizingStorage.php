@@ -103,9 +103,26 @@ final class DenormalizingStorage implements Storage
     private function denormalize(string $id, array $data, array $context): object
     {
         try {
-            return $this->denormalizer->denormalize($data, $this->class, null, $context + [
+            $metadata = [];
+            foreach ($data as $key => $value) {
+                if (str_starts_with($key, '__')) {
+                    $metadata[$key] = $value;
+                    unset($data[$key]);
+                }
+            }
+            $object = $this->denormalizer->denormalize($data, $this->class, null, $context + [
                 AbstractNormalizer::ALLOW_EXTRA_ATTRIBUTES => false,
             ]);
+
+            // attach metadata to the object as dynamic properties
+            foreach ($metadata as $key => $value) {
+                /**
+                 * @phpstan-ignore-next-line
+                 */
+                $object->{$key} = $value;
+            }
+
+            return $object;
         } catch (ExtraAttributesException $extraAttributesException) {
             throw UnexpectedAttributeException::newSelf($id, $extraAttributesException->getMessage());
         }

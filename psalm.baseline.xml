@@ -427,12 +427,19 @@
       <code><![CDATA[$GLOBALS['YASSG_BASEDIR']]]></code>
       <code><![CDATA[$context['_path']]]></code>
     </MixedArgument>
+    <MixedAssignment>
+      <code><![CDATA[$context['_path']]]></code>
+      <code><![CDATA[$context['_path']]]></code>
+      <code>$item</code>
+    </MixedAssignment>
+    <MixedPropertyFetch>
+      <code><![CDATA[$options['self']->__path]]></code>
+    </MixedPropertyFetch>
     <PossiblyNullArgument>
       <code><![CDATA[$this->imgproxyUrl]]></code>
     </PossiblyNullArgument>
     <PossiblyUndefinedStringArrayOffset>
       <code><![CDATA[$GLOBALS['YASSG_BASEDIR']]]></code>
-      <code><![CDATA[$context['_path']]]></code>
     </PossiblyUndefinedStringArrayOffset>
     <UnusedClass>
       <code>ThumbnailExtension</code>
@@ -632,12 +639,19 @@
       <code>$locale</code>
       <code>$locale</code>
     </MixedArgument>
+    <MixedArgumentTypeCoercion>
+      <code>$key</code>
+    </MixedArgumentTypeCoercion>
     <MixedArrayOffset>
       <code><![CDATA[$this->cache[$this->class][$locale]]]></code>
     </MixedArrayOffset>
     <MixedAssignment>
       <code>$locale</code>
       <code>$locale</code>
+      <code>$metadata[$key]</code>
+      <code>$object</code>
+      <code>$value</code>
+      <code>$value</code>
     </MixedAssignment>
     <MixedInferredReturnType>
       <code>T</code>
@@ -649,6 +663,7 @@
       <code><![CDATA[$this->denormalizer->denormalize($data, $this->class, null, $context + [
                 AbstractNormalizer::ALLOW_EXTRA_ATTRIBUTES => false,
             ])]]></code>
+      <code>$object</code>
     </MixedReturnStatement>
     <PossiblyUndefinedStringArrayOffset>
       <code>$context[LocaleContext::LOCALE]</code>

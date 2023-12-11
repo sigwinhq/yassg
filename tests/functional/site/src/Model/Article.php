@@ -20,8 +20,13 @@ final class Article
     public string $title;
     public string $slug;
     public string $body;
-    public string $image;
+    public ?string $image = null;
 
     #[Context(['datetime_format' => 'Y-m-d H:i:s'])]
     public \DateTimeInterface $publishedAt;
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
 }

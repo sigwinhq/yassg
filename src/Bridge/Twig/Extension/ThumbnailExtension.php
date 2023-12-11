@@ -29,12 +29,30 @@ final class ThumbnailExtension extends AbstractExtension
         return [
             new TwigFunction('yassg_thumbnail', function (array $context, string $path, array $options = []): string {
                 if (str_starts_with($path, './')) {
+                    if (! isset($context['_path'])) {
+                        if (isset($options['self'])) {
+                            $context['_path'] = $options['self']->__path;
+                        } else {
+                            $candidates = [];
+                            foreach ($context as $item) {
+                                if (\is_object($item) && property_exists($item, '__path')) {
+                                    $candidates[] = $item;
+                                }
+                            }
+                            if (\count($candidates) !== 1) {
+                                throw new \RuntimeException('Cannot use yassg_thumbnail() without a single Locatable object in context, pass {self: object} as the second argument');
+                            }
+                            $context['_path'] = $candidates[0]->__path;
+                        }
+                    }
+
                     $newPath = realpath(\dirname($context['_path']).'/'.$path);
                     if ($newPath === false) {
                         throw new \RuntimeException('Invalid thumbnail path '.$path);
                     }
                     $path = $newPath;
                 }
+                unset($options['self']);
 
                 $filter = '';
                 if ($options !== []) {
