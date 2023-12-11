@@ -1,0 +1,12 @@
+services:
+    imgproxy:
+        image: darthsim/imgproxy:v3
+        environment:
+            - IMGPROXY_LOCAL_FILESYSTEM_ROOT=/app
+        working_dir: /app
+        ports:
+            - 8090:8080
+        volumes:
+            - .:/app:ro
+        tmpfs:
+            - /tmp
