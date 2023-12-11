@@ -13,14 +13,15 @@ declare(strict_types=1);
 
 namespace Sigwin\YASSG\Bridge\Twig\Extension;
 
-use Sigwin\YASSG\ThumbnailQueue;
+use Sigwin\YASSG\Asset\AssetFetch;
+use Sigwin\YASSG\AssetQueue;
 use Symfony\Component\Asset\Packages;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 final class ThumbnailExtension extends AbstractExtension
 {
-    public function __construct(private ?string $imgproxyUrl, private readonly Packages $packages, private readonly ThumbnailQueue $thumbnailQueue) {}
+    public function __construct(private ?string $imgproxyUrl, private readonly Packages $packages, private readonly AssetQueue $thumbnailQueue) {}
 
     public function getFunctions(): array
     {
@@ -54,12 +55,7 @@ final class ThumbnailExtension extends AbstractExtension
                 $relative = str_replace($GLOBALS['YASSG_BASEDIR'], '', $path);
                 $url = sprintf('%1$s/insecure/%2$s%3$s', $this->imgproxyUrl, $filter, $this->encode('local:///'.ltrim($relative, '/')));
 
-                /*
-                $this->thumbnailQueue->add([
-                    'source' => $url,
-                    'destination' => $this->packages->getUrl(ltrim($relative, '/')),
-                ]);
-                */
+                $this->thumbnailQueue->add(new AssetFetch($url, $relative));
 
                 return $url;
 

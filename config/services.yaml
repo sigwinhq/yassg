@@ -83,12 +83,12 @@ services:
         class: Sigwin\YASSG\Bridge\Symfony\HttpKernel\Fragment\RelativeUrlInlineFragmentRenderer
         decorates: fragment.renderer.inline
 
-    sigwin_yassg.file_decoder.thumbnail_queue_file_decoder:
+    sigwin_yassg.file_decoder.caching_queue_file_decoder:
         class: Sigwin\YASSG\Decoder\CachingFileDecoder
         decorates: 'Sigwin\YASSG\FileDecoder'
         decoration_priority: 200
-    sigwin_yassg.file_decoder.caching_file_decoder:
-        class: Sigwin\YASSG\Decoder\ThumbnailQueueFileDecoder
+    sigwin_yassg.file_decoder.asset_file_decoder:
+        class: Sigwin\YASSG\Decoder\AssetQueueFileDecoder
         decorates: 'Sigwin\YASSG\FileDecoder'
         decoration_priority: 100
     Sigwin\YASSG\FileDecoder:

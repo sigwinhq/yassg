@@ -13,43 +13,47 @@ declare(strict_types=1);
 
 namespace Sigwin\YASSG;
 
+use Sigwin\YASSG\Asset\AssetCopy;
+use Sigwin\YASSG\Asset\AssetFetch;
 use Symfony\Component\Filesystem\Filesystem;
 
-/**
- * @psalm-type TThumbnailOptions = array{source: string, destination: string}
- */
-final class ThumbnailQueue
+final class AssetQueue
 {
     /**
-     * @var array<string, TThumbnailOptions>
+     * @var array<string, AssetCopy|AssetFetch>
      */
     private array $queue = [];
 
     public function __construct(private string $buildDir, private Filesystem $filesystem) {}
 
-    /**
-     * @param TThumbnailOptions $specification
-     */
-    public function add(array $specification): void
+    public function add(AssetCopy|AssetFetch $specification): void
     {
-        $this->queue[$specification['destination']] = $specification;
+        $this->queue[$specification->destination] = $specification;
     }
 
     /**
-     * @param callable(TThumbnailOptions): void $callable
+     * @param callable(AssetCopy|AssetFetch): void $callable
      *
-     * @return list<TThumbnailOptions>
+     * @return list<AssetCopy|AssetFetch>
      */
     public function flush(?callable $callable = null): array
     {
         foreach ($this->queue as $specification) {
-            $destination = $this->buildDir.'/'.ltrim($specification['destination'], '/');
+            $destination = $this->buildDir.'/'.ltrim($specification->destination, '/');
             if (file_exists($destination)) {
                 continue;
             }
 
             // TODO: ImgProxy
-            $this->filesystem->copy($specification['source'], $destination);
+            if ($specification instanceof AssetFetch) {
+                $this->filesystem->copy($specification->url, $destination);
+                if ($callable !== null) {
+                    $callable($specification);
+                }
+                continue;
+            }
+
+            $this->filesystem->copy($specification->source, $destination);
             if ($callable !== null) {
                 $callable($specification);
             }
