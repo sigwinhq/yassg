@@ -1,5 +1,5 @@
 sigwin_yassg:
-    imgproxy_url: http://localhost:8080
+    imgproxy_url: http://localhost:8090
     databases:
         articles:
             class: Sigwin\YASSG\Test\Functional\Site\Model\Article

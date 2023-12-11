@@ -5,7 +5,7 @@ services:
             - IMGPROXY_LOCAL_FILESYSTEM_ROOT=/app
         working_dir: /app
         ports:
-            - 8080:8080
+            - 8090:8080
         volumes:
             - .:/app:ro
         tmpfs:
