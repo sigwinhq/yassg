@@ -25,6 +25,7 @@ final class Configuration implements ConfigurationInterface
         $treeBuilder->getRootNode()
             ->children()
                 ->scalarNode('imgproxy_url')
+                    ->defaultValue('http://localhost:8090')
                 ->end()
                 ->arrayNode('variables')
                     ->scalarPrototype()
