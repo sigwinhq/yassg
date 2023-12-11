@@ -97,7 +97,10 @@ final readonly class Generator
 
     private function createRequest(string $path): Request
     {
-        return Request::create(rtrim($path, '/'))->withBaseUrl($this->urlGenerator->getContext()->getBaseUrl());
+        $request = Request::create(rtrim($path, '/'))->withBaseUrl($this->urlGenerator->getContext()->getBaseUrl());
+        $request->attributes->add(['yassg_build' => true]);
+
+        return $request;
     }
 
     private function generateSitemapPath(bool $deflate, ?string $name = null, ?int $offset = null): string

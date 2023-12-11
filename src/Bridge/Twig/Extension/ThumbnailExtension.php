@@ -16,12 +16,13 @@ namespace Sigwin\YASSG\Bridge\Twig\Extension;
 use Sigwin\YASSG\Asset\AssetFetch;
 use Sigwin\YASSG\AssetQueue;
 use Symfony\Component\Asset\Packages;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
 final class ThumbnailExtension extends AbstractExtension
 {
-    public function __construct(private ?string $imgproxyUrl, private readonly Packages $packages, private readonly AssetQueue $thumbnailQueue) {}
+    public function __construct(private RequestStack $requestStack, private ?string $imgproxyUrl, private readonly Packages $packages, private readonly AssetQueue $thumbnailQueue) {}
 
     public function getFunctions(): array
     {
@@ -51,15 +52,22 @@ final class ThumbnailExtension extends AbstractExtension
                     }
                     $filter .= '/';
                 }
-
                 $relative = str_replace($GLOBALS['YASSG_BASEDIR'], '', $path);
+
+                $request = $this->requestStack->getCurrentRequest();
+                if ($request === null) {
+                    throw new \RuntimeException('Cannot use yassg_thumbnail without a request');
+                }
+                $build = (bool) $request->attributes->get('yassg_build', false);
                 $url = sprintf('%1$s/insecure/%2$s%3$s', $this->imgproxyUrl, $filter, $this->encode('local:///'.ltrim($relative, '/')));
+                if (! $build) {
+                    return $url;
+                }
 
-                $this->thumbnailQueue->add(new AssetFetch($url, $relative));
+                $path = \dirname($relative).'/'.md5(md5_file($path).$filter);
+                $this->thumbnailQueue->add(new AssetFetch($url, $path));
 
-                return $url;
-
-                return $this->packages->getUrl(ltrim($relative, '/'));
+                return $this->packages->getUrl(ltrim($path, '/'));
             }, ['needs_context' => true]),
         ];
     }

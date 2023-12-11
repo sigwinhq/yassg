@@ -16,6 +16,7 @@ namespace Sigwin\YASSG;
 use Sigwin\YASSG\Asset\AssetCopy;
 use Sigwin\YASSG\Asset\AssetFetch;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 final class AssetQueue
 {
@@ -24,7 +25,7 @@ final class AssetQueue
      */
     private array $queue = [];
 
-    public function __construct(private string $buildDir, private Filesystem $filesystem) {}
+    public function __construct(private string $buildDir, private Filesystem $filesystem, private HttpClientInterface $httpClient) {}
 
     public function add(AssetCopy|AssetFetch $specification): void
     {
@@ -46,7 +47,17 @@ final class AssetQueue
 
             // TODO: ImgProxy
             if ($specification instanceof AssetFetch) {
-                $this->filesystem->copy($specification->url, $destination);
+                $response = $this->httpClient->request('GET', $specification->url);
+                $this->filesystem->mkdir(\dirname($destination));
+                $handle = fopen($destination, 'w');
+                if ($handle === false) {
+                    throw new \RuntimeException('Failed to open file for writing');
+                }
+                foreach ($this->httpClient->stream($response) as $chunk) {
+                    fwrite($handle, $chunk->getContent());
+                }
+                fclose($handle);
+
                 if ($callable !== null) {
                     $callable($specification);
                 }
