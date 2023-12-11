@@ -440,7 +440,6 @@
     </PossiblyNullArgument>
     <PossiblyUndefinedStringArrayOffset>
       <code><![CDATA[$GLOBALS['YASSG_BASEDIR']]]></code>
-      <code><![CDATA[$context['_path']]]></code>
     </PossiblyUndefinedStringArrayOffset>
     <UnusedClass>
       <code>ThumbnailExtension</code>
@@ -664,6 +663,7 @@
       <code><![CDATA[$this->denormalizer->denormalize($data, $this->class, null, $context + [
                 AbstractNormalizer::ALLOW_EXTRA_ATTRIBUTES => false,
             ])]]></code>
+      <code>$object</code>
     </MixedReturnStatement>
     <PossiblyUndefinedStringArrayOffset>
       <code>$context[LocaleContext::LOCALE]</code>
