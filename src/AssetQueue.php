@@ -47,7 +47,11 @@ final class AssetQueue
 
             // TODO: ImgProxy
             if ($specification instanceof AssetFetch) {
-                $response = $this->httpClient->request('GET', $specification->url);
+                $response = $this->httpClient->request('GET', $specification->url, [
+                    'headers' => [
+                        'Accept' => 'image/webp,image/apng,image/*,*/*;q=0.8',
+                    ],
+                ]);
                 $this->filesystem->mkdir(\dirname($destination));
                 $handle = fopen($destination, 'w');
                 if ($handle === false) {
