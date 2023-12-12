@@ -83,7 +83,7 @@ final class ThumbnailExtension extends AbstractExtension
                     return $url;
                 }
 
-                $path = \dirname($relative).'/'.md5(md5_file($path).$filter);
+                $path = sprintf('%1$s/%2$s.%3$s.webp', \dirname($relative), pathinfo($relative, \PATHINFO_FILENAME), mb_substr(md5(md5_file($path).$filter), 0, 8));
                 $this->thumbnailQueue->add(new AssetFetch($url, $path));
 
                 return $this->packages->getUrl(ltrim($path, '/'));
