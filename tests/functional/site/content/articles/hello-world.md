@@ -16,3 +16,7 @@ class HelloWorld
     }
 }
 ```
+
+^^^
+![example-image](https://picsum.photos/id/237/200/300)
+^^^ This is caption for this image
