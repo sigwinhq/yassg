@@ -1,4 +1,22 @@
 services:
+    app:
+        image: php:8.2-alpine
+        environment:
+            BASE_URL: ${BASE_URL}
+        working_dir: /app
+        volumes:
+            - .:/app
+        tmpfs:
+            - /tmp
+    webpack:
+        image: node:20-alpine
+        environment:
+            BASE_URL: ${BASE_URL}
+        working_dir: /app
+        volumes:
+            - .:/app
+        tmpfs:
+            - /tmp
     imgproxy:
         image: darthsim/imgproxy:v3
         environment:
