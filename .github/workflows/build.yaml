@@ -87,6 +87,10 @@ jobs:
                 working-directory: tests/functional/init
                 run: make -f ../default.mk self/init
             -
+                name: Run Infra init
+                working-directory: tests/functional/init
+                run: make -f ../default.mk init
+            -
                 name: Run build
                 working-directory: tests/functional/init
                 run: make self/build
