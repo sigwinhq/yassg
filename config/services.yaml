@@ -109,6 +109,7 @@ services:
     League\CommonMark\Extension\Attributes\AttributesExtension: ~
     League\CommonMark\Extension\HeadingPermalink\HeadingPermalinkExtension: ~
     League\CommonMark\Extension\TableOfContents\TableOfContentsExtension: ~
+    JSW\Figure\FigureExtension: ~
 
     Spatie\CommonMarkHighlighter\FencedCodeRenderer: ~
     Spatie\CommonMarkHighlighter\IndentedCodeRenderer: ~
@@ -129,6 +130,8 @@ services:
                 addExtension: [ '@League\CommonMark\Extension\Footnote\FootnoteExtension' ]
             -
                 addExtension: [ '@League\CommonMark\Extension\Attributes\AttributesExtension' ]
+            -
+                addExtension: [ '@JSW\Figure\FigureExtension' ]
             -
                 addRenderer: [ League\CommonMark\Extension\CommonMark\Node\Block\FencedCode, '@Spatie\CommonMarkHighlighter\FencedCodeRenderer', 10 ]
             -
