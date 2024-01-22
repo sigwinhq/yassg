@@ -27,10 +27,13 @@ final class ThumbnailExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('yassg_thumbnail', function (array $context, string $path, array $options = []): string {
+            new TwigFunction('yassg_thumbnail', /** @param array<string, string>|array{self: object} $options */ function (array $context, string $path, array $options = []): string {
                 if (str_starts_with($path, './')) {
                     if (! isset($context['_path'])) {
                         if (isset($options['self'])) {
+                            if (! \is_object($options['self']) || ! property_exists($options['self'], '__path')) {
+                                throw new \RuntimeException('Cannot use yassg_thumbnail() with {self: object} as the second argument, pass {self: object} as the second argument');
+                            }
                             $context['_path'] = $options['self']->__path;
                         } else {
                             $candidates = [];
@@ -60,15 +63,33 @@ final class ThumbnailExtension extends AbstractExtension
                         throw new \RuntimeException('Cannot use yassg_thumbnail options without sigwin_yassg.imgproxy_url configured');
                     }
 
+                    $filters = [];
+
                     $filter .= 'rs:fill';
                     if (isset($options['width'])) {
-                        $filter .= ':'.(string) $options['width'];
+                        if (! is_numeric($options['width'])) {
+                            throw new \RuntimeException('Invalid thumbnail width');
+                        }
+                        $filter .= ':'.$options['width'];
+                        unset($options['width']);
 
                         if (isset($options['height'])) {
-                            $filter .= ':'.(string) $options['height'];
+                            if (! is_numeric($options['height'])) {
+                                throw new \RuntimeException('Invalid thumbnail height');
+                            }
+                            $filter .= ':'.$options['height'];
+                            unset($options['height']);
                         }
+                        $filters[] = $filter;
                     }
-                    $filter .= '/';
+
+                    foreach ($options as $name => $value) {
+                        if (! \is_string($value)) {
+                            throw new \RuntimeException('Invalid thumbnail option '.$name);
+                        }
+                        $filters[] = $name.':'.$value;
+                    }
+                    $filter = implode('/', $filters).'/';
                 }
                 $relative = str_replace($GLOBALS['YASSG_BASEDIR'], '', $path);
 

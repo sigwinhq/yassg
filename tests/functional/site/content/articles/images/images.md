@@ -16,3 +16,5 @@ This is a database lookup example: {{yassg_get('articles', '/hello-world.md').ti
 This is an asset lookup: {{ yassg_thumbnail(item.image) }}
 
 ![Logo]({{ yassg_thumbnail(item.image, {width: 260, height: 480}) }})
+
+![Logo]({{ yassg_thumbnail(item.image, {width: 400, height: 200, gravity: "no"}) }})
