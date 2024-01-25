@@ -28,7 +28,8 @@ final class MemoryStorage implements StorageWithOptions
          * @var array<string, array>
          */
         private array $values
-    ) {}
+    ) {
+    }
 
     public static function resolveOptions(array $options): array
     {

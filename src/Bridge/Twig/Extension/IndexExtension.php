@@ -19,7 +19,9 @@ use Twig\TwigFunction;
 
 final class IndexExtension extends AbstractExtension
 {
-    public function __construct(private readonly Permutator $permutator) {}
+    public function __construct(private readonly Permutator $permutator)
+    {
+    }
 
     public function getFunctions(): array
     {

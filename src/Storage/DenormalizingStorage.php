@@ -34,7 +34,9 @@ final class DenormalizingStorage implements Storage
      * @param Storage<T>      $storage
      * @param class-string<T> $class
      */
-    public function __construct(private readonly DenormalizerInterface $denormalizer, private readonly Storage $storage, private readonly string $class, private readonly LocaleContext $context) {}
+    public function __construct(private readonly DenormalizerInterface $denormalizer, private readonly Storage $storage, private readonly string $class, private readonly LocaleContext $context)
+    {
+    }
 
     /**
      * @return iterable<string, T>

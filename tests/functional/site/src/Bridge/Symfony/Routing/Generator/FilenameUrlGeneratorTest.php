@@ -25,7 +25,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
  * @small
  */
 #[\PHPUnit\Framework\Attributes\Small]
-#[\PHPUnit\Framework\Attributes\CoversClass(\Sigwin\YASSG\Bridge\Symfony\Routing\Generator\FilenameUrlGenerator::class)]
+#[\PHPUnit\Framework\Attributes\CoversClass(FilenameUrlGenerator::class)]
 final class FilenameUrlGeneratorTest extends TestCase
 {
     public function testCannotGenerateUnknownRoute(): void

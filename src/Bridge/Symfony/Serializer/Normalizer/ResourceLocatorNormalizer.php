@@ -19,7 +19,9 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 final readonly class ResourceLocatorNormalizer implements DenormalizerInterface
 {
-    public function __construct(private FileLocatorInterface $locator) {}
+    public function __construct(private FileLocatorInterface $locator)
+    {
+    }
 
     /**
      * @return array<string>|string

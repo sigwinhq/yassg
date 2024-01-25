@@ -18,7 +18,9 @@ use Symfony\Component\Routing\RequestContext;
 
 final class FilenameUrlGenerator implements UrlGeneratorInterface
 {
-    public function __construct(private readonly UrlGeneratorInterface $urlGenerator, private array $stripParameters, private array $routes) {}
+    public function __construct(private readonly UrlGeneratorInterface $urlGenerator, private array $stripParameters, private array $routes)
+    {
+    }
 
     public function generate(string $name, array $parameters = [], int $referenceType = self::ABSOLUTE_PATH): string
     {

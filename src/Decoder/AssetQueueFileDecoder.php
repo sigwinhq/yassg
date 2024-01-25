@@ -20,7 +20,9 @@ use Sigwin\YASSG\FileDecoder;
 
 final readonly class AssetQueueFileDecoder implements FileDecoder
 {
-    public function __construct(private FileDecoder $decoder, private AssetQueue $queue) {}
+    public function __construct(private FileDecoder $decoder, private AssetQueue $queue)
+    {
+    }
 
     public function supports(\SplFileInfo $file): bool
     {

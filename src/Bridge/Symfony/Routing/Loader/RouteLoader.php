@@ -20,7 +20,9 @@ use Symfony\Component\Routing\RouteCollection;
 
 final readonly class RouteLoader implements RouteLoaderInterface
 {
-    public function __construct(private array $routes) {}
+    public function __construct(private array $routes)
+    {
+    }
 
     public function __invoke(): RouteCollection
     {

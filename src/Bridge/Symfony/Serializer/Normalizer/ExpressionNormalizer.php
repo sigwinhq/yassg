@@ -19,7 +19,9 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 final readonly class ExpressionNormalizer implements DenormalizerInterface
 {
-    public function __construct(private ExpressionLanguage $expressionLanguage, private DatabaseProvider $databaseProvider) {}
+    public function __construct(private ExpressionLanguage $expressionLanguage, private DatabaseProvider $databaseProvider)
+    {
+    }
 
     public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): object
     {
