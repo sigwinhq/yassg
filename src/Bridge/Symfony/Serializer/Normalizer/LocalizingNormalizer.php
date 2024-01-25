@@ -25,7 +25,9 @@ final class LocalizingNormalizer implements DenormalizerAwareInterface, Denormal
     /**
      * @param array<class-string, list<string>> $classes
      */
-    public function __construct(private readonly array $classes) {}
+    public function __construct(private readonly array $classes)
+    {
+    }
 
     public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {

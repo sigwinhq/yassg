@@ -17,7 +17,9 @@ use Psr\Container\ContainerInterface;
 
 final readonly class DatabaseProvider
 {
-    public function __construct(private ContainerInterface $locator) {}
+    public function __construct(private ContainerInterface $locator)
+    {
+    }
 
     public function getDatabase(string $name): Database
     {

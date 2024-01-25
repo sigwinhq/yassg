@@ -20,7 +20,9 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 final readonly class RelativeUrlInlineFragmentRenderer implements FragmentRendererInterface
 {
-    public function __construct(private InlineFragmentRenderer $fragmentRenderer, private UrlGeneratorInterface $urlGenerator) {}
+    public function __construct(private InlineFragmentRenderer $fragmentRenderer, private UrlGeneratorInterface $urlGenerator)
+    {
+    }
 
     /**
      * @param array<array-key, mixed> $options

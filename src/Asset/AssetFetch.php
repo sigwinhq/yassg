@@ -15,5 +15,7 @@ namespace Sigwin\YASSG\Asset;
 
 final readonly class AssetFetch
 {
-    public function __construct(public string $url, public string $destination) {}
+    public function __construct(public string $url, public string $destination)
+    {
+    }
 }

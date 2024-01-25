@@ -25,7 +25,9 @@ final class AssetQueue
      */
     private array $queue = [];
 
-    public function __construct(private string $buildDir, private Filesystem $filesystem, private HttpClientInterface $httpClient) {}
+    public function __construct(private readonly string $buildDir, private readonly Filesystem $filesystem, private readonly HttpClientInterface $httpClient)
+    {
+    }
 
     public function add(AssetCopy|AssetFetch $specification): void
     {

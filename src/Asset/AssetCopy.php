@@ -15,5 +15,7 @@ namespace Sigwin\YASSG\Asset;
 
 final readonly class AssetCopy
 {
-    public function __construct(public string $source, public string $destination) {}
+    public function __construct(public string $source, public string $destination)
+    {
+    }
 }

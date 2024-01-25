@@ -19,7 +19,9 @@ use Twig\TwigFunction;
 
 final class PaginatorExtension extends AbstractExtension
 {
-    public function __construct(private readonly DatabaseProvider $provider) {}
+    public function __construct(private readonly DatabaseProvider $provider)
+    {
+    }
 
     public function getFunctions(): array
     {

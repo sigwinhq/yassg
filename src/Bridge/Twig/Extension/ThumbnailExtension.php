@@ -22,7 +22,9 @@ use Twig\TwigFunction;
 
 final class ThumbnailExtension extends AbstractExtension
 {
-    public function __construct(private RequestStack $requestStack, private ?string $imgproxyUrl, private readonly Packages $packages, private readonly AssetQueue $thumbnailQueue) {}
+    public function __construct(private readonly RequestStack $requestStack, private readonly ?string $imgproxyUrl, private readonly Packages $packages, private readonly AssetQueue $thumbnailQueue)
+    {
+    }
 
     public function getFunctions(): array
     {
@@ -49,7 +51,7 @@ final class ThumbnailExtension extends AbstractExtension
                         }
                     }
 
-                    $newPath = realpath(\dirname($context['_path']).'/'.$path);
+                    $newPath = realpath(\dirname((string) $context['_path']).'/'.$path);
                     if ($newPath === false) {
                         throw new \RuntimeException('Invalid thumbnail path '.$path);
                     }

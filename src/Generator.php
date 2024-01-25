@@ -30,7 +30,9 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
  */
 final readonly class Generator
 {
-    public function __construct(private string $buildDir, private Permutator $permutator, private UrlGeneratorInterface $urlGenerator, private KernelInterface $kernel, private Filesystem $filesystem, private AssetQueue $thumbnailQueue) {}
+    public function __construct(private string $buildDir, private Permutator $permutator, private UrlGeneratorInterface $urlGenerator, private KernelInterface $kernel, private Filesystem $filesystem, private AssetQueue $thumbnailQueue)
+    {
+    }
 
     /**
      * @param callable(Request, Response, string): void $callable

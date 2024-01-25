@@ -20,7 +20,8 @@ final readonly class CompositeFileDecoder implements FileDecoder
     public function __construct(
         /** @var iterable<FileDecoder> */
         private iterable $decoders
-    ) {}
+    ) {
+    }
 
     public function supports(\SplFileInfo $file): bool
     {

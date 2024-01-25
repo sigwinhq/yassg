@@ -19,7 +19,9 @@ use Twig\TwigFunction;
 
 final class DatabaseExtension extends AbstractExtension
 {
-    public function __construct(private readonly DatabaseProvider $provider) {}
+    public function __construct(private readonly DatabaseProvider $provider)
+    {
+    }
 
     public function getFunctions(): array
     {
