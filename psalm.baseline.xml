@@ -456,6 +456,10 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Context/LocaleContext.php">
+    <MissingClassConstType>
+      <code><![CDATA[LOCALE = 'sigwin_locale']]></code>
+      <code><![CDATA[LOCALE_FALLBACK = 'sigwin_locale_fallback']]></code>
+    </MissingClassConstType>
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
