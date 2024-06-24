@@ -28,6 +28,12 @@ final readonly class Permutator
      */
     public function permute(): \Traversable
     {
+        /** @var array{
+         *     catalog?: array<string, string>,
+         *     defaults?: array<string, string>,
+         *     options?: array{headers?: array<string, string>, skip?: bool}, skip?: bool
+         * } $spec
+         */
         foreach ($this->routes as $route => $spec) {
             if ($spec['options']['skip'] ?? $spec['skip'] ?? false) {
                 continue;

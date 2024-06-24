@@ -14,9 +14,9 @@ declare(strict_types=1);
 namespace Sigwin\YASSG\Bridge\Symfony\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\Finder\Finder;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 final class KernelExtension extends Extension implements PrependExtensionInterface
 {
