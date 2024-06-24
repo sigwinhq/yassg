@@ -1,66 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.16.0@2897ba636551a8cb61601cc26f6ccfbba6c36591">
+<files psalm-version="5.24.0@462c80e31c34e58cc4f750c656be3927e80e550e">
   <file src="bootstrap.php">
     <PossiblyFalseArgument>
       <code><![CDATA[getenv('YASSG_SKIP_BUNDLES')]]></code>
     </PossiblyFalseArgument>
     <RedundantIdentityWithTrue>
-      <code>true === file_exists($autoloader)</code>
+      <code><![CDATA[true === file_exists($autoloader)]]></code>
     </RedundantIdentityWithTrue>
   </file>
   <file src="resources/init/demo/src/Model/Page.php">
     <MissingConstructor>
-      <code>$image</code>
-      <code>$slug</code>
-      <code>$title</code>
+      <code><![CDATA[$image]]></code>
+      <code><![CDATA[$slug]]></code>
+      <code><![CDATA[$title]]></code>
     </MissingConstructor>
     <UnusedClass>
-      <code>Page</code>
+      <code><![CDATA[Page]]></code>
     </UnusedClass>
   </file>
   <file src="src/Asset/AssetCopy.php">
     <PossiblyUnusedMethod>
-      <code>__construct</code>
+      <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/AssetQueue.php">
     <PossiblyUnusedMethod>
-      <code>__construct</code>
+      <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Bridge/Symfony/Command/GenerateCommand.php">
     <UnusedClass>
-      <code>GenerateCommand</code>
+      <code><![CDATA[GenerateCommand]]></code>
     </UnusedClass>
   </file>
   <file src="src/Bridge/Symfony/Command/InitCommand.php">
     <RedundantIdentityWithTrue>
-      <code>$optional === true</code>
+      <code><![CDATA[$optional === true]]></code>
     </RedundantIdentityWithTrue>
     <UnusedClass>
-      <code>InitCommand</code>
+      <code><![CDATA[InitCommand]]></code>
     </UnusedClass>
   </file>
   <file src="src/Bridge/Symfony/DependencyInjection/CompilerPass/ConfigureDatabasesCompilerPass.php">
     <MixedArgument>
-      <code>$type</code>
+      <code><![CDATA[$type]]></code>
     </MixedArgument>
     <MixedArrayAccess>
       <code><![CDATA[$tag['type']]]></code>
     </MixedArrayAccess>
     <MixedArrayOffset>
-      <code>$supportedStorageTypes[$type]</code>
-      <code>$supportedStorageTypes[$type]</code>
+      <code><![CDATA[$supportedStorageTypes[$type]]]></code>
+      <code><![CDATA[$supportedStorageTypes[$type]]]></code>
     </MixedArrayOffset>
     <MixedAssignment>
-      <code>$key</code>
-      <code>$options</code>
-      <code>$tag</code>
-      <code>$type</code>
-      <code>$value</code>
+      <code><![CDATA[$key]]></code>
+      <code><![CDATA[$options]]></code>
+      <code><![CDATA[$tag]]></code>
+      <code><![CDATA[$type]]></code>
+      <code><![CDATA[$value]]></code>
     </MixedAssignment>
     <MixedOperand>
-      <code>$key</code>
+      <code><![CDATA[$key]]></code>
     </MixedOperand>
   </file>
   <file src="src/Bridge/Symfony/DependencyInjection/CompilerPass/InjectRouteVariablesCompilerPass.php">
@@ -76,87 +76,83 @@
       <code><![CDATA[$routes[$name]['variables']]]></code>
     </MixedArrayAssignment>
     <MixedArrayOffset>
-      <code>$routesVariables[$variable]</code>
+      <code><![CDATA[$routesVariables[$variable]]]></code>
       <code><![CDATA[$routes[$name]['catalog'][$variable]]]></code>
       <code><![CDATA[$routes[$name]['catalog'][$variable]]]></code>
     </MixedArrayOffset>
     <MixedAssignment>
       <code><![CDATA[$routes[$name]['variables'][]]]></code>
-      <code>$spec</code>
-      <code>$variable</code>
+      <code><![CDATA[$spec]]></code>
+      <code><![CDATA[$variable]]></code>
     </MixedAssignment>
   </file>
   <file src="src/Bridge/Symfony/DependencyInjection/Configuration.php">
     <MixedMethodCall>
-      <code>arrayNode</code>
-      <code>arrayNode</code>
-      <code>arrayNode</code>
-      <code>arrayNode</code>
-      <code>arrayNode</code>
-      <code>arrayPrototype</code>
-      <code>arrayPrototype</code>
-      <code>booleanNode</code>
-      <code>booleanNode</code>
-      <code>cannotBeEmpty</code>
-      <code>cannotBeEmpty</code>
-      <code>children</code>
-      <code>children</code>
-      <code>children</code>
-      <code>defaultFalse</code>
-      <code>defaultFalse</code>
-      <code>defaultValue</code>
-      <code>end</code>
-      <code>end</code>
-      <code>end</code>
-      <code>end</code>
-      <code>end</code>
-      <code>end</code>
-      <code>end</code>
-      <code>end</code>
-      <code>end</code>
-      <code>end</code>
-      <code>end</code>
-      <code>end</code>
-      <code>end</code>
-      <code>end</code>
-      <code>end</code>
-      <code>end</code>
-      <code>end</code>
-      <code>end</code>
-      <code>end</code>
-      <code>end</code>
-      <code>end</code>
-      <code>end</code>
-      <code>end</code>
-      <code>end</code>
-      <code>end</code>
-      <code>info</code>
-      <code>isRequired</code>
-      <code>isRequired</code>
-      <code>isRequired</code>
-      <code>requiresAtLeastOneElement</code>
-      <code>scalarNode</code>
-      <code>scalarNode</code>
-      <code>scalarNode</code>
-      <code>scalarNode</code>
-      <code>scalarPrototype</code>
-      <code>scalarPrototype</code>
-      <code>scalarPrototype</code>
-      <code>setDeprecated</code>
-      <code>setDeprecated</code>
-      <code>setDeprecated</code>
-      <code>useAttributeAsKey</code>
-      <code>variableNode</code>
-      <code>variableNode</code>
-      <code>variableNode</code>
-      <code>variableNode</code>
+      <code><![CDATA[arrayNode]]></code>
+      <code><![CDATA[arrayNode]]></code>
+      <code><![CDATA[arrayNode]]></code>
+      <code><![CDATA[arrayNode]]></code>
+      <code><![CDATA[arrayNode]]></code>
+      <code><![CDATA[arrayPrototype]]></code>
+      <code><![CDATA[arrayPrototype]]></code>
+      <code><![CDATA[booleanNode]]></code>
+      <code><![CDATA[booleanNode]]></code>
+      <code><![CDATA[cannotBeEmpty]]></code>
+      <code><![CDATA[cannotBeEmpty]]></code>
+      <code><![CDATA[children]]></code>
+      <code><![CDATA[children]]></code>
+      <code><![CDATA[children]]></code>
+      <code><![CDATA[defaultFalse]]></code>
+      <code><![CDATA[defaultFalse]]></code>
+      <code><![CDATA[defaultValue]]></code>
+      <code><![CDATA[end]]></code>
+      <code><![CDATA[end]]></code>
+      <code><![CDATA[end]]></code>
+      <code><![CDATA[end]]></code>
+      <code><![CDATA[end]]></code>
+      <code><![CDATA[end]]></code>
+      <code><![CDATA[end]]></code>
+      <code><![CDATA[end]]></code>
+      <code><![CDATA[end]]></code>
+      <code><![CDATA[end]]></code>
+      <code><![CDATA[end]]></code>
+      <code><![CDATA[end]]></code>
+      <code><![CDATA[end]]></code>
+      <code><![CDATA[end]]></code>
+      <code><![CDATA[end]]></code>
+      <code><![CDATA[end]]></code>
+      <code><![CDATA[end]]></code>
+      <code><![CDATA[end]]></code>
+      <code><![CDATA[end]]></code>
+      <code><![CDATA[end]]></code>
+      <code><![CDATA[end]]></code>
+      <code><![CDATA[end]]></code>
+      <code><![CDATA[end]]></code>
+      <code><![CDATA[end]]></code>
+      <code><![CDATA[end]]></code>
+      <code><![CDATA[info]]></code>
+      <code><![CDATA[isRequired]]></code>
+      <code><![CDATA[isRequired]]></code>
+      <code><![CDATA[isRequired]]></code>
+      <code><![CDATA[requiresAtLeastOneElement]]></code>
+      <code><![CDATA[scalarNode]]></code>
+      <code><![CDATA[scalarNode]]></code>
+      <code><![CDATA[scalarNode]]></code>
+      <code><![CDATA[scalarNode]]></code>
+      <code><![CDATA[scalarPrototype]]></code>
+      <code><![CDATA[scalarPrototype]]></code>
+      <code><![CDATA[scalarPrototype]]></code>
+      <code><![CDATA[setDeprecated]]></code>
+      <code><![CDATA[setDeprecated]]></code>
+      <code><![CDATA[setDeprecated]]></code>
+      <code><![CDATA[useAttributeAsKey]]></code>
+      <code><![CDATA[variableNode]]></code>
+      <code><![CDATA[variableNode]]></code>
+      <code><![CDATA[variableNode]]></code>
+      <code><![CDATA[variableNode]]></code>
     </MixedMethodCall>
-    <PossiblyNullReference>
-      <code>arrayNode</code>
-      <code>end</code>
-    </PossiblyNullReference>
     <UndefinedInterfaceMethod>
-      <code>arrayNode</code>
+      <code><![CDATA[arrayNode]]></code>
     </UndefinedInterfaceMethod>
   </file>
   <file src="src/Bridge/Symfony/DependencyInjection/KernelExtension.php">
@@ -171,21 +167,21 @@
       <code><![CDATA[$route['options']['strip_parameters']]]></code>
     </MixedArrayAccess>
     <MixedArrayOffset>
-      <code>$stripParameters[$name]</code>
+      <code><![CDATA[$stripParameters[$name]]]></code>
     </MixedArrayOffset>
     <MixedAssignment>
-      <code>$name</code>
-      <code>$route</code>
-      <code>$stripParameters[$name]</code>
+      <code><![CDATA[$name]]></code>
+      <code><![CDATA[$route]]></code>
+      <code><![CDATA[$stripParameters[$name]]]></code>
     </MixedAssignment>
   </file>
   <file src="src/Bridge/Symfony/ExpressionLanguage/FunctionProvider.php">
     <MixedArgument>
-      <code>$arguments</code>
-      <code>$arguments</code>
-      <code>$arguments</code>
-      <code>$arguments</code>
-      <code>$arguments</code>
+      <code><![CDATA[$arguments]]></code>
+      <code><![CDATA[$arguments]]></code>
+      <code><![CDATA[$arguments]]></code>
+      <code><![CDATA[$arguments]]></code>
+      <code><![CDATA[$arguments]]></code>
     </MixedArgument>
     <PossiblyUndefinedStringArrayOffset>
       <code><![CDATA[$variables['provider']]]></code>
@@ -193,39 +189,26 @@
       <code><![CDATA[$variables['provider']]]></code>
     </PossiblyUndefinedStringArrayOffset>
     <UnusedClass>
-      <code>FunctionProvider</code>
+      <code><![CDATA[FunctionProvider]]></code>
     </UnusedClass>
   </file>
   <file src="src/Bridge/Symfony/HttpKernel/Fragment/RelativeUrlInlineFragmentRenderer.php">
     <UnusedClass>
-      <code>RelativeUrlInlineFragmentRenderer</code>
+      <code><![CDATA[RelativeUrlInlineFragmentRenderer]]></code>
     </UnusedClass>
   </file>
   <file src="src/Bridge/Symfony/Kernel.php">
-    <MixedArrayAccess>
-      <code><![CDATA[$envs[$this->environment]]]></code>
-      <code><![CDATA[$envs['all']]]></code>
-    </MixedArrayAccess>
-    <MixedAssignment>
-      <code>$class</code>
-      <code>$classes</code>
-      <code>$envs</code>
-    </MixedAssignment>
     <MixedMethodCall>
-      <code>new $class()</code>
+      <code><![CDATA[new $class()]]></code>
     </MixedMethodCall>
     <MixedReturnTypeCoercion>
-      <code>iterable</code>
+      <code><![CDATA[iterable]]></code>
     </MixedReturnTypeCoercion>
     <PossiblyUnusedMethod>
-      <code>configureContainer</code>
+      <code><![CDATA[configureContainer]]></code>
     </PossiblyUnusedMethod>
-    <PropertyNotSetInConstructor>
-      <code>Kernel</code>
-      <code>Kernel</code>
-    </PropertyNotSetInConstructor>
     <UnresolvableInclude>
-      <code>require $path</code>
+      <code><![CDATA[require $path]]></code>
     </UnresolvableInclude>
   </file>
   <file src="src/Bridge/Symfony/Routing/Generator/FilenameUrlGenerator.php">
@@ -237,41 +220,38 @@
       <code><![CDATA[$this->routes[$name]['path']]]></code>
     </MixedArrayAccess>
     <MixedArrayOffset>
-      <code>$parameters[$name]</code>
+      <code><![CDATA[$parameters[$name]]]></code>
     </MixedArrayOffset>
     <MixedAssignment>
-      <code>$name</code>
+      <code><![CDATA[$name]]></code>
     </MixedAssignment>
-    <PossiblyUnusedReturnValue>
-      <code>string</code>
-    </PossiblyUnusedReturnValue>
   </file>
   <file src="src/Bridge/Symfony/Routing/Generator/GlobalVariableUrlGenerator.php">
     <MixedArgument>
-      <code>$variable</code>
+      <code><![CDATA[$variable]]></code>
     </MixedArgument>
     <MixedArrayAccess>
       <code><![CDATA[$this->routes[$name]['variables']]]></code>
     </MixedArrayAccess>
     <MixedArrayOffset>
-      <code>$parameters[$variable]</code>
+      <code><![CDATA[$parameters[$variable]]]></code>
     </MixedArrayOffset>
     <MixedAssignment>
-      <code>$parameters[$variable]</code>
-      <code>$value</code>
-      <code>$variable</code>
+      <code><![CDATA[$parameters[$variable]]]></code>
+      <code><![CDATA[$value]]></code>
+      <code><![CDATA[$variable]]></code>
     </MixedAssignment>
     <UnusedClass>
-      <code>GlobalVariableUrlGenerator</code>
+      <code><![CDATA[GlobalVariableUrlGenerator]]></code>
     </UnusedClass>
   </file>
   <file src="src/Bridge/Symfony/Routing/Loader/RouteLoader.php">
     <MixedArgument>
-      <code>$path</code>
+      <code><![CDATA[$path]]></code>
       <code><![CDATA[$route['defaults'] ?? []]]></code>
     </MixedArgument>
     <MixedArgumentTypeCoercion>
-      <code>$name</code>
+      <code><![CDATA[$name]]></code>
     </MixedArgumentTypeCoercion>
     <MixedArrayAccess>
       <code><![CDATA[$route['defaults']]]></code>
@@ -282,134 +262,122 @@
       <code><![CDATA[$route['path']]]></code>
     </MixedArrayAccess>
     <MixedAssignment>
-      <code>$path</code>
-      <code>$route</code>
+      <code><![CDATA[$path]]></code>
+      <code><![CDATA[$route]]></code>
     </MixedAssignment>
     <MixedOperand>
       <code><![CDATA[$route['path']]]></code>
     </MixedOperand>
     <UnusedClass>
-      <code>RouteLoader</code>
+      <code><![CDATA[RouteLoader]]></code>
     </UnusedClass>
   </file>
   <file src="src/Bridge/Symfony/Serializer/AttributeMetadataTrait.php">
     <InternalMethod>
-      <code>getAttributesMetadata</code>
-      <code>getName</code>
+      <code><![CDATA[getAttributesMetadata]]></code>
+      <code><![CDATA[getName]]></code>
     </InternalMethod>
     <MissingConstructor>
-      <code>$classMetadataFactory</code>
+      <code><![CDATA[$classMetadataFactory]]></code>
     </MissingConstructor>
   </file>
   <file src="src/Bridge/Symfony/Serializer/Normalizer/CollectionNormalizer.php">
     <MixedAssignment>
-      <code>$denormalized[$id]</code>
-      <code>$item</code>
+      <code><![CDATA[$denormalized[$id]]]></code>
+      <code><![CDATA[$item]]></code>
     </MixedAssignment>
     <PropertyNotSetInConstructor>
-      <code>CollectionNormalizer</code>
+      <code><![CDATA[CollectionNormalizer]]></code>
     </PropertyNotSetInConstructor>
     <UnusedClass>
-      <code>CollectionNormalizer</code>
+      <code><![CDATA[CollectionNormalizer]]></code>
     </UnusedClass>
-    <UnusedParam>
-      <code>$format</code>
-    </UnusedParam>
   </file>
   <file src="src/Bridge/Symfony/Serializer/Normalizer/ExpressionNormalizer.php">
     <MixedAssignment>
-      <code>$value</code>
+      <code><![CDATA[$value]]></code>
     </MixedAssignment>
     <MixedInferredReturnType>
-      <code>object</code>
+      <code><![CDATA[object]]></code>
     </MixedInferredReturnType>
     <MixedReturnStatement>
-      <code>$value</code>
+      <code><![CDATA[$value]]></code>
     </MixedReturnStatement>
     <UnusedClass>
-      <code>ExpressionNormalizer</code>
+      <code><![CDATA[ExpressionNormalizer]]></code>
     </UnusedClass>
-    <UnusedParam>
-      <code>$format</code>
-    </UnusedParam>
   </file>
   <file src="src/Bridge/Symfony/Serializer/Normalizer/LocalizingNormalizer.php">
     <MixedArrayAccess>
-      <code>$data[$property][$fallbackLocale]</code>
-      <code>$data[$property][$locale]</code>
+      <code><![CDATA[$data[$property][$fallbackLocale]]]></code>
+      <code><![CDATA[$data[$property][$locale]]]></code>
     </MixedArrayAccess>
     <MixedArrayOffset>
-      <code>$data[$property][$fallbackLocale]</code>
-      <code>$data[$property][$locale]</code>
+      <code><![CDATA[$data[$property][$fallbackLocale]]]></code>
+      <code><![CDATA[$data[$property][$locale]]]></code>
     </MixedArrayOffset>
     <MixedAssignment>
-      <code>$data[$property]</code>
-      <code>$fallbackLocale</code>
-      <code>$locale</code>
+      <code><![CDATA[$data[$property]]]></code>
+      <code><![CDATA[$fallbackLocale]]></code>
+      <code><![CDATA[$locale]]></code>
     </MixedAssignment>
     <PossiblyUndefinedStringArrayOffset>
-      <code>$context[LocaleContext::LOCALE]</code>
-      <code>$context[LocaleContext::LOCALE_FALLBACK]</code>
+      <code><![CDATA[$context[LocaleContext::LOCALE]]]></code>
+      <code><![CDATA[$context[LocaleContext::LOCALE_FALLBACK]]]></code>
     </PossiblyUndefinedStringArrayOffset>
     <PropertyNotSetInConstructor>
-      <code>LocalizingNormalizer</code>
+      <code><![CDATA[LocalizingNormalizer]]></code>
     </PropertyNotSetInConstructor>
     <UnusedClass>
-      <code>LocalizingNormalizer</code>
+      <code><![CDATA[LocalizingNormalizer]]></code>
     </UnusedClass>
-    <UnusedParam>
-      <code>$format</code>
-    </UnusedParam>
   </file>
   <file src="src/Bridge/Symfony/Serializer/Normalizer/ResourceLocatorNormalizer.php">
     <UnusedClass>
-      <code>ResourceLocatorNormalizer</code>
+      <code><![CDATA[ResourceLocatorNormalizer]]></code>
     </UnusedClass>
-    <UnusedParam>
-      <code>$format</code>
-    </UnusedParam>
   </file>
   <file src="src/Bridge/Twig/Extension/DatabaseExtension.php">
     <MixedArgument>
-      <code>$arguments</code>
-      <code>$arguments</code>
-      <code>$arguments</code>
-      <code>$arguments</code>
-      <code>$arguments</code>
-      <code>$arguments</code>
-      <code>$arguments</code>
-      <code>$arguments</code>
-      <code>$arguments</code>
-      <code>$arguments</code>
-      <code>$arguments</code>
-      <code>$arguments</code>
-      <code>$arguments</code>
-      <code>$arguments</code>
-      <code>$arguments</code>
-      <code>$arguments</code>
-      <code>$arguments</code>
-      <code>$arguments</code>
-      <code>$arguments</code>
-      <code>$arguments</code>
-      <code>$arguments</code>
-      <code>$arguments</code>
+      <code><![CDATA[$arguments]]></code>
+      <code><![CDATA[$arguments]]></code>
+      <code><![CDATA[$arguments]]></code>
+      <code><![CDATA[$arguments]]></code>
+      <code><![CDATA[$arguments]]></code>
+      <code><![CDATA[$arguments]]></code>
+      <code><![CDATA[$arguments]]></code>
+      <code><![CDATA[$arguments]]></code>
+      <code><![CDATA[$arguments]]></code>
+      <code><![CDATA[$arguments]]></code>
+      <code><![CDATA[$arguments]]></code>
+      <code><![CDATA[$arguments]]></code>
+      <code><![CDATA[$arguments]]></code>
+      <code><![CDATA[$arguments]]></code>
+      <code><![CDATA[$arguments]]></code>
+      <code><![CDATA[$arguments]]></code>
+      <code><![CDATA[$arguments]]></code>
+      <code><![CDATA[$arguments]]></code>
+      <code><![CDATA[$arguments]]></code>
+      <code><![CDATA[$arguments]]></code>
+      <code><![CDATA[$arguments]]></code>
+      <code><![CDATA[$arguments]]></code>
     </MixedArgument>
     <UnusedClass>
-      <code>DatabaseExtension</code>
+      <code><![CDATA[DatabaseExtension]]></code>
     </UnusedClass>
   </file>
   <file src="src/Bridge/Twig/Extension/IndexExtension.php">
     <UnusedClass>
-      <code>IndexExtension</code>
+      <code><![CDATA[IndexExtension]]></code>
     </UnusedClass>
   </file>
   <file src="src/Bridge/Twig/Extension/PaginatorExtension.php">
     <MixedArgument>
-      <code>$conditions</code>
-      <code>$conditions</code>
-      <code>$conditions</code>
-      <code>$conditions</code>
-      <code>$conditions</code>
+      <code><![CDATA[$conditions]]></code>
+      <code><![CDATA[$conditions]]></code>
+      <code><![CDATA[$conditions]]></code>
+      <code><![CDATA[$conditions]]></code>
+      <code><![CDATA[$conditions]]></code>
     </MixedArgument>
     <MixedAssignment>
       <code><![CDATA[$conditions['limit']]]></code>
@@ -419,22 +387,18 @@
       <code><![CDATA[$conditions['limit']]]></code>
     </MixedOperand>
     <UnusedClass>
-      <code>PaginatorExtension</code>
+      <code><![CDATA[PaginatorExtension]]></code>
     </UnusedClass>
   </file>
   <file src="src/Bridge/Twig/Extension/ThumbnailExtension.php">
     <MixedArgument>
       <code><![CDATA[$GLOBALS['YASSG_BASEDIR']]]></code>
-      <code><![CDATA[$context['_path']]]></code>
     </MixedArgument>
     <MixedAssignment>
       <code><![CDATA[$context['_path']]]></code>
       <code><![CDATA[$context['_path']]]></code>
-      <code>$item</code>
+      <code><![CDATA[$item]]></code>
     </MixedAssignment>
-    <MixedPropertyFetch>
-      <code><![CDATA[$options['self']->__path]]></code>
-    </MixedPropertyFetch>
     <PossiblyNullArgument>
       <code><![CDATA[$this->imgproxyUrl]]></code>
     </PossiblyNullArgument>
@@ -442,341 +406,292 @@
       <code><![CDATA[$GLOBALS['YASSG_BASEDIR']]]></code>
     </PossiblyUndefinedStringArrayOffset>
     <UnusedClass>
-      <code>ThumbnailExtension</code>
+      <code><![CDATA[ThumbnailExtension]]></code>
     </UnusedClass>
   </file>
   <file src="src/Collection.php">
     <PossiblyUnusedMethod>
-      <code>column</code>
-      <code>total</code>
+      <code><![CDATA[column]]></code>
+      <code><![CDATA[total]]></code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Collection/ReadOnlyCollection.php">
     <MixedAssignment>
-      <code>$item</code>
-      <code>$values[$id]</code>
+      <code><![CDATA[$item]]></code>
+      <code><![CDATA[$values[$id]]]></code>
     </MixedAssignment>
     <MixedInferredReturnType>
-      <code>object</code>
-      <code>object</code>
+      <code><![CDATA[object]]></code>
+      <code><![CDATA[object]]></code>
     </MixedInferredReturnType>
     <MixedReturnStatement>
       <code><![CDATA[$this->data[$name]]]></code>
       <code><![CDATA[$this->data[$offset]]]></code>
     </MixedReturnStatement>
     <PossiblyUnusedMethod>
-      <code>__get</code>
-      <code>count</code>
+      <code><![CDATA[__get]]></code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Context/LocaleContext.php">
     <PossiblyUnusedMethod>
-      <code>__construct</code>
+      <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Database.php">
     <PossiblyUnusedMethod>
-      <code>countBy</code>
+      <code><![CDATA[countBy]]></code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Database/CachingDatabase.php">
     <InvalidOperand>
-      <code>$limit</code>
-      <code>$offset</code>
+      <code><![CDATA[$limit]]></code>
+      <code><![CDATA[$offset]]></code>
     </InvalidOperand>
     <MissingTemplateParam>
-      <code>Database</code>
-      <code>DatabaseTrait</code>
+      <code><![CDATA[Database]]></code>
+      <code><![CDATA[DatabaseTrait]]></code>
     </MissingTemplateParam>
     <MixedAssignment>
-      <code>$locale</code>
-      <code>$locale</code>
+      <code><![CDATA[$locale]]></code>
+      <code><![CDATA[$locale]]></code>
     </MixedAssignment>
     <MixedOperand>
-      <code>$locale</code>
-      <code>$locale</code>
+      <code><![CDATA[$locale]]></code>
+      <code><![CDATA[$locale]]></code>
     </MixedOperand>
     <PossiblyNullOperand>
-      <code>$limit</code>
-      <code>$select</code>
+      <code><![CDATA[$limit]]></code>
+      <code><![CDATA[$select]]></code>
     </PossiblyNullOperand>
     <PossiblyUndefinedStringArrayOffset>
       <code><![CDATA[$this->localeContext->getLocale()[LocaleContext::LOCALE]]]></code>
       <code><![CDATA[$this->localeContext->getLocale()[LocaleContext::LOCALE]]]></code>
     </PossiblyUndefinedStringArrayOffset>
     <PossiblyUnusedMethod>
-      <code>__construct</code>
+      <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
     <UnusedForeachValue>
-      <code>$entity</code>
+      <code><![CDATA[$entity]]></code>
     </UnusedForeachValue>
   </file>
   <file src="src/Database/DatabaseTrait.php">
-    <MixedArgument>
-      <code>$value</code>
-    </MixedArgument>
     <MixedArgumentTypeCoercion>
-      <code>$condition</code>
+      <code><![CDATA[$condition]]></code>
     </MixedArgumentTypeCoercion>
   </file>
   <file src="src/Database/MemoryDatabase.php">
     <MissingTemplateParam>
-      <code>Database</code>
-      <code>DatabaseTrait</code>
+      <code><![CDATA[Database]]></code>
+      <code><![CDATA[DatabaseTrait]]></code>
     </MissingTemplateParam>
-    <MixedArgument>
-      <code>$storage</code>
-      <code>$storage</code>
-      <code>$storage</code>
-    </MixedArgument>
     <MixedArgumentTypeCoercion>
-      <code>$key</code>
+      <code><![CDATA[$key]]></code>
     </MixedArgumentTypeCoercion>
-    <MixedArrayAssignment>
-      <code>$storage[$id]</code>
-    </MixedArrayAssignment>
     <MixedAssignment>
-      <code>$direction</code>
-      <code>$itemAValue</code>
-      <code>$itemBValue</code>
-      <code>$total</code>
+      <code><![CDATA[$direction]]></code>
+      <code><![CDATA[$itemAValue]]></code>
+      <code><![CDATA[$itemBValue]]></code>
     </MixedAssignment>
-    <MixedInferredReturnType>
-      <code>int</code>
-    </MixedInferredReturnType>
-    <MixedOperand>
-      <code>$total</code>
-    </MixedOperand>
-    <MixedReturnStatement>
-      <code>$total</code>
-    </MixedReturnStatement>
     <PossiblyUnusedMethod>
-      <code>__construct</code>
+      <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/DatabaseProvider.php">
     <PossiblyUnusedMethod>
-      <code>__construct</code>
+      <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Decoder/AssetQueueFileDecoder.php">
     <UnusedClass>
-      <code>AssetQueueFileDecoder</code>
+      <code><![CDATA[AssetQueueFileDecoder]]></code>
     </UnusedClass>
   </file>
   <file src="src/Decoder/CachingFileDecoder.php">
     <UnusedClass>
-      <code>CachingFileDecoder</code>
+      <code><![CDATA[CachingFileDecoder]]></code>
     </UnusedClass>
   </file>
   <file src="src/Decoder/CompositeFileDecoder.php">
     <UnusedClass>
-      <code>CompositeFileDecoder</code>
+      <code><![CDATA[CompositeFileDecoder]]></code>
     </UnusedClass>
   </file>
   <file src="src/Decoder/MarkdownFileDecoder.php">
     <UnusedClass>
-      <code>MarkdownFileDecoder</code>
+      <code><![CDATA[MarkdownFileDecoder]]></code>
     </UnusedClass>
   </file>
   <file src="src/Decoder/YamlFileDecoder.php">
     <MixedReturnTypeCoercion>
-      <code>$data</code>
-      <code>array</code>
+      <code><![CDATA[$data]]></code>
+      <code><![CDATA[array]]></code>
     </MixedReturnTypeCoercion>
     <UnusedClass>
-      <code>YamlFileDecoder</code>
+      <code><![CDATA[YamlFileDecoder]]></code>
     </UnusedClass>
   </file>
   <file src="src/Generator.php">
     <PossiblyUnusedMethod>
-      <code>__construct</code>
+      <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Permutator.php">
     <MixedArgument>
-      <code>$expression</code>
-      <code>$parameters</code>
-      <code><![CDATA[$spec['defaults'] ?? []]]></code>
-      <code><![CDATA[$spec['options']['headers'] ?? null]]></code>
-      <code><![CDATA[$spec['options']['headers'] ?? null]]></code>
+      <code><![CDATA[$parameters]]></code>
     </MixedArgument>
     <MixedArgumentTypeCoercion>
-      <code>$route</code>
-      <code>$route</code>
+      <code><![CDATA[$route]]></code>
+      <code><![CDATA[$route]]></code>
     </MixedArgumentTypeCoercion>
-    <MixedArrayAccess>
-      <code><![CDATA[$spec['defaults']]]></code>
-      <code><![CDATA[$spec['options']]]></code>
-      <code><![CDATA[$spec['options']]]></code>
-      <code><![CDATA[$spec['options']['headers']]]></code>
-      <code><![CDATA[$spec['options']['headers']]]></code>
-      <code><![CDATA[$spec['options']['skip']]]></code>
-      <code><![CDATA[$spec['skip']]]></code>
-    </MixedArrayAccess>
-    <MixedArrayOffset>
-      <code>$variables[$variable]</code>
-    </MixedArrayOffset>
     <MixedAssignment>
-      <code>$expression</code>
-      <code>$parameters</code>
-      <code>$variable</code>
-      <code>$variables[$variable]</code>
+      <code><![CDATA[$parameters]]></code>
+      <code><![CDATA[$variables[$variable]]]></code>
     </MixedAssignment>
-    <PossiblyUndefinedStringArrayOffset>
-      <code><![CDATA[$spec['defaults']]]></code>
-      <code><![CDATA[$spec['options']]]></code>
-    </PossiblyUndefinedStringArrayOffset>
     <PossiblyUnusedMethod>
-      <code>__construct</code>
+      <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Storage/DenormalizingStorage.php">
     <MissingTemplateParam>
-      <code>Storage</code>
+      <code><![CDATA[Storage]]></code>
     </MissingTemplateParam>
     <MixedArgument>
-      <code>$locale</code>
-      <code>$locale</code>
+      <code><![CDATA[$locale]]></code>
+      <code><![CDATA[$locale]]></code>
     </MixedArgument>
     <MixedArgumentTypeCoercion>
-      <code>$key</code>
+      <code><![CDATA[$key]]></code>
     </MixedArgumentTypeCoercion>
     <MixedArrayOffset>
       <code><![CDATA[$this->cache[$this->class][$locale]]]></code>
     </MixedArrayOffset>
     <MixedAssignment>
-      <code>$locale</code>
-      <code>$locale</code>
-      <code>$metadata[$key]</code>
-      <code>$object</code>
-      <code>$value</code>
-      <code>$value</code>
+      <code><![CDATA[$locale]]></code>
+      <code><![CDATA[$locale]]></code>
+      <code><![CDATA[$metadata[$key]]]></code>
+      <code><![CDATA[$object]]></code>
+      <code><![CDATA[$value]]></code>
+      <code><![CDATA[$value]]></code>
     </MixedAssignment>
     <MixedInferredReturnType>
-      <code>T</code>
+      <code><![CDATA[T]]></code>
     </MixedInferredReturnType>
     <MixedMethodCall>
       <code><![CDATA[new $this->class()]]></code>
     </MixedMethodCall>
     <MixedReturnStatement>
-      <code><![CDATA[$this->denormalizer->denormalize($data, $this->class, null, $context + [
-                AbstractNormalizer::ALLOW_EXTRA_ATTRIBUTES => false,
-            ])]]></code>
-      <code>$object</code>
+      <code><![CDATA[$object]]></code>
     </MixedReturnStatement>
     <PossiblyUndefinedStringArrayOffset>
-      <code>$context[LocaleContext::LOCALE]</code>
-      <code>$context[LocaleContext::LOCALE]</code>
+      <code><![CDATA[$context[LocaleContext::LOCALE]]]></code>
+      <code><![CDATA[$context[LocaleContext::LOCALE]]]></code>
     </PossiblyUndefinedStringArrayOffset>
     <PossiblyUnusedMethod>
-      <code>__construct</code>
+      <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Storage/FilesystemStorage.php">
     <MissingTemplateParam>
-      <code>StorageWithOptions</code>
+      <code><![CDATA[StorageWithOptions]]></code>
     </MissingTemplateParam>
     <MixedArgumentTypeCoercion>
-      <code>$names</code>
+      <code><![CDATA[$names]]></code>
       <code><![CDATA[$this->roots]]></code>
     </MixedArgumentTypeCoercion>
     <MixedAssignment>
-      <code>$root</code>
-      <code>$root</code>
+      <code><![CDATA[$root]]></code>
+      <code><![CDATA[$root]]></code>
     </MixedAssignment>
     <MixedOperand>
-      <code>$root</code>
-      <code>$root</code>
+      <code><![CDATA[$root]]></code>
+      <code><![CDATA[$root]]></code>
     </MixedOperand>
     <UnusedClass>
-      <code>FilesystemStorage</code>
+      <code><![CDATA[FilesystemStorage]]></code>
     </UnusedClass>
   </file>
   <file src="src/Storage/MemoryStorage.php">
     <UnusedClass>
-      <code>MemoryStorage</code>
+      <code><![CDATA[MemoryStorage]]></code>
     </UnusedClass>
   </file>
   <file src="src/StorageWithOptions.php">
     <PossiblyUnusedReturnValue>
-      <code>array</code>
+      <code><![CDATA[array]]></code>
     </PossiblyUnusedReturnValue>
   </file>
   <file src="tests/functional/site/src/Bridge/Symfony/EventSubscriber.php">
     <UnusedClass>
-      <code>EventSubscriber</code>
+      <code><![CDATA[EventSubscriber]]></code>
     </UnusedClass>
   </file>
   <file src="tests/functional/site/src/Controller/TestController.php">
     <UnusedClass>
-      <code>TestController</code>
+      <code><![CDATA[TestController]]></code>
     </UnusedClass>
   </file>
   <file src="tests/functional/site/src/Model/Article.php">
     <MissingConstructor>
-      <code>$body</code>
-      <code>$image</code>
-      <code>$publishedAt</code>
-      <code>$slug</code>
-      <code>$title</code>
-      <code>$image</code>
+      <code><![CDATA[$body]]></code>
+      <code><![CDATA[$publishedAt]]></code>
+      <code><![CDATA[$slug]]></code>
+      <code><![CDATA[$title]]></code>
     </MissingConstructor>
     <UnusedClass>
-      <code>Article</code>
+      <code><![CDATA[Article]]></code>
     </UnusedClass>
   </file>
   <file src="tests/functional/site/src/Model/Category.php">
     <MissingConstructor>
-      <code>$name</code>
-      <code>$products</code>
-      <code>$slug</code>
+      <code><![CDATA[$name]]></code>
+      <code><![CDATA[$products]]></code>
+      <code><![CDATA[$slug]]></code>
     </MissingConstructor>
     <PossiblyUnusedMethod>
-      <code>getDescription</code>
-      <code>method</code>
+      <code><![CDATA[getDescription]]></code>
+      <code><![CDATA[method]]></code>
     </PossiblyUnusedMethod>
     <PossiblyUnusedProperty>
-      <code>$name</code>
-      <code>$parent</code>
-      <code>$products</code>
-      <code>$slug</code>
+      <code><![CDATA[$name]]></code>
+      <code><![CDATA[$parent]]></code>
+      <code><![CDATA[$products]]></code>
+      <code><![CDATA[$slug]]></code>
     </PossiblyUnusedProperty>
   </file>
   <file src="tests/functional/site/src/Model/Locale.php">
     <MissingConstructor>
-      <code>$isoCode</code>
-      <code>$name</code>
+      <code><![CDATA[$isoCode]]></code>
+      <code><![CDATA[$name]]></code>
     </MissingConstructor>
     <UnusedClass>
-      <code>Locale</code>
+      <code><![CDATA[Locale]]></code>
     </UnusedClass>
   </file>
   <file src="tests/functional/site/src/Model/Product.php">
     <MissingConstructor>
-      <code>$categories</code>
-      <code>$index</code>
-      <code>$name</code>
-      <code>$slug</code>
+      <code><![CDATA[$categories]]></code>
+      <code><![CDATA[$index]]></code>
+      <code><![CDATA[$name]]></code>
+      <code><![CDATA[$slug]]></code>
     </MissingConstructor>
     <MixedAssignment>
-      <code>$category</code>
+      <code><![CDATA[$category]]></code>
     </MixedAssignment>
     <MixedInferredReturnType>
-      <code>?Category</code>
+      <code><![CDATA[?Category]]></code>
     </MixedInferredReturnType>
     <MixedReturnStatement>
-      <code>$category !== false ? $category : null</code>
-      <code>$category !== false ? $category : null</code>
+      <code><![CDATA[$category !== false ? $category : null]]></code>
+      <code><![CDATA[$category !== false ? $category : null]]></code>
     </MixedReturnStatement>
     <PossiblyUnusedMethod>
-      <code>getCategory</code>
-      <code>getName</code>
+      <code><![CDATA[getCategory]]></code>
+      <code><![CDATA[getName]]></code>
     </PossiblyUnusedMethod>
     <PossiblyUnusedProperty>
-      <code>$file</code>
-      <code>$index</code>
-      <code>$slug</code>
+      <code><![CDATA[$file]]></code>
+      <code><![CDATA[$index]]></code>
+      <code><![CDATA[$slug]]></code>
     </PossiblyUnusedProperty>
   </file>
   <file src="web/index.php">

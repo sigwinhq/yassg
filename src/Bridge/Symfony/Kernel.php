@@ -83,6 +83,9 @@ final class Kernel extends \Symfony\Component\HttpKernel\Kernel
     private function createEnvironmentClasses(string $path, array $skipBundles = []): iterable
     {
         if (is_file($path) && \in_array(realpath($path), get_included_files(), true) === false) {
+            /**
+             * @var array<class-string, array<string, bool>> $classes
+             */
             $classes = require $path;
             foreach ($classes as $class => $envs) {
                 if (($envs[$this->environment] ?? $envs['all'] ?? false) && ! \in_array($class, $skipBundles, true)) {

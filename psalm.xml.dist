@@ -25,6 +25,13 @@
         </ignoreFiles>
     </projectFiles>
 
+    <issueHandlers>
+        <MissingClassConstType>
+            <errorLevel type="suppress">
+            </errorLevel>
+        </MissingClassConstType>
+    </issueHandlers>
+
     <plugins>
         <pluginClass class="Psalm\PhpUnitPlugin\Plugin"/>
         <pluginClass class="Psalm\SymfonyPsalmPlugin\Plugin"/>
