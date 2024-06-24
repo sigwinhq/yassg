@@ -34,6 +34,11 @@
     </UnusedClass>
   </file>
   <file src="src/Bridge/Symfony/Command/InitCommand.php">
+    <MissingClassConstType>
+      <code><![CDATA[SOURCE_BASIC = 'basic']]></code>
+      <code><![CDATA[SOURCE_DEMO = 'demo']]></code>
+      <code><![CDATA[SOURCE_GITLAB = 'gitlab']]></code>
+    </MissingClassConstType>
     <RedundantIdentityWithTrue>
       <code><![CDATA[$optional === true]]></code>
     </RedundantIdentityWithTrue>
@@ -535,11 +540,17 @@
     </UnusedClass>
   </file>
   <file src="src/Decoder/MarkdownFileDecoder.php">
+    <MissingClassConstType>
+      <code><![CDATA[EXTENSIONS = ['md', 'markdown']]]></code>
+    </MissingClassConstType>
     <UnusedClass>
       <code><![CDATA[MarkdownFileDecoder]]></code>
     </UnusedClass>
   </file>
   <file src="src/Decoder/YamlFileDecoder.php">
+    <MissingClassConstType>
+      <code><![CDATA[EXTENSIONS = ['yml', 'yaml']]]></code>
+    </MissingClassConstType>
     <MixedReturnTypeCoercion>
       <code><![CDATA[$data]]></code>
       <code><![CDATA[array]]></code>
