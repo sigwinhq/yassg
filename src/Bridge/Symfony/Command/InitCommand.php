@@ -61,12 +61,12 @@ final class InitCommand extends Command
         $namespace = $input->getOption('namespace');
         $namespace = trim($namespace, '\\');
 
-        $style->section(sprintf('Namespace: %1$s', $namespace));
+        $style->section(\sprintf('Namespace: %1$s', $namespace));
 
-        $style->writeln(sprintf('Ensuring folder <comment>%1$s</comment>', $this->baseDir.'/src/'));
+        $style->writeln(\sprintf('Ensuring folder <comment>%1$s</comment>', $this->baseDir.'/src/'));
         $filesystem->mkdir($this->baseDir.'/src/');
         $composerFile = $this->baseDir.'/composer.json';
-        $style->writeln(sprintf('Registering namespace <comment>%1$s</comment> in <info>%2$s</info>', $namespace, $composerFile));
+        $style->writeln(\sprintf('Registering namespace <comment>%1$s</comment> in <info>%2$s</info>', $namespace, $composerFile));
         $composer = [];
         if (file_exists($composerFile)) {
             /** @var string $composer */
@@ -84,10 +84,10 @@ final class InitCommand extends Command
         ]);
         file_put_contents($composerFile, json_encode($composer, \JSON_PRETTY_PRINT | \JSON_THROW_ON_ERROR));
 
-        $style->writeln(sprintf('Ensuring folder <comment>%1$s</comment>', $this->baseDir.'/config/'));
+        $style->writeln(\sprintf('Ensuring folder <comment>%1$s</comment>', $this->baseDir.'/config/'));
         $filesystem->mkdir($this->baseDir.'/config/');
         $servicesFile = $this->baseDir.'/config/services.yaml';
-        $style->writeln(sprintf('Registering namespace <comment>%1$s</comment> in <info>%2$s</info>', $namespace, $servicesFile));
+        $style->writeln(\sprintf('Registering namespace <comment>%1$s</comment> in <info>%2$s</info>', $namespace, $servicesFile));
         /** @var array $services */
         $services = file_exists($servicesFile) ? Yaml::parseFile($servicesFile) : [];
         $services = array_replace($services, [
@@ -114,7 +114,7 @@ final class InitCommand extends Command
                 continue;
             }
 
-            $style->section(sprintf('Init: %1$s', ucfirst($sourceDir)));
+            $style->section(\sprintf('Init: %1$s', ucfirst($sourceDir)));
 
             $finder = new Finder();
             $finder

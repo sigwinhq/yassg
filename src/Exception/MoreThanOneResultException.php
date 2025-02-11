@@ -17,6 +17,6 @@ final class MoreThanOneResultException extends \RuntimeException
 {
     public static function newSelf(int $count): self
     {
-        return new self(sprintf('One result expected, %1$d found', $count));
+        return new self(\sprintf('One result expected, %1$d found', $count));
     }
 }

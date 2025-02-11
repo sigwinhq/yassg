@@ -22,13 +22,13 @@ final class FunctionProvider implements ExpressionFunctionProviderInterface
     public function getFunctions(): array
     {
         return [
-            new ExpressionFunction('yassg_find_all', static fn (string $name): string => sprintf('$provider->getDatabase(%s)', $name), static function (array $variables, string $name, array $arguments = []) {
+            new ExpressionFunction('yassg_find_all', static fn (string $name): string => \sprintf('$provider->getDatabase(%s)', $name), static function (array $variables, string $name, array $arguments = []) {
                 /** @var DatabaseProvider $provider */
                 $provider = $variables['provider'];
 
                 return $provider->getDatabase($name)->findAll(...$arguments);
             }),
-            new ExpressionFunction('yassg_pages', static fn (string $name): string => sprintf('$provider->getDatabase(%s)', $name), static function (array $variables, string $name, ?string $condition = null, ?int $limit = null) {
+            new ExpressionFunction('yassg_pages', static fn (string $name): string => \sprintf('$provider->getDatabase(%s)', $name), static function (array $variables, string $name, ?string $condition = null, ?int $limit = null) {
                 /** @var DatabaseProvider $provider */
                 $provider = $variables['provider'];
                 $database = $provider->getDatabase($name);
@@ -36,7 +36,7 @@ final class FunctionProvider implements ExpressionFunctionProviderInterface
 
                 return range(1, ceil($count / ($limit ?? $database->getPageLimit())));
             }),
-            new ExpressionFunction('yassg_get', static fn (string $name): string => sprintf('$provider->getDatabase(%s)', $name), static function (array $variables, string $name, string $id) {
+            new ExpressionFunction('yassg_get', static fn (string $name): string => \sprintf('$provider->getDatabase(%s)', $name), static function (array $variables, string $name, string $id) {
                 /** @var DatabaseProvider $provider */
                 $provider = $variables['provider'];
 

@@ -17,7 +17,7 @@ final readonly class Location
 {
     public function __construct(
         private Route $route,
-        private BuildOptions $buildOptions
+        private BuildOptions $buildOptions,
     ) {
     }
 

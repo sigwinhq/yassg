@@ -34,7 +34,7 @@ final class FilesystemStorage implements StorageWithOptions
 
             $realpath = realpath($path);
             if ($realpath === false) {
-                throw new \InvalidArgumentException(sprintf('The path "%s" does not exist.', $path));
+                throw new \InvalidArgumentException(\sprintf('The path "%s" does not exist.', $path));
             }
 
             return $realpath;
@@ -77,7 +77,7 @@ final class FilesystemStorage implements StorageWithOptions
             }
         }
 
-        throw new \RuntimeException(sprintf('Failed to open stream: No such file: %1$s', $id));
+        throw new \RuntimeException(\sprintf('Failed to open stream: No such file: %1$s', $id));
     }
 
     public function has(string $id): bool
@@ -112,7 +112,7 @@ final class FilesystemStorage implements StorageWithOptions
     private function decode(\SplFileInfo $file): array
     {
         if ($this->decoder->supports($file) === false) {
-            throw new \RuntimeException(sprintf('Decoder does not know how to decode %1$s file', $file->getRealPath()));
+            throw new \RuntimeException(\sprintf('Decoder does not know how to decode %1$s file', $file->getRealPath()));
         }
 
         $decoded = $this->decoder->decode($file);

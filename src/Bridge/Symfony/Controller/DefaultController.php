@@ -32,7 +32,7 @@ final class DefaultController extends AbstractController
         }
 
         /** @var string $template */
-        $template = $request->attributes->get('_template') ?? sprintf('pages/%1$s.html.twig', $route);
+        $template = $request->attributes->get('_template') ?? \sprintf('pages/%1$s.html.twig', $route);
 
         return $this->render($template, $request->attributes->all());
     }

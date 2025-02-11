@@ -101,12 +101,12 @@ final class ThumbnailExtension extends AbstractExtension
                 } else {
                     $build = (bool) $request->attributes->get('yassg_build', false);
                 }
-                $url = sprintf('%1$s/insecure/%2$s%3$s', $this->imgproxyUrl, $filter, $this->encode('local:///'.ltrim($relative, '/')));
+                $url = \sprintf('%1$s/insecure/%2$s%3$s', $this->imgproxyUrl, $filter, $this->encode('local:///'.ltrim($relative, '/')));
                 if (! $build) {
                     return $url;
                 }
 
-                $path = sprintf('%1$s/%2$s.%3$s.webp', \dirname($relative), pathinfo($relative, \PATHINFO_FILENAME), mb_substr(md5(md5_file($path).$filter), 0, 8));
+                $path = \sprintf('%1$s/%2$s.%3$s.webp', \dirname($relative), pathinfo($relative, \PATHINFO_FILENAME), mb_substr(md5(md5_file($path).$filter), 0, 8));
                 $this->thumbnailQueue->add(new AssetFetch($url, $path));
 
                 return $this->packages->getUrl(ltrim($path, '/'));

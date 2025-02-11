@@ -19,7 +19,7 @@ final readonly class CompositeFileDecoder implements FileDecoder
 {
     public function __construct(
         /** @var iterable<FileDecoder> */
-        private iterable $decoders
+        private iterable $decoders,
     ) {
     }
 
