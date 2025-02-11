@@ -18,7 +18,7 @@ services:
         tmpfs:
             - /tmp
     imgproxy:
-        image: darthsim/imgproxy:v3
+        image: darthsim/imgproxy:v3.27.2
         environment:
             - IMGPROXY_LOCAL_FILESYSTEM_ROOT=/app
             - IMGPROXY_MAX_ANIMATION_FRAMES=60
