@@ -19,12 +19,12 @@ use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-final class FilesystemStorage implements StorageWithOptions
+final readonly class FilesystemStorage implements StorageWithOptions
 {
-    private readonly array $roots;
-    private readonly Finder $finder;
+    private array $roots;
+    private Finder $finder;
 
-    public function __construct(FileLocatorInterface $locator, private readonly FileDecoder $decoder, array $root, ?array $names = null)
+    public function __construct(FileLocatorInterface $locator, private FileDecoder $decoder, array $root, ?array $names = null)
     {
         $this->roots = array_map(static function (string $path) use ($locator): string {
             if (str_starts_with($path, '@')) {
