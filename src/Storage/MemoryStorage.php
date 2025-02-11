@@ -27,7 +27,7 @@ final class MemoryStorage implements StorageWithOptions
         /**
          * @var array<string, array>
          */
-        private array $values
+        private array $values,
     ) {
     }
 
@@ -48,7 +48,7 @@ final class MemoryStorage implements StorageWithOptions
     public function get(string $id): array
     {
         if ($this->has($id) === false) {
-            throw new \InvalidArgumentException(sprintf('No value with id "%s" found.', $id));
+            throw new \InvalidArgumentException(\sprintf('No value with id "%s" found.', $id));
         }
 
         return $this->values[$id];

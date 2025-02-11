@@ -17,6 +17,6 @@ final class UnexpectedAttributeException extends \RuntimeException
 {
     public static function newSelf(string $id, string $message): self
     {
-        return new self(sprintf('Unexpected attribute for "%1$s", %2$s', $id, $message));
+        return new self(\sprintf('Unexpected attribute for "%1$s", %2$s', $id, $message));
     }
 }

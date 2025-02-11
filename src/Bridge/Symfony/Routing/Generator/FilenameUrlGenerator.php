@@ -37,7 +37,7 @@ final class FilenameUrlGenerator implements UrlGeneratorInterface
 
         $url = $this->urlGenerator->generate($name, $parameters, $referenceType);
         if (parse_url($url, \PHP_URL_QUERY) !== null) {
-            throw new \LogicException(sprintf('Query string found while generating route "%1$s", query strings are forbidden: %2$s', $name, $url));
+            throw new \LogicException(\sprintf('Query string found while generating route "%1$s", query strings are forbidden: %2$s', $name, $url));
         }
 
         /** @var bool $indexFile */

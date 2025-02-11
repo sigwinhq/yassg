@@ -18,11 +18,7 @@ use Sigwin\YASSG\Bridge\Symfony\Routing\Generator\FilenameUrlGenerator;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
- * @covers \Sigwin\YASSG\Bridge\Symfony\Routing\Generator\FilenameUrlGenerator
- *
  * @internal
- *
- * @small
  */
 #[\PHPUnit\Framework\Attributes\Small]
 #[\PHPUnit\Framework\Attributes\CoversClass(FilenameUrlGenerator::class)]

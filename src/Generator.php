@@ -111,14 +111,14 @@ final readonly class Generator
             return $this->generateUrl('/sitemap.xml'.($deflate ? '.gz' : ''));
         }
 
-        return $this->generateUrl(sprintf('/sitemap-%1$s-%2$d.xml'.($deflate ? '.gz' : ''), $name, $offset ?? throw new \LogicException('Offset must be set when name is set')));
+        return $this->generateUrl(\sprintf('/sitemap-%1$s-%2$d.xml'.($deflate ? '.gz' : ''), $name, $offset ?? throw new \LogicException('Offset must be set when name is set')));
     }
 
     private function generateUrl(string $path): string
     {
         $context = $this->urlGenerator->getContext();
 
-        return sprintf('%1$s://%2$s%3$s%4$s', $context->getScheme(), $context->getHost(), $context->getBaseUrl(), $path);
+        return \sprintf('%1$s://%2$s%3$s%4$s', $context->getScheme(), $context->getHost(), $context->getBaseUrl(), $path);
     }
 
     /**
@@ -136,7 +136,7 @@ final readonly class Generator
 
         $statusCode = $response->getStatusCode();
         if ($statusCode !== $expectedStatusCode) {
-            throw new \RuntimeException(sprintf('Invalid response for %1$s, expected %2$d, got %3$d', $request->getUri(), $expectedStatusCode, $statusCode));
+            throw new \RuntimeException(\sprintf('Invalid response for %1$s, expected %2$d, got %3$d', $request->getUri(), $expectedStatusCode, $statusCode));
         }
 
         $body = $response->getContent();

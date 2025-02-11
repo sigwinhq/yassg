@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.24.0@462c80e31c34e58cc4f750c656be3927e80e550e">
+<files psalm-version="5.26.1@d747f6500b38ac4f7dfc5edbcae6e4b637d7add0">
   <file src="bootstrap.php">
     <PossiblyFalseArgument>
       <code><![CDATA[getenv('YASSG_SKIP_BUNDLES')]]></code>
@@ -338,6 +338,9 @@
       <code><![CDATA[$fallbackLocale]]></code>
       <code><![CDATA[$locale]]></code>
     </MixedAssignment>
+    <MixedReturnStatement>
+      <code><![CDATA[$this->denormalizer->denormalize($data, $type, $format, $context)]]></code>
+    </MixedReturnStatement>
     <PossiblyUndefinedStringArrayOffset>
       <code><![CDATA[$context[LocaleContext::LOCALE]]]></code>
       <code><![CDATA[$context[LocaleContext::LOCALE_FALLBACK]]]></code>

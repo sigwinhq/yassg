@@ -24,12 +24,12 @@ final readonly class DatabaseProvider
     public function getDatabase(string $name): Database
     {
         if ($this->locator->has($name) === false) {
-            throw new \LogicException(sprintf('No such database "%1$s"', $name));
+            throw new \LogicException(\sprintf('No such database "%1$s"', $name));
         }
 
         $database = $this->locator->get($name);
         if ($database instanceof Database === false) {
-            throw new \LogicException(sprintf('Service "%1$s" is not a database', $name));
+            throw new \LogicException(\sprintf('Service "%1$s" is not a database', $name));
         }
 
         return $database;

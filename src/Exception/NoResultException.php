@@ -20,7 +20,7 @@ final class NoResultException extends \RuntimeException
         if ($condition === null) {
             parent::__construct('No result found');
         } else {
-            parent::__construct(sprintf('No result found for condition "%s"', $condition));
+            parent::__construct(\sprintf('No result found for condition "%s"', $condition));
         }
     }
 }

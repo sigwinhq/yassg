@@ -106,7 +106,7 @@ trait DatabaseTrait
         }
 
         array_walk($condition, static function (float|int|string &$value, string $key): void {
-            $value = sprintf('%1$s == "%2$s"', $key, $value);
+            $value = \sprintf('%1$s == "%2$s"', $key, $value);
         });
 
         return implode(' AND ', $condition);

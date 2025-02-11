@@ -30,7 +30,6 @@ return static function (RectorConfig $rectorConfig): void {
         DoctrineSetList::ANNOTATIONS_TO_ATTRIBUTES,
         LevelSetList::UP_TO_PHP_82,
         PHPUnitSetList::PHPUNIT_90,
-        PHPUnitSetList::PHPUNIT_91,
         PHPUnitSetList::PHPUNIT_100,
         SymfonySetList::ANNOTATIONS_TO_ATTRIBUTES,
         SymfonySetList::SYMFONY_63,

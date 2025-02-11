@@ -36,7 +36,7 @@ final readonly class ExpressionNormalizer implements DenormalizerInterface
          * @phpstan-ignore-next-line
          */
         if (is_a($value, $type, false) === false) {
-            throw new \LogicException(sprintf('Invalid value denormalized, %1$s expected, %2$s received', $type, get_debug_type($value)));
+            throw new \LogicException(\sprintf('Invalid value denormalized, %1$s expected, %2$s received', $type, get_debug_type($value)));
         }
 
         return $value;

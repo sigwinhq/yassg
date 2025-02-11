@@ -73,8 +73,8 @@ final class GenerateCommand extends Command
             $style->writeln($request->getUri());
 
             if ($style->isDebug()) {
-                $style->info(sprintf('Response code: %1d$', $response->getStatusCode()));
-                $style->info(sprintf('Written to: %1s$', $path));
+                $style->info(\sprintf('Response code: %1d$', $response->getStatusCode()));
+                $style->info(\sprintf('Written to: %1s$', $path));
             }
         });
 
