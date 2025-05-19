@@ -38,6 +38,7 @@ final readonly class AssetQueueFileDecoder implements FileDecoder
             foreach ($decoded['__assets'] as $asset) {
                 $this->queue->add($asset);
             }
+            unset($decoded['__assets']);
         }
 
         return $decoded;
