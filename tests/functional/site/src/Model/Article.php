@@ -15,15 +15,20 @@ namespace Sigwin\YASSG\Test\Functional\Site\Model;
 
 use Sigwin\YASSG\Linkable;
 use Symfony\Component\Serializer\Annotation\Context;
+use Symfony\Component\Validator\Constraints as Assert;
 
 final class Article implements Linkable
 {
+    #[Assert\NotBlank]
     public string $title;
+    #[Assert\NotBlank]
     public string $slug;
+    #[Assert\NotBlank]
     public string $body;
     public ?string $image = null;
     public ?self $previous = null;
 
+    #[Assert\NotBlank]
     #[Context(['datetime_format' => 'Y-m-d H:i:s'])]
     public \DateTimeInterface $publishedAt;
 

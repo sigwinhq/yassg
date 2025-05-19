@@ -15,6 +15,8 @@ sigwin_yassg:
                 _locale: "yassg_find_all('locale').column('isoCode')"
         article:
             path: /{_locale}/article/{slug}
+            defaults:
+                _locale: en
             catalog:
                 slug: "yassg_find_all('articles').column('slug')"
         articles:

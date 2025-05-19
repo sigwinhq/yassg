@@ -43,6 +43,11 @@
       <code><![CDATA[InitCommand]]></code>
     </UnusedClass>
   </file>
+  <file src="src/Bridge/Symfony/Command/ValidateCommand.php">
+    <UnusedClass>
+      <code><![CDATA[ValidateCommand]]></code>
+    </UnusedClass>
+  </file>
   <file src="src/Bridge/Symfony/DependencyInjection/CompilerPass/ConfigureDatabasesCompilerPass.php">
     <MissingOverrideAttribute>
       <code><![CDATA[public function process(ContainerBuilder $container): void]]></code>

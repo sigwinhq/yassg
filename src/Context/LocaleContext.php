@@ -32,10 +32,6 @@ final readonly class LocaleContext
     {
         $request = $this->requestStack->getMainRequest();
         if ($request === null) {
-            if ($this->translator instanceof \Symfony\Component\Translation\Translator === false) {
-                // TODO: remove with Symfony 6.x being lowest
-                throw new \LogicException();
-            }
             $locale = $fallbackLocale = $this->translator->getLocale();
         } else {
             $locale = $request->getLocale();
