@@ -13,14 +13,16 @@ declare(strict_types=1);
 
 namespace Sigwin\YASSG\Test\Functional\Site\Model;
 
+use Sigwin\YASSG\Linkable;
 use Symfony\Component\Serializer\Annotation\Context;
 
-final class Article
+final class Article implements Linkable
 {
     public string $title;
     public string $slug;
     public string $body;
     public ?string $image = null;
+    public ?self $previous = null;
 
     #[Context(['datetime_format' => 'Y-m-d H:i:s'])]
     public \DateTimeInterface $publishedAt;
@@ -28,5 +30,17 @@ final class Article
     public function getImage(): ?string
     {
         return $this->image;
+    }
+
+    public function getLinkRouteName(): string
+    {
+        return 'article';
+    }
+
+    public function getLinkRouteParameters(): array
+    {
+        return [
+            'slug' => $this->slug,
+        ];
     }
 }
