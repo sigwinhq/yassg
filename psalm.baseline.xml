@@ -409,6 +409,12 @@
       <code><![CDATA[public function getSupportedTypes(?string $format): array]]></code>
       <code><![CDATA[public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool]]></code>
     </MissingOverrideAttribute>
+    <NoValue>
+      <code><![CDATA[return $data;]]></code>
+    </NoValue>
+    <RedundantConditionGivenDocblockType>
+      <code><![CDATA[\is_string($data)]]></code>
+    </RedundantConditionGivenDocblockType>
     <UnusedClass>
       <code><![CDATA[ResourceLocatorNormalizer]]></code>
     </UnusedClass>

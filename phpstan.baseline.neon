@@ -277,6 +277,30 @@ parameters:
 			path: src/Bridge/Symfony/Serializer/Normalizer/LocalizingNormalizer.php
 
 		-
+			message: '#^Call to function is_string\(\) with string will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Bridge/Symfony/Serializer/Normalizer/ResourceLocatorNormalizer.php
+
+		-
+			message: '#^Method Sigwin\\YASSG\\Bridge\\Symfony\\Serializer\\Normalizer\\ResourceLocatorNormalizer\:\:denormalize\(\) never returns array\<string\> so it can be removed from the return type\.$#'
+			identifier: return.unusedType
+			count: 1
+			path: src/Bridge/Symfony/Serializer/Normalizer/ResourceLocatorNormalizer.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 1
+			path: src/Bridge/Symfony/Serializer/Normalizer/ResourceLocatorNormalizer.php
+
+		-
+			message: '#^PHPDoc tag @var with type array\<string\>\|string is not subtype of type string\.$#'
+			identifier: varTag.type
+			count: 1
+			path: src/Bridge/Symfony/Serializer/Normalizer/ResourceLocatorNormalizer.php
+
+		-
 			message: '#^Parameter \#1 \$condition of method Sigwin\\YASSG\\Database\<object\>\:\:findAll\(\) expects string\|null, mixed given\.$#'
 			identifier: argument.type
 			count: 1
