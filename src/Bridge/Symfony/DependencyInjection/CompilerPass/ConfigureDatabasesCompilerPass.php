@@ -64,6 +64,8 @@ final class ConfigureDatabasesCompilerPass implements CompilerPassInterface
         }
         $this->classMetadataFactory = $classMetadata;
 
+        $databases = [];
+
         /** @var array<string, array{storage: string, class: class-string, page_limit: int<1, max>, options?: array}> $configuredDatabases */
         $configuredDatabases = $container->getParameter('sigwin_yassg.databases_spec');
         foreach ($configuredDatabases as $name => $database) {
@@ -90,6 +92,7 @@ final class ConfigureDatabasesCompilerPass implements CompilerPassInterface
                 $storageDefinition->setArgument('$'.$key, $value);
             }
             $storageId = \sprintf('sigwin_yassg.database.storage.%1$s', $name);
+            $databases[] = $name;
             $container->setDefinition($storageId, $storageDefinition);
 
             $denormalizerDefinition = new Definition(Storage\DenormalizingStorage::class);
@@ -135,6 +138,7 @@ final class ConfigureDatabasesCompilerPass implements CompilerPassInterface
             }
         }
         $container->setParameter('sigwin_yassg.databases_spec', null);
+        $container->setParameter('sigwin_yassg.databases', $databases);
         $container
             ->getDefinition('sigwin_yassg.serializer.denormalizer.localizing')
                 ->setArgument(0, $localizableClasses)

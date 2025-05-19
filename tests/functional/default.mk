@@ -12,6 +12,9 @@ self/build: self/service self/clean ${BUILD_DIR}/assets/entrypoints.json ## Self
 self/init: self/clean ## Self: init the app via yassg:init
 	export YASSG_SKIP_BUNDLES=${YASSG_SKIP_BUNDLES}; \
 	php ../../../bin/yassg yassg:init --demo
+self/validate: ## Self: validate the database with yassg:validate
+	export YASSG_SKIP_BUNDLES=${YASSG_SKIP_BUNDLES}; \
+	php ../../../bin/yassg yassg:validate -vvv
 self/clean:
 	rm -rf ${BUILD_DIR}
 self/test:

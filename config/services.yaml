@@ -7,6 +7,7 @@ services:
             $baseDir: "%sigwin_yassg.base_dir%"
             $buildDir: "%sigwin_yassg.build_dir%"
             $routes: "%sigwin_yassg.routes%"
+            $databases: "%sigwin_yassg.databases%"
 
     Sigwin\YASSG\:
         resource: '../src/'
