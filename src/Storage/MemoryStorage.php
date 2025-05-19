@@ -23,12 +23,20 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 final class MemoryStorage implements StorageWithOptions
 {
-    public function __construct(
-        /**
-         * @var array<string, array>
-         */
-        private array $values,
-    ) {
+    /**
+     * @var array<string, array<string, mixed>>
+     */
+    private array $values;
+
+    /**
+     * @param array<string, array<string, mixed>> $values
+     */
+    public function __construct(array $values)
+    {
+        foreach (array_keys($values) as $id) {
+            $values[$id]['__id'] = $id;
+        }
+        $this->values = $values;
     }
 
     public static function resolveOptions(array $options): array
