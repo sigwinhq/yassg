@@ -33,11 +33,13 @@ final class Kernel extends \Symfony\Component\HttpKernel\Kernel
         parent::__construct($environment, $debug);
     }
 
+    #[\Override]
     public function getCacheDir(): string
     {
         return $this->baseDir.'/var/cache/'.$this->environment;
     }
 
+    #[\Override]
     public function getLogDir(): string
     {
         return $this->baseDir.'/var/log';

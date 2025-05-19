@@ -25,6 +25,7 @@ final class Urlset extends \Presta\SitemapBundle\Sitemap\Urlset
         $this->lastmod = new \DateTimeImmutable('1970-01-01 00:00:00');
     }
 
+    #[\Override]
     public function addUrl(Url $url): void
     {
         parent::addUrl($url);

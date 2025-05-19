@@ -26,10 +26,10 @@ use Symfony\Component\Yaml\Yaml;
 #[AsCommand(name: 'yassg:init')]
 final class InitCommand extends Command
 {
-    private const SOURCE_BASIC = 'basic';
-    private const SOURCE_DEMO = 'demo';
+    private const string SOURCE_BASIC = 'basic';
+    private const string SOURCE_DEMO = 'demo';
     // private const SOURCE_GITHUB = 'github';
-    private const SOURCE_GITLAB = 'gitlab';
+    private const string SOURCE_GITLAB = 'gitlab';
 
     public function __construct(private readonly string $initDir, private readonly string $baseDir)
     {

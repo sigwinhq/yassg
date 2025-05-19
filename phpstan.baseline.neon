@@ -1,612 +1,949 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^PHPDoc tag @var for variable \\$composer has no value type specified in iterable type array\\.$#"
+			message: '#^PHPDoc tag @var for variable \$composer has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Bridge/Symfony/Command/InitCommand.php
 
 		-
-			message: "#^PHPDoc tag @var for variable \\$services has no value type specified in iterable type array\\.$#"
+			message: '#^PHPDoc tag @var for variable \$services has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Bridge/Symfony/Command/InitCommand.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Bridge\\\\Symfony\\\\DependencyInjection\\\\CompilerPass\\\\ConfigureDatabasesCompilerPass\\:\\:getLocalizableProperties\\(\\) return type has no value type specified in iterable type array\\.$#"
+			message: '#^Cannot access offset ''type'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
 			count: 1
 			path: src/Bridge/Symfony/DependencyInjection/CompilerPass/ConfigureDatabasesCompilerPass.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Bridge\\\\Symfony\\\\DependencyInjection\\\\CompilerPass\\\\ConfigureDatabasesCompilerPass\\:\\:getProperties\\(\\) return type has no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Bridge\\Symfony\\DependencyInjection\\CompilerPass\\ConfigureDatabasesCompilerPass\:\:getLocalizableProperties\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Bridge/Symfony/DependencyInjection/CompilerPass/ConfigureDatabasesCompilerPass.php
 
 		-
-			message: "#^PHPDoc tag @var for variable \\$class contains generic interface Sigwin\\\\YASSG\\\\StorageWithOptions but does not specify its types\\: T$#"
+			message: '#^Method Sigwin\\YASSG\\Bridge\\Symfony\\DependencyInjection\\CompilerPass\\ConfigureDatabasesCompilerPass\:\:getProperties\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Bridge/Symfony/DependencyInjection/CompilerPass/ConfigureDatabasesCompilerPass.php
 
 		-
-			message: "#^PHPDoc tag @var for variable \\$configuredDatabases has no value type specified in iterable type array\\.$#"
+			message: '#^PHPDoc tag @var for variable \$class contains generic interface Sigwin\\YASSG\\StorageWithOptions but does not specify its types\: T$#'
+			identifier: missingType.generics
 			count: 1
 			path: src/Bridge/Symfony/DependencyInjection/CompilerPass/ConfigureDatabasesCompilerPass.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Bridge\\\\Symfony\\\\Kernel\\:\\:createEnvironmentClasses\\(\\) return type has no value type specified in iterable type iterable\\.$#"
+			message: '#^PHPDoc tag @var for variable \$configuredDatabases has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Bridge/Symfony/DependencyInjection/CompilerPass/ConfigureDatabasesCompilerPass.php
+
+		-
+			message: '#^Parameter \#2 \.\.\.\$values of function sprintf expects bool\|float\|int\|string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Bridge/Symfony/DependencyInjection/CompilerPass/ConfigureDatabasesCompilerPass.php
+
+		-
+			message: '#^Cannot access an offset on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/Bridge/Symfony/DependencyInjection/CompilerPass/InjectRouteVariablesCompilerPass.php
+
+		-
+			message: '#^Cannot access offset ''catalog'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: src/Bridge/Symfony/DependencyInjection/CompilerPass/InjectRouteVariablesCompilerPass.php
+
+		-
+			message: '#^Cannot access offset ''path'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/Bridge/Symfony/DependencyInjection/CompilerPass/InjectRouteVariablesCompilerPass.php
+
+		-
+			message: '#^Cannot access offset ''variables'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/Bridge/Symfony/DependencyInjection/CompilerPass/InjectRouteVariablesCompilerPass.php
+
+		-
+			message: '#^Cannot access offset mixed on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: src/Bridge/Symfony/DependencyInjection/CompilerPass/InjectRouteVariablesCompilerPass.php
+
+		-
+			message: '#^Parameter \#1 \$path of class Symfony\\Component\\Routing\\Route constructor expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Bridge/Symfony/DependencyInjection/CompilerPass/InjectRouteVariablesCompilerPass.php
+
+		-
+			message: '#^Argument of an invalid type mixed supplied for foreach, only iterables are supported\.$#'
+			identifier: foreach.nonIterable
+			count: 1
+			path: src/Bridge/Symfony/DependencyInjection/KernelExtension.php
+
+		-
+			message: '#^Cannot access offset ''options'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/Bridge/Symfony/DependencyInjection/KernelExtension.php
+
+		-
+			message: '#^Cannot access offset ''strip_parameters'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/Bridge/Symfony/DependencyInjection/KernelExtension.php
+
+		-
+			message: '#^Parameter \#2 \$value of method Symfony\\Component\\DependencyInjection\\Container\:\:setParameter\(\) expects array\|bool\|float\|int\|string\|UnitEnum\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 4
+			path: src/Bridge/Symfony/DependencyInjection/KernelExtension.php
+
+		-
+			message: '#^Parameter \#1 \$condition of method Sigwin\\YASSG\\Database\<object\>\:\:findAll\(\) expects string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Bridge/Symfony/ExpressionLanguage/FunctionProvider.php
+
+		-
+			message: '#^Binary operation "\." between non\-falsy\-string and mixed results in an error\.$#'
+			identifier: binaryOp.invalid
 			count: 1
 			path: src/Bridge/Symfony/Kernel.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Bridge\\\\Symfony\\\\Routing\\\\Generator\\\\FilenameUrlGenerator\\:\\:__construct\\(\\) has parameter \\$routes with no value type specified in iterable type array\\.$#"
+			message: '#^Generator expects value type Symfony\\Component\\HttpKernel\\Bundle\\BundleInterface, mixed given\.$#'
+			identifier: generator.valueType
+			count: 2
+			path: src/Bridge/Symfony/Kernel.php
+
+		-
+			message: '#^Method Sigwin\\YASSG\\Bridge\\Symfony\\Kernel\:\:createEnvironmentClasses\(\) return type has no value type specified in iterable type iterable\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Bridge/Symfony/Kernel.php
+
+		-
+			message: '#^Cannot access offset ''path'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: src/Bridge/Symfony/Routing/Generator/FilenameUrlGenerator.php
+
+		-
+			message: '#^Cannot cast mixed to string\.$#'
+			identifier: cast.string
+			count: 2
+			path: src/Bridge/Symfony/Routing/Generator/FilenameUrlGenerator.php
+
+		-
+			message: '#^Method Sigwin\\YASSG\\Bridge\\Symfony\\Routing\\Generator\\FilenameUrlGenerator\:\:__construct\(\) has parameter \$routes with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Bridge/Symfony/Routing/Generator/FilenameUrlGenerator.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Bridge\\\\Symfony\\\\Routing\\\\Generator\\\\FilenameUrlGenerator\\:\\:__construct\\(\\) has parameter \\$stripParameters with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Bridge\\Symfony\\Routing\\Generator\\FilenameUrlGenerator\:\:__construct\(\) has parameter \$stripParameters with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Bridge/Symfony/Routing/Generator/FilenameUrlGenerator.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Bridge\\\\Symfony\\\\Routing\\\\Generator\\\\FilenameUrlGenerator\\:\\:generate\\(\\) has parameter \\$parameters with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Bridge\\Symfony\\Routing\\Generator\\FilenameUrlGenerator\:\:generate\(\) has parameter \$parameters with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Bridge/Symfony/Routing/Generator/FilenameUrlGenerator.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Bridge\\\\Symfony\\\\Routing\\\\Generator\\\\FilenameUrlGenerator\\:\\:stripParameters\\(\\) has parameter \\$names with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Bridge\\Symfony\\Routing\\Generator\\FilenameUrlGenerator\:\:stripParameters\(\) has parameter \$names with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Bridge/Symfony/Routing/Generator/FilenameUrlGenerator.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Bridge\\\\Symfony\\\\Routing\\\\Generator\\\\FilenameUrlGenerator\\:\\:stripParameters\\(\\) has parameter \\$parameters with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Bridge\\Symfony\\Routing\\Generator\\FilenameUrlGenerator\:\:stripParameters\(\) has parameter \$parameters with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Bridge/Symfony/Routing/Generator/FilenameUrlGenerator.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Bridge\\\\Symfony\\\\Routing\\\\Generator\\\\GlobalVariableUrlGenerator\\:\\:__construct\\(\\) has parameter \\$routes with no value type specified in iterable type array\\.$#"
+			message: '#^Parameter \#1 \$names of method Sigwin\\YASSG\\Bridge\\Symfony\\Routing\\Generator\\FilenameUrlGenerator\:\:stripParameters\(\) expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Bridge/Symfony/Routing/Generator/FilenameUrlGenerator.php
+
+		-
+			message: '#^Argument of an invalid type mixed supplied for foreach, only iterables are supported\.$#'
+			identifier: foreach.nonIterable
 			count: 1
 			path: src/Bridge/Symfony/Routing/Generator/GlobalVariableUrlGenerator.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Bridge\\\\Symfony\\\\Routing\\\\Generator\\\\GlobalVariableUrlGenerator\\:\\:generate\\(\\) has parameter \\$parameters with no value type specified in iterable type array\\.$#"
+			message: '#^Cannot access offset ''variables'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
 			count: 1
 			path: src/Bridge/Symfony/Routing/Generator/GlobalVariableUrlGenerator.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Bridge\\\\Symfony\\\\Routing\\\\Loader\\\\RouteLoader\\:\\:__construct\\(\\) has parameter \\$routes with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Bridge\\Symfony\\Routing\\Generator\\GlobalVariableUrlGenerator\:\:__construct\(\) has parameter \$routes with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Bridge/Symfony/Routing/Generator/GlobalVariableUrlGenerator.php
+
+		-
+			message: '#^Method Sigwin\\YASSG\\Bridge\\Symfony\\Routing\\Generator\\GlobalVariableUrlGenerator\:\:generate\(\) has parameter \$parameters with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Bridge/Symfony/Routing/Generator/GlobalVariableUrlGenerator.php
+
+		-
+			message: '#^Parameter \#1 \$key of method Symfony\\Component\\HttpFoundation\\ParameterBag\:\:get\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Bridge/Symfony/Routing/Generator/GlobalVariableUrlGenerator.php
+
+		-
+			message: '#^Binary operation "\." between mixed and ''/\{_filename\}'' results in an error\.$#'
+			identifier: binaryOp.invalid
 			count: 1
 			path: src/Bridge/Symfony/Routing/Loader/RouteLoader.php
 
 		-
-			message: "#^Property Sigwin\\\\YASSG\\\\Bridge\\\\Symfony\\\\Routing\\\\Loader\\\\RouteLoader\\:\\:\\$routes type has no value type specified in iterable type array\\.$#"
+			message: '#^Cannot access offset ''_controller'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
 			count: 1
 			path: src/Bridge/Symfony/Routing/Loader/RouteLoader.php
 
 		-
-			message: """
-				#^Class Sigwin\\\\YASSG\\\\Bridge\\\\Symfony\\\\Serializer\\\\Normalizer\\\\CollectionNormalizer implements deprecated interface Symfony\\\\Component\\\\Serializer\\\\Normalizer\\\\CacheableSupportsMethodInterface\\:
-				since Symfony 6\\.3, implement "getSupportedTypes\\(\\?string \\$format\\)" instead$#
-			"""
+			message: '#^Cannot access offset ''defaults'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: src/Bridge/Symfony/Routing/Loader/RouteLoader.php
+
+		-
+			message: '#^Cannot access offset ''path'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 3
+			path: src/Bridge/Symfony/Routing/Loader/RouteLoader.php
+
+		-
+			message: '#^Cannot cast mixed to string\.$#'
+			identifier: cast.string
+			count: 1
+			path: src/Bridge/Symfony/Routing/Loader/RouteLoader.php
+
+		-
+			message: '#^Method Sigwin\\YASSG\\Bridge\\Symfony\\Routing\\Loader\\RouteLoader\:\:__construct\(\) has parameter \$routes with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Bridge/Symfony/Routing/Loader/RouteLoader.php
+
+		-
+			message: '#^Parameter \#1 \$array of function array_replace expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Bridge/Symfony/Routing/Loader/RouteLoader.php
+
+		-
+			message: '#^Parameter \#1 \$path of class Symfony\\Component\\Routing\\Route constructor expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Bridge/Symfony/Routing/Loader/RouteLoader.php
+
+		-
+			message: '#^Method Sigwin\\YASSG\\Bridge\\Symfony\\Serializer\\Normalizer\\CollectionNormalizer\:\:denormalize\(\) return type with generic interface Sigwin\\YASSG\\Collection does not specify its types\: TKey, TValue$#'
+			identifier: missingType.generics
 			count: 1
 			path: src/Bridge/Symfony/Serializer/Normalizer/CollectionNormalizer.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Bridge\\\\Symfony\\\\Serializer\\\\Normalizer\\\\CollectionNormalizer\\:\\:denormalize\\(\\) return type with generic interface Sigwin\\\\YASSG\\\\Collection does not specify its types\\: TKey, TValue$#"
+			message: '#^Method Sigwin\\YASSG\\Bridge\\Symfony\\Serializer\\Normalizer\\CollectionNormalizer\:\:getProperties\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Bridge/Symfony/Serializer/Normalizer/CollectionNormalizer.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Bridge\\\\Symfony\\\\Serializer\\\\Normalizer\\\\CollectionNormalizer\\:\\:getProperties\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Bridge/Symfony/Serializer/Normalizer/CollectionNormalizer.php
-
-		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Bridge\\\\Symfony\\\\Serializer\\\\Normalizer\\\\CollectionNormalizer\\:\\:supportsDenormalization\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Bridge/Symfony/Serializer/Normalizer/CollectionNormalizer.php
-
-		-
-			message: """
-				#^Class Sigwin\\\\YASSG\\\\Bridge\\\\Symfony\\\\Serializer\\\\Normalizer\\\\LocalizingNormalizer implements deprecated interface Symfony\\\\Component\\\\Serializer\\\\Normalizer\\\\CacheableSupportsMethodInterface\\:
-				since Symfony 6\\.3, implement "getSupportedTypes\\(\\?string \\$format\\)" instead$#
-			"""
-			count: 1
+			message: '#^Cannot access offset mixed on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
 			path: src/Bridge/Symfony/Serializer/Normalizer/LocalizingNormalizer.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Bridge\\\\Symfony\\\\Serializer\\\\Normalizer\\\\LocalizingNormalizer\\:\\:__construct\\(\\) has parameter \\$classes with no value type specified in iterable type array\\.$#"
+			message: '#^Call to function is_string\(\) with string will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
 			count: 1
-			path: src/Bridge/Symfony/Serializer/Normalizer/LocalizingNormalizer.php
+			path: src/Bridge/Symfony/Serializer/Normalizer/ResourceLocatorNormalizer.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Bridge\\\\Symfony\\\\Serializer\\\\Normalizer\\\\LocalizingNormalizer\\:\\:supportsDenormalization\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Bridge\\Symfony\\Serializer\\Normalizer\\ResourceLocatorNormalizer\:\:denormalize\(\) never returns array\<string\> so it can be removed from the return type\.$#'
+			identifier: return.unusedType
 			count: 1
-			path: src/Bridge/Symfony/Serializer/Normalizer/LocalizingNormalizer.php
+			path: src/Bridge/Symfony/Serializer/Normalizer/ResourceLocatorNormalizer.php
 
 		-
-			message: "#^Property Sigwin\\\\YASSG\\\\Bridge\\\\Symfony\\\\Serializer\\\\Normalizer\\\\LocalizingNormalizer\\:\\:\\$classes type has no value type specified in iterable type array\\.$#"
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
 			count: 1
-			path: src/Bridge/Symfony/Serializer/Normalizer/LocalizingNormalizer.php
+			path: src/Bridge/Symfony/Serializer/Normalizer/ResourceLocatorNormalizer.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\BuildOptions\\:\\:__construct\\(\\) has parameter \\$requestHeaders with no value type specified in iterable type array\\.$#"
+			message: '#^PHPDoc tag @var with type array\<string\>\|string is not subtype of type string\.$#'
+			identifier: varTag.type
+			count: 1
+			path: src/Bridge/Symfony/Serializer/Normalizer/ResourceLocatorNormalizer.php
+
+		-
+			message: '#^Parameter \#1 \$condition of method Sigwin\\YASSG\\Database\<object\>\:\:findAll\(\) expects string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Bridge/Twig/Extension/DatabaseExtension.php
+
+		-
+			message: '#^Parameter \#1 \$condition of method Sigwin\\YASSG\\Database\<object\>\:\:findAllBy\(\) expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Bridge/Twig/Extension/DatabaseExtension.php
+
+		-
+			message: '#^Parameter \#1 \$condition of method Sigwin\\YASSG\\Database\<object\>\:\:findOne\(\) expects string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Bridge/Twig/Extension/DatabaseExtension.php
+
+		-
+			message: '#^Parameter \#1 \$condition of method Sigwin\\YASSG\\Database\<object\>\:\:findOneBy\(\) expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Bridge/Twig/Extension/DatabaseExtension.php
+
+		-
+			message: '#^Parameter \#1 \$condition of method Sigwin\\YASSG\\Database\<object\>\:\:findOneByOrNull\(\) expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Bridge/Twig/Extension/DatabaseExtension.php
+
+		-
+			message: '#^Parameter \#1 \$condition of method Sigwin\\YASSG\\Database\<object\>\:\:findOneOrNull\(\) expects string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Bridge/Twig/Extension/DatabaseExtension.php
+
+		-
+			message: '#^Binary operation "\*" between int and mixed results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: src/Bridge/Twig/Extension/PaginatorExtension.php
+
+		-
+			message: '#^Parameter \#1 \$condition of method Sigwin\\YASSG\\Database\<object\>\:\:findAll\(\) expects string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Bridge/Twig/Extension/PaginatorExtension.php
+
+		-
+			message: '#^Cannot cast mixed to string\.$#'
+			identifier: cast.string
+			count: 1
+			path: src/Bridge/Twig/Extension/ThumbnailExtension.php
+
+		-
+			message: '#^Parameter \#1 \$search of function str_replace expects array\<string\>\|string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Bridge/Twig/Extension/ThumbnailExtension.php
+
+		-
+			message: '#^Method Sigwin\\YASSG\\BuildOptions\:\:__construct\(\) has parameter \$requestHeaders with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/BuildOptions.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\BuildOptions\\:\\:getRequestHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\BuildOptions\:\:getRequestHeaders\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/BuildOptions.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Collection\\:\\:column\\(\\) return type has no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Collection\:\:column\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Collection.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Collection\\\\ReadOnlyCollection\\:\\:__construct\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Collection\\ReadOnlyCollection\:\:__construct\(\) has parameter \$data with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Collection/ReadOnlyCollection.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Collection\\\\ReadOnlyCollection\\:\\:__construct\\(\\) has parameter \\$names with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Collection\\ReadOnlyCollection\:\:__construct\(\) has parameter \$names with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Collection/ReadOnlyCollection.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Collection\\\\ReadOnlyCollection\\:\\:column\\(\\) return type has no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Collection\\ReadOnlyCollection\:\:__get\(\) should return object but returns mixed\.$#'
+			identifier: return.type
 			count: 1
 			path: src/Collection/ReadOnlyCollection.php
 
 		-
-			message: "#^Property Sigwin\\\\YASSG\\\\Collection\\\\ReadOnlyCollection\\:\\:\\$data type has no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Collection\\ReadOnlyCollection\:\:column\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Collection/ReadOnlyCollection.php
 
 		-
-			message: "#^Property Sigwin\\\\YASSG\\\\Collection\\\\ReadOnlyCollection\\:\\:\\$names type has no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Collection\\ReadOnlyCollection\:\:getIterator\(\) should return Traversable\<string, object\> but returns ArrayIterator\<\(int\|string\), mixed\>\.$#'
+			identifier: return.type
 			count: 1
 			path: src/Collection/ReadOnlyCollection.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Context\\\\LocaleContext\\:\\:getLocale\\(\\) return type has no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Collection\\ReadOnlyCollection\:\:offsetGet\(\) should return object but returns mixed\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Collection/ReadOnlyCollection.php
+
+		-
+			message: '#^Method Sigwin\\YASSG\\Context\\LocaleContext\:\:getLocale\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Context/LocaleContext.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Database\\:\\:countBy\\(\\) has parameter \\$condition with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Database\:\:countBy\(\) has parameter \$condition with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Database.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Database\\:\\:findAll\\(\\) has parameter \\$sort with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Database\:\:findAll\(\) has parameter \$sort with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Database.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Database\\:\\:findAllBy\\(\\) has parameter \\$condition with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Database\:\:findAllBy\(\) has parameter \$condition with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Database.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Database\\:\\:findAllBy\\(\\) has parameter \\$sort with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Database\:\:findAllBy\(\) has parameter \$sort with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Database.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Database\\:\\:findOne\\(\\) has parameter \\$sort with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Database\:\:findOne\(\) has parameter \$sort with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Database.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Database\\:\\:findOneBy\\(\\) has parameter \\$condition with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Database\:\:findOneBy\(\) has parameter \$condition with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Database.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Database\\:\\:findOneBy\\(\\) has parameter \\$sort with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Database\:\:findOneBy\(\) has parameter \$sort with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Database.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Database\\:\\:findOneByOrNull\\(\\) has parameter \\$condition with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Database\:\:findOneByOrNull\(\) has parameter \$condition with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Database.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Database\\:\\:findOneByOrNull\\(\\) has parameter \\$sort with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Database\:\:findOneByOrNull\(\) has parameter \$sort with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Database.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Database\\:\\:findOneOrNull\\(\\) has parameter \\$sort with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Database\:\:findOneOrNull\(\) has parameter \$sort with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Database.php
 
 		-
-			message: "#^Class Sigwin\\\\YASSG\\\\Database\\\\CachingDatabase implements generic interface Sigwin\\\\YASSG\\\\Database but does not specify its types\\: T$#"
+			message: '#^Binary operation "\." between non\-falsy\-string and mixed results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 2
+			path: src/Database/CachingDatabase.php
+
+		-
+			message: '#^Class Sigwin\\YASSG\\Database\\CachingDatabase implements generic interface Sigwin\\YASSG\\Database but does not specify its types\: T$#'
+			identifier: missingType.generics
 			count: 1
 			path: src/Database/CachingDatabase.php
 
 		-
-			message: "#^Class Sigwin\\\\YASSG\\\\Database\\\\CachingDatabase uses generic trait Sigwin\\\\YASSG\\\\Database\\\\DatabaseTrait but does not specify its types\\: T$#"
+			message: '#^Class Sigwin\\YASSG\\Database\\CachingDatabase uses generic trait Sigwin\\YASSG\\Database\\DatabaseTrait but does not specify its types\: T$#'
+			identifier: missingType.generics
 			count: 1
 			path: src/Database/CachingDatabase.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Database\\\\CachingDatabase\\:\\:__construct\\(\\) has parameter \\$database with generic interface Sigwin\\\\YASSG\\\\Database but does not specify its types\\: T$#"
+			message: '#^Method Sigwin\\YASSG\\Database\\CachingDatabase\:\:__construct\(\) has parameter \$database with generic interface Sigwin\\YASSG\\Database but does not specify its types\: T$#'
+			identifier: missingType.generics
 			count: 1
 			path: src/Database/CachingDatabase.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Database\\\\CachingDatabase\\:\\:__construct\\(\\) has parameter \\$names with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Database\\CachingDatabase\:\:__construct\(\) has parameter \$names with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Database/CachingDatabase.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Database\\\\CachingDatabase\\:\\:conditionArrayToString\\(\\) has parameter \\$condition with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Database\\CachingDatabase\:\:conditionArrayToString\(\) has parameter \$condition with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Database/CachingDatabase.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Database\\\\CachingDatabase\\:\\:countBy\\(\\) has parameter \\$condition with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Database\\CachingDatabase\:\:countBy\(\) has parameter \$condition with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Database/CachingDatabase.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Database\\\\CachingDatabase\\:\\:createCollection\\(\\) has parameter \\$storage with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Database\\CachingDatabase\:\:createCollection\(\) has parameter \$storage with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Database/CachingDatabase.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Database\\\\CachingDatabase\\:\\:createCollection\\(\\) return type with generic interface Sigwin\\\\YASSG\\\\Collection does not specify its types\\: TKey, TValue$#"
+			message: '#^Method Sigwin\\YASSG\\Database\\CachingDatabase\:\:createCollection\(\) return type with generic interface Sigwin\\YASSG\\Collection does not specify its types\: TKey, TValue$#'
+			identifier: missingType.generics
 			count: 1
 			path: src/Database/CachingDatabase.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Database\\\\CachingDatabase\\:\\:findAll\\(\\) has parameter \\$sort with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Database\\CachingDatabase\:\:findAll\(\) has parameter \$sort with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Database/CachingDatabase.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Database\\\\CachingDatabase\\:\\:findAllBy\\(\\) has parameter \\$condition with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Database\\CachingDatabase\:\:findAllBy\(\) has parameter \$condition with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Database/CachingDatabase.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Database\\\\CachingDatabase\\:\\:findAllBy\\(\\) has parameter \\$sort with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Database\\CachingDatabase\:\:findAllBy\(\) has parameter \$sort with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Database/CachingDatabase.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Database\\\\CachingDatabase\\:\\:findOne\\(\\) has parameter \\$sort with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Database\\CachingDatabase\:\:findOne\(\) has parameter \$sort with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Database/CachingDatabase.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Database\\\\CachingDatabase\\:\\:findOneBy\\(\\) has parameter \\$condition with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Database\\CachingDatabase\:\:findOneBy\(\) has parameter \$condition with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Database/CachingDatabase.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Database\\\\CachingDatabase\\:\\:findOneBy\\(\\) has parameter \\$sort with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Database\\CachingDatabase\:\:findOneBy\(\) has parameter \$sort with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Database/CachingDatabase.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Database\\\\CachingDatabase\\:\\:findOneByOrNull\\(\\) has parameter \\$condition with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Database\\CachingDatabase\:\:findOneByOrNull\(\) has parameter \$condition with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Database/CachingDatabase.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Database\\\\CachingDatabase\\:\\:findOneByOrNull\\(\\) has parameter \\$sort with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Database\\CachingDatabase\:\:findOneByOrNull\(\) has parameter \$sort with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Database/CachingDatabase.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Database\\\\CachingDatabase\\:\\:findOneOrNull\\(\\) has parameter \\$sort with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Database\\CachingDatabase\:\:findOneOrNull\(\) has parameter \$sort with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Database/CachingDatabase.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Database\\\\CachingDatabase\\:\\:oneOrFail\\(\\) has parameter \\$list with generic interface Sigwin\\\\YASSG\\\\Collection but does not specify its types\\: TKey, TValue$#"
+			message: '#^Method Sigwin\\YASSG\\Database\\CachingDatabase\:\:oneOrFail\(\) has parameter \$list with generic interface Sigwin\\YASSG\\Collection but does not specify its types\: TKey, TValue$#'
+			identifier: missingType.generics
 			count: 1
 			path: src/Database/CachingDatabase.php
 
 		-
-			message: "#^Property Sigwin\\\\YASSG\\\\Database\\\\CachingDatabase\\:\\:\\$database with generic interface Sigwin\\\\YASSG\\\\Database does not specify its types\\: T$#"
+			message: '#^Parameter \#2 \$callback of function array_walk expects callable\(mixed, int\|string\)\: mixed, Closure\(float\|int\|string, string\)\: void given\.$#'
+			identifier: argument.type
 			count: 1
 			path: src/Database/CachingDatabase.php
 
 		-
-			message: "#^Property Sigwin\\\\YASSG\\\\Database\\\\CachingDatabase\\:\\:\\$names type has no value type specified in iterable type array\\.$#"
+			message: '#^Property Sigwin\\YASSG\\Database\\CachingDatabase\:\:\$names type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Database/CachingDatabase.php
 
 		-
-			message: "#^Class Sigwin\\\\YASSG\\\\Database\\\\MemoryDatabase implements generic interface Sigwin\\\\YASSG\\\\Database but does not specify its types\\: T$#"
+			message: '#^Class Sigwin\\YASSG\\Database\\MemoryDatabase implements generic interface Sigwin\\YASSG\\Database but does not specify its types\: T$#'
+			identifier: missingType.generics
 			count: 1
 			path: src/Database/MemoryDatabase.php
 
 		-
-			message: "#^Class Sigwin\\\\YASSG\\\\Database\\\\MemoryDatabase uses generic trait Sigwin\\\\YASSG\\\\Database\\\\DatabaseTrait but does not specify its types\\: T$#"
+			message: '#^Class Sigwin\\YASSG\\Database\\MemoryDatabase uses generic trait Sigwin\\YASSG\\Database\\DatabaseTrait but does not specify its types\: T$#'
+			identifier: missingType.generics
 			count: 1
 			path: src/Database/MemoryDatabase.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Database\\\\MemoryDatabase\\:\\:__construct\\(\\) has parameter \\$storage with generic interface Sigwin\\\\YASSG\\\\Storage but does not specify its types\\: T$#"
+			message: '#^Method Sigwin\\YASSG\\Database\\MemoryDatabase\:\:__construct\(\) has parameter \$storage with generic interface Sigwin\\YASSG\\Storage but does not specify its types\: T$#'
+			identifier: missingType.generics
 			count: 1
 			path: src/Database/MemoryDatabase.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Database\\\\MemoryDatabase\\:\\:conditionArrayToString\\(\\) has parameter \\$condition with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Database\\MemoryDatabase\:\:conditionArrayToString\(\) has parameter \$condition with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Database/MemoryDatabase.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Database\\\\MemoryDatabase\\:\\:countBy\\(\\) has parameter \\$condition with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Database\\MemoryDatabase\:\:countBy\(\) has parameter \$condition with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Database/MemoryDatabase.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Database\\\\MemoryDatabase\\:\\:createCollection\\(\\) has parameter \\$storage with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Database\\MemoryDatabase\:\:createCollection\(\) has parameter \$storage with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Database/MemoryDatabase.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Database\\\\MemoryDatabase\\:\\:createCollection\\(\\) return type with generic interface Sigwin\\\\YASSG\\\\Collection does not specify its types\\: TKey, TValue$#"
+			message: '#^Method Sigwin\\YASSG\\Database\\MemoryDatabase\:\:createCollection\(\) return type with generic interface Sigwin\\YASSG\\Collection does not specify its types\: TKey, TValue$#'
+			identifier: missingType.generics
 			count: 1
 			path: src/Database/MemoryDatabase.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Database\\\\MemoryDatabase\\:\\:findAll\\(\\) has parameter \\$sort with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Database\\MemoryDatabase\:\:findAll\(\) has parameter \$sort with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Database/MemoryDatabase.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Database\\\\MemoryDatabase\\:\\:findAllBy\\(\\) has parameter \\$condition with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Database\\MemoryDatabase\:\:findAllBy\(\) has parameter \$condition with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Database/MemoryDatabase.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Database\\\\MemoryDatabase\\:\\:findAllBy\\(\\) has parameter \\$sort with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Database\\MemoryDatabase\:\:findAllBy\(\) has parameter \$sort with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Database/MemoryDatabase.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Database\\\\MemoryDatabase\\:\\:findOne\\(\\) has parameter \\$sort with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Database\\MemoryDatabase\:\:findOne\(\) has parameter \$sort with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Database/MemoryDatabase.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Database\\\\MemoryDatabase\\:\\:findOneBy\\(\\) has parameter \\$condition with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Database\\MemoryDatabase\:\:findOneBy\(\) has parameter \$condition with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Database/MemoryDatabase.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Database\\\\MemoryDatabase\\:\\:findOneBy\\(\\) has parameter \\$sort with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Database\\MemoryDatabase\:\:findOneBy\(\) has parameter \$sort with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Database/MemoryDatabase.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Database\\\\MemoryDatabase\\:\\:findOneByOrNull\\(\\) has parameter \\$condition with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Database\\MemoryDatabase\:\:findOneByOrNull\(\) has parameter \$condition with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Database/MemoryDatabase.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Database\\\\MemoryDatabase\\:\\:findOneByOrNull\\(\\) has parameter \\$sort with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Database\\MemoryDatabase\:\:findOneByOrNull\(\) has parameter \$sort with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Database/MemoryDatabase.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Database\\\\MemoryDatabase\\:\\:findOneOrNull\\(\\) has parameter \\$sort with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Database\\MemoryDatabase\:\:findOneOrNull\(\) has parameter \$sort with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Database/MemoryDatabase.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Database\\\\MemoryDatabase\\:\\:oneOrFail\\(\\) has parameter \\$list with generic interface Sigwin\\\\YASSG\\\\Collection but does not specify its types\\: TKey, TValue$#"
+			message: '#^Method Sigwin\\YASSG\\Database\\MemoryDatabase\:\:oneOrFail\(\) has parameter \$list with generic interface Sigwin\\YASSG\\Collection but does not specify its types\: TKey, TValue$#'
+			identifier: missingType.generics
 			count: 1
 			path: src/Database/MemoryDatabase.php
 
 		-
-			message: "#^Property Sigwin\\\\YASSG\\\\Database\\\\MemoryDatabase\\:\\:\\$names type has no value type specified in iterable type array\\.$#"
+			message: '#^Parameter \#2 \$callback of function array_walk expects callable\(mixed, int\|string\)\: mixed, Closure\(float\|int\|string, string\)\: void given\.$#'
+			identifier: argument.type
 			count: 1
 			path: src/Database/MemoryDatabase.php
 
 		-
-			message: "#^Property Sigwin\\\\YASSG\\\\Database\\\\MemoryDatabase\\:\\:\\$storage with generic interface Sigwin\\\\YASSG\\\\Storage does not specify its types\\: T$#"
+			message: '#^Property Sigwin\\YASSG\\Database\\MemoryDatabase\:\:\$names type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Database/MemoryDatabase.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\DatabaseProvider\\:\\:getDatabase\\(\\) return type with generic interface Sigwin\\\\YASSG\\\\Database does not specify its types\\: T$#"
+			message: '#^Method Sigwin\\YASSG\\DatabaseProvider\:\:getDatabase\(\) return type with generic interface Sigwin\\YASSG\\Database does not specify its types\: T$#'
+			identifier: missingType.generics
 			count: 1
 			path: src/DatabaseProvider.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Decoder\\\\CachingFileDecoder\\:\\:decode\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Decoder/CachingFileDecoder.php
-
-		-
-			message: "#^PHPDoc tag @var for variable \\$value has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Decoder/CachingFileDecoder.php
-
-		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Decoder\\\\CompositeFileDecoder\\:\\:__construct\\(\\) has parameter \\$decoders with no value type specified in iterable type iterable\\.$#"
-			count: 1
-			path: src/Decoder/CompositeFileDecoder.php
-
-		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Decoder\\\\CompositeFileDecoder\\:\\:decode\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Decoder/CompositeFileDecoder.php
-
-		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Decoder\\\\MarkdownFileDecoder\\:\\:decode\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Decoder/MarkdownFileDecoder.php
-
-		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Decoder\\\\YamlFileDecoder\\:\\:decode\\(\\) return type has no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Decoder\\YamlFileDecoder\:\:decode\(\) should return array\<string, mixed\> but returns array\<mixed, mixed\>\.$#'
+			identifier: return.type
 			count: 1
 			path: src/Decoder/YamlFileDecoder.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\FileDecoder\\:\\:decode\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/FileDecoder.php
-
-		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Permutator\\:\\:__construct\\(\\) has parameter \\$routes with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Permutator\:\:__construct\(\) has parameter \$routes with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Permutator.php
 
 		-
-			message: "#^Property Sigwin\\\\YASSG\\\\Permutator\\:\\:\\$routes type has no value type specified in iterable type array\\.$#"
+			message: '#^Parameter \#2 \$parameters of class Sigwin\\YASSG\\Route constructor expects array, mixed given\.$#'
+			identifier: argument.type
 			count: 1
 			path: src/Permutator.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Route\\:\\:__construct\\(\\) has parameter \\$parameters with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Route\:\:__construct\(\) has parameter \$parameters with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Route.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Route\\:\\:getParameters\\(\\) return type has no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Route\:\:getParameters\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Route.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Storage\\:\\:get\\(\\) return type has no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Storage\:\:get\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Storage.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Storage\\:\\:load\\(\\) return type has no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Storage\:\:load\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Storage.php
 
 		-
-			message: "#^Class Sigwin\\\\YASSG\\\\Storage\\\\DenormalizingStorage implements generic interface Sigwin\\\\YASSG\\\\Storage but does not specify its types\\: T$#"
+			message: '#^Class Sigwin\\YASSG\\Storage\\DenormalizingStorage implements generic interface Sigwin\\YASSG\\Storage but does not specify its types\: T$#'
+			identifier: missingType.generics
 			count: 1
 			path: src/Storage/DenormalizingStorage.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Storage\\\\DenormalizingStorage\\:\\:denormalize\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Storage\\DenormalizingStorage\:\:denormalize\(\) has parameter \$context with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Storage/DenormalizingStorage.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Storage\\\\DenormalizingStorage\\:\\:denormalize\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Storage\\DenormalizingStorage\:\:denormalize\(\) has parameter \$data with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Storage/DenormalizingStorage.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Storage\\\\DenormalizingStorage\\:\\:fetch\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Storage\\DenormalizingStorage\:\:denormalize\(\) should return T of object but returns mixed\.$#'
+			identifier: return.type
 			count: 1
 			path: src/Storage/DenormalizingStorage.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Storage\\\\DenormalizingStorage\\:\\:fetch\\(\\) has parameter \\$item with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Storage\\DenormalizingStorage\:\:fetch\(\) has parameter \$context with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Storage/DenormalizingStorage.php
 
 		-
-			message: "#^Class Sigwin\\\\YASSG\\\\Storage\\\\FilesystemStorage implements generic interface Sigwin\\\\YASSG\\\\StorageWithOptions but does not specify its types\\: T$#"
+			message: '#^Method Sigwin\\YASSG\\Storage\\DenormalizingStorage\:\:fetch\(\) has parameter \$item with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Storage/DenormalizingStorage.php
+
+		-
+			message: '#^Parameter \#1 \$locale of method Sigwin\\YASSG\\Storage\\DenormalizingStorage\<T of object\>\:\:fetch\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Storage/DenormalizingStorage.php
+
+		-
+			message: '#^Binary operation "\." between mixed and string results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 2
+			path: src/Storage/FilesystemStorage.php
+
+		-
+			message: '#^Class Sigwin\\YASSG\\Storage\\FilesystemStorage implements generic interface Sigwin\\YASSG\\StorageWithOptions but does not specify its types\: T$#'
+			identifier: missingType.generics
 			count: 1
 			path: src/Storage/FilesystemStorage.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Storage\\\\FilesystemStorage\\:\\:__construct\\(\\) has parameter \\$names with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Storage\\FilesystemStorage\:\:__construct\(\) has parameter \$names with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Storage/FilesystemStorage.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Storage\\\\FilesystemStorage\\:\\:__construct\\(\\) has parameter \\$root with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Storage\\FilesystemStorage\:\:__construct\(\) has parameter \$root with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Storage/FilesystemStorage.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Storage\\\\FilesystemStorage\\:\\:decode\\(\\) return type has no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Storage\\FilesystemStorage\:\:decode\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Storage/FilesystemStorage.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Storage\\\\FilesystemStorage\\:\\:get\\(\\) return type has no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Storage\\FilesystemStorage\:\:get\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Storage/FilesystemStorage.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Storage\\\\FilesystemStorage\\:\\:load\\(\\) return type has no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Storage\\FilesystemStorage\:\:load\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Storage/FilesystemStorage.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Storage\\\\FilesystemStorage\\:\\:resolveOptions\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Storage\\FilesystemStorage\:\:resolveOptions\(\) has parameter \$options with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Storage/FilesystemStorage.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Storage\\\\FilesystemStorage\\:\\:resolveOptions\\(\\) return type has no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Storage\\FilesystemStorage\:\:resolveOptions\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Storage/FilesystemStorage.php
 
 		-
-			message: "#^Property Sigwin\\\\YASSG\\\\Storage\\\\FilesystemStorage\\:\\:\\$roots type has no value type specified in iterable type array\\.$#"
+			message: '#^Parameter \#1 \$callback of function array_map expects \(callable\(mixed\)\: mixed\)\|null, Closure\(string\)\: string given\.$#'
+			identifier: argument.type
 			count: 1
 			path: src/Storage/FilesystemStorage.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Storage\\\\MemoryStorage\\:\\:__construct\\(\\) has parameter \\$values with no value type specified in iterable type array\\.$#"
+			message: '#^Parameter \#1 \$patterns of method Symfony\\Component\\Finder\\Finder\:\:name\(\) expects array\<string\>\|string, array given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Storage/FilesystemStorage.php
+
+		-
+			message: '#^Parameter \#1 \$search of function str_replace expects array\<string\>\|string, array given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Storage/FilesystemStorage.php
+
+		-
+			message: '#^Property Sigwin\\YASSG\\Storage\\FilesystemStorage\:\:\$roots type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Storage/FilesystemStorage.php
+
+		-
+			message: '#^Method Sigwin\\YASSG\\Storage\\MemoryStorage\:\:__construct\(\) has parameter \$values with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Storage/MemoryStorage.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Storage\\\\MemoryStorage\\:\\:get\\(\\) return type has no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Storage\\MemoryStorage\:\:get\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Storage/MemoryStorage.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Storage\\\\MemoryStorage\\:\\:load\\(\\) return type has no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Storage\\MemoryStorage\:\:load\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Storage/MemoryStorage.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Storage\\\\MemoryStorage\\:\\:resolveOptions\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Storage\\MemoryStorage\:\:resolveOptions\(\) has parameter \$options with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Storage/MemoryStorage.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Storage\\\\MemoryStorage\\:\\:resolveOptions\\(\\) return type has no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\Storage\\MemoryStorage\:\:resolveOptions\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/Storage/MemoryStorage.php
 
 		-
-			message: "#^Property Sigwin\\\\YASSG\\\\Storage\\\\MemoryStorage\\:\\:\\$values type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Storage/MemoryStorage.php
-
-		-
-			message: "#^Method Sigwin\\\\YASSG\\\\StorageWithOptions\\:\\:resolveOptions\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\StorageWithOptions\:\:resolveOptions\(\) has parameter \$options with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/StorageWithOptions.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\StorageWithOptions\\:\\:resolveOptions\\(\\) return type has no value type specified in iterable type array\\.$#"
+			message: '#^Method Sigwin\\YASSG\\StorageWithOptions\:\:resolveOptions\(\) return type has no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
 			count: 1
 			path: src/StorageWithOptions.php
 
 		-
-			message: "#^Call to deprecated method withConsecutive\\(\\) of class PHPUnit\\\\Framework\\\\MockObject\\\\Builder\\\\InvocationMocker\\.$#"
+			message: '#^Parameter \#1 \$baseDir of class Sigwin\\YASSG\\Bridge\\Symfony\\Kernel constructor expects string, mixed given\.$#'
+			identifier: argument.type
 			count: 1
-			path: tests/unit/GeneratorTest.php
+			path: web/index.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Test\\\\GeneratorTest\\:\\:createPermutator\\(\\) has parameter \\$routes with no value type specified in iterable type array\\.$#"
+			message: '#^Parameter \#2 \$environment of class Sigwin\\YASSG\\Bridge\\Symfony\\Kernel constructor expects string, mixed given\.$#'
+			identifier: argument.type
 			count: 1
-			path: tests/unit/GeneratorTest.php
+			path: web/index.php
 
 		-
-			message: "#^Method Sigwin\\\\YASSG\\\\Test\\\\GeneratorTest\\:\\:mockUrlGenerator\\(\\) has parameter \\$routes with no value type specified in iterable type array\\.$#"
+			message: '#^Parameter \#4 \$skipBundles of class Sigwin\\YASSG\\Bridge\\Symfony\\Kernel constructor expects list\<string\>, mixed given\.$#'
+			identifier: argument.type
 			count: 1
-			path: tests/unit/GeneratorTest.php
+			path: web/index.php

@@ -21,8 +21,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 final readonly class LocaleContext
 {
-    public const LOCALE = 'sigwin_locale';
-    public const LOCALE_FALLBACK = 'sigwin_locale_fallback';
+    public const string LOCALE = 'sigwin_locale';
+    public const string LOCALE_FALLBACK = 'sigwin_locale_fallback';
 
     public function __construct(private RequestStack $requestStack, private TranslatorInterface $translator)
     {

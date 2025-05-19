@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-class Page
+final class Page
 {
     public string $slug;
     public string $title;

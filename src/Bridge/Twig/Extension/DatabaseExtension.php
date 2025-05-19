@@ -23,6 +23,7 @@ final class DatabaseExtension extends AbstractExtension
     {
     }
 
+    #[\Override]
     public function getFunctions(): array
     {
         return [
