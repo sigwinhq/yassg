@@ -20,7 +20,7 @@ use Twig\TwigFunction;
 
 final class LinkableExtension extends AbstractExtension
 {
-    public function __construct(private UrlGeneratorInterface $generator)
+    public function __construct(private readonly UrlGeneratorInterface $generator)
     {
     }
 

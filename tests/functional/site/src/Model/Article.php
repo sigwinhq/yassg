@@ -32,11 +32,13 @@ final class Article implements Linkable
         return $this->image;
     }
 
+    #[\Override]
     public function getLinkRouteName(): string
     {
         return 'article';
     }
 
+    #[\Override]
     public function getLinkRouteParameters(): array
     {
         return [

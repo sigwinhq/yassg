@@ -456,6 +456,11 @@
       <code><![CDATA[IndexExtension]]></code>
     </UnusedClass>
   </file>
+  <file src="src/Bridge/Twig/Extension/LinkableExtension.php">
+    <UnusedClass>
+      <code><![CDATA[LinkableExtension]]></code>
+    </UnusedClass>
+  </file>
   <file src="src/Bridge/Twig/Extension/PaginatorExtension.php">
     <MixedArgument>
       <code><![CDATA[$conditions]]></code>
