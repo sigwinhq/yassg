@@ -64,7 +64,7 @@ final readonly class FilesystemStorage implements StorageWithOptions
             }
             $ids[$id] = true;
 
-            yield $id => $this->decode($file);
+            yield $id => $this->decode($id, $file);
         }
     }
 
@@ -73,7 +73,7 @@ final readonly class FilesystemStorage implements StorageWithOptions
         foreach ($this->roots as $root) {
             $path = $root.$id;
             if (file_exists($path)) {
-                return $this->decode(new \SplFileObject($path));
+                return $this->decode($id, new \SplFileObject($path));
             }
         }
 
@@ -109,13 +109,14 @@ final readonly class FilesystemStorage implements StorageWithOptions
         return $resolver->resolve($options);
     }
 
-    private function decode(\SplFileInfo $file): array
+    private function decode(string $id, \SplFileInfo $file): array
     {
         if ($this->decoder->supports($file) === false) {
             throw new \RuntimeException(\sprintf('Decoder does not know how to decode %1$s file', $file->getRealPath()));
         }
 
         $decoded = $this->decoder->decode($file);
+        $decoded['__id'] = $id;
         $decoded['__path'] = $file->getRealPath();
 
         return $decoded;

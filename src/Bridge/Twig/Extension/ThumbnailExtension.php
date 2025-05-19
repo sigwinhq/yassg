@@ -15,6 +15,7 @@ namespace Sigwin\YASSG\Bridge\Twig\Extension;
 
 use Sigwin\YASSG\Asset\AssetFetch;
 use Sigwin\YASSG\AssetQueue;
+use Sigwin\YASSG\Metadata;
 use Symfony\Component\Asset\Packages;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Twig\Extension\AbstractExtension;
@@ -34,21 +35,22 @@ final class ThumbnailExtension extends AbstractExtension
                 if (str_starts_with($path, './')) {
                     if (! isset($context['__path'])) {
                         if (isset($options['self'])) {
-                            if (! \is_object($options['self']) || ! property_exists($options['self'], '__path')) {
+                            if (! \is_object($options['self']) || ! property_exists($options['self'], '__metadata')
+                                || ! \is_object($options['self']->__metadata) || ! $options['self']->__metadata instanceof Metadata) {
                                 throw new \RuntimeException('Cannot use yassg_thumbnail() with {self: object} as the second argument, pass {self: object} as the second argument');
                             }
-                            $context['__path'] = $options['self']->__path;
+                            $context['__path'] = $options['self']->__metadata->path;
                         } else {
                             $candidates = [];
                             foreach ($context as $item) {
-                                if (\is_object($item) && property_exists($item, '__path')) {
-                                    $candidates[] = $item;
+                                if (\is_object($item) && property_exists($item, '__metadata') && $item->__metadata instanceof Metadata) {
+                                    $candidates[] = $item->__metadata;
                                 }
                             }
                             if (\count($candidates) !== 1) {
                                 throw new \RuntimeException('Cannot use yassg_thumbnail() without a single Locatable object in context, pass {self: object} as the second argument');
                             }
-                            $context['__path'] = $candidates[0]->__path;
+                            $context['__path'] = $candidates[0]->path;
                         }
                     }
 

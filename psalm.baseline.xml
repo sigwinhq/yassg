@@ -668,6 +668,11 @@
       <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
   </file>
+  <file src="src/Metadata.php">
+    <PossiblyUnusedProperty>
+      <code><![CDATA[$id]]></code>
+    </PossiblyUnusedProperty>
+  </file>
   <file src="src/Permutator.php">
     <MixedArgument>
       <code><![CDATA[$parameters]]></code>

@@ -15,6 +15,7 @@ namespace Sigwin\YASSG\Storage;
 
 use Sigwin\YASSG\Context\LocaleContext;
 use Sigwin\YASSG\Exception\UnexpectedAttributeException;
+use Sigwin\YASSG\Metadata;
 use Sigwin\YASSG\Storage;
 use Symfony\Component\Serializer\Exception\ExtraAttributesException;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
@@ -108,21 +109,18 @@ final class DenormalizingStorage implements Storage
             $metadata = [];
             foreach ($data as $key => $value) {
                 if (str_starts_with($key, '__')) {
-                    $metadata[$key] = $value;
+                    if (! \is_string($value)) {
+                        throw new \LogicException('Invalid metadata value');
+                    }
+                    $metadata[mb_substr($key, 2)] = $value;
                     unset($data[$key]);
                 }
             }
             $object = $this->denormalizer->denormalize($data, $this->class, null, $context + [
                 AbstractNormalizer::ALLOW_EXTRA_ATTRIBUTES => false,
             ]);
-
-            // attach metadata to the object as dynamic properties
-            foreach ($metadata as $key => $value) {
-                /**
-                 * @phpstan-ignore-next-line
-                 */
-                $object->{$key} = $value;
-            }
+            /** @phpstan-ignore-next-line */
+            $object->__metadata = new Metadata(...$metadata);
 
             return $object;
         } catch (ExtraAttributesException $extraAttributesException) {
