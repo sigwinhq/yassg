@@ -167,6 +167,9 @@
       <code><![CDATA[variableNode]]></code>
       <code><![CDATA[variableNode]]></code>
     </MixedMethodCall>
+    <PossiblyNullReference>
+      <code><![CDATA[arrayNode]]></code>
+    </PossiblyNullReference>
     <UndefinedInterfaceMethod>
       <code><![CDATA[arrayNode]]></code>
     </UndefinedInterfaceMethod>
@@ -238,6 +241,9 @@
     <PossiblyUnusedMethod>
       <code><![CDATA[configureContainer]]></code>
     </PossiblyUnusedMethod>
+    <PropertyNotSetInConstructor>
+      <code><![CDATA[Kernel]]></code>
+    </PropertyNotSetInConstructor>
     <UnresolvableInclude>
       <code><![CDATA[require $path]]></code>
     </UnresolvableInclude>
@@ -338,6 +344,9 @@
     <UnusedClass>
       <code><![CDATA[CollectionNormalizer]]></code>
     </UnusedClass>
+    <UnusedParam>
+      <code><![CDATA[$format]]></code>
+    </UnusedParam>
   </file>
   <file src="src/Bridge/Symfony/Serializer/Normalizer/ExpressionNormalizer.php">
     <MissingOverrideAttribute>
@@ -354,6 +363,9 @@
     <UnusedClass>
       <code><![CDATA[ExpressionNormalizer]]></code>
     </UnusedClass>
+    <UnusedParam>
+      <code><![CDATA[$format]]></code>
+    </UnusedParam>
   </file>
   <file src="src/Bridge/Symfony/Serializer/Normalizer/LocalizingNormalizer.php">
     <MissingOverrideAttribute>
@@ -387,6 +399,9 @@
     <UnusedClass>
       <code><![CDATA[LocalizingNormalizer]]></code>
     </UnusedClass>
+    <UnusedParam>
+      <code><![CDATA[$format]]></code>
+    </UnusedParam>
   </file>
   <file src="src/Bridge/Symfony/Serializer/Normalizer/ResourceLocatorNormalizer.php">
     <MissingOverrideAttribute>
@@ -397,6 +412,9 @@
     <UnusedClass>
       <code><![CDATA[ResourceLocatorNormalizer]]></code>
     </UnusedClass>
+    <UnusedParam>
+      <code><![CDATA[$format]]></code>
+    </UnusedParam>
   </file>
   <file src="src/Bridge/Twig/Extension/DatabaseExtension.php">
     <MixedArgument>

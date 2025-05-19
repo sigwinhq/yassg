@@ -32,7 +32,10 @@ final readonly class ResourceLocatorNormalizer implements DenormalizerInterface
             throw new \LogicException('String expected');
         }
 
-        return $this->locator->locate($data);
+        /** @var array<string>|string $data */
+        $data = $this->locator->locate($data);
+
+        return $data;
     }
 
     /**
