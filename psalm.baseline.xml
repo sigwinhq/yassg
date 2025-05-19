@@ -490,8 +490,8 @@
       <code><![CDATA[$GLOBALS['YASSG_BASEDIR']]]></code>
     </MixedArgument>
     <MixedAssignment>
-      <code><![CDATA[$context['_path']]]></code>
-      <code><![CDATA[$context['_path']]]></code>
+      <code><![CDATA[$context['__path']]]></code>
+      <code><![CDATA[$context['__path']]]></code>
       <code><![CDATA[$item]]></code>
     </MixedAssignment>
     <PossiblyFalseOperand>

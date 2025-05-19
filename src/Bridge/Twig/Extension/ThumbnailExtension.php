@@ -32,12 +32,12 @@ final class ThumbnailExtension extends AbstractExtension
         return [
             new TwigFunction('yassg_thumbnail', /** @param array<string, string>|array{self: object} $options */ function (array $context, string $path, array $options = []): string {
                 if (str_starts_with($path, './')) {
-                    if (! isset($context['_path'])) {
+                    if (! isset($context['__path'])) {
                         if (isset($options['self'])) {
                             if (! \is_object($options['self']) || ! property_exists($options['self'], '__path')) {
                                 throw new \RuntimeException('Cannot use yassg_thumbnail() with {self: object} as the second argument, pass {self: object} as the second argument');
                             }
-                            $context['_path'] = $options['self']->__path;
+                            $context['__path'] = $options['self']->__path;
                         } else {
                             $candidates = [];
                             foreach ($context as $item) {
@@ -48,11 +48,11 @@ final class ThumbnailExtension extends AbstractExtension
                             if (\count($candidates) !== 1) {
                                 throw new \RuntimeException('Cannot use yassg_thumbnail() without a single Locatable object in context, pass {self: object} as the second argument');
                             }
-                            $context['_path'] = $candidates[0]->__path;
+                            $context['__path'] = $candidates[0]->__path;
                         }
                     }
 
-                    $newPath = realpath(\dirname((string) $context['_path']).'/'.$path);
+                    $newPath = realpath(\dirname((string) $context['__path']).'/'.$path);
                     if ($newPath === false) {
                         throw new \RuntimeException('Invalid thumbnail path '.$path);
                     }
