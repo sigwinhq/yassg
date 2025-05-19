@@ -25,6 +25,10 @@ return static function (RectorConfig $rectorConfig): void {
         __DIR__.'/tests',
         __DIR__.'/web',
     ]);
+    $rectorConfig->skip([
+        __DIR__.'/tests/functional/init',
+        __DIR__.'/tests/functional/site/var',
+    ]);
     $rectorConfig->symfonyContainerXml(__DIR__.'/var/cache/dev/Sigwin_YASSG_Bridge_Symfony_KernelDevDebugContainer.xml');
     $rectorConfig->sets([
         DoctrineSetList::ANNOTATIONS_TO_ATTRIBUTES,

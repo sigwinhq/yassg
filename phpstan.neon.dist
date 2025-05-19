@@ -13,6 +13,7 @@ parameters:
     excludePaths:
         - tests/functional/init/ (?)
         - tests/functional/site/var/ (?)
+        - tests/functional/site/index.php (?)
         - var/
         - vendor/
         - rector.php

@@ -169,7 +169,7 @@ final readonly class Generator
         }
 
         /** @var string $content */
-        $content = ($deflate ? gzencode($sitemap->toXml()) : $sitemap->toXml());
+        $content = ($deflate ? gzencode($sitemap->toXml(), 9) : $sitemap->toXml());
         $this->filesystem->dumpFile($this->buildDir.str_replace($this->generateUrl(''), '', $path), $content);
     }
 }
