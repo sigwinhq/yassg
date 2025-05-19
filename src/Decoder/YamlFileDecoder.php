@@ -20,7 +20,7 @@ final class YamlFileDecoder implements FileDecoder
 {
     use FileDecoderTrait;
 
-    private const EXTENSIONS = ['yml', 'yaml'];
+    private const array EXTENSIONS = ['yml', 'yaml'];
 
     public function decode(\SplFileInfo $file): array
     {

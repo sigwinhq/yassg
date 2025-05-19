@@ -25,7 +25,7 @@ final readonly class MarkdownFileDecoder implements FileDecoder
 {
     use FileDecoderTrait;
 
-    private const EXTENSIONS = ['md', 'markdown'];
+    private const array EXTENSIONS = ['md', 'markdown'];
 
     public function __construct(private ConverterInterface $converter, private Environment $twig, private AssetQueue $assetQueue)
     {

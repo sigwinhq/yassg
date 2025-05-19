@@ -26,6 +26,7 @@ final class ThumbnailExtension extends AbstractExtension
     {
     }
 
+    #[\Override]
     public function getFunctions(): array
     {
         return [

@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.26.1@d747f6500b38ac4f7dfc5edbcae6e4b637d7add0">
+<files psalm-version="6.8.9@e856423a5dc38d65e56b5792750c557277afe393">
   <file src="bootstrap.php">
     <PossiblyFalseArgument>
       <code><![CDATA[getenv('YASSG_SKIP_BUNDLES')]]></code>
     </PossiblyFalseArgument>
-    <RedundantIdentityWithTrue>
-      <code><![CDATA[true === file_exists($autoloader)]]></code>
-    </RedundantIdentityWithTrue>
   </file>
   <file src="resources/init/demo/src/Model/Page.php">
     <MissingConstructor>
@@ -29,24 +26,27 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Bridge/Symfony/Command/GenerateCommand.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[protected function configure(): void]]></code>
+      <code><![CDATA[protected function execute(InputInterface $input, OutputInterface $output): int]]></code>
+    </MissingOverrideAttribute>
     <UnusedClass>
       <code><![CDATA[GenerateCommand]]></code>
     </UnusedClass>
   </file>
   <file src="src/Bridge/Symfony/Command/InitCommand.php">
-    <MissingClassConstType>
-      <code><![CDATA[SOURCE_BASIC = 'basic']]></code>
-      <code><![CDATA[SOURCE_DEMO = 'demo']]></code>
-      <code><![CDATA[SOURCE_GITLAB = 'gitlab']]></code>
-    </MissingClassConstType>
-    <RedundantIdentityWithTrue>
-      <code><![CDATA[$optional === true]]></code>
-    </RedundantIdentityWithTrue>
+    <MissingOverrideAttribute>
+      <code><![CDATA[protected function configure(): void]]></code>
+      <code><![CDATA[protected function execute(InputInterface $input, OutputInterface $output): int]]></code>
+    </MissingOverrideAttribute>
     <UnusedClass>
       <code><![CDATA[InitCommand]]></code>
     </UnusedClass>
   </file>
   <file src="src/Bridge/Symfony/DependencyInjection/CompilerPass/ConfigureDatabasesCompilerPass.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function process(ContainerBuilder $container): void]]></code>
+    </MissingOverrideAttribute>
     <MixedArgument>
       <code><![CDATA[$type]]></code>
     </MixedArgument>
@@ -69,6 +69,9 @@
     </MixedOperand>
   </file>
   <file src="src/Bridge/Symfony/DependencyInjection/CompilerPass/InjectRouteVariablesCompilerPass.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function process(ContainerBuilder $container): void]]></code>
+    </MissingOverrideAttribute>
     <MixedArgument>
       <code><![CDATA[$spec['path']]]></code>
     </MixedArgument>
@@ -91,7 +94,15 @@
       <code><![CDATA[$variable]]></code>
     </MixedAssignment>
   </file>
+  <file src="src/Bridge/Symfony/DependencyInjection/CompilerPass/RemoveCommandsCompilerPass.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function process(ContainerBuilder $container): void]]></code>
+    </MissingOverrideAttribute>
+  </file>
   <file src="src/Bridge/Symfony/DependencyInjection/Configuration.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function getConfigTreeBuilder(): TreeBuilder]]></code>
+    </MissingOverrideAttribute>
     <MixedMethodCall>
       <code><![CDATA[arrayNode]]></code>
       <code><![CDATA[arrayNode]]></code>
@@ -156,14 +167,15 @@
       <code><![CDATA[variableNode]]></code>
       <code><![CDATA[variableNode]]></code>
     </MixedMethodCall>
-    <PossiblyNullReference>
-      <code><![CDATA[arrayNode]]></code>
-    </PossiblyNullReference>
     <UndefinedInterfaceMethod>
       <code><![CDATA[arrayNode]]></code>
     </UndefinedInterfaceMethod>
   </file>
   <file src="src/Bridge/Symfony/DependencyInjection/KernelExtension.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function load(array $configs, ContainerBuilder $container): void]]></code>
+      <code><![CDATA[public function prepend(ContainerBuilder $container): void]]></code>
+    </MissingOverrideAttribute>
     <MixedArgument>
       <code><![CDATA[$config['databases'] ?? []]]></code>
       <code><![CDATA[$config['imgproxy_url'] ?? null]]></code>
@@ -184,6 +196,9 @@
     </MixedAssignment>
   </file>
   <file src="src/Bridge/Symfony/ExpressionLanguage/FunctionProvider.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function getFunctions(): array]]></code>
+    </MissingOverrideAttribute>
     <MixedArgument>
       <code><![CDATA[$arguments]]></code>
       <code><![CDATA[$arguments]]></code>
@@ -201,11 +216,19 @@
     </UnusedClass>
   </file>
   <file src="src/Bridge/Symfony/HttpKernel/Fragment/RelativeUrlInlineFragmentRenderer.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function getName(): string]]></code>
+      <code><![CDATA[public function render(string|\Symfony\Component\HttpKernel\Controller\ControllerReference $uri, Request $request, array $options = []): \Symfony\Component\HttpFoundation\Response]]></code>
+    </MissingOverrideAttribute>
     <UnusedClass>
       <code><![CDATA[RelativeUrlInlineFragmentRenderer]]></code>
     </UnusedClass>
   </file>
   <file src="src/Bridge/Symfony/Kernel.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function build(ContainerBuilder $container): void]]></code>
+      <code><![CDATA[public function registerBundles(): iterable]]></code>
+    </MissingOverrideAttribute>
     <MixedMethodCall>
       <code><![CDATA[new $class()]]></code>
     </MixedMethodCall>
@@ -215,14 +238,16 @@
     <PossiblyUnusedMethod>
       <code><![CDATA[configureContainer]]></code>
     </PossiblyUnusedMethod>
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[Kernel]]></code>
-    </PropertyNotSetInConstructor>
     <UnresolvableInclude>
       <code><![CDATA[require $path]]></code>
     </UnresolvableInclude>
   </file>
   <file src="src/Bridge/Symfony/Routing/Generator/FilenameUrlGenerator.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function generate(string $name, array $parameters = [], int $referenceType = self::ABSOLUTE_PATH): string]]></code>
+      <code><![CDATA[public function getContext(): RequestContext]]></code>
+      <code><![CDATA[public function setContext(RequestContext $context): void]]></code>
+    </MissingOverrideAttribute>
     <MixedArgument>
       <code><![CDATA[$this->stripParameters[$name] ?? []]]></code>
     </MixedArgument>
@@ -238,6 +263,11 @@
     </MixedAssignment>
   </file>
   <file src="src/Bridge/Symfony/Routing/Generator/GlobalVariableUrlGenerator.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function generate(string $name, array $parameters = [], int $referenceType = self::ABSOLUTE_PATH): string]]></code>
+      <code><![CDATA[public function getContext(): RequestContext]]></code>
+      <code><![CDATA[public function setContext(RequestContext $context): void]]></code>
+    </MissingOverrideAttribute>
     <MixedArgument>
       <code><![CDATA[$variable]]></code>
     </MixedArgument>
@@ -293,6 +323,11 @@
     </MissingConstructor>
   </file>
   <file src="src/Bridge/Symfony/Serializer/Normalizer/CollectionNormalizer.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): Collection]]></code>
+      <code><![CDATA[public function getSupportedTypes(?string $format): array]]></code>
+      <code><![CDATA[public function supportsDenormalization(mixed $data, string $type, ?string $format = null, ?array $context = null): bool]]></code>
+    </MissingOverrideAttribute>
     <MixedAssignment>
       <code><![CDATA[$denormalized[$id]]]></code>
       <code><![CDATA[$item]]></code>
@@ -303,28 +338,29 @@
     <UnusedClass>
       <code><![CDATA[CollectionNormalizer]]></code>
     </UnusedClass>
-    <UnusedParam>
-      <code><![CDATA[$format]]></code>
-    </UnusedParam>
   </file>
   <file src="src/Bridge/Symfony/Serializer/Normalizer/ExpressionNormalizer.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): object]]></code>
+      <code><![CDATA[public function getSupportedTypes(?string $format): array]]></code>
+      <code><![CDATA[public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool]]></code>
+    </MissingOverrideAttribute>
     <MixedAssignment>
       <code><![CDATA[$value]]></code>
     </MixedAssignment>
-    <MixedInferredReturnType>
-      <code><![CDATA[object]]></code>
-    </MixedInferredReturnType>
     <MixedReturnStatement>
       <code><![CDATA[$value]]></code>
     </MixedReturnStatement>
     <UnusedClass>
       <code><![CDATA[ExpressionNormalizer]]></code>
     </UnusedClass>
-    <UnusedParam>
-      <code><![CDATA[$format]]></code>
-    </UnusedParam>
   </file>
   <file src="src/Bridge/Symfony/Serializer/Normalizer/LocalizingNormalizer.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed]]></code>
+      <code><![CDATA[public function getSupportedTypes(?string $format): array]]></code>
+      <code><![CDATA[public function supportsDenormalization(mixed $data, string $type, ?string $format = null, ?array $context = null): bool]]></code>
+    </MissingOverrideAttribute>
     <MixedArrayAccess>
       <code><![CDATA[$data[$property][$fallbackLocale]]]></code>
       <code><![CDATA[$data[$property][$locale]]]></code>
@@ -351,17 +387,16 @@
     <UnusedClass>
       <code><![CDATA[LocalizingNormalizer]]></code>
     </UnusedClass>
-    <UnusedParam>
-      <code><![CDATA[$format]]></code>
-    </UnusedParam>
   </file>
   <file src="src/Bridge/Symfony/Serializer/Normalizer/ResourceLocatorNormalizer.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): array|string]]></code>
+      <code><![CDATA[public function getSupportedTypes(?string $format): array]]></code>
+      <code><![CDATA[public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool]]></code>
+    </MissingOverrideAttribute>
     <UnusedClass>
       <code><![CDATA[ResourceLocatorNormalizer]]></code>
     </UnusedClass>
-    <UnusedParam>
-      <code><![CDATA[$format]]></code>
-    </UnusedParam>
   </file>
   <file src="src/Bridge/Twig/Extension/DatabaseExtension.php">
     <MixedArgument>
@@ -425,6 +460,9 @@
       <code><![CDATA[$context['_path']]]></code>
       <code><![CDATA[$item]]></code>
     </MixedAssignment>
+    <PossiblyFalseOperand>
+      <code><![CDATA[md5_file($path)]]></code>
+    </PossiblyFalseOperand>
     <PossiblyNullArgument>
       <code><![CDATA[$this->imgproxyUrl]]></code>
     </PossiblyNullArgument>
@@ -442,14 +480,20 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Collection/ReadOnlyCollection.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function column(string $name): array]]></code>
+      <code><![CDATA[public function count(): int]]></code>
+      <code><![CDATA[public function getIterator(): \Traversable]]></code>
+      <code><![CDATA[public function offsetExists(mixed $offset): bool]]></code>
+      <code><![CDATA[public function offsetGet(mixed $offset): object]]></code>
+      <code><![CDATA[public function offsetSet(mixed $offset, mixed $value): void]]></code>
+      <code><![CDATA[public function offsetUnset(mixed $offset): void]]></code>
+      <code><![CDATA[public function total(): int]]></code>
+    </MissingOverrideAttribute>
     <MixedAssignment>
       <code><![CDATA[$item]]></code>
       <code><![CDATA[$values[$id]]]></code>
     </MixedAssignment>
-    <MixedInferredReturnType>
-      <code><![CDATA[object]]></code>
-      <code><![CDATA[object]]></code>
-    </MixedInferredReturnType>
     <MixedReturnStatement>
       <code><![CDATA[$this->data[$name]]]></code>
       <code><![CDATA[$this->data[$offset]]]></code>
@@ -459,10 +503,6 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Context/LocaleContext.php">
-    <MissingClassConstType>
-      <code><![CDATA[LOCALE = 'sigwin_locale']]></code>
-      <code><![CDATA[LOCALE_FALLBACK = 'sigwin_locale_fallback']]></code>
-    </MissingClassConstType>
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
@@ -475,8 +515,13 @@
   <file src="src/Database/CachingDatabase.php">
     <InvalidOperand>
       <code><![CDATA[$limit]]></code>
-      <code><![CDATA[$offset]]></code>
     </InvalidOperand>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function count(?string $condition = null): int]]></code>
+      <code><![CDATA[public function findAll(?string $condition = null, ?array $sort = null, ?int $limit = null, int $offset = 0, ?string $select = null): Collection]]></code>
+      <code><![CDATA[public function get(string $id): object]]></code>
+      <code><![CDATA[public function has(string $id): bool]]></code>
+    </MissingOverrideAttribute>
     <MissingTemplateParam>
       <code><![CDATA[Database]]></code>
       <code><![CDATA[DatabaseTrait]]></code>
@@ -510,6 +555,12 @@
     </MixedArgumentTypeCoercion>
   </file>
   <file src="src/Database/MemoryDatabase.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function count(?string $condition = null): int]]></code>
+      <code><![CDATA[public function findAll(?string $condition = null, ?array $sort = null, ?int $limit = null, int $offset = 0, ?string $select = null): Collection]]></code>
+      <code><![CDATA[public function get(string $id): object]]></code>
+      <code><![CDATA[public function has(string $id): bool]]></code>
+    </MissingOverrideAttribute>
     <MissingTemplateParam>
       <code><![CDATA[Database]]></code>
       <code><![CDATA[DatabaseTrait]]></code>
@@ -532,32 +583,44 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Decoder/AssetQueueFileDecoder.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function decode(\SplFileInfo $file): array]]></code>
+      <code><![CDATA[public function supports(\SplFileInfo $file): bool]]></code>
+    </MissingOverrideAttribute>
     <UnusedClass>
       <code><![CDATA[AssetQueueFileDecoder]]></code>
     </UnusedClass>
   </file>
   <file src="src/Decoder/CachingFileDecoder.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function decode(\SplFileInfo $file): array]]></code>
+      <code><![CDATA[public function supports(\SplFileInfo $file): bool]]></code>
+    </MissingOverrideAttribute>
     <UnusedClass>
       <code><![CDATA[CachingFileDecoder]]></code>
     </UnusedClass>
   </file>
   <file src="src/Decoder/CompositeFileDecoder.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function decode(\SplFileInfo $file): array]]></code>
+      <code><![CDATA[public function supports(\SplFileInfo $file): bool]]></code>
+    </MissingOverrideAttribute>
     <UnusedClass>
       <code><![CDATA[CompositeFileDecoder]]></code>
     </UnusedClass>
   </file>
   <file src="src/Decoder/MarkdownFileDecoder.php">
-    <MissingClassConstType>
-      <code><![CDATA[EXTENSIONS = ['md', 'markdown']]]></code>
-    </MissingClassConstType>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function decode(\SplFileInfo $file): array]]></code>
+    </MissingOverrideAttribute>
     <UnusedClass>
       <code><![CDATA[MarkdownFileDecoder]]></code>
     </UnusedClass>
   </file>
   <file src="src/Decoder/YamlFileDecoder.php">
-    <MissingClassConstType>
-      <code><![CDATA[EXTENSIONS = ['yml', 'yaml']]]></code>
-    </MissingClassConstType>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function decode(\SplFileInfo $file): array]]></code>
+    </MissingOverrideAttribute>
     <MixedReturnTypeCoercion>
       <code><![CDATA[$data]]></code>
       <code><![CDATA[array]]></code>
@@ -588,6 +651,11 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Storage/DenormalizingStorage.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function get(string $id): object]]></code>
+      <code><![CDATA[public function has(string $id): bool]]></code>
+      <code><![CDATA[public function load(): iterable]]></code>
+    </MissingOverrideAttribute>
     <MissingTemplateParam>
       <code><![CDATA[Storage]]></code>
     </MissingTemplateParam>
@@ -605,19 +673,12 @@
       <code><![CDATA[$locale]]></code>
       <code><![CDATA[$locale]]></code>
       <code><![CDATA[$metadata[$key]]]></code>
-      <code><![CDATA[$object]]></code>
       <code><![CDATA[$value]]></code>
       <code><![CDATA[$value]]></code>
     </MixedAssignment>
-    <MixedInferredReturnType>
-      <code><![CDATA[T]]></code>
-    </MixedInferredReturnType>
     <MixedMethodCall>
       <code><![CDATA[new $this->class()]]></code>
     </MixedMethodCall>
-    <MixedReturnStatement>
-      <code><![CDATA[$object]]></code>
-    </MixedReturnStatement>
     <PossiblyUndefinedStringArrayOffset>
       <code><![CDATA[$context[LocaleContext::LOCALE]]]></code>
       <code><![CDATA[$context[LocaleContext::LOCALE]]]></code>
@@ -627,6 +688,12 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Storage/FilesystemStorage.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function get(string $id): array]]></code>
+      <code><![CDATA[public function has(string $id): bool]]></code>
+      <code><![CDATA[public function load(): iterable]]></code>
+      <code><![CDATA[public static function resolveOptions(array $options): array]]></code>
+    </MissingOverrideAttribute>
     <MissingTemplateParam>
       <code><![CDATA[StorageWithOptions]]></code>
     </MissingTemplateParam>
@@ -647,6 +714,12 @@
     </UnusedClass>
   </file>
   <file src="src/Storage/MemoryStorage.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function get(string $id): array]]></code>
+      <code><![CDATA[public function has(string $id): bool]]></code>
+      <code><![CDATA[public function load(): iterable]]></code>
+      <code><![CDATA[public static function resolveOptions(array $options): array]]></code>
+    </MissingOverrideAttribute>
     <UnusedClass>
       <code><![CDATA[MemoryStorage]]></code>
     </UnusedClass>
@@ -657,6 +730,12 @@
     </PossiblyUnusedReturnValue>
   </file>
   <file src="tests/functional/site/src/Bridge/Symfony/EventSubscriber.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public static function getSubscribedEvents(): array]]></code>
+    </MissingOverrideAttribute>
+    <PossiblyFalseArgument>
+      <code><![CDATA[strtotime('2021-12-31 00:00:00')]]></code>
+    </PossiblyFalseArgument>
     <UnusedClass>
       <code><![CDATA[EventSubscriber]]></code>
     </UnusedClass>
@@ -713,9 +792,6 @@
     <MixedAssignment>
       <code><![CDATA[$category]]></code>
     </MixedAssignment>
-    <MixedInferredReturnType>
-      <code><![CDATA[?Category]]></code>
-    </MixedInferredReturnType>
     <MixedReturnStatement>
       <code><![CDATA[$category !== false ? $category : null]]></code>
       <code><![CDATA[$category !== false ? $category : null]]></code>

@@ -28,7 +28,7 @@ return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->symfonyContainerXml(__DIR__.'/var/cache/dev/Sigwin_YASSG_Bridge_Symfony_KernelDevDebugContainer.xml');
     $rectorConfig->sets([
         DoctrineSetList::ANNOTATIONS_TO_ATTRIBUTES,
-        LevelSetList::UP_TO_PHP_82,
+        LevelSetList::UP_TO_PHP_83,
         PHPUnitSetList::PHPUNIT_90,
         PHPUnitSetList::PHPUNIT_100,
         SymfonySetList::ANNOTATIONS_TO_ATTRIBUTES,

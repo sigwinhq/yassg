@@ -66,6 +66,7 @@ final class KernelExtension extends Extension implements PrependExtensionInterfa
         }
     }
 
+    #[\Override]
     public function getAlias(): string
     {
         return 'sigwin_yassg';
