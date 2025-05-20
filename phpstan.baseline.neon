@@ -337,6 +337,90 @@ parameters:
 			path: src/Bridge/Twig/Extension/DatabaseExtension.php
 
 		-
+			message: '#^Call to function is_object\(\) with string will always evaluate to false\.$#'
+			identifier: function.impossibleType
+			count: 1
+			path: src/Bridge/Twig/Extension/ImageExtension.php
+
+		-
+			message: '#^Call to function is_string\(\) with string will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: src/Bridge/Twig/Extension/ImageExtension.php
+
+		-
+			message: '#^Cannot cast mixed to int\.$#'
+			identifier: cast.int
+			count: 2
+			path: src/Bridge/Twig/Extension/ImageExtension.php
+
+		-
+			message: '#^Method Sigwin\\YASSG\\Bridge\\Twig\\Extension\\ImageExtension\:\:scheduleThumbnail\(\) has parameter \$context with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Bridge/Twig/Extension/ImageExtension.php
+
+		-
+			message: '#^Method Sigwin\\YASSG\\Bridge\\Twig\\Extension\\ImageExtension\:\:scheduleThumbnail\(\) has parameter \$options with no value type specified in iterable type array\.$#'
+			identifier: missingType.iterableValue
+			count: 1
+			path: src/Bridge/Twig/Extension/ImageExtension.php
+
+		-
+			message: '#^Only booleans are allowed in a ternary operator condition, string\|null given\.$#'
+			identifier: ternary.condNotBoolean
+			count: 3
+			path: src/Bridge/Twig/Extension/ImageExtension.php
+
+		-
+			message: '#^Parameter \#1 \$options of method Sigwin\\YASSG\\Bridge\\Twig\\Extension\\ImageExtension\:\:buildImgproxyFilter\(\) expects array\<string, string\>, array given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Bridge/Twig/Extension/ImageExtension.php
+
+		-
+			message: '#^Parameter \#1 \$search of function str_replace expects array\<string\>\|string, mixed given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Bridge/Twig/Extension/ImageExtension.php
+
+		-
+			message: '#^Parameter \#2 \$context of method Sigwin\\YASSG\\Bridge\\Twig\\Extension\\ImageExtension\:\:buildOriginAbsolutePath\(\) expects array\{__path\?\: string\}, array given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Bridge/Twig/Extension/ImageExtension.php
+
+		-
+			message: '#^Parameter \#2 \$format of method Sigwin\\YASSG\\Bridge\\Twig\\Extension\\ImageExtension\:\:scheduleThumbnail\(\) expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Bridge/Twig/Extension/ImageExtension.php
+
+		-
+			message: '#^Parameter \#3 \$options of method Sigwin\\YASSG\\Bridge\\Twig\\Extension\\ImageExtension\:\:buildOriginAbsolutePath\(\) expects array\<string, object\|string\>, array given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Bridge/Twig/Extension/ImageExtension.php
+
+		-
+			message: '#^Result of && is always false\.$#'
+			identifier: booleanAnd.alwaysFalse
+			count: 2
+			path: src/Bridge/Twig/Extension/ImageExtension.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between 0 and 1 will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 1
+			path: src/Bridge/Twig/Extension/ImageExtension.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 1
+			path: src/Bridge/Twig/Extension/ImageExtension.php
+
+		-
 			message: '#^Binary operation "\*" between int and mixed results in an error\.$#'
 			identifier: binaryOp.invalid
 			count: 1
@@ -347,18 +431,6 @@ parameters:
 			identifier: argument.type
 			count: 1
 			path: src/Bridge/Twig/Extension/PaginatorExtension.php
-
-		-
-			message: '#^Cannot cast mixed to string\.$#'
-			identifier: cast.string
-			count: 1
-			path: src/Bridge/Twig/Extension/ThumbnailExtension.php
-
-		-
-			message: '#^Parameter \#1 \$search of function str_replace expects array\<string\>\|string, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Bridge/Twig/Extension/ThumbnailExtension.php
 
 		-
 			message: '#^Method Sigwin\\YASSG\\BuildOptions\:\:__construct\(\) has parameter \$requestHeaders with no value type specified in iterable type array\.$#'
