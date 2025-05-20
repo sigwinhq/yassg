@@ -456,6 +456,52 @@
       <code><![CDATA[DatabaseExtension]]></code>
     </UnusedClass>
   </file>
+  <file src="src/Bridge/Twig/Extension/ImageExtension.php">
+    <DocblockTypeContradiction>
+      <code><![CDATA[\is_object($item)]]></code>
+      <code><![CDATA[\is_string($value)]]></code>
+    </DocblockTypeContradiction>
+    <InvalidCast>
+      <code><![CDATA[$options['height']]]></code>
+      <code><![CDATA[$options['width']]]></code>
+    </InvalidCast>
+    <MixedArgument>
+      <code><![CDATA[$GLOBALS['YASSG_BASEDIR']]]></code>
+      <code><![CDATA[$GLOBALS['YASSG_BASEDIR']]]></code>
+    </MixedArgument>
+    <MixedArgumentTypeCoercion>
+      <code><![CDATA[$context]]></code>
+      <code><![CDATA[$options]]></code>
+      <code><![CDATA[$options]]></code>
+    </MixedArgumentTypeCoercion>
+    <MixedPropertyFetch>
+      <code><![CDATA[$item->__metadata]]></code>
+    </MixedPropertyFetch>
+    <NoValue>
+      <code><![CDATA[$item]]></code>
+    </NoValue>
+    <PossiblyFalseOperand>
+      <code><![CDATA[md5_file($origin)]]></code>
+    </PossiblyFalseOperand>
+    <PossiblyInvalidArgument>
+      <code><![CDATA[$options['format'] ?? 'webp']]></code>
+    </PossiblyInvalidArgument>
+    <PossiblyInvalidCast>
+      <code><![CDATA[$options['format'] ?? 'webp']]></code>
+    </PossiblyInvalidCast>
+    <PossiblyUndefinedStringArrayOffset>
+      <code><![CDATA[$GLOBALS['YASSG_BASEDIR']]]></code>
+      <code><![CDATA[$GLOBALS['YASSG_BASEDIR']]]></code>
+    </PossiblyUndefinedStringArrayOffset>
+    <RiskyTruthyFalsyComparison>
+      <code><![CDATA[$srcAvif2x]]></code>
+      <code><![CDATA[$srcFallback2x]]></code>
+      <code><![CDATA[$srcWebp2x]]></code>
+    </RiskyTruthyFalsyComparison>
+    <UnusedClass>
+      <code><![CDATA[ImageExtension]]></code>
+    </UnusedClass>
+  </file>
   <file src="src/Bridge/Twig/Extension/IndexExtension.php">
     <UnusedClass>
       <code><![CDATA[IndexExtension]]></code>
@@ -483,28 +529,6 @@
     </MixedOperand>
     <UnusedClass>
       <code><![CDATA[PaginatorExtension]]></code>
-    </UnusedClass>
-  </file>
-  <file src="src/Bridge/Twig/Extension/ThumbnailExtension.php">
-    <MixedArgument>
-      <code><![CDATA[$GLOBALS['YASSG_BASEDIR']]]></code>
-    </MixedArgument>
-    <MixedAssignment>
-      <code><![CDATA[$context['__path']]]></code>
-      <code><![CDATA[$context['__path']]]></code>
-      <code><![CDATA[$item]]></code>
-    </MixedAssignment>
-    <PossiblyFalseOperand>
-      <code><![CDATA[md5_file($path)]]></code>
-    </PossiblyFalseOperand>
-    <PossiblyNullArgument>
-      <code><![CDATA[$this->imgproxyUrl]]></code>
-    </PossiblyNullArgument>
-    <PossiblyUndefinedStringArrayOffset>
-      <code><![CDATA[$GLOBALS['YASSG_BASEDIR']]]></code>
-    </PossiblyUndefinedStringArrayOffset>
-    <UnusedClass>
-      <code><![CDATA[ThumbnailExtension]]></code>
     </UnusedClass>
   </file>
   <file src="src/Collection.php">
