@@ -151,7 +151,7 @@ final class ImageExtension extends AbstractExtension
                 if (isset($options['self'])) {
                     if (! \is_object($options['self']) || ! property_exists($options['self'], '__metadata')
                         || ! \is_object($options['self']->__metadata) || ! $options['self']->__metadata instanceof Metadata) {
-                        throw new \RuntimeException('Cannot use yassg_thumbnail() with {self: object} as the second argument, pass {self: object} as the second argument');
+                        throw new \RuntimeException('Cannot resolve path without knowing the current object, pass {self: object} as the second argument');
                     }
                     $rootPath = $options['self']->__metadata->path;
                 } else {
@@ -162,7 +162,7 @@ final class ImageExtension extends AbstractExtension
                         }
                     }
                     if (\count($candidates) !== 1) {
-                        throw new \RuntimeException('Cannot use yassg_thumbnail() without a single Locatable object in context, pass {self: object} as the second argument');
+                        throw new \RuntimeException('Cannot resolve path without a single Locatable object in context, pass {self: object} as the second argument');
                     }
                     $rootPath = $candidates[0]->path;
                 }
