@@ -83,7 +83,26 @@ final class ImageExtension extends AbstractExtension
                     $srcsetFallback = $srcFallback1x.' 1x'.($srcFallback2x ? ', '.$srcFallback2x.' 2x' : '');
 
                     // Build <picture> element
-                    $html = '<picture>';
+                    $attributes = array_filter([
+                        'class' => $options['attributes']['class'] ?? null,
+                        'style' => $options['attributes']['style'] ?? null,
+                    ]);
+
+                    $imgAttributes = array_filter([
+                        'src' => $srcFallback1x,
+                        'srcset' => $srcsetFallback,
+                        'width' => $width !== null ? (string) $width : null,
+                        'height' => $height !== null ? (string) $height : null,
+                        'alt' => $options['attributes']['alt'] ?? '',
+                        'loading' => $options['attributes']['loading'] ?? 'lazy',
+                        'decoding' => $options['attributes']['decoding'] ?? 'async',
+                    ]);
+
+                    $html = '<picture '.implode(' ', array_map(
+                        static fn ($key, $value) => htmlspecialchars($key, \ENT_QUOTES).'="'.htmlspecialchars($value, \ENT_QUOTES).'"',
+                        array_keys($attributes),
+                        $attributes
+                    )).'>';
                     $html .= '<source type="image/avif" srcset="'.htmlspecialchars($srcsetAvif, \ENT_QUOTES).'"/>';
                     $html .= '<source type="image/webp" srcset="'.htmlspecialchars($srcsetWebp, \ENT_QUOTES).'"/>';
                     if ($fallbackFormat === 'png') {
@@ -91,11 +110,12 @@ final class ImageExtension extends AbstractExtension
                     } else {
                         $html .= '<source type="image/jpeg" srcset="'.htmlspecialchars($srcsetFallback, \ENT_QUOTES).'"/>';
                     }
-                    $html .= '<img src="'.htmlspecialchars($srcFallback1x, \ENT_QUOTES).'"'
-                        .' srcset="'.htmlspecialchars($srcsetFallback, \ENT_QUOTES).'"'
-                        .($width !== null ? ' width="'.$width.'"' : '')
-                        .($height !== null ? ' height="'.$height.'"' : '')
-                        .' loading="lazy" decoding="async" />';
+                    $html .= '<img '
+                        .implode(' ', array_map(
+                            static fn ($key, $value) => htmlspecialchars($key, \ENT_QUOTES).'="'.htmlspecialchars($value, \ENT_QUOTES).'"',
+                            array_keys($imgAttributes),
+                            $imgAttributes
+                        )).' />';
                     $html .= '</picture>';
 
                     return $html;
@@ -184,9 +204,7 @@ final class ImageExtension extends AbstractExtension
     private function buildImgproxyFilter(array $options): string
     {
         $filter = '';
-        if (isset($options['self'])) {
-            unset($options['self']);
-        }
+        unset($options['self'], $options['attributes']);
 
         if ($options !== []) {
             $filters = [];

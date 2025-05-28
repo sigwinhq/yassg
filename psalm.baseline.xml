@@ -461,6 +461,12 @@
       <code><![CDATA[\is_object($item)]]></code>
       <code><![CDATA[\is_string($value)]]></code>
     </DocblockTypeContradiction>
+    <InvalidArrayAccess>
+      <code><![CDATA[$options['attributes']['class']]]></code>
+    </InvalidArrayAccess>
+    <InvalidArrayOffset>
+      <code><![CDATA[$options['attributes']['class']]]></code>
+    </InvalidArrayOffset>
     <InvalidCast>
       <code><![CDATA[$options['height']]]></code>
       <code><![CDATA[$options['width']]]></code>
@@ -468,6 +474,8 @@
     <MixedArgument>
       <code><![CDATA[$GLOBALS['YASSG_BASEDIR']]]></code>
       <code><![CDATA[$GLOBALS['YASSG_BASEDIR']]]></code>
+      <code><![CDATA[$value]]></code>
+      <code><![CDATA[$value]]></code>
     </MixedArgument>
     <MixedArgumentTypeCoercion>
       <code><![CDATA[$context]]></code>
