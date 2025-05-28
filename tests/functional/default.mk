@@ -16,10 +16,10 @@ self/validate: ## Self: validate the database with yassg:validate
 	export YASSG_SKIP_BUNDLES=${YASSG_SKIP_BUNDLES}; \
 	php ../../../bin/yassg yassg:validate -vvv
 self/clean:
-	rm -rf ${BUILD_DIR}
+	rm -rf ${BUILD_DIR} var/cache
 self/test:
 	sh -c "${PHPQA_DOCKER_COMMAND} diff -r fixtures/ public/"
-self/check: self/build ## Self: check the build
-	lychee --verbose --offline --base ./${BUILD_DIR} ./${BUILD_DIR}
+self/check: ## Self: check the build
+	lychee --base ${BASE_URL} --root-dir $(pwd)/${BUILD_DIR} ./${BUILD_DIR}
 self/serve: self/build ## Self: serve the build
 	php -S localhost:9999 -t ${BUILD_DIR}/
