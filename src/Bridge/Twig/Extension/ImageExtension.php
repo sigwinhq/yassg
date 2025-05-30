@@ -84,8 +84,8 @@ final class ImageExtension extends AbstractExtension
 
                     // Build <picture> element
                     $attributes = array_filter([
-                        'class' => $options['attributes']['class'] ?? null,
-                        'style' => $options['attributes']['style'] ?? null,
+                        'class' => $options['attrs']['class'] ?? null,
+                        'style' => $options['attrs']['style'] ?? null,
                     ]);
 
                     $imgAttributes = array_filter([
@@ -93,12 +93,14 @@ final class ImageExtension extends AbstractExtension
                         'srcset' => $srcsetFallback,
                         'width' => $width !== null ? (string) $width : null,
                         'height' => $height !== null ? (string) $height : null,
-                        'alt' => $options['attributes']['alt'] ?? '',
-                        'loading' => $options['attributes']['loading'] ?? 'lazy',
-                        'decoding' => $options['attributes']['decoding'] ?? 'async',
+                        'class' => $options['img_attrs']['class'] ?? null,
+                        'style' => $options['img_attrs']['style'] ?? null,
+                        'alt' => $options['img_attrs']['alt'] ?? $options['attrs']['alt'] ?? null,
+                        'loading' => $options['img_attrs']['loading'] ?? $options['attrs']['loading'] ?? 'lazy',
+                        'decoding' => $options['img_attrs']['loading'] ?? $options['attrs']['decoding'] ?? 'async',
                     ]);
 
-                    $html = '<picture '.implode(' ', array_map(
+                    $html = '<picture'.($attributes ? ' ' : '').implode(' ', array_map(
                         static fn ($key, $value) => htmlspecialchars($key, \ENT_QUOTES).'="'.htmlspecialchars($value, \ENT_QUOTES).'"',
                         array_keys($attributes),
                         $attributes
@@ -204,7 +206,7 @@ final class ImageExtension extends AbstractExtension
     private function buildImgproxyFilter(array $options): string
     {
         $filter = '';
-        unset($options['self'], $options['attributes']);
+        unset($options['self'], $options['attrs'], $options['img_attrs']);
 
         if ($options !== []) {
             $filters = [];
