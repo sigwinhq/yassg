@@ -462,10 +462,10 @@
       <code><![CDATA[\is_string($value)]]></code>
     </DocblockTypeContradiction>
     <InvalidArrayAccess>
-      <code><![CDATA[$options['attributes']['class']]]></code>
+      <code><![CDATA[$options['attrs']['class']]]></code>
     </InvalidArrayAccess>
     <InvalidArrayOffset>
-      <code><![CDATA[$options['attributes']['class']]]></code>
+      <code><![CDATA[$options['attrs']['class']]]></code>
     </InvalidArrayOffset>
     <InvalidCast>
       <code><![CDATA[$options['height']]]></code>

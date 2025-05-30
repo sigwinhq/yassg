@@ -357,13 +357,13 @@ parameters:
 		-
 			message: '#^Cannot access offset ''alt'' on mixed\.$#'
 			identifier: offsetAccess.nonOffsetAccessible
-			count: 1
+			count: 2
 			path: src/Bridge/Twig/Extension/ImageExtension.php
 
 		-
 			message: '#^Cannot access offset ''class'' on mixed\.$#'
 			identifier: offsetAccess.nonOffsetAccessible
-			count: 1
+			count: 2
 			path: src/Bridge/Twig/Extension/ImageExtension.php
 
 		-
@@ -375,13 +375,13 @@ parameters:
 		-
 			message: '#^Cannot access offset ''loading'' on mixed\.$#'
 			identifier: offsetAccess.nonOffsetAccessible
-			count: 1
+			count: 3
 			path: src/Bridge/Twig/Extension/ImageExtension.php
 
 		-
 			message: '#^Cannot access offset ''style'' on mixed\.$#'
 			identifier: offsetAccess.nonOffsetAccessible
-			count: 1
+			count: 2
 			path: src/Bridge/Twig/Extension/ImageExtension.php
 
 		-
@@ -399,6 +399,12 @@ parameters:
 		-
 			message: '#^Method Sigwin\\YASSG\\Bridge\\Twig\\Extension\\ImageExtension\:\:scheduleThumbnail\(\) has parameter \$options with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
+			count: 1
+			path: src/Bridge/Twig/Extension/ImageExtension.php
+
+		-
+			message: '#^Only booleans are allowed in a ternary operator condition, array\<string, mixed\> given\.$#'
+			identifier: ternary.condNotBoolean
 			count: 1
 			path: src/Bridge/Twig/Extension/ImageExtension.php
 
