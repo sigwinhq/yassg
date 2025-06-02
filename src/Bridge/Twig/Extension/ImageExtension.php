@@ -96,6 +96,7 @@ final class ImageExtension extends AbstractExtension
                         'class' => $options['img_attrs']['class'] ?? null,
                         'style' => $options['img_attrs']['style'] ?? null,
                         'alt' => $options['img_attrs']['alt'] ?? $options['attrs']['alt'] ?? null,
+                        'fetchpriority' => $options['img_attrs']['fetchpriority'] ?? $options['attrs']['fetchpriority'] ?? null,
                         'loading' => $options['img_attrs']['loading'] ?? $options['attrs']['loading'] ?? 'lazy',
                         'decoding' => $options['img_attrs']['loading'] ?? $options['attrs']['decoding'] ?? 'async',
                     ]);
