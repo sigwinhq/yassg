@@ -56,7 +56,7 @@ final class GenerateCommand extends Command
          * @psalm-suppress UnnecessaryVarAnnotation Psalm's Symfony plugin solves this, but not PHPStan's
          */
         $buildUrl = $input->getArgument('url');
-        $buildUrl = rtrim($buildUrl, '/');
+        $buildUrl = mb_rtrim($buildUrl, '/');
 
         /**
          * @phpstan-var bool $indexFile

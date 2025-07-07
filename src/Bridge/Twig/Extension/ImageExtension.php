@@ -132,7 +132,7 @@ final class ImageExtension extends AbstractExtension
      */
     private function encode(string $payload): string
     {
-        return rtrim(strtr(base64_encode($payload), '+/', '-_'), '=');
+        return mb_rtrim(strtr(base64_encode($payload), '+/', '-_'), '=');
     }
 
     private function scheduleThumbnail(string $path, string $format, array $context, array $options): string
@@ -149,7 +149,7 @@ final class ImageExtension extends AbstractExtension
         $destination = \sprintf('%1$s/%2$s.%3$s.%4$s', \dirname($relativeOrigin), pathinfo($relativeOrigin, \PATHINFO_FILENAME), mb_substr(md5(md5_file($origin).$filters), 0, 8), $format);
         $this->thumbnailQueue->add(new AssetFetch($url, $destination));
 
-        return $this->packages->getUrl(ltrim($destination, '/'));
+        return $this->packages->getUrl(mb_ltrim($destination, '/'));
     }
 
     private function isBuild(): bool
@@ -244,6 +244,6 @@ final class ImageExtension extends AbstractExtension
 
     private function buildImgproxyUrl(string $path, string $filters): string
     {
-        return \sprintf('%1$s/insecure/%2$s%3$s', $this->imgproxyUrl, $filters, $this->encode('local:///'.ltrim(str_replace($GLOBALS['YASSG_BASEDIR'], '', $path), '/')));
+        return \sprintf('%1$s/insecure/%2$s%3$s', $this->imgproxyUrl, $filters, $this->encode('local:///'.mb_ltrim(str_replace($GLOBALS['YASSG_BASEDIR'], '', $path), '/')));
     }
 }

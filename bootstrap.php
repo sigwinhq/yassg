@@ -15,7 +15,7 @@ namespace Sigwin\YASSG;
 
 $skipBundles = [];
 if (getenv('YASSG_SKIP_BUNDLES') !== false) {
-    $skipBundles = array_map(static fn (string $name): string => trim($name), explode(',', getenv('YASSG_SKIP_BUNDLES')));
+    $skipBundles = array_map(static fn (string $name): string => mb_trim($name), explode(',', getenv('YASSG_SKIP_BUNDLES')));
 }
 $GLOBALS['YASSG_SKIP_BUNDLES'] = $skipBundles;
 

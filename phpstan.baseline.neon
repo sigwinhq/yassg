@@ -1,6 +1,12 @@
 parameters:
 	ignoreErrors:
 		-
+			message: '#^Parameter \#2 \$string of function explode expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: bootstrap.php
+
+		-
 			message: '#^PHPDoc tag @var for variable \$composer has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -454,6 +460,12 @@ parameters:
 			message: '#^Parameter \#3 \$options of method Sigwin\\YASSG\\Bridge\\Twig\\Extension\\ImageExtension\:\:buildOriginAbsolutePath\(\) expects array\<string, object\|string\>, array given\.$#'
 			identifier: argument.type
 			count: 2
+			path: src/Bridge/Twig/Extension/ImageExtension.php
+
+		-
+			message: '#^Possibly impure call to function mb_rtrim\(\) in pure method Sigwin\\YASSG\\Bridge\\Twig\\Extension\\ImageExtension\:\:encode\(\)\.$#'
+			identifier: possiblyImpure.functionCall
+			count: 1
 			path: src/Bridge/Twig/Extension/ImageExtension.php
 
 		-
