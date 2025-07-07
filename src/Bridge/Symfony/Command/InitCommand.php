@@ -59,7 +59,7 @@ final class InitCommand extends Command
          * @var string $namespace
          */
         $namespace = $input->getOption('namespace');
-        $namespace = trim($namespace, '\\');
+        $namespace = mb_trim($namespace, '\\');
 
         $style->section(\sprintf('Namespace: %1$s', $namespace));
 

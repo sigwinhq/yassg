@@ -74,7 +74,8 @@ final class ConfigureDatabasesCompilerPass implements CompilerPassInterface
                 throw new \LogicException(\sprintf('Unsupported type "%1$s" at "sigwin_yassg.data_sources.%2$s", allowed values: %3$s', $type, $name, implode(', ', array_keys($supportedStorageTypes))));
             }
 
-            $databaseClass = ltrim($database['class'], '\\');
+            /** @var class-string $databaseClass */
+            $databaseClass = mb_ltrim($database['class'], '\\');
 
             $storageDefinition = new Definition($supportedStorageTypes[$type]);
             $storageDefinition

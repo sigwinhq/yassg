@@ -99,7 +99,7 @@ final readonly class Generator
 
     private function createRequest(string $path): Request
     {
-        $request = Request::create(rtrim($path, '/'))->withContext($this->urlGenerator->getContext());
+        $request = Request::create(mb_rtrim($path, '/'))->withContext($this->urlGenerator->getContext());
         $request->attributes->add(['yassg_build' => true]);
 
         return $request;

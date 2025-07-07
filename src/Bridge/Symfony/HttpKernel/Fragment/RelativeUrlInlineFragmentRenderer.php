@@ -30,7 +30,7 @@ final readonly class RelativeUrlInlineFragmentRenderer implements FragmentRender
     public function render(string|\Symfony\Component\HttpKernel\Controller\ControllerReference $uri, Request $request, array $options = []): \Symfony\Component\HttpFoundation\Response
     {
         if (\is_string($uri)) {
-            $uri = rtrim(str_replace($this->urlGenerator->getContext()->getBaseUrl(), '', $uri), '/');
+            $uri = mb_rtrim(str_replace($this->urlGenerator->getContext()->getBaseUrl(), '', $uri), '/');
         }
 
         return $this->fragmentRenderer->render($uri, $request, $options);

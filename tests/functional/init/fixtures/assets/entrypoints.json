@@ -2,8 +2,8 @@
   "entrypoints": {
     "app": {
       "js": [
-        "/sub/dir/another/assets/runtime.ce912fa2.js",
-        "/sub/dir/another/assets/app.2289004f.js"
+        "/sub/dir/another/assets/runtime.e9965371.js",
+        "/sub/dir/another/assets/app.8524779c.js"
       ],
       "css": [
         "/sub/dir/another/assets/app.2e773b84.css"
@@ -11,8 +11,8 @@
     }
   },
   "integrity": {
-    "/sub/dir/another/assets/runtime.ce912fa2.js": "sha384-akH8de+2IXVp4vYQJY5TWpLUXNL8/EUBZ0KDgJUIFyHEJiRkwDje0b0SK7WFzRJt",
-    "/sub/dir/another/assets/app.2289004f.js": "sha384-LONSz9M3gUR3ykQcfpwcgRary/XUFLct2+mz7DgZ6M57VACJmnRewzIPGjjANBE2",
+    "/sub/dir/another/assets/runtime.e9965371.js": "sha384-wXPPlraplDpX7JoQiYnzm30Jh9vO3mgiE7ZiVGU7Tf79XZqa+uBmlfhf11iQ0iKm",
+    "/sub/dir/another/assets/app.8524779c.js": "sha384-clxAF225XX7pTUw5fi0cJthT8dkTH9fZnkMfdjDDLBngIxuPdAiTIWhhMlaZbsog",
     "/sub/dir/another/assets/app.2e773b84.css": "sha384-t56F6yDakn/jYRHL6uxVbMaf/JtnF0k7yEall1cerAGjo0kfE3W7foG5+n1Ynxd5"
   }
 }
