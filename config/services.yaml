@@ -26,14 +26,12 @@ services:
     sigwin_yassg.abstract.database.storage.filesystem_storage_type:
         class: Sigwin\YASSG\Storage\FilesystemStorage
         tags:
-            -
-                name: sigwin_yassg.database.storage.type
+            -   name: sigwin_yassg.database.storage.type
                 type: filesystem
     sigwin_yassg.abstract.database.storage.memory_storage_type:
         class: Sigwin\YASSG\Storage\MemoryStorage
         tags:
-            -
-                name: sigwin_yassg.database.storage.type
+            -   name: sigwin_yassg.database.storage.type
                 type: memory
 
     Sigwin\YASSG\DatabaseProvider:
@@ -43,8 +41,7 @@ services:
     sigwin_yassg.expression_language:
         class: Symfony\Component\ExpressionLanguage\ExpressionLanguage
         calls:
-            -
-                registerProvider: [ '@Sigwin\YASSG\Bridge\Symfony\ExpressionLanguage\FunctionProvider' ]
+            -   registerProvider: [ '@Sigwin\YASSG\Bridge\Symfony\ExpressionLanguage\FunctionProvider' ]
 
     Sigwin\YASSG\Permutator:
         $expressionLanguage: '@sigwin_yassg.expression_language'
@@ -52,32 +49,28 @@ services:
     sigwin_yassg.serializer.denormalizer.localizing:
         class: Sigwin\YASSG\Bridge\Symfony\Serializer\Normalizer\LocalizingNormalizer
         tags:
-            -
-                name: serializer.normalizer
+            -   name: serializer.normalizer
                 priority: 3000
     sigwin_yassg.serializer.denormalizer.collection:
         class: Sigwin\YASSG\Bridge\Symfony\Serializer\Normalizer\CollectionNormalizer
         arguments:
             $expressionLanguage: '@sigwin_yassg.expression_language'
         tags:
-            -
-                name: serializer.normalizer
+            -   name: serializer.normalizer
                 priority: 5000
     sigwin_yassg.serializer.denormalizer.expression:
         class: Sigwin\YASSG\Bridge\Symfony\Serializer\Normalizer\ExpressionNormalizer
         arguments:
             $expressionLanguage: '@sigwin_yassg.expression_language'
         tags:
-            -
-                name: serializer.normalizer
+            -   name: serializer.normalizer
                 priority: 4000
     sigwin_yassg.serializer.denormalizer.locator:
         class: Sigwin\YASSG\Bridge\Symfony\Serializer\Normalizer\ResourceLocatorNormalizer
         arguments:
             $locator: '@file_locator'
         tags:
-            -
-                name: serializer.normalizer
+            -   name: serializer.normalizer
                 priority: 3000
 
     sigwin_yassg.fragment.renderer.inline:
@@ -100,12 +93,22 @@ services:
     sigwin_yassg.file_decoder.yaml_file_decoder:
         class: Sigwin\YASSG\Decoder\YamlFileDecoder
         tags:
-            -
-                name: sigwin_yassg.file_decoder
+            -   name: sigwin_yassg.file_decoder
+
+    Embed\Embed:
+        calls:
+            -   setSettings:
+                    -   "oembed:query_parameters":
+                            maxwidth: 800
+                            maxheight: 600
 
     League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension: ~
     League\CommonMark\Extension\FrontMatter\FrontMatterExtension: ~
     League\CommonMark\Extension\Table\TableExtension: ~
+    League\CommonMark\Extension\Embed\EmbedExtension: ~
+    League\CommonMark\Extension\Embed\Bridge\OscaroteroEmbedAdapter:
+        $embed: '@Embed\Embed'
+
     League\CommonMark\Extension\Footnote\FootnoteExtension: ~
     League\CommonMark\Extension\Attributes\AttributesExtension: ~
     League\CommonMark\Extension\HeadingPermalink\HeadingPermalinkExtension: ~
@@ -116,27 +119,22 @@ services:
     Spatie\CommonMarkHighlighter\IndentedCodeRenderer: ~
 
     League\CommonMark\Environment\Environment:
+        arguments:
+            $config:
+                embed:
+                    adapter: '@League\CommonMark\Extension\Embed\Bridge\OscaroteroEmbedAdapter'
         calls:
-            -
-                addExtension: [ '@League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension' ]
-            -
-                addExtension: [ '@League\CommonMark\Extension\FrontMatter\FrontMatterExtension' ]
-            -
-                addExtension: [ '@League\CommonMark\Extension\Table\TableExtension' ]
-            -
-                addExtension: [ '@League\CommonMark\Extension\HeadingPermalink\HeadingPermalinkExtension' ]
-            -
-                addExtension: [ '@League\CommonMark\Extension\TableOfContents\TableOfContentsExtension' ]
-            -
-                addExtension: [ '@League\CommonMark\Extension\Footnote\FootnoteExtension' ]
-            -
-                addExtension: [ '@League\CommonMark\Extension\Attributes\AttributesExtension' ]
-            -
-                addExtension: [ '@JSW\Figure\FigureExtension' ]
-            -
-                addRenderer: [ League\CommonMark\Extension\CommonMark\Node\Block\FencedCode, '@Spatie\CommonMarkHighlighter\FencedCodeRenderer', 10 ]
-            -
-                addRenderer: [ League\CommonMark\Extension\CommonMark\Node\Block\IndentedCode, '@Spatie\CommonMarkHighlighter\IndentedCodeRenderer', 10 ]
+            -   addExtension: [ '@League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension' ]
+            -   addExtension: [ '@League\CommonMark\Extension\Embed\EmbedExtension' ]
+            -   addExtension: [ '@League\CommonMark\Extension\FrontMatter\FrontMatterExtension' ]
+            -   addExtension: [ '@League\CommonMark\Extension\Table\TableExtension' ]
+            -   addExtension: [ '@League\CommonMark\Extension\HeadingPermalink\HeadingPermalinkExtension' ]
+            -   addExtension: [ '@League\CommonMark\Extension\TableOfContents\TableOfContentsExtension' ]
+            -   addExtension: [ '@League\CommonMark\Extension\Footnote\FootnoteExtension' ]
+            -   addExtension: [ '@League\CommonMark\Extension\Attributes\AttributesExtension' ]
+            -   addExtension: [ '@JSW\Figure\FigureExtension' ]
+            -   addRenderer: [ League\CommonMark\Extension\CommonMark\Node\Block\FencedCode, '@Spatie\CommonMarkHighlighter\FencedCodeRenderer', 10 ]
+            -   addRenderer: [ League\CommonMark\Extension\CommonMark\Node\Block\IndentedCode, '@Spatie\CommonMarkHighlighter\IndentedCodeRenderer', 10 ]
     League\CommonMark\Environment\EnvironmentInterface: '@League\CommonMark\Environment\Environment'
 
     League\CommonMark\MarkdownConverter: ~
@@ -146,8 +144,7 @@ services:
         arguments:
             - '@League\CommonMark\ConverterInterface'
         tags:
-            -
-                name: sigwin_yassg.file_decoder
+            -   name: sigwin_yassg.file_decoder
 
     Sigwin\YASSG\Bridge\Symfony\Routing\Generator\GlobalVariableUrlGenerator:
         decorates: Symfony\Component\Routing\Generator\UrlGeneratorInterface
