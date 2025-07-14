@@ -5,9 +5,11 @@
     "require": {
         "php": "^8.3",
         "ext-zlib": "*",
-        "bentools/cartesian-product": "^1.4",
+        "bentools/cartesian-product": "^2.0",
+        "embed/embed": "^4.0",
         "jsw/commonmark-figure-extension": "^1.1",
         "league/commonmark": "^2.3",
+        "nyholm/psr7": "^1.0",
         "phpdocumentor/type-resolver": "^1.0",
         "phpstan/phpdoc-parser": "^1.0",
         "presta/sitemap-bundle": "^4.0",

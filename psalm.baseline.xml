@@ -712,6 +712,9 @@
     <MixedArgument>
       <code><![CDATA[$parameters]]></code>
     </MixedArgument>
+    <InternalMethod>
+      <code><![CDATA[combinations($variables)]]></code>
+    </InternalMethod>
     <MixedArgumentTypeCoercion>
       <code><![CDATA[$route]]></code>
       <code><![CDATA[$route]]></code>
