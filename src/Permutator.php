@@ -15,7 +15,7 @@ namespace Sigwin\YASSG;
 
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
-use function BenTools\CartesianProduct\cartesian_product;
+use function BenTools\CartesianProduct\combinations;
 
 final readonly class Permutator
 {
@@ -49,13 +49,17 @@ final readonly class Permutator
             }
 
             foreach ($spec['catalog'] as $variable => $expression) {
-                $variables[$variable] = $this->expressionLanguage->evaluate(
+                $catalog = $this->expressionLanguage->evaluate(
                     $expression,
                     ['provider' => $this->provider]
                 );
+                if (! is_iterable($catalog)) {
+                    throw new \InvalidArgumentException('Catalog for variable "'.$variable.'" must be iterable, got '.\gettype($catalog));
+                }
+                $variables[$variable] = $catalog;
             }
 
-            foreach (cartesian_product($variables) as $parameters) {
+            foreach (combinations($variables) as $parameters) {
                 yield new Location(
                     new Route($route, $parameters),
                     new BuildOptions($spec['options']['headers'] ?? null)
