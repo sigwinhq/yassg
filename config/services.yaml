@@ -117,6 +117,7 @@ services:
 
     Spatie\CommonMarkHighlighter\FencedCodeRenderer: ~
     Spatie\CommonMarkHighlighter\IndentedCodeRenderer: ~
+    League\CommonMark\Extension\Embed\EmbedRenderer: ~
 
     League\CommonMark\Environment\Environment:
         arguments:
@@ -135,6 +136,14 @@ services:
             -   addExtension: [ '@JSW\Figure\FigureExtension' ]
             -   addRenderer: [ League\CommonMark\Extension\CommonMark\Node\Block\FencedCode, '@Spatie\CommonMarkHighlighter\FencedCodeRenderer', 10 ]
             -   addRenderer: [ League\CommonMark\Extension\CommonMark\Node\Block\IndentedCode, '@Spatie\CommonMarkHighlighter\IndentedCodeRenderer', 10 ]
+            -   addRenderer:
+                    - League\CommonMark\Extension\Embed\Embed
+                    - !service
+                        class: League\CommonMark\Renderer\HtmlDecorator
+                        arguments:
+                            - '@League\CommonMark\Extension\Embed\EmbedRenderer'
+                            - 'div'
+                            -   class: "embedded-content"
     League\CommonMark\Environment\EnvironmentInterface: '@League\CommonMark\Environment\Environment'
 
     League\CommonMark\MarkdownConverter: ~

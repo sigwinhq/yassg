@@ -6,13 +6,13 @@
         "/sub/dir/another/assets/app.9267444a.js"
       ],
       "css": [
-        "/sub/dir/another/assets/app.d4da4e7e.css"
+        "/sub/dir/another/assets/app.1f8584ad.css"
       ]
     }
   },
   "integrity": {
     "/sub/dir/another/assets/runtime.4d1205b9.js": "sha384-J2jFm3DPgrcqyvls0fZlS51nUYgiBB+JLwWiU5v7vxEbLwKolmaHrRuz4BjP6qaE",
     "/sub/dir/another/assets/app.9267444a.js": "sha384-WbAUi92ziCGFD1kGZRzpOP8Nxymnw5vXM3szOB1JmBrCU+MVGXBRReCttizXHDdI",
-    "/sub/dir/another/assets/app.d4da4e7e.css": "sha384-t9qUhz8OfBEKvYdnnNndPZAf+S5Q3p0dBnxLn+5SShoNhInHUF+Bu8WJTo+FQJYJ"
+    "/sub/dir/another/assets/app.1f8584ad.css": "sha384-3NHt86+2NcsnDmkRSTRUVveqFlyObtNR/TvbopmMrXQ6jOZEChrYwg7DsIhL0q+J"
   }
 }
