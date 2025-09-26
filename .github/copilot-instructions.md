@@ -48,6 +48,9 @@ make test
 make analyze
 
 # Format code
+make cs
+
+# Prepare for distribution (runs all checks - local CI)
 make dist
 ```
 
@@ -76,24 +79,6 @@ The project uses PHPUnit with mutation testing via Infection:
 - Prefer final classes and readonly properties where applicable
 - Use type hints for all parameters and return types
 
-### File Headers
-
-All PHP files should include:
-```php
-<?php
-
-declare(strict_types=1);
-
-/*
- * This file is part of the Sigwin Yassg project.
- *
- * (c) sigwin.hr
- *
- * This source file is subject to the MIT license that is bundled
- * with this source code in the file LICENSE.
- */
-```
-
 ### Naming Conventions
 
 - Classes: PascalCase
@@ -106,7 +91,7 @@ declare(strict_types=1);
 ### Core Classes
 
 - `Generator`: Main site generation logic
-- `Database`: YAML-based data storage interface
+- `Database`: Collection of content that can point to YAML files via Decoders
 - `Route`: Represents site routes and pages
 - `Storage`: File system abstraction
 - `Bridge\Symfony\*`: Symfony integration layer
