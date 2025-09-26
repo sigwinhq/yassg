@@ -883,6 +883,12 @@
       <code><![CDATA[$slug]]></code>
     </PossiblyUnusedProperty>
   </file>
+  <file src="tests/unit/AssetQueueTest.php">
+    <PossiblyUndefinedIntArrayOffset>
+      <code><![CDATA[$existingAssets[1]]]></code>
+      <code><![CDATA[$processedAssets[0]]]></code>
+    </PossiblyUndefinedIntArrayOffset>
+  </file>
   <file src="web/index.php">
     <MixedArgument>
       <code><![CDATA[$GLOBALS['YASSG_BASEDIR'] ?? throw new LogicException('YASSG base dir not found')]]></code>
