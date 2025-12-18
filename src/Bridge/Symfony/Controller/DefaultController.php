@@ -31,23 +31,23 @@ final class DefaultController extends AbstractController
             throw new \LogicException('Invalid request, invalid route attribute');
         }
 
+        /** @var null|string $filename */
         $filename = $request->attributes->get('_filename');
-
-        // Check if this is a SVG request
-        if ($filename === 'index.svg') {
-            // Render SVG template instead of HTML
-            /** @var string $template */
-            $template = $request->attributes->get('_template') ?? \sprintf('social/%1$s.svg.twig', $route);
-
-            $response = $this->render($template, $request->attributes->all());
-            $response->headers->set('Content-Type', 'image/svg+xml');
-
-            return $response;
+        switch (true) {
+            case $filename === 'index.svg':
+                $type = 'svg';
+                $contentType = 'image/svg+xml';
+                break;
+            default:
+                $type = 'html';
+                $contentType = 'text/html; charset=UTF-8';
         }
 
         /** @var string $template */
-        $template = $request->attributes->get('_template') ?? \sprintf('pages/%1$s.html.twig', $route);
+        $template = $request->attributes->get('_template') ?? \sprintf('pages/%1$s.%2$s.twig', $route, $type);
+        $response = $this->render($template, $request->attributes->all());
+        $response->headers->set('Content-Type', $contentType);
 
-        return $this->render($template, $request->attributes->all());
+        return $response;
     }
 }

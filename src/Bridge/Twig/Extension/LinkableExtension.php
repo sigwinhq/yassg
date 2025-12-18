@@ -28,7 +28,8 @@ final class LinkableExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('yassg_url', fn (Linkable $linkable) => $this->generator->generate($linkable->getLinkRouteName(), $linkable->getLinkRouteParameters())),
+            new TwigFunction('yassg_url', fn (Linkable $linkable, array $parameters = []) => $this->generator->generate($linkable->getLinkRouteName(), array_replace($linkable->getLinkRouteParameters(), $parameters))),
+            new TwigFunction('yassg_svg_url', fn (Linkable $linkable, array $parameters = []) => $this->generator->generate($linkable->getLinkRouteName(), array_replace($linkable->getLinkRouteParameters(), $parameters, ['_filename' => 'index.svg']))),
         ];
     }
 }
