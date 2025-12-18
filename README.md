@@ -53,32 +53,49 @@ Generate dynamic social images (Open Graph, Twitter Cards) from SVG templates. E
 
 #### How It Works
 
-1. **SVG URLs**: Any route can be accessed with `.svg` extension (e.g., `/article/hello-world.svg`)
-2. **Template Rendering**: The SVG template receives the same context as the HTML page
+1. **SVG URLs**: Any Linkable entity can generate an SVG URL using `yassg_svg_url(entity)`
+2. **Template Rendering**: The SVG template at `pages/{route}.svg.twig` receives the same context as the HTML page
 3. **ImgProxy Processing**: Use `yassg_thumbnail()` to process the SVG through ImgProxy
 4. **Build Time**: Images are generated and optimized during the build process
 
 #### Usage in Templates
 
-Generate a social image URL and process it through ImgProxy:
+Define a `social_image` block in your page template that uses `yassg_svg_url()`:
 
 ```twig
-{# In your HTML template #}
+{# templates/pages/article.html.twig #}
+{% extends 'layout.html.twig' %}
+
 {% set article = yassg_find_one_by('articles', {condition: {'item.slug': slug}}) %}
-{% set social_image_url = yassg_thumbnail(yassg_social_image(article), {
-    width: 1200,
-    height: 630,
-    format: 'webp'
-}) %}
-<meta property="og:image" content="{{ social_image_url }}">
+
+{% block title %}{{ article.title }}{% endblock %}
+
+{% block social_image %}{{ yassg_svg_url(article) }}{% endblock %}
+
+{% block body %}
+    {# ... #}
+{% endblock %}
+```
+
+In your layout template, use the block to generate meta tags:
+
+```twig
+{# templates/layout.html.twig #}
+{% block social_image %}{% endblock %}
+{% set social_image_url = block('social_image') %}
+{% if social_image_url is not empty %}
+<meta property="og:image" content="{{ yassg_thumbnail(absolute_url(social_image_url)) }}">
+<meta name="twitter:image" content="{{ yassg_thumbnail(absolute_url(social_image_url)) }}">
+<meta name="twitter:card" content="summary_large_image">
+{% endif %}
 ```
 
 #### Creating SVG Templates
 
-Create SVG templates in `templates/social/{route}.svg.twig`:
+Create SVG templates in `templates/pages/{route}.svg.twig`:
 
 ```svg
-{# templates/social/article.svg.twig #}
+{# templates/pages/article.svg.twig #}
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
     <rect width="1200" height="630" fill="#1a202c"/>
     <text x="600" y="315" font-family="Arial" font-size="64" fill="#ffffff" text-anchor="middle">
@@ -91,6 +108,30 @@ Create SVG templates in `templates/social/{route}.svg.twig`:
 ```
 
 The SVG template receives the same variables as the HTML template (article, page, etc.).
+
+#### Making Your Model Linkable
+
+To use `yassg_svg_url()`, your model must implement the `Linkable` interface:
+
+```php
+use Sigwin\YASSG\Linkable;
+
+final class Article implements Linkable
+{
+    public string $title;
+    public string $slug;
+    
+    public function getLinkRouteName(): string
+    {
+        return 'article';
+    }
+    
+    public function getLinkRouteParameters(): array
+    {
+        return ['slug' => $this->slug];
+    }
+}
+```
 
 #### Composing with Other Assets
 

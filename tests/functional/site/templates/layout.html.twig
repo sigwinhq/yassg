@@ -7,6 +7,7 @@
 
     <title>{% block title %}{% endblock %}</title>
 
+    {% block social_image %}{% endblock %}
     {% set social_image_url = block('social_image') %}
     {% if social_image_url is not empty %}
     <meta property="og:image" content="{{ yassg_thumbnail(absolute_url(social_image_url)) }}">
