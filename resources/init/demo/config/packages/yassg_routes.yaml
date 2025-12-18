@@ -1,5 +1,4 @@
 sigwin_yassg:
-    social_image_template: 'social/default.svg.twig'
     routes:
         demo:
             path: /

@@ -49,49 +49,33 @@ Includes Gitlab CI / Gitlab Pages setup.
 
 ### Custom Social Images
 
-Generate dynamic social images (Open Graph, Twitter Cards) from Twig templates using SVG.
+Generate dynamic social images (Open Graph, Twitter Cards) from SVG templates. Each route can render a `.svg` version that is then processed through ImgProxy.
 
-#### Configuration
+#### How It Works
 
-Set a default social image template in your configuration:
-
-```yaml
-# config/packages/yassg_routes.yaml
-sigwin_yassg:
-    social_image_template: 'social/default.svg.twig'
-```
-
-#### Per-route Configuration
-
-Override the template for specific routes:
-
-```yaml
-sigwin_yassg:
-    routes:
-        article:
-            path: /article/{slug}
-            options:
-                social_image_template: 'social/article.svg.twig'
-```
+1. **SVG URLs**: Any route can be accessed with `.svg` extension (e.g., `/article/hello-world.svg`)
+2. **Template Rendering**: The SVG template receives the same context as the HTML page
+3. **ImgProxy Processing**: Use `yassg_thumbnail()` to process the SVG through ImgProxy
+4. **Build Time**: Images are generated and optimized during the build process
 
 #### Usage in Templates
 
-Generate a social image URL in your Twig templates:
+Generate a social image URL and process it through ImgProxy:
 
 ```twig
-{% set social_image_url = yassg_social_image('social/custom.svg.twig') %}
+{# In your HTML template #}
+{% set article = yassg_find_one_by('articles', {condition: {'item.slug': slug}}) %}
+{% set social_image_url = yassg_thumbnail(yassg_social_image(article), {
+    width: 1200,
+    height: 630,
+    format: 'webp'
+}) %}
 <meta property="og:image" content="{{ social_image_url }}">
-```
-
-Or use the default template:
-
-```twig
-{% set social_image_url = yassg_social_image() %}
 ```
 
 #### Creating SVG Templates
 
-Create SVG templates that receive the full Twig context:
+Create SVG templates in `templates/social/{route}.svg.twig`:
 
 ```svg
 {# templates/social/article.svg.twig #}
@@ -100,19 +84,27 @@ Create SVG templates that receive the full Twig context:
     <text x="600" y="315" font-family="Arial" font-size="64" fill="#ffffff" text-anchor="middle">
         {{ article.title }}
     </text>
+    <text x="600" y="380" font-family="Arial" font-size="24" fill="#cccccc" text-anchor="middle">
+        {{ article.publishedAt|date('F j, Y') }}
+    </text>
 </svg>
 ```
 
-The SVG is automatically processed through ImgProxy and converted to WebP (or other formats) during the build process.
+The SVG template receives the same variables as the HTML template (article, page, etc.).
 
-#### Custom Options
+#### Composing with Other Assets
 
-Customize image dimensions and format:
+Since SVG templates can use any Twig functions, you can include other assets:
 
-```twig
-{% set social_image_url = yassg_social_image('social/custom.svg.twig', {
-    width: 1200,
-    height: 630,
+```svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+    <image href="{{ yassg_thumbnail(article.image, {width: 1200, height: 630}) }}" width="1200" height="630"/>
+    <rect width="1200" height="630" fill="rgba(0,0,0,0.5)"/>
+    <text x="600" y="315" font-size="64" fill="#fff" text-anchor="middle">
+        {{ article.title }}
+    </text>
+</svg>
+```
     format: 'png'
 }) %}
 ```

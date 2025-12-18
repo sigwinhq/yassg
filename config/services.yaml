@@ -8,7 +8,6 @@ services:
             $buildDir: "%sigwin_yassg.build_dir%"
             $routes: "%sigwin_yassg.routes%"
             $databases: "%sigwin_yassg.databases%"
-            $defaultSocialImageTemplate: "%sigwin_yassg.social_image_template%"
 
     Sigwin\YASSG\:
         resource: '../src/'

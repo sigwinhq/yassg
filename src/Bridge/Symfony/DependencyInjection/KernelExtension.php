@@ -27,7 +27,6 @@ final class KernelExtension extends Extension implements PrependExtensionInterfa
         $config = $this->processConfiguration($configuration, $configs);
 
         $container->setParameter('sigwin_yassg.imgproxy_url', $config['imgproxy_url'] ?? null);
-        $container->setParameter('sigwin_yassg.social_image_template', $config['social_image_template'] ?? null);
 
         $container->setParameter('sigwin_yassg.routes', $config['routes'] ?? []);
         $container->setParameter('sigwin_yassg.routes.variables', $config['variables'] ?? []);

@@ -5,7 +5,7 @@
 
 {% block title %}{{ article.title }}{% endblock %}
 
-{% block social_image %}{{ yassg_social_image('social/default.svg.twig') }}{% endblock %}
+{% block social_image %}{{ yassg_thumbnail(yassg_social_image(article), {width: 1200, height: 630, format: 'webp'}) }}{% endblock %}
 
 {% block body %}
 <main class="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
