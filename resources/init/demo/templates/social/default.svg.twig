@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+    <defs>
+        <style>
+            .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; font-size: 72px; font-weight: bold; fill: #ffffff; }
+            .subtitle { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; font-size: 36px; fill: #f0f0f0; }
+        </style>
+        <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+        </linearGradient>
+    </defs>
+    
+    <rect width="1200" height="630" fill="url(#bgGradient)"/>
+    
+    <text x="600" y="280" class="title" text-anchor="middle">
+        {% if demo_page is defined %}
+            {{ demo_page.title }}
+        {% else %}
+            My Awesome Site
+        {% endif %}
+    </text>
+    
+    <text x="600" y="360" class="subtitle" text-anchor="middle">
+        {% if demo_page is defined and demo_page.description is defined %}
+            {{ demo_page.description }}
+        {% else %}
+            Built with YASSG
+        {% endif %}
+    </text>
+</svg>
