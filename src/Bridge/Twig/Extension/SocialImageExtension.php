@@ -72,13 +72,13 @@ final class SocialImageExtension extends AbstractExtension
         // Render the SVG template with the current context
         $svgContent = $this->twig->render($templatePath, $context);
 
-        // Create a hash for the SVG content
-        $hash = md5($svgContent);
+        // Create a hash for the SVG content (using SHA-256 for collision resistance)
+        $hash = hash('sha256', $svgContent);
         $svgRelativePath = '/social-images/'.$hash.'.svg';
         
         // During build, write SVG to build directory
         // During dev, write to base directory for ImgProxy to access
-        $svgAbsolutePath = $this->isBuild() ? $this->buildDir.$svgRelativePath : $this->baseDir.$svgRelativePath;
+        $svgAbsolutePath = ($this->isBuild() ? $this->buildDir : $this->baseDir).$svgRelativePath;
         $this->filesystem->dumpFile($svgAbsolutePath, $svgContent);
 
         // Generate ImgProxy URL for the SVG
@@ -129,10 +129,18 @@ final class SocialImageExtension extends AbstractExtension
         }
 
         // Priority 3: Template from context item metadata (if available)
+        // Check options first (explicit {self: object} parameter)
         if (isset($options['self']) && \is_object($options['self'])) {
             $self = $options['self'];
             if (property_exists($self, 'socialImageTemplate') && $self->socialImageTemplate !== null) {
                 return $self->socialImageTemplate;
+            }
+        }
+        
+        // Also check context for objects with metadata
+        foreach ($context as $item) {
+            if (\is_object($item) && property_exists($item, 'socialImageTemplate') && $item->socialImageTemplate !== null) {
+                return $item->socialImageTemplate;
             }
         }
 
