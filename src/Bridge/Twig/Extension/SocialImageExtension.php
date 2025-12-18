@@ -77,10 +77,9 @@ final class SocialImageExtension extends AbstractExtension
         // Get route parameters from the entity or request
         $routeParams = $request->attributes->get('_route_params', []);
         
-        // Generate the URL with .svg appended
-        // Try to use the route with _format parameter first
+        // Generate the URL with .svg filename parameter
         try {
-            $svgUrl = $this->urlGenerator->generate($routeName, array_merge($routeParams, ['_format' => 'svg']), UrlGeneratorInterface::ABSOLUTE_PATH);
+            $svgUrl = $this->urlGenerator->generate($routeName, array_merge($routeParams, ['_filename' => '.svg']), UrlGeneratorInterface::ABSOLUTE_PATH);
         } catch (\Exception $e) {
             // Fallback: append .svg to the current path
             $htmlUrl = $this->urlGenerator->generate($routeName, $routeParams, UrlGeneratorInterface::ABSOLUTE_PATH);

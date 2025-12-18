@@ -34,7 +34,7 @@ final class DefaultController extends AbstractController
         $filename = $request->attributes->get('_filename');
         
         // Check if this is a SVG request
-        if ($filename === 'svg' || str_ends_with((string) $filename, '.svg')) {
+        if ($filename === '.svg') {
             // Render SVG template instead of HTML
             /** @var string $template */
             $template = $request->attributes->get('_template') ?? \sprintf('social/%1$s.svg.twig', $route);
