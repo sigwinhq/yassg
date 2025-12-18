@@ -4,3 +4,7 @@
 /var/
 /vendor/
 /composer.lock
+composer.json~
+*.swp
+*.swo
+*~
