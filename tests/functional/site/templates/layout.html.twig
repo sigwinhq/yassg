@@ -8,10 +8,15 @@
     <title>{% block title %}{% endblock %}</title>
 
     {% block social_image %}{% endblock %}
-    {% set social_image_url = block('social_image') %}
+    {#
+        TODO: must be the correct address
+
+        Revamp when we have a full Docker build setup
+    #}
+    {% set social_image_url = "http://app:9988"~block('social_image') %}
     {% if social_image_url is not empty %}
-    <meta property="og:image" content="{{ yassg_thumbnail(absolute_url(social_image_url)) }}">
-    <meta name="twitter:image" content="{{ yassg_thumbnail(absolute_url(social_image_url)) }}">
+    <meta property="og:image" content="{{ yassg_thumbnail(social_image_url) }}">
+    <meta name="twitter:image" content="{{ yassg_thumbnail(social_image_url) }}">
     <meta name="twitter:card" content="summary_large_image">
     {% endif %}
 

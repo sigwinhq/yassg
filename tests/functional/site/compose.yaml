@@ -3,7 +3,7 @@ services:
         image: php:8.4-alpine
         environment:
             BASE_URL: ${BASE_URL}
-            YASSG_SKIP_BUNDLES: "Symfony\WebpackEncoreBundle\WebpackEncoreBundle"
+            YASSG_SKIP_BUNDLES: Symfony\WebpackEncoreBundle\WebpackEncoreBundle
         command: php -S 0.0.0.0:9988 -t /app/tests/functional/site
         ports:
             - "9988:9988"
@@ -23,13 +23,14 @@ services:
     imgproxy:
         image: darthsim/imgproxy:v3.27.2
         environment:
+            - IMGPROXY_BIND=:8090
             - IMGPROXY_LOCAL_FILESYSTEM_ROOT=/app
             - IMGPROXY_MAX_ANIMATION_FRAMES=60
             - IMGPROXY_AUTO_AVIF=1
             - IMGPROXY_AUTO_WEBP=1
         working_dir: /app
         ports:
-            - 8090:8080
+            - 8090:8090
         volumes:
             - .:/app:ro
         tmpfs:
