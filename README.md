@@ -146,7 +146,4 @@ Since SVG templates can use any Twig functions, you can include other assets:
     </text>
 </svg>
 ```
-    format: 'png'
-}) %}
-```
 
