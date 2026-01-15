@@ -244,6 +244,10 @@ final class ImageExtension extends AbstractExtension
 
     private function buildImgproxyUrl(string $path, string $filters): string
     {
-        return \sprintf('%1$s/insecure/%2$s%3$s', $this->imgproxyUrl, $filters, $this->encode('local:///'.mb_ltrim(str_replace($GLOBALS['YASSG_BASEDIR'], '', $path), '/')));
+        if (! str_contains($path, '://')) {
+            $path = 'local:///'.mb_ltrim(str_replace($GLOBALS['YASSG_BASEDIR'], '', $path), '/');
+        }
+
+        return \sprintf('%1$s/insecure/%2$s%3$s', $this->imgproxyUrl, $filters, $this->encode($path));
     }
 }

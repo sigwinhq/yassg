@@ -7,6 +7,14 @@
     
     <title>{{ demo_page.title }}</title>
 
+    {% block social_image %}{% endblock %}
+    {% set social_image_url = block('social_image') %}
+    {% if social_image_url is not empty %}
+    <meta property="og:image" content="{{ yassg_thumbnail(absolute_url(social_image_url)) }}">
+    <meta name="twitter:image" content="{{ yassg_thumbnail(absolute_url(social_image_url)) }}">
+    <meta name="twitter:card" content="summary_large_image">
+    {% endif %}
+
     {{ encore_entry_link_tags('app') }}
 </head>
 <body>

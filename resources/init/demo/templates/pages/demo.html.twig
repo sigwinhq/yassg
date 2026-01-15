@@ -3,6 +3,8 @@
 {# query the database #}
 {% set demo_page = yassg_find_one_by('pages', {condition: {'item.slug': 'demo-page'}}) %}
 
+{% block social_image %}{{ yassg_svg_url(demo_page) }}{% endblock %}
+
 {% block body %}
 
     <main class="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">

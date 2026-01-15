@@ -35,9 +35,10 @@ final readonly class RouteLoader implements RouteLoaderInterface
                 $path = $route['path'];
                 $requirements = [];
             } else {
+                // Support both index.html and .svg extension
                 $path = $route['path'].'/{_filename}';
                 $requirements = [
-                    '_filename' => 'index\.html',
+                    '_filename' => 'index(\.html|\.svg)',
                 ];
             }
 

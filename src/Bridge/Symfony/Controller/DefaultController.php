@@ -31,9 +31,23 @@ final class DefaultController extends AbstractController
             throw new \LogicException('Invalid request, invalid route attribute');
         }
 
-        /** @var string $template */
-        $template = $request->attributes->get('_template') ?? \sprintf('pages/%1$s.html.twig', $route);
+        /** @var null|string $filename */
+        $filename = $request->attributes->get('_filename');
+        switch (true) {
+            case $filename === 'index.svg':
+                $type = 'svg';
+                $contentType = 'image/svg+xml';
+                break;
+            default:
+                $type = 'html';
+                $contentType = 'text/html; charset=UTF-8';
+        }
 
-        return $this->render($template, $request->attributes->all());
+        /** @var string $template */
+        $template = $request->attributes->get('_template') ?? \sprintf('pages/%1$s.%2$s.twig', $route, $type);
+        $response = $this->render($template, $request->attributes->all());
+        $response->headers->set('Content-Type', $contentType);
+
+        return $response;
     }
 }
