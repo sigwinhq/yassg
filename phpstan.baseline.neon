@@ -55,6 +55,12 @@ parameters:
 			path: src/Bridge/Symfony/DependencyInjection/CompilerPass/ConfigureDatabasesCompilerPass.php
 
 		-
+			message: '#^Possibly invalid array key type mixed\.$#'
+			identifier: offsetAccess.invalidOffset
+			count: 2
+			path: src/Bridge/Symfony/DependencyInjection/CompilerPass/ConfigureDatabasesCompilerPass.php
+
+		-
 			message: '#^Cannot access an offset on mixed\.$#'
 			identifier: offsetAccess.nonOffsetAccessible
 			count: 1
@@ -91,6 +97,12 @@ parameters:
 			path: src/Bridge/Symfony/DependencyInjection/CompilerPass/InjectRouteVariablesCompilerPass.php
 
 		-
+			message: '#^Possibly invalid array key type mixed\.$#'
+			identifier: offsetAccess.invalidOffset
+			count: 2
+			path: src/Bridge/Symfony/DependencyInjection/CompilerPass/InjectRouteVariablesCompilerPass.php
+
+		-
 			message: '#^Argument of an invalid type mixed supplied for foreach, only iterables are supported\.$#'
 			identifier: foreach.nonIterable
 			count: 1
@@ -115,16 +127,16 @@ parameters:
 			path: src/Bridge/Symfony/DependencyInjection/KernelExtension.php
 
 		-
+			message: '#^Possibly invalid array key type mixed\.$#'
+			identifier: offsetAccess.invalidOffset
+			count: 1
+			path: src/Bridge/Symfony/DependencyInjection/KernelExtension.php
+
+		-
 			message: '#^Parameter \#1 \$condition of method Sigwin\\YASSG\\Database\<object\>\:\:findAll\(\) expects string\|null, mixed given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Bridge/Symfony/ExpressionLanguage/FunctionProvider.php
-
-		-
-			message: '#^Binary operation "\." between non\-falsy\-string and mixed results in an error\.$#'
-			identifier: binaryOp.invalid
-			count: 1
-			path: src/Bridge/Symfony/Kernel.php
 
 		-
 			message: '#^Generator expects value type Symfony\\Component\\HttpKernel\\Bundle\\BundleInterface, mixed given\.$#'
@@ -187,6 +199,12 @@ parameters:
 			path: src/Bridge/Symfony/Routing/Generator/FilenameUrlGenerator.php
 
 		-
+			message: '#^Possibly invalid array key type mixed\.$#'
+			identifier: offsetAccess.invalidOffset
+			count: 2
+			path: src/Bridge/Symfony/Routing/Generator/FilenameUrlGenerator.php
+
+		-
 			message: '#^Argument of an invalid type mixed supplied for foreach, only iterables are supported\.$#'
 			identifier: foreach.nonIterable
 			count: 1
@@ -214,6 +232,12 @@ parameters:
 			message: '#^Parameter \#1 \$key of method Symfony\\Component\\HttpFoundation\\ParameterBag\:\:get\(\) expects string, mixed given\.$#'
 			identifier: argument.type
 			count: 1
+			path: src/Bridge/Symfony/Routing/Generator/GlobalVariableUrlGenerator.php
+
+		-
+			message: '#^Possibly invalid array key type mixed\.$#'
+			identifier: offsetAccess.invalidOffset
+			count: 2
 			path: src/Bridge/Symfony/Routing/Generator/GlobalVariableUrlGenerator.php
 
 		-
@@ -281,24 +305,6 @@ parameters:
 			identifier: offsetAccess.nonOffsetAccessible
 			count: 2
 			path: src/Bridge/Symfony/Serializer/Normalizer/LocalizingNormalizer.php
-
-		-
-			message: '#^Call to function is_string\(\) with string will always evaluate to true\.$#'
-			identifier: function.alreadyNarrowedType
-			count: 1
-			path: src/Bridge/Symfony/Serializer/Normalizer/ResourceLocatorNormalizer.php
-
-		-
-			message: '#^Method Sigwin\\YASSG\\Bridge\\Symfony\\Serializer\\Normalizer\\ResourceLocatorNormalizer\:\:denormalize\(\) never returns array\<string\> so it can be removed from the return type\.$#'
-			identifier: return.unusedType
-			count: 1
-			path: src/Bridge/Symfony/Serializer/Normalizer/ResourceLocatorNormalizer.php
-
-		-
-			message: '#^Unreachable statement \- code above always terminates\.$#'
-			identifier: deadCode.unreachable
-			count: 1
-			path: src/Bridge/Symfony/Serializer/Normalizer/ResourceLocatorNormalizer.php
 
 		-
 			message: '#^PHPDoc tag @var with type array\<string\>\|string is not subtype of type string\.$#'
@@ -553,12 +559,6 @@ parameters:
 			path: src/Collection/ReadOnlyCollection.php
 
 		-
-			message: '#^Method Sigwin\\YASSG\\Context\\LocaleContext\:\:getLocale\(\) return type has no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/Context/LocaleContext.php
-
-		-
 			message: '#^Method Sigwin\\YASSG\\Database\:\:countBy\(\) has parameter \$condition with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -617,12 +617,6 @@ parameters:
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Database.php
-
-		-
-			message: '#^Binary operation "\." between non\-falsy\-string and mixed results in an error\.$#'
-			identifier: binaryOp.invalid
-			count: 2
-			path: src/Database/CachingDatabase.php
 
 		-
 			message: '#^Class Sigwin\\YASSG\\Database\\CachingDatabase implements generic interface Sigwin\\YASSG\\Database but does not specify its types\: T$#'
@@ -877,12 +871,6 @@ parameters:
 			path: src/Permutator.php
 
 		-
-			message: '#^Parameter \#2 \$parameters of class Sigwin\\YASSG\\Route constructor expects array, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Permutator.php
-
-		-
 			message: '#^Method Sigwin\\YASSG\\Route\:\:__construct\(\) has parameter \$parameters with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -913,12 +901,6 @@ parameters:
 			path: src/Storage/DenormalizingStorage.php
 
 		-
-			message: '#^Method Sigwin\\YASSG\\Storage\\DenormalizingStorage\:\:denormalize\(\) has parameter \$context with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/Storage/DenormalizingStorage.php
-
-		-
 			message: '#^Method Sigwin\\YASSG\\Storage\\DenormalizingStorage\:\:denormalize\(\) has parameter \$data with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
@@ -931,28 +913,10 @@ parameters:
 			path: src/Storage/DenormalizingStorage.php
 
 		-
-			message: '#^Method Sigwin\\YASSG\\Storage\\DenormalizingStorage\:\:fetch\(\) has parameter \$context with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/Storage/DenormalizingStorage.php
-
-		-
 			message: '#^Method Sigwin\\YASSG\\Storage\\DenormalizingStorage\:\:fetch\(\) has parameter \$item with no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Storage/DenormalizingStorage.php
-
-		-
-			message: '#^Parameter \#1 \$locale of method Sigwin\\YASSG\\Storage\\DenormalizingStorage\<T of object\>\:\:fetch\(\) expects string, mixed given\.$#'
-			identifier: argument.type
-			count: 2
-			path: src/Storage/DenormalizingStorage.php
-
-		-
-			message: '#^Binary operation "\." between mixed and string results in an error\.$#'
-			identifier: binaryOp.invalid
-			count: 2
-			path: src/Storage/FilesystemStorage.php
 
 		-
 			message: '#^Class Sigwin\\YASSG\\Storage\\FilesystemStorage implements generic interface Sigwin\\YASSG\\StorageWithOptions but does not specify its types\: T$#'
@@ -1015,22 +979,10 @@ parameters:
 			path: src/Storage/FilesystemStorage.php
 
 		-
-			message: '#^Parameter \#1 \$search of function str_replace expects array\<string\>\|string, array given\.$#'
-			identifier: argument.type
-			count: 1
-			path: src/Storage/FilesystemStorage.php
-
-		-
 			message: '#^Property Sigwin\\YASSG\\Storage\\FilesystemStorage\:\:\$roots type has no value type specified in iterable type array\.$#'
 			identifier: missingType.iterableValue
 			count: 1
 			path: src/Storage/FilesystemStorage.php
-
-		-
-			message: '#^Method Sigwin\\YASSG\\Storage\\MemoryStorage\:\:__construct\(\) has parameter \$values with no value type specified in iterable type array\.$#'
-			identifier: missingType.iterableValue
-			count: 1
-			path: src/Storage/MemoryStorage.php
 
 		-
 			message: '#^Method Sigwin\\YASSG\\Storage\\MemoryStorage\:\:get\(\) return type has no value type specified in iterable type array\.$#'

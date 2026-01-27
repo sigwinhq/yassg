@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="6.12.1@e71404b0465be25cf7f8a631b298c01c5ddd864f">
+<files psalm-version="6.14.3@d0b040a91f280f071c1abcb1b77ce3822058725a">
   <file src="bootstrap.php">
     <PossiblyFalseArgument>
       <code><![CDATA[getenv('YASSG_SKIP_BUNDLES')]]></code>
@@ -108,76 +108,9 @@
     <MissingOverrideAttribute>
       <code><![CDATA[public function getConfigTreeBuilder(): TreeBuilder]]></code>
     </MissingOverrideAttribute>
-    <MixedMethodCall>
-      <code><![CDATA[arrayNode]]></code>
-      <code><![CDATA[arrayNode]]></code>
-      <code><![CDATA[arrayNode]]></code>
-      <code><![CDATA[arrayNode]]></code>
-      <code><![CDATA[arrayNode]]></code>
-      <code><![CDATA[arrayPrototype]]></code>
-      <code><![CDATA[arrayPrototype]]></code>
-      <code><![CDATA[booleanNode]]></code>
-      <code><![CDATA[booleanNode]]></code>
-      <code><![CDATA[cannotBeEmpty]]></code>
-      <code><![CDATA[cannotBeEmpty]]></code>
-      <code><![CDATA[children]]></code>
-      <code><![CDATA[children]]></code>
-      <code><![CDATA[children]]></code>
-      <code><![CDATA[defaultFalse]]></code>
-      <code><![CDATA[defaultFalse]]></code>
-      <code><![CDATA[defaultValue]]></code>
+    <UnusedMethodCall>
       <code><![CDATA[end]]></code>
-      <code><![CDATA[end]]></code>
-      <code><![CDATA[end]]></code>
-      <code><![CDATA[end]]></code>
-      <code><![CDATA[end]]></code>
-      <code><![CDATA[end]]></code>
-      <code><![CDATA[end]]></code>
-      <code><![CDATA[end]]></code>
-      <code><![CDATA[end]]></code>
-      <code><![CDATA[end]]></code>
-      <code><![CDATA[end]]></code>
-      <code><![CDATA[end]]></code>
-      <code><![CDATA[end]]></code>
-      <code><![CDATA[end]]></code>
-      <code><![CDATA[end]]></code>
-      <code><![CDATA[end]]></code>
-      <code><![CDATA[end]]></code>
-      <code><![CDATA[end]]></code>
-      <code><![CDATA[end]]></code>
-      <code><![CDATA[end]]></code>
-      <code><![CDATA[end]]></code>
-      <code><![CDATA[end]]></code>
-      <code><![CDATA[end]]></code>
-      <code><![CDATA[end]]></code>
-      <code><![CDATA[end]]></code>
-      <code><![CDATA[info]]></code>
-      <code><![CDATA[isRequired]]></code>
-      <code><![CDATA[isRequired]]></code>
-      <code><![CDATA[isRequired]]></code>
-      <code><![CDATA[requiresAtLeastOneElement]]></code>
-      <code><![CDATA[scalarNode]]></code>
-      <code><![CDATA[scalarNode]]></code>
-      <code><![CDATA[scalarNode]]></code>
-      <code><![CDATA[scalarNode]]></code>
-      <code><![CDATA[scalarPrototype]]></code>
-      <code><![CDATA[scalarPrototype]]></code>
-      <code><![CDATA[scalarPrototype]]></code>
-      <code><![CDATA[setDeprecated]]></code>
-      <code><![CDATA[setDeprecated]]></code>
-      <code><![CDATA[setDeprecated]]></code>
-      <code><![CDATA[useAttributeAsKey]]></code>
-      <code><![CDATA[variableNode]]></code>
-      <code><![CDATA[variableNode]]></code>
-      <code><![CDATA[variableNode]]></code>
-      <code><![CDATA[variableNode]]></code>
-    </MixedMethodCall>
-    <PossiblyNullReference>
-      <code><![CDATA[arrayNode]]></code>
-    </PossiblyNullReference>
-    <UndefinedInterfaceMethod>
-      <code><![CDATA[arrayNode]]></code>
-    </UndefinedInterfaceMethod>
+    </UnusedMethodCall>
   </file>
   <file src="src/Bridge/Symfony/DependencyInjection/KernelExtension.php">
     <MissingOverrideAttribute>
@@ -246,9 +179,6 @@
     <PossiblyUnusedMethod>
       <code><![CDATA[configureContainer]]></code>
     </PossiblyUnusedMethod>
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[Kernel]]></code>
-    </PropertyNotSetInConstructor>
     <UnresolvableInclude>
       <code><![CDATA[require $path]]></code>
     </UnresolvableInclude>
@@ -349,11 +279,11 @@
     <UnusedClass>
       <code><![CDATA[CollectionNormalizer]]></code>
     </UnusedClass>
-    <UnusedParam>
-      <code><![CDATA[$format]]></code>
-    </UnusedParam>
   </file>
   <file src="src/Bridge/Symfony/Serializer/Normalizer/ExpressionNormalizer.php">
+    <MethodSignatureMismatch>
+      <code><![CDATA[$context]]></code>
+    </MethodSignatureMismatch>
     <MissingOverrideAttribute>
       <code><![CDATA[public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): object]]></code>
       <code><![CDATA[public function getSupportedTypes(?string $format): array]]></code>
@@ -368,9 +298,6 @@
     <UnusedClass>
       <code><![CDATA[ExpressionNormalizer]]></code>
     </UnusedClass>
-    <UnusedParam>
-      <code><![CDATA[$format]]></code>
-    </UnusedParam>
   </file>
   <file src="src/Bridge/Symfony/Serializer/Normalizer/LocalizingNormalizer.php">
     <MissingOverrideAttribute>
@@ -404,28 +331,19 @@
     <UnusedClass>
       <code><![CDATA[LocalizingNormalizer]]></code>
     </UnusedClass>
-    <UnusedParam>
-      <code><![CDATA[$format]]></code>
-    </UnusedParam>
   </file>
   <file src="src/Bridge/Symfony/Serializer/Normalizer/ResourceLocatorNormalizer.php">
+    <MethodSignatureMismatch>
+      <code><![CDATA[$context]]></code>
+    </MethodSignatureMismatch>
     <MissingOverrideAttribute>
       <code><![CDATA[public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): array|string]]></code>
       <code><![CDATA[public function getSupportedTypes(?string $format): array]]></code>
       <code><![CDATA[public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool]]></code>
     </MissingOverrideAttribute>
-    <NoValue>
-      <code><![CDATA[return $data;]]></code>
-    </NoValue>
-    <RedundantConditionGivenDocblockType>
-      <code><![CDATA[\is_string($data)]]></code>
-    </RedundantConditionGivenDocblockType>
     <UnusedClass>
       <code><![CDATA[ResourceLocatorNormalizer]]></code>
     </UnusedClass>
-    <UnusedParam>
-      <code><![CDATA[$format]]></code>
-    </UnusedParam>
   </file>
   <file src="src/Bridge/Twig/Extension/DatabaseExtension.php">
     <MixedArgument>
@@ -595,14 +513,6 @@
       <code><![CDATA[Database]]></code>
       <code><![CDATA[DatabaseTrait]]></code>
     </MissingTemplateParam>
-    <MixedAssignment>
-      <code><![CDATA[$locale]]></code>
-      <code><![CDATA[$locale]]></code>
-    </MixedAssignment>
-    <MixedOperand>
-      <code><![CDATA[$locale]]></code>
-      <code><![CDATA[$locale]]></code>
-    </MixedOperand>
     <PossiblyNullOperand>
       <code><![CDATA[$limit]]></code>
       <code><![CDATA[$select]]></code>
@@ -709,9 +619,6 @@
     </PossiblyUnusedProperty>
   </file>
   <file src="src/Permutator.php">
-    <MixedArgument>
-      <code><![CDATA[$parameters]]></code>
-    </MixedArgument>
     <InternalMethod>
       <code><![CDATA[combinations($variables)]]></code>
     </InternalMethod>
@@ -719,10 +626,6 @@
       <code><![CDATA[$route]]></code>
       <code><![CDATA[$route]]></code>
     </MixedArgumentTypeCoercion>
-    <MixedAssignment>
-      <code><![CDATA[$parameters]]></code>
-      <code><![CDATA[$variables[$variable]]]></code>
-    </MixedAssignment>
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
@@ -736,23 +639,9 @@
     <MissingTemplateParam>
       <code><![CDATA[Storage]]></code>
     </MissingTemplateParam>
-    <MixedArgument>
-      <code><![CDATA[$locale]]></code>
-      <code><![CDATA[$locale]]></code>
-    </MixedArgument>
     <MixedArgumentTypeCoercion>
       <code><![CDATA[$key]]></code>
     </MixedArgumentTypeCoercion>
-    <MixedArrayOffset>
-      <code><![CDATA[$this->cache[$this->class][$locale]]]></code>
-    </MixedArrayOffset>
-    <MixedAssignment>
-      <code><![CDATA[$locale]]></code>
-      <code><![CDATA[$locale]]></code>
-      <code><![CDATA[$metadata[$key]]]></code>
-      <code><![CDATA[$value]]></code>
-      <code><![CDATA[$value]]></code>
-    </MixedAssignment>
     <MixedMethodCall>
       <code><![CDATA[new $this->class()]]></code>
     </MixedMethodCall>

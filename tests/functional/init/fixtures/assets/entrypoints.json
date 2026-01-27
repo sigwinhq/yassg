@@ -3,7 +3,7 @@
     "app": {
       "js": [
         "/sub/dir/another/assets/runtime.e9965371.js",
-        "/sub/dir/another/assets/app.8524779c.js"
+        "/sub/dir/another/assets/app.aa59aa56.js"
       ],
       "css": [
         "/sub/dir/another/assets/app.2e773b84.css"
@@ -12,7 +12,7 @@
   },
   "integrity": {
     "/sub/dir/another/assets/runtime.e9965371.js": "sha384-wXPPlraplDpX7JoQiYnzm30Jh9vO3mgiE7ZiVGU7Tf79XZqa+uBmlfhf11iQ0iKm",
-    "/sub/dir/another/assets/app.8524779c.js": "sha384-clxAF225XX7pTUw5fi0cJthT8dkTH9fZnkMfdjDDLBngIxuPdAiTIWhhMlaZbsog",
+    "/sub/dir/another/assets/app.aa59aa56.js": "sha384-XyA2gbgXx3ybdbjYzBKhypu4zm14P8qnyyFktTJsYv9gTvPebftX5O2Uh9nY+l15",
     "/sub/dir/another/assets/app.2e773b84.css": "sha384-t56F6yDakn/jYRHL6uxVbMaf/JtnF0k7yEall1cerAGjo0kfE3W7foG5+n1Ynxd5"
   }
 }

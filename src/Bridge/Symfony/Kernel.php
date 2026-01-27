@@ -48,6 +48,7 @@ final class Kernel extends \Symfony\Component\HttpKernel\Kernel
     public function build(ContainerBuilder $container): void
     {
         $container->setParameter('kernel.secret', uniqid(__DIR__, true));
+        $container->setParameter('kernel.runtime_mode', ['web' => 1, 'cli' => 1]);
         $container->setParameter('sigwin_yassg.base_dir', $this->baseDir);
 
         // TODO: make configurable
