@@ -28,6 +28,9 @@ final readonly class LocaleContext
     {
     }
 
+    /**
+     * @return array<string, string>
+     */
     public function getLocale(): array
     {
         $request = $this->requestStack->getMainRequest();

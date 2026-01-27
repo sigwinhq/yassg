@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Sigwin\YASSG\Test\Functional\Site\Model;
 
 use Sigwin\YASSG\Linkable;
-use Symfony\Component\Serializer\Annotation\Context;
+use Symfony\Component\Serializer\Attribute\Context;
 use Symfony\Component\Validator\Constraints as Assert;
 
 final class Article implements Linkable

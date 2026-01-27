@@ -75,7 +75,8 @@ final class DenormalizingStorage implements Storage
     }
 
     /**
-     * @param array|T $item
+     * @param array|T              $item
+     * @param array<string, mixed> $context
      *
      * @return T
      */
@@ -101,6 +102,8 @@ final class DenormalizingStorage implements Storage
     }
 
     /**
+     * @param array<string, mixed> $context
+     *
      * @return T
      */
     private function denormalize(string $id, array $data, array $context): object
