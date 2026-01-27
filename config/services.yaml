@@ -88,7 +88,7 @@ services:
     Sigwin\YASSG\FileDecoder:
         class: Sigwin\YASSG\Decoder\CompositeFileDecoder
         arguments:
-            $decoders: !tagged { tag: 'sigwin_yassg.file_decoder' }
+            $decoders: !tagged_iterator { tag: 'sigwin_yassg.file_decoder' }
 
     sigwin_yassg.file_decoder.yaml_file_decoder:
         class: Sigwin\YASSG\Decoder\YamlFileDecoder
