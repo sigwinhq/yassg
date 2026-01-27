@@ -18,10 +18,12 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 final class Configuration implements ConfigurationInterface
 {
+    /**
+     * @return TreeBuilder<'array'>
+     */
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('sigwin_yassg');
-
         $treeBuilder->getRootNode()
             ->children()
                 ->scalarNode('imgproxy_url')
