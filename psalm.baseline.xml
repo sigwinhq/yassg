@@ -281,6 +281,9 @@
     </UnusedClass>
   </file>
   <file src="src/Bridge/Symfony/Serializer/Normalizer/ExpressionNormalizer.php">
+    <MethodSignatureMismatch>
+      <code><![CDATA[$context]]></code>
+    </MethodSignatureMismatch>
     <MissingOverrideAttribute>
       <code><![CDATA[public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): object]]></code>
       <code><![CDATA[public function getSupportedTypes(?string $format): array]]></code>
@@ -330,6 +333,9 @@
     </UnusedClass>
   </file>
   <file src="src/Bridge/Symfony/Serializer/Normalizer/ResourceLocatorNormalizer.php">
+    <MethodSignatureMismatch>
+      <code><![CDATA[$context]]></code>
+    </MethodSignatureMismatch>
     <MissingOverrideAttribute>
       <code><![CDATA[public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): array|string]]></code>
       <code><![CDATA[public function getSupportedTypes(?string $format): array]]></code>
@@ -373,6 +379,9 @@
       <code><![CDATA[\is_object($item)]]></code>
       <code><![CDATA[\is_string($value)]]></code>
     </DocblockTypeContradiction>
+    <ImpureFunctionCall>
+      <code><![CDATA[mb_rtrim]]></code>
+    </ImpureFunctionCall>
     <InvalidArrayAccess>
       <code><![CDATA[$options['attrs']['class']]]></code>
     </InvalidArrayAccess>
