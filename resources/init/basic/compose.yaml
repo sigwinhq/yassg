@@ -1,0 +1,33 @@
+services:
+    app:
+        image: php:8.2-alpine
+        environment:
+            BASE_URL: ${BASE_URL}
+        working_dir: /app
+        volumes:
+            - .:/app
+        tmpfs:
+            - /tmp
+    webpack:
+        image: node:20-alpine
+        environment:
+            BASE_URL: ${BASE_URL}
+        working_dir: /app
+        volumes:
+            - .:/app
+        tmpfs:
+            - /tmp
+    imgproxy:
+        image: darthsim/imgproxy:v3.27.2
+        environment:
+            - IMGPROXY_LOCAL_FILESYSTEM_ROOT=/app
+            - IMGPROXY_MAX_ANIMATION_FRAMES=60
+            - IMGPROXY_ENABLE_AVIF_DETECTION=1
+            - IMGPROXY_ENABLE_WEBP_DETECTION=1
+        working_dir: /app
+        ports:
+            - 8090:8080
+        volumes:
+            - .:/app:ro
+        tmpfs:
+            - /tmp
