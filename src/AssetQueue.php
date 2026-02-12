@@ -42,7 +42,7 @@ final class AssetQueue
     public function flush(?callable $callable = null): array
     {
         foreach ($this->queue as $specification) {
-            $destination = $this->buildDir.'/'.mb_ltrim($specification->destination, '/');
+            $destination = $this->buildDir.'/'.\mb_ltrim($specification->destination, '/');
             if (file_exists($destination)) {
                 continue;
             }
